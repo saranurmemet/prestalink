@@ -133,3 +133,4 @@ Seed script çalıştıktan sonra:
 
 
 
+

@@ -24,9 +24,9 @@ const LiveDashboard = () => {
   }, []);
 
   const candidates = [
-    { name: 'Leyla K.', role: 'CNC Specialist', location: 'Munich', status: 'active', time: '2m' },
-    { name: 'Omar S.', role: 'Nurse', location: 'Hamburg', status: 'review', time: '5m' },
-    { name: 'Sara M.', role: 'Chef', location: 'Paris', status: 'active', time: '8m' },
+    { name: 'Layla Al-Hassan', role: 'CNC Specialist', location: 'Munich', status: 'active', time: '2m' },
+    { name: 'Omar Al-Mansouri', role: 'Nurse', location: 'Hamburg', status: 'review', time: '5m' },
+    { name: 'Sara Al-Fahad', role: 'Chef', location: 'Paris', status: 'active', time: '8m' },
   ];
 
   return (

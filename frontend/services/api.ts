@@ -9,8 +9,8 @@ const getApiUrl = () => {
   }
   if (typeof window !== 'undefined') {
     const hostname = window.location.hostname;
-    if (hostname === '10.76.212.194' || hostname === 'localhost' || hostname === '127.0.0.1') {
-      return `http://${hostname === 'localhost' || hostname === '127.0.0.1' ? 'localhost' : '10.76.212.194'}:5000/api`;
+    if (hostname === '10.76.212.194' || hostname === '192.168.1.14' || hostname === 'localhost' || hostname === '127.0.0.1') {
+      return `http://${hostname === 'localhost' || hostname === '127.0.0.1' ? 'localhost' : hostname}:5000/api`;
     }
   }
   return 'https://prestalink.onrender.com/api';
