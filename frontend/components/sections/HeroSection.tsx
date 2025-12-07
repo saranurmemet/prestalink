@@ -50,9 +50,9 @@ const HeroSection = () => {
               </div>
               <div className="grid gap-3">
                 {[
-                  { name: 'Leyla K.', role: '5 yrs exp - Munich', lang: 'FR', color: 'bg-blue-100', icon: '👩‍💼' },
-                  { name: 'Omar S.', role: 'B1 German - Hamburg', lang: 'TR', color: 'bg-green-100', icon: '👨‍⚕️' },
-                  { name: 'Sara M.', role: 'EN & FR - Paris', lang: 'AR', color: 'bg-purple-100', icon: '👩‍🍳' },
+                  { name: 'Layla Al-Hassan', role: '5 yrs exp - Munich', lang: 'FR', color: 'bg-blue-100', icon: '👩‍💼' },
+                  { name: 'Omar Al-Mansouri', role: 'B1 German - Hamburg', lang: 'TR', color: 'bg-green-100', icon: '👨‍⚕️' },
+                  { name: 'Sara Al-Fahad', role: 'EN & FR - Paris', lang: 'AR', color: 'bg-purple-100', icon: '👩‍🍳' },
                 ].map((item, index) => (
                   <div key={index} className={`${item.color} rounded-xl p-4 border border-white/60 shadow-sm animate-slide-up group`} style={{ animationDelay: `${0.5 + index * 0.1}s` }}>
                     <div className="flex items-center justify-between mb-2">

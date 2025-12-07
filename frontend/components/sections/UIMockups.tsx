@@ -6,16 +6,16 @@ const UIMockups = () => {
 
   // Web/Desktop mockup items
   const desktopItems = [
-    { title: 'John Doe', subtitle: 'Software Engineer', status: 'active', badge: 'NEW' },
-    { title: 'Sarah Miller', subtitle: 'UX Designer', status: 'review', badge: null },
-    { title: 'Ahmed Hassan', subtitle: 'Data Analyst', status: 'active', badge: null },
-    { title: 'Maria Garcia', subtitle: 'Product Manager', status: 'pending', badge: null },
+    { title: 'Mohammed Al-Rashid', subtitle: 'Software Engineer', status: 'active', badge: 'NEW' },
+    { title: 'Fatima Al-Zahra', subtitle: 'UX Designer', status: 'review', badge: null },
+    { title: 'Ahmed Hassan Al-Mahmoud', subtitle: 'Data Analyst', status: 'active', badge: null },
+    { title: 'Khadija Al-Saud', subtitle: 'Product Manager', status: 'pending', badge: null },
   ];
 
   // Mobile app items
   const mobileItems = [
-    { title: 'Senior Developer', location: 'Berlin, DE', salary: '€65K' },
-    { title: 'Product Designer', location: 'Paris, FR', salary: '€55K' },
+    { title: 'Senior Developer', location: 'Berlin, DE', salary: '€5,400/ay' },
+    { title: 'Product Designer', location: 'Paris, FR', salary: '€4,600/ay' },
   ];
 
   return (
