@@ -42,8 +42,8 @@ export default function ServiceWorkerUpdater() {
       // İlk yüklemede kontrol et
       checkForUpdates();
 
-      // Her 30 saniyede bir otomatik kontrol et (daha sık kontrol)
-      const updateInterval = setInterval(checkForUpdates, 30000);
+      // Her 5 dakikada bir otomatik kontrol et (performans için optimize edildi)
+      const updateInterval = setInterval(checkForUpdates, 300000);
 
       // Service worker mesajlarını dinle
       navigator.serviceWorker.addEventListener('controllerchange', () => {
