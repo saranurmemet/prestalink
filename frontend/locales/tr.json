@@ -1,0 +1,634 @@
+{
+  "nav": {
+    "home": "Ana Sayfa",
+    "about": "Hakkımızda",
+    "contact": "İletişim",
+    "jobs": "İşler",
+    "login": "Giriş",
+    "register": "Kayıt Ol",
+    "logout": "Çıkış"
+  },
+  "footer": {
+    "rights": "Tüm hakları saklıdır."
+  },
+  "hero": {
+    "tag": "Profesyonel Avrupa İş Yerleştirme Hizmeti",
+    "title": "Europass CV Hazırlama ve Otomatik İş Başvuru Platformu",
+    "subtitle": "Sizin için Avrupa standartlarında Europass CV hazırlıyoruz, yapay zeka ile en uygun işleri seçiyoruz ve otomatik olarak firmalara başvurunuzu yapıyoruz. Vize süreçlerinden yerleşime kadar tüm adımlarda yanınızdayız.",
+    "ctaPrimary": "Hemen iletişime geç",
+    "ctaSecondary": "Hizmetlerimizi keşfet",
+    "stats": {
+      "placements": "Başarılı yerleştirme",
+      "partners": "İşe alım ortağı",
+      "languages": "Desteklenen dil"
+    },
+    "widget": {
+      "candidates": "İncelenen adaylar",
+      "updated": "Canlı akış",
+      "items": {
+        "0": { "name": "Leyla / CNC", "role": "5 yıl deneyim - Münih", "language": "FR" },
+        "1": { "name": "Omar / Hemşire", "role": "B1 Almanca - Hamburg", "language": "TR" },
+        "2": { "name": "Sara / Şef", "role": "EN & FR - Paris", "language": "AR" }
+      }
+    }
+  },
+  "features": {
+    "tag": "Kapsamlı Hizmetlerimiz",
+    "title": "Avrupa'da İş Bulma Sürecinizin Her Adımında Yanınızdayız",
+    "subtitle": "Europass CV hazırlamadan otomatik başvuru yönetimine, vize süreçlerinden yerleşime kadar tüm süreçleri profesyonelce yönetiyoruz.",
+    "europassCv": {
+      "title": "Europass CV Hazırlama",
+      "body": "Avrupa standartlarına uygun, profesyonel Europass CV formatında CV'nizi hazırlıyoruz. Tüm deneyim, eğitim ve becerileriniz standart formatta düzenlenir."
+    },
+    "aiMatching": {
+      "title": "Yapay Zeka İş Eşleştirme",
+      "body": "Gelişmiş AI teknolojisi ile profilinize, deneyiminize ve hedeflerinize en uygun iş fırsatlarını otomatik olarak belirliyoruz."
+    },
+    "autoApplication": {
+      "title": "Otomatik Başvuru Yönetimi",
+      "body": "Hedef ülke diline göre lokalize edilmiş CV'nizle uygun firmalara otomatik olarak başvuru yapıyor ve tüm süreci takip ediyoruz."
+    },
+    "localization": {
+      "title": "Dil Lokalizasyonu",
+      "body": "Almanca, Fransızca, İngilizce ve diğer hedef ülke dillerine göre CV'nizi profesyonelce çevirip lokalize ediyoruz."
+    },
+    "documentSupport": {
+      "title": "Belge Hazırlık Desteği",
+      "body": "Vize ve başvuru için gerekli tüm belgelerin hazırlanmasında size rehberlik ediyor ve eksiksiz olmasını sağlıyoruz."
+    },
+    "visaSupport": {
+      "title": "Vize Süreç Yönetimi",
+      "body": "Firmalardan davet mektubu ve gerekli evrakları alıyor, vize başvuru sürecinizde profesyonel destek sunuyoruz."
+    },
+    "roles": {
+      "title": "Rol bazlı yetki",
+      "body": "Aday, işe alım uzmanı, admin ve süper admin için ayrıntılı izinler."
+    },
+    "speed": {
+      "title": "Şimşek hızında",
+      "body": "Haftalar değil, dakikalar içinde fırsatlarla eşleşin. AI destekli sistemimiz 7/24 çalışır."
+    },
+    "verified": {
+      "title": "Doğrulanmış fırsatlar",
+      "body": "Her iş ilanı ve işveren doğrulanmıştır. Güvenliğiniz bizim önceliğimizdir."
+    }
+  },
+  "jobs": {
+    "tag": "Cezayir vatandaşları için öne çıkan işler",
+    "title": "Cezayir vatandaşları için Avrupa işleri",
+    "subtitle": "Her iş özellikle Cezayir vatandaşları için. Almanya, Fransa, İspanya ve diğerlerinde vize, konaklama ve yerleşim için tam destek.",
+    "extraDescription": "Özellikle Cezayir vatandaşları için tasarlanmış platform. Her pozisyon detaylı inceleme sürecinden geçer, vize, konaklama ve yerleşim için tam destek dahildir. Avrupa'ya yolculuğunuzun her adımında yanınızdayız - iş başvurusundan vize alımına ve yerleşime kadar.",
+    "loading": "İş ilanları yükleniyor...",
+    "notFound": "İş bulunamadı",
+    "backToJobs": "İş ilanlarına dön",
+    "viewFullPage": "Tam Sayfayı Gör",
+    "apply": "Hemen başvur",
+    "onlyUsersCanApply": "Sadece kullanıcılar işlere başvurabilir"
+  },
+  "process": {
+    "tag": "İş Sürecimiz",
+    "title": "8 Adımlı Profesyonel Süreç",
+    "subtitle": "İletişime geçtiğiniz andan itibaren yerleşime kadar tüm süreçlerde yanınızdayız.",
+    "step1": {
+      "title": "İletişime Geçin",
+      "body": "Bize ulaştığınızda tüm kişisel bilgilerinizi, deneyimlerinizi, eğitim geçmişinizi ve kariyer hedeflerinizi detaylı olarak alıyoruz."
+    },
+    "step2": {
+      "title": "Europass CV Hazırlama",
+      "body": "Avrupa standartlarına uygun, profesyonel Europass CV formatında CV'nizi hazırlıyoruz. Tüm bilgileriniz standart formata dönüştürülür."
+    },
+    "step3": {
+      "title": "Profil Oluşturma",
+      "body": "Sizin için platformumuzda kullanıcı hesabı oluşturuyor ve tüm bilgilerinizi güvenli bir şekilde sisteme kaydediyoruz."
+    },
+    "step4": {
+      "title": "AI İş Eşleştirme",
+      "body": "Yapay zeka destekli sistemimiz, profilinize, deneyiminize ve hedeflerinize en uygun iş fırsatlarını otomatik olarak belirler."
+    },
+    "step5": {
+      "title": "Dil Lokalizasyonu",
+      "body": "Hedef ülkenin diline göre CV'nizi profesyonelce çevirip lokalize ediyoruz. Almanca, Fransızca, İngilizce ve diğer dillerde hazırlıyoruz."
+    },
+    "step6": {
+      "title": "Otomatik Başvuru Yönetimi",
+      "body": "Lokalize edilmiş CV'nizle uygun firmalara otomatik olarak e-posta başvuruları gönderiyoruz ve tüm başvuruları takip ediyoruz."
+    },
+    "step7": {
+      "title": "Firma İletişim & Belge Desteği",
+      "body": "Şirketlerle iletişimi yönetiyor, sizinle koordineli olarak çalışıyoruz. Başvuru için gerekli belgelerin hazırlanmasında size rehberlik ediyoruz."
+    },
+    "step8": {
+      "title": "Vize Süreç Yönetimi",
+      "body": "Vize için firmalardan davet mektubu ve gerekli evrakları alıyor, tüm belgeleri size teslim ediyoruz. Vize sürecinizde de destek sunuyoruz."
+    }
+  },
+  "benefits": {
+    "tag": "Neden bizi seçmelisiniz",
+    "title": "Uluslararası başarı için ihtiyacınız olan her şey",
+    "subtitle": "Yolculuğunuzun her aşamasında kapsamlı destek sunuyoruz.",
+    "speed": {
+      "title": "Hızlı Eşleştirme",
+      "body": "AI destekli iş eşleştirme, sizi dakikalar içinde ilgili fırsatlarla buluşturur."
+    },
+    "security": {
+      "title": "Doğrulanmış İşverenler",
+      "body": "Tüm iş ilanları doğrulanmıştır. Verileriniz güvenli ve korumalıdır."
+    },
+    "support": {
+      "title": "7/24 Destek",
+      "body": "Çok dilli destek ekibimizle istediğiniz zaman yardım alın."
+    },
+    "global": {
+      "title": "Global Ağ",
+      "body": "Güvenilir ortaklarla 15+ Avrupa ülkesinde fırsatlara erişin."
+    },
+    "stats": {
+      "satisfaction": "Memnuniyet",
+      "support": "Destek",
+      "countries": "Ülke",
+      "active": "Aktif kullanıcı"
+    },
+    "trust": {
+      "title": "Binlerce kişi tarafından güveniliyor",
+      "body": "Avrupa'da hayal ettikleri işleri başarıyla bulan binlerce adaya katılın."
+    }
+  },
+  "testimonials": {
+    "tag": "Başarı hikayeleri",
+    "title": "Adaylarımız ne diyor",
+    "subtitle": "Prestalink aracılığıyla mükemmel işlerini bulan insanlardan gerçek hikayeler.",
+    "item1": {
+      "name": "Leyla K.",
+      "role": "CNC Uzmanı, Münih",
+      "text": "Prestalink, Almanya'ya yerleşmemi çok kolaylaştırdı. Destek ekibi belgelerden daire bulmaya kadar her konuda yardımcı oldu."
+    },
+    "item2": {
+      "name": "Omar S.",
+      "role": "Hemşire, Hamburg",
+      "text": "Sağlık profesyoneli olarak doğrulanmış fırsatlara ihtiyacım vardı. Prestalink beni güvenilir işverenlerle buluşturdu ve şimdi hayal ettiğim işte çalışıyorum."
+    },
+    "item3": {
+      "name": "Sara M.",
+      "role": "Şef, Paris",
+      "text": "Çok dilli platform iletişimi kolaylaştırdı. 2 ay içinde birden fazla teklif aldım ve kariyerim için en iyisini seçtim."
+    }
+  },
+  "cta": {
+    "tag": "Modern işe alım",
+    "title": "Sınır ötesi işe alıma başlayın",
+    "subtitle": "Başvurular, mesajlaşma, belge kontrolü ve onboarding tek yerde.",
+    "primary": "Ücretsiz hesap aç",
+    "secondary": "İşe alım paneli"
+  },
+  "about": {
+    "title": "Prestalink hakkında",
+    "description": "PrestaLink, Cezayir vatandaşlarının Avrupa'da kariyer hayallerini gerçekleştirmeleri için tasarlanmış kapsamlı bir iş platformudur. 2018 yılından beri faaliyet gösteren platformumuz, binlerce Cezayir vatandaşının Almanya, Fransa, İspanya, Hollanda ve diğer Avrupa ülkelerinde iş bulmasına yardımcı olmuştur. Sadece iş bulma değil, aynı zamanda vize süreçleri, konaklama çözümleri, dil eğitimi ve yerleşim danışmanlığı gibi her adımda tam destek sunuyoruz. Gelişmiş teknoloji altyapımız, geniş işveren ağımız ve deneyimli ekibimizle, Cezayir vatandaşlarının Avrupa'ya güvenli ve sorunsuz bir şekilde yerleşmesini sağlıyoruz.",
+    "missionTitle": "Misyonumuz",
+    "missionBody": "PrestaLink olarak misyonumuz, Cezayir vatandaşlarına adil, şeffaf ve güvenilir bir şekilde Avrupa'da iş fırsatları sunmak ve tüm yerleşim sürecinde kapsamlı destek sağlamaktır. İnsan odaklı yaklaşımımızla, her adayın benzersiz ihtiyaçlarını anlıyor ve kişiselleştirilmiş çözümler sunuyoruz. Sadece iş eşleştirmesi değil, aynı zamanda vize başvuru süreçlerinde rehberlik, konaklama desteği, kültürel uyum programları ve yerleşim sonrası takip hizmetleri ile yanınızdayız. Etik değerlere bağlılığımız, şeffaf iletişimimiz ve kaliteli hizmet anlayışımızla, Cezayir vatandaşlarının Avrupa'da başarılı bir kariyer yolculuğuna başlamalarını sağlıyoruz. Ayrıca, işverenlerin de doğru yeteneklere ulaşabilmeleri için ölçeklenebilir ve verimli işe alım programları geliştiriyoruz.",
+    "visionTitle": "Vizyonumuz",
+    "visionBody": "2026 yılına kadar Avrupa'nın en güvenilir ve kapsamlı iş platformu olmak ve Cezayir vatandaşlarının Avrupa'ya yerleşim sürecinde birinci tercih haline gelmek vizyonumuzdur. Çok dilli yeteneklerin ve etik işverenlerin buluştuğu bir ekosistem yaratarak, uluslararası işgücü hareketliliğini dönüştürmeyi hedefliyoruz. Teknolojik yenilikler ve sürekli gelişim ile, kullanıcı deneyimini en üst seviyeye çıkaracak ve iş eşleştirme süreçlerini optimize edeceğiz. Avrupa'nın 25+ ülkesinde aktif olmak, 50.000+ başarılı yerleştirme gerçekleştirmek ve %99+ müşteri memnuniyeti oranına ulaşmak için çalışıyoruz. Ayrıca, sürdürülebilir kalkınma hedeflerine katkıda bulunarak, hem adaylar hem de işverenler için uzun vadeli değer yaratmayı amaçlıyoruz.",
+    "valuesTitle": "Değerler",
+    "values": [
+      "İnsanı merkeze alan tasarım: Her kararımızda ve hizmetimizde kullanıcılarımızın ihtiyaçlarını ve deneyimlerini ön planda tutuyoruz. Platformumuzun her özelliği, gerçek kullanıcı geri bildirimlerine dayanarak şekilleniyor.",
+      "Şeffaf uyumluluk: Tüm süreçlerimizde açıklık ve dürüstlük prensibiyle hareket ediyoruz. Vize süreçleri, ücretler, hizmet kapsamı ve işveren bilgileri hakkında tam şeffaflık sağlıyoruz.",
+      "Yerel STK iş birlikleri: Cezayir ve Avrupa'daki yerel sivil toplum kuruluşları, dernekler ve göç danışmanlık merkezleri ile güçlü iş birlikleri kurarak, toplumsal sorumluluk bilinciyle çalışıyoruz. Bu ortaklıklar sayesinde daha geniş bir kitleye ulaşıyor ve yerel kültürlere saygılı bir yaklaşım sergiliyoruz."
+    ],
+    "servicesTitle": "Servislerimiz",
+    "servicesSubtitle": "Cezayir vatandaşlarına sunduğumuz kapsamlı hizmetler",
+    "services": {
+      "0": {
+        "title": "Europass CV Hazırlama",
+        "description": "Avrupa standartlarına uygun, profesyonel Europass CV formatında CV'nizi hazırlıyoruz. Tüm deneyim, eğitim ve becerileriniz standart formatta düzenlenir ve hedef ülke diline göre lokalize edilir."
+      },
+      "1": {
+        "title": "AI İş Eşleştirme",
+        "description": "Yapay zeka destekli sistemimiz, profilinize, deneyiminize ve kariyer hedeflerinize en uygun iş fırsatlarını otomatik olarak belirler ve size önerir."
+      },
+      "2": {
+        "title": "Otomatik Başvuru Yönetimi",
+        "description": "Hedef ülke diline göre lokalize edilmiş CV'nizle uygun firmalara otomatik olarak e-posta başvuruları gönderiyoruz ve tüm başvuruları takip ediyoruz."
+      },
+      "3": {
+        "title": "Firma İletişim Koordinasyonu",
+        "description": "Şirketlerle iletişimi yönetiyor, sizinle koordineli olarak çalışıyoruz. Başvuru süreçlerini takip ediyor ve geri bildirimleri size aktarıyoruz."
+      },
+      "4": {
+        "title": "Belge Hazırlık Desteği",
+        "description": "Vize ve başvuru için gerekli tüm belgelerin hazırlanmasında size rehberlik ediyor, belgelerin eksiksiz olmasını sağlıyoruz."
+      },
+      "5": {
+        "title": "Vize Süreç Yönetimi",
+        "description": "Vize için firmalardan davet mektubu ve gerekli evrakları alıyor, tüm belgeleri size teslim ediyoruz. Vize başvuru sürecinizde de profesyonel destek sunuyoruz."
+      }
+    },
+    "statsTitle": "Rakamlarla PrestaLink",
+    "stats": {
+      "0": { "label": "Başarılı Yerleştirme" },
+      "1": { "label": "İş Ortağı" },
+      "2": { "label": "Desteklenen Dil" },
+      "3": { "label": "Müşteri Memnuniyeti" }
+    },
+    "howWeWorkTitle": "Nasıl Çalışıyoruz",
+    "steps": {
+      "0": {
+        "title": "Profil Oluştur",
+        "description": "Hesabınızı oluşturun, CV'nizi yükleyin ve yeteneklerinizi girin. Profiliniz doğrulanacak."
+      },
+      "1": {
+        "title": "İş Eşleştirme",
+        "description": "AI destekli sistemimiz sizin için en uygun iş fırsatlarını belirler ve size önerir."
+      },
+      "2": {
+        "title": "Başvuru & Destek",
+        "description": "Uygun işlere başvurun. Vize ve konaklama konularında sürekli destek alın."
+      },
+      "3": {
+        "title": "Yerleşim",
+        "description": "Avrupa'ya yerleşin. Yerleşim sonrası da destek hizmetlerimiz devam eder."
+      }
+    },
+    "whyChooseUsTitle": "Neden Bizi Seçmelisiniz",
+    "whyChooseUs": {
+      "0": {
+        "title": "Güvenilir & Doğrulanmış",
+        "description": "Tüm işverenler ve iş ilanları detaylı şekilde doğrulanır. Güvenliğiniz bizim önceliğimizdir."
+      },
+      "1": {
+        "title": "Tam Destek Hizmeti",
+        "description": "Sadece iş bulmanıza değil, vize, konaklama ve yerleşim sürecinize de destek sağlıyoruz."
+      },
+      "2": {
+        "title": "Deneyimli Ekip",
+        "description": "Avrupa iş piyasası ve göç süreçleri konusunda deneyimli ekibimiz her zaman yanınızdadır."
+      }
+    },
+    "testimonialsTitle": "Başarı Hikayeleri",
+    "testimonialsSubtitle": "Cezayir vatandaşlarından gerçek hikayeler"
+  },
+  "contact": {
+    "title": "Ekibimizle iletişime geçin",
+    "subtitle": "Brüksel merkezli ekibimiz ve İstanbul/Kazablanka operasyonlarımızla yanınızdayız.",
+    "name": "Ad Soyad",
+    "email": "E-posta",
+    "message": "Nasıl yardımcı olabiliriz?",
+    "submit": "Mesaj gönder",
+    "success": "Teşekkürler! 1 iş günü içinde dönüş yapacağız."
+  },
+  "auth": {
+    "loginTitle": "Tekrar hoş geldiniz",
+    "registerTitle": "Prestalink profilinizi oluşturun",
+    "selectLoginType": "Giriş Türünü Seçin",
+    "selectLoginTypeDesc": "Aşağıdaki rollerden birini seçerek devam edin",
+    "selectRegisterType": "Kayıt Türünü Seçin",
+    "selectRegisterTypeDesc": "Hesap oluşturmak için rolünüzü seçin",
+    "selectRole": "Lütfen bir rol seçin",
+    "backToRoleSelection": "Role Dön",
+    "continue": "Devam Et",
+    "loginSubtitle": "Hesabınıza giriş yapın",
+    "registerSubtitle": "Yeni hesap oluşturun",
+    "adminRegisterNote": "Not: Admin hesapları sadece mevcut adminler tarafından oluşturulabilir.",
+    "email": "E-posta",
+    "password": "Şifre",
+    "name": "Ad Soyad",
+    "namePlaceholder": "Adınız Soyadınız",
+    "phone": "Telefon",
+    "languages": "Diller (virgülle ayırın)",
+    "languagesHint": "Bildiğiniz dilleri virgülle ayırarak yazın (örn: EN, FR, AR)",
+    "login": "Giriş Yap",
+    "register": "Kayıt Ol",
+    "loading": "İşleniyor...",
+    "error": "Bir hata oluştu.",
+    "registerPrompt": "Hesabınız yok mu?",
+    "loginPrompt": "Zaten hesabınız var mı?",
+    "roles": {
+      "user": {
+        "title": "İş Arayan (Aday)",
+        "description": "Avrupa'da iş fırsatları bulun ve başvurun. CV'nizi hazırlayın ve kariyerinizi geliştirin."
+      },
+      "recruiter": {
+        "title": "İşveren (İşe Alım Uzmanı)",
+        "description": "İş ilanları oluşturun, adayları görüntüleyin ve işe alım sürecinizi yönetin."
+      },
+      "admin": {
+        "title": "Yönetici (Admin)",
+        "description": "Sistemi yönetin, kullanıcıları izleyin ve platform ayarlarını kontrol edin."
+      }
+    }
+  },
+  "userDashboard": {
+    "welcome": "Hoş Geldiniz",
+    "welcomeUser": "Hoş Geldiniz {name}",
+    "subtitle": "Belgelerinizi yükleyin, başvurularınızı izleyin ve işe alım uzmanlarıyla iletişimde kalın.",
+    "cvStatus": "CV Durumu",
+    "cvUploaded": "CV Yüklendi",
+    "cvNotUploaded": "CV Yüklenmedi",
+    "totalApplications": "Toplam Başvuru",
+    "newJobMatches": "Yeni İş Eşleşmeleri",
+    "quickActions": "Hızlı İşlemler",
+    "editProfile": "Profili Düzenle",
+    "viewJobs": "İşleri Görüntüle",
+    "viewApplications": "Başvuruları Görüntüle",
+    "metrics": {
+      "applications": "Başvuru",
+      "jobs": "Aktif ilan",
+      "notifications": "Bildirim",
+      "languages": "Dil"
+    },
+    "jobList": "Mevcut pozisyonlar",
+    "uploadTitle": "CV ve sertifika yükle",
+    "selectJob": "İlan seçin",
+    "cv": "Özgeçmiş",
+    "certificates": "Sertifikalar",
+    "submit": "Başvuruyu gönder",
+    "applicationSuccess": "Başvurunuz alındı.",
+    "applicationError": "Başvuru gönderilemedi.",
+    "applicationsTitle": "Başvuru durumu",
+    "notificationsTitle": "Bildirimler",
+    "noApplications": "Henüz başvuru yok.",
+    "noNotifications": "Yeni bildiriminiz yok."
+  },
+  "recruiterDashboard": {
+    "title": "İşe Alım Paneli",
+    "subtitle": "İlanlarınızı yönetin, adayları inceleyin ve süreci hızlandırın.",
+    "metrics": {
+      "jobs": "Aktif ilan",
+      "applications": "Aday",
+      "countries": "Aktif ülke"
+    },
+    "createJob": "Yeni iş ilanı oluştur",
+    "fields": {
+      "title": "Pozisyon adı",
+      "description": "İş tanımı",
+      "location": "Lokasyon",
+      "salary": "Maaş aralığı",
+      "experience": "Deneyim",
+      "language": "Dil şartı"
+    },
+    "publish": "İlanı yayımla",
+    "success": "İlan başarıyla eklendi.",
+    "error": "İşlem başarısız.",
+    "applicants": "Adaylar",
+    "selectJob": "Adayları görmek için ilan seçin",
+    "noApplicants": "Henüz başvuru yok."
+  },
+  "employerNav": {
+    "dashboard": "Dashboard",
+    "profile": "Şirket Profili",
+    "createJob": "İş İlanı Oluştur",
+    "jobListings": "İş İlanları",
+    "notifications": "Bildirimler"
+  },
+  "employerDashboard": {
+    "welcome": "Hoş Geldiniz, {name}",
+    "subtitle": "İş ilanlarınızı yönetin ve adayları inceleyin",
+    "totalActiveJobs": "Aktif İş İlanları",
+    "totalApplicants": "Toplam Aday",
+    "countriesHiring": "İşe Alım Yapılan Ülkeler",
+    "quickActions": "Hızlı İşlemler",
+    "createNewJob": "Yeni İş Oluştur",
+    "viewJobListings": "İş İlanlarını Görüntüle",
+    "viewApplicants": "Adayları Görüntüle",
+    "recentJobs": "Son İş İlanları",
+    "viewDetails": "Detayları Gör"
+  },
+  "employerProfile": {
+    "title": "Şirket Profili",
+    "subtitle": "Şirket bilgilerinizi güncelleyin",
+    "incompleteWarning": "Şirket profiliniz eksik görünüyor. Lütfen tüm bilgileri doldurun.",
+    "fields": {
+      "companyName": "Şirket Adı",
+      "companyDescription": "Şirket Açıklaması",
+      "industry": "Sektör",
+      "country": "Ülke",
+      "city": "Şehir",
+      "contactEmail": "İletişim E-postası",
+      "contactPhone": "İletişim Telefonu",
+      "companyLogo": "Şirket Logosu"
+    },
+    "save": "Kaydet",
+    "saved": "Profil başarıyla güncellendi",
+    "error": "Profil güncellenirken hata oluştu"
+  },
+  "createJob": {
+    "title": "Yeni İş İlanı Oluştur",
+    "subtitle": "Yeni bir iş pozisyonu için ilan oluşturun",
+    "fields": {
+      "jobTitle": "İş Başlığı",
+      "jobDescription": "İş Açıklaması",
+      "location": "Lokasyon (Ülke / Şehir)",
+      "salaryRange": "Maaş Aralığı",
+      "requiredExperience": "Gerekli Deneyim",
+      "requiredLanguages": "Gerekli Diller",
+      "workType": "Çalışma Tipi"
+    },
+    "placeholders": {
+      "jobDescription": "İş tanımını detaylı olarak açıklayın...",
+      "location": "Örn: Munich, DE",
+      "salaryRange": "Örn: €48K - €58K",
+      "requiredExperience": "Örn: 3+ years",
+      "requiredLanguages": "Örn: EN, DE"
+    },
+    "workTypes": {
+      "fullTime": "Tam Zamanlı",
+      "partTime": "Yarı Zamanlı",
+      "seasonal": "Mevsimlik"
+    },
+    "publish": "İlanı Yayınla",
+    "success": "İş ilanınız artık yayında!",
+    "error": "İlan oluşturulurken hata oluştu",
+    "publishing": "Yayınlanıyor...",
+    "published": "Yayınlandı!",
+    "cancel": "İptal"
+  },
+  "employerJobs": {
+    "title": "İş İlanları Yönetimi",
+    "subtitle": "Tüm iş ilanlarınızı yönetin",
+    "noJobs": "Henüz iş ilanı oluşturmadınız",
+    "edit": "Düzenle",
+    "delete": "Sil",
+    "viewApplicants": "Adayları Görüntüle",
+    "totalApplicants": "Toplam Aday",
+    "status": {
+      "active": "Aktif",
+      "closed": "Kapalı"
+    },
+    "confirmDelete": "Bu ilanı silmek istediğinize emin misiniz?",
+    "deleted": "İlan başarıyla silindi",
+    "error": "İlan silinirken hata oluştu",
+    "loading": "Yükleniyor..."
+  },
+  "employerJobDetail": {
+    "title": "İş İlanı Detayları",
+    "applicants": "Adaylar",
+    "applicantInfo": {
+      "name": "Ad",
+      "country": "Ülke",
+      "experience": "Deneyim",
+      "languages": "Diller",
+      "downloadCv": "CV İndir",
+      "viewProfile": "Profili Görüntüle"
+    },
+    "status": {
+      "pending": "Beklemede",
+      "reviewing": "İnceleniyor",
+      "viewed": "İncelendi",
+      "interview": "Mülakat",
+      "accepted": "Kabul Edildi",
+      "rejected": "Reddedildi"
+    },
+    "noApplicants": "Bu ilan için henüz başvuru yok",
+    "backToJobs": "İş İlanlarına Dön",
+    "loading": "Yükleniyor...",
+    "notFound": "İş bulunamadı"
+  },
+  "applicantReview": {
+    "title": "Aday İnceleme",
+    "profile": "Profil",
+    "downloadCv": "CV İndir",
+    "downloadCertificates": "Sertifikaları İndir",
+    "internalNotes": "İç Notlar",
+    "changeStatus": "Durum Değiştir",
+    "notesPlaceholder": "Bu aday hakkında notlarınızı buraya yazın...",
+    "saveNotes": "Notları Kaydet",
+    "statusUpdated": "Durum başarıyla güncellendi",
+    "status": {
+      "pending": "Beklemede",
+      "viewed": "İncelendi",
+      "interview": "Mülakat",
+      "accepted": "Kabul Edildi",
+      "rejected": "Reddedildi"
+    },
+    "saving": "Kaydediliyor...",
+    "backToJob": "İş İlanına Dön",
+    "loading": "Yükleniyor...",
+    "notFound": "Aday bulunamadı",
+    "files": "Dosyalar"
+  },
+  "employerNotifications": {
+    "title": "Bildirimler",
+    "subtitle": "Tüm bildirimlerinizi burada görüntüleyin",
+    "markAllRead": "Tümünü Okundu İşaretle",
+    "noNotifications": "Yeni bildiriminiz yok",
+    "unread": "okunmamış"
+  },
+  "adminDashboard": {
+    "title": "Yönetim Merkezi",
+    "subtitle": "Kullanıcıları, işe alımcıları ve iş kayıtlarını yönetin.",
+    "metrics": {
+      "jobs": "İş",
+      "recruiters": "İşe alımcı",
+      "users": "Kullanıcı",
+      "logs": "Kayıt"
+    },
+    "manageUsers": "Admin kullanıcılar",
+    "manageJobs": "İlan özeti",
+    "logs": "Sistem kayıtları",
+    "noUsers": "Admin bulunamadı.",
+    "logEntries": [
+      "Günlük yedek tamamlandı",
+      "Yeni işe alımcı doğrulandı",
+      "CV arşivi uzun süreli depoya aktarıldı"
+    ]
+  },
+  "userNav": {
+    "dashboard": "Dashboard",
+    "profile": "Profilim",
+    "jobListings": "İş İlanları",
+    "applications": "Başvurularım",
+    "notifications": "Bildirimler"
+  },
+  "userProfile": {
+    "title": "Profil Düzenle",
+    "subtitle": "Kişisel bilgilerinizi güncelleyin",
+    "incompleteWarning": "Profiliniz eksik görünüyor. Lütfen tüm bilgileri doldurun.",
+    "fields": {
+      "fullName": "Ad Soyad",
+      "email": "E-posta",
+      "phone": "Telefon",
+      "country": "Ülke",
+      "languages": "Diller",
+      "experienceLevel": "Deneyim Seviyesi",
+      "bio": "Kısa Özgeçmiş",
+      "profilePhoto": "Profil Fotoğrafı",
+      "cv": "CV Yükle (PDF)",
+      "certificates": "Sertifikalar Yükle"
+    },
+    "placeholders": {
+      "country": "Örn: Türkiye, Almanya...",
+      "bio": "Kendiniz hakkında kısa bilgi..."
+    },
+    "save": "Kaydet",
+    "cancel": "İptal",
+    "saved": "Profil başarıyla güncellendi",
+    "error": "Profil güncellenirken hata oluştu"
+  },
+  "userJobs": {
+    "title": "İş İlanları",
+    "subtitle": "Size uygun iş fırsatlarını keşfedin",
+    "searchPlaceholder": "İş ara...",
+    "filters": {
+      "country": "Ülke",
+      "salaryRange": "Maaş Aralığı",
+      "position": "Pozisyon",
+      "experience": "Deneyim",
+      "language": "Dil"
+    },
+    "placeholders": {
+      "country": "Ülke...",
+      "experience": "Deneyim...",
+      "salaryRange": "Maaş..."
+    },
+    "apply": "Başvur",
+    "viewDetails": "Detayları Gör",
+    "noJobs": "Henüz iş ilanı yok",
+    "noMatches": "Aradığınız kriterlere uygun iş bulunamadı",
+    "all": "Tümü"
+  },
+  "jobDetail": {
+    "title": "İş Detayları",
+    "location": "Lokasyon",
+    "salary": "Maaş",
+    "experience": "Deneyim",
+    "languages": "Gerekli Diller",
+    "description": "İş Tanımı",
+    "company": "Şirket Bilgileri",
+    "applyNow": "Şimdi Başvur",
+    "backToJobs": "İş İlanlarına Dön",
+    "cvRequired": "Başvuru yapmak için önce CV'nizi yüklemeniz gerekiyor.",
+    "uploadCv": "CV Yükle",
+    "applicationSuccess": "Başvurunuz başarıyla gönderildi!",
+    "companyInfoComingSoon": "Şirket bilgileri yakında eklenecek"
+  },
+  "userApplications": {
+    "title": "Başvurularım",
+    "subtitle": "Tüm iş başvurularınızı görüntüleyin",
+    "status": {
+      "pending": "Beklemede",
+      "reviewing": "İnceleniyor",
+      "interview": "Mülakat",
+      "accepted": "Kabul Edildi",
+      "rejected": "Reddedildi"
+    },
+    "appliedOn": "Başvuru Tarihi",
+    "noApplications": "Henüz başvuru yapmadınız",
+    "jobTitle": "İş Pozisyonu",
+    "company": "Şirket"
+  },
+  "userNotifications": {
+    "title": "Bildirimler",
+    "subtitle": "Tüm bildirimlerinizi burada görüntüleyin",
+    "markAllRead": "Tümünü Okundu İşaretle",
+    "noNotifications": "Yeni bildiriminiz yok",
+    "unread": "Okunmamış"
+  },
+  "common": {
+    "loading": "Yükleniyor...",
+    "saving": "Kaydediliyor...",
+    "cancel": "İptal",
+    "save": "Kaydet",
+    "delete": "Sil",
+    "edit": "Düzenle",
+    "back": "Geri"
+  }
+}
+

@@ -1,0 +1,634 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "contact": "Contact",
+    "jobs": "Offres",
+    "login": "Connexion",
+    "register": "Inscription",
+    "logout": "Déconnexion"
+  },
+  "footer": {
+    "rights": "Tous droits réservés."
+  },
+  "hero": {
+    "tag": "Service professionnel de placement d'emploi en Europe",
+    "title": "Plateforme de préparation de CV Europass et de candidature automatique",
+    "subtitle": "Nous préparons des CV Europass selon les normes européennes, sélectionnons les emplois les plus adaptés avec l'intelligence artificielle et soumettons automatiquement vos candidatures aux entreprises. Nous sommes à vos côtés à chaque étape des processus de visa jusqu'à l'installation.",
+    "ctaPrimary": "Contactez-nous maintenant",
+    "ctaSecondary": "Découvrez nos services",
+    "stats": {
+      "placements": "Placements réussis",
+      "partners": "Partenaires",
+      "languages": "Langues"
+    },
+    "widget": {
+      "candidates": "Candidats en revue",
+      "updated": "Flux en direct",
+      "items": {
+        "0": { "name": "Leyla / CNC", "role": "5 ans exp - Munich", "language": "FR" },
+        "1": { "name": "Omar / Infirmier", "role": "B1 Allemand - Hambourg", "language": "TR" },
+        "2": { "name": "Sara / Chef", "role": "EN & FR - Paris", "language": "AR" }
+      }
+    }
+  },
+  "features": {
+    "tag": "Nos services complets",
+    "title": "Nous sommes à vos côtés à chaque étape de votre processus de recherche d'emploi en Europe",
+    "subtitle": "Nous gérons professionnellement tous les processus de la préparation de CV Europass à la gestion automatique des candidatures, des processus de visa à l'installation.",
+    "europassCv": {
+      "title": "Préparation de CV Europass",
+      "body": "Nous préparons votre CV au format Europass professionnel selon les normes européennes. Toutes vos expériences, formations et compétences sont organisées au format standard."
+    },
+    "aiMatching": {
+      "title": "Matching d'emploi par IA",
+      "body": "Notre technologie IA avancée identifie automatiquement les opportunités d'emploi les plus adaptées à votre profil, expérience et objectifs."
+    },
+    "autoApplication": {
+      "title": "Gestion automatique des candidatures",
+      "body": "Nous soumettons automatiquement vos candidatures aux entreprises adaptées avec votre CV localisé et suivons tout le processus."
+    },
+    "localization": {
+      "title": "Localisation linguistique",
+      "body": "Nous traduisons et localisons professionnellement votre CV selon les langues du pays cible, y compris l'allemand, le français, l'anglais et d'autres langues."
+    },
+    "documentSupport": {
+      "title": "Support de préparation de documents",
+      "body": "Nous vous guidons dans la préparation de tous les documents nécessaires pour le visa et les candidatures et nous nous assurons qu'ils sont complets."
+    },
+    "visaSupport": {
+      "title": "Gestion du processus de visa",
+      "body": "Nous obtenons les lettres d'invitation et les documents requis auprès des entreprises et fournissons un soutien professionnel pendant votre processus de demande de visa."
+    },
+    "roles": {
+      "title": "Contrôle des rôles",
+      "body": "Permissions précises pour utilisateurs, recruteurs, admins et superadmins."
+    },
+    "speed": {
+      "title": "Ultra rapide",
+      "body": "Trouvez des opportunités en minutes, pas en semaines. Notre système alimenté par l'IA fonctionne 24/7."
+    },
+    "verified": {
+      "title": "Opportunités vérifiées",
+      "body": "Chaque offre d'emploi et employeur est vérifié. Votre sécurité est notre priorité."
+    }
+  },
+  "jobs": {
+    "tag": "Offres pour citoyens algériens",
+    "title": "Emplois en Europe pour citoyens algériens",
+    "subtitle": "Chaque offre est spécialement destinée aux citoyens algériens. Soutien complet pour le visa, le logement et l'installation en Allemagne, France, Espagne et autres.",
+    "extraDescription": "Plateforme spécialement conçue pour les citoyens algériens. Chaque poste passe par un processus d'examen détaillé avec un soutien complet pour le visa, le logement et l'installation. Nous vous accompagnons à chaque étape de votre migration vers l'Europe - de la candidature à l'obtention du visa et à l'installation.",
+    "loading": "Chargement des offres...",
+    "notFound": "Offre introuvable",
+    "backToJobs": "Retour aux offres",
+    "viewFullPage": "Voir la page complète",
+    "apply": "Postuler",
+    "onlyUsersCanApply": "Seuls les utilisateurs peuvent postuler"
+  },
+  "process": {
+    "tag": "Notre processus",
+    "title": "Processus professionnel en 8 étapes",
+    "subtitle": "Nous sommes à vos côtés dans tous les processus depuis le moment où vous nous contactez jusqu'à l'installation.",
+    "step1": {
+      "title": "Contactez-nous",
+      "body": "Lorsque vous nous contactez, nous collectons toutes vos informations personnelles, expériences, parcours éducatif et objectifs de carrière en détail."
+    },
+    "step2": {
+      "title": "Préparation de CV Europass",
+      "body": "Nous préparons votre CV au format Europass professionnel selon les normes européennes. Toutes vos informations sont converties au format standard."
+    },
+    "step3": {
+      "title": "Création de profil",
+      "body": "Nous créons un compte utilisateur pour vous sur notre plateforme et sauvegardons en toute sécurité toutes vos informations dans le système."
+    },
+    "step4": {
+      "title": "Matching d'emploi par IA",
+      "body": "Notre système alimenté par l'IA identifie automatiquement les opportunités d'emploi les plus adaptées à votre profil, expérience et objectifs."
+    },
+    "step5": {
+      "title": "Localisation linguistique",
+      "body": "Nous traduisons et localisons professionnellement votre CV selon la langue du pays cible. Nous le préparons en allemand, français, anglais et autres langues."
+    },
+    "step6": {
+      "title": "Gestion automatique des candidatures",
+      "body": "Nous envoyons automatiquement des candidatures par e-mail aux entreprises adaptées avec votre CV localisé et suivons toutes les candidatures."
+    },
+    "step7": {
+      "title": "Communication avec l'entreprise et support documentaire",
+      "body": "Nous gérons la communication avec les entreprises et travaillons en coordination avec vous. Nous vous guidons dans la préparation des documents nécessaires pour les candidatures."
+    },
+    "step8": {
+      "title": "Gestion du processus de visa",
+      "body": "Nous obtenons les lettres d'invitation et les documents requis auprès des entreprises pour le visa et vous remettons tous les documents. Nous fournissons également un soutien pendant votre processus de visa."
+    }
+  },
+  "benefits": {
+    "tag": "Pourquoi nous choisir",
+    "title": "Tout ce dont vous avez besoin pour réussir à l'international",
+    "subtitle": "Nous offrons un soutien complet à chaque étape de votre parcours.",
+    "speed": {
+      "title": "Matching rapide",
+      "body": "Le matching de jobs alimenté par l'IA vous connecte avec des opportunités pertinentes en minutes."
+    },
+    "security": {
+      "title": "Employeurs vérifiés",
+      "body": "Toutes les offres sont vérifiées. Vos données sont sécurisées et protégées."
+    },
+    "support": {
+      "title": "Support 24/7",
+      "body": "Obtenez de l'aide à tout moment avec notre équipe de support multilingue disponible 24h/24."
+    },
+    "global": {
+      "title": "Réseau mondial",
+      "body": "Accédez aux opportunités dans plus de 15 pays européens avec des partenaires de confiance."
+    },
+    "stats": {
+      "satisfaction": "Satisfaction",
+      "support": "Support",
+      "countries": "Pays",
+      "active": "Utilisateurs actifs"
+    },
+    "trust": {
+      "title": "Fait confiance par des milliers",
+      "body": "Rejoignez des milliers de candidats qui ont trouvé avec succès leur emploi de rêve en Europe."
+    }
+  },
+  "testimonials": {
+    "tag": "Histoires de succès",
+    "title": "Ce que disent nos candidats",
+    "subtitle": "De vraies histoires de personnes qui ont trouvé leur emploi parfait grâce à Prestalink.",
+    "item1": {
+      "name": "Leyla K.",
+      "role": "Spécialiste CNC, Munich",
+      "text": "Prestalink a rendu ma relocalisation en Allemagne si fluide. L'équipe de soutien a aidé avec tout, des documents à la recherche d'un appartement."
+    },
+    "item2": {
+      "name": "Omar S.",
+      "role": "Infirmier, Hambourg",
+      "text": "En tant que professionnel de la santé, j'avais besoin d'opportunités vérifiées. Prestalink m'a connecté avec des employeurs de confiance et je travaille maintenant dans mon emploi de rêve."
+    },
+    "item3": {
+      "name": "Sara M.",
+      "role": "Chef, Paris",
+      "text": "La plateforme multilingue a facilité la communication. En 2 mois, j'ai eu plusieurs offres et j'ai choisi la meilleure pour ma carrière."
+    }
+  },
+  "cta": {
+    "tag": "Recrutement moderne",
+    "title": "Lancez votre programme transfrontalier",
+    "subtitle": "Centralisez candidatures, documents et validations.",
+    "primary": "Créer un compte",
+    "secondary": "Espace recruteur"
+  },
+  "about": {
+    "title": "À propos de Prestalink",
+    "description": "PrestaLink est une plateforme d'emploi complète conçue pour aider les citoyens algériens à réaliser leurs rêves de carrière en Europe. Opérationnelle depuis 2018, notre plateforme a aidé des milliers de citoyens algériens à trouver un emploi en Allemagne, en France, en Espagne, aux Pays-Bas et dans d'autres pays européens. Nous fournissons un soutien complet non seulement dans la recherche d'emploi, mais aussi dans les processus de visa, les solutions de logement, la formation linguistique et le conseil en installation à chaque étape. Avec notre infrastructure technologique avancée, notre vaste réseau d'employeurs et notre équipe expérimentée, nous garantissons que les citoyens algériens peuvent s'installer en Europe en toute sécurité et en douceur.",
+    "missionTitle": "Notre mission",
+    "missionBody": "En tant que PrestaLink, notre mission est d'offrir aux citoyens algériens des opportunités d'emploi équitables, transparentes et fiables en Europe et de fournir un soutien complet tout au long du processus d'installation. Avec notre approche centrée sur l'humain, nous comprenons les besoins uniques de chaque candidat et fournissons des solutions personnalisées. Nous sommes à vos côtés non seulement pour le matching d'emploi, mais aussi pour le guidage des demandes de visa, le soutien au logement, les programmes d'intégration culturelle et les services de suivi post-installation. Avec notre engagement envers les valeurs éthiques, notre communication transparente et notre approche de service de qualité, nous garantissons que les citoyens algériens commencent un parcours professionnel réussi en Europe. Nous développons également des programmes de recrutement évolutifs et efficaces pour que les employeurs puissent atteindre les bons talents.",
+    "visionTitle": "Notre vision",
+    "visionBody": "Notre vision est de devenir la plateforme d'emploi la plus fiable et complète d'Europe d'ici 2026 et de devenir le premier choix pour les citoyens algériens dans leur processus d'installation en Europe. Nous visons à transformer la mobilité de la main-d'œuvre internationale en créant un écosystème où les talents multilingues et les employeurs éthiques se rencontrent. Grâce aux innovations technologiques et au développement continu, nous élèverons l'expérience utilisateur au plus haut niveau et optimiserons les processus de matching d'emploi. Nous travaillons pour être actifs dans 25+ pays européens, réaliser 50 000+ placements réussis et atteindre un taux de satisfaction client de 99%+. Nous visons également à créer une valeur à long terme pour les candidats et les employeurs tout en contribuant aux objectifs de développement durable.",
+    "valuesTitle": "Valeurs",
+    "values": [
+      "Design centré humain: Nous privilégions les besoins et les expériences de nos utilisateurs dans chaque décision et service. Chaque fonctionnalité de notre plateforme est façonnée sur la base de retours réels des utilisateurs.",
+      "Conformité transparente: Nous agissons avec ouverture et honnêteté dans tous nos processus. Nous garantissons une transparence totale concernant les processus de visa, les frais, la portée des services et les informations sur les employeurs.",
+      "Partenariats locaux: Nous travaillons avec un sens de la responsabilité sociale en établissant des partenariats solides avec les organisations non gouvernementales locales, les associations et les centres de conseil en migration en Algérie et en Europe. Grâce à ces partenariats, nous touchons un public plus large et démontrons une approche qui respecte les cultures locales."
+    ],
+    "servicesTitle": "Nos Services",
+    "servicesSubtitle": "Services complets que nous offrons aux citoyens algériens",
+    "services": {
+      "0": {
+        "title": "Préparation de CV Europass",
+        "description": "Nous préparons votre CV au format Europass professionnel selon les normes européennes. Toutes vos expériences, formations et compétences sont organisées au format standard et localisées selon la langue du pays cible."
+      },
+      "1": {
+        "title": "Matching d'emploi par IA",
+        "description": "Notre système alimenté par l'IA identifie automatiquement et recommande les opportunités d'emploi les plus adaptées à votre profil, expérience et objectifs de carrière."
+      },
+      "2": {
+        "title": "Gestion automatique des candidatures",
+        "description": "Nous envoyons automatiquement des candidatures par e-mail aux entreprises adaptées avec votre CV localisé et suivons toutes les candidatures."
+      },
+      "3": {
+        "title": "Coordination de communication avec l'entreprise",
+        "description": "Nous gérons la communication avec les entreprises et travaillons en coordination avec vous. Nous suivons les processus de candidature et vous transmettons les retours."
+      },
+      "4": {
+        "title": "Support de préparation de documents",
+        "description": "Nous vous guidons dans la préparation de tous les documents nécessaires pour le visa et les candidatures et nous nous assurons qu'ils sont complets."
+      },
+      "5": {
+        "title": "Gestion du processus de visa",
+        "description": "Nous obtenons les lettres d'invitation et les documents requis auprès des entreprises pour le visa et vous remettons tous les documents. Nous fournissons également un soutien professionnel pendant votre processus de demande de visa."
+      }
+    },
+    "statsTitle": "PrestaLink en chiffres",
+    "stats": {
+      "0": { "label": "Placements réussis" },
+      "1": { "label": "Partenaires" },
+      "2": { "label": "Langues supportées" },
+      "3": { "label": "Satisfaction client" }
+    },
+    "howWeWorkTitle": "Comment nous travaillons",
+    "steps": {
+      "0": {
+        "title": "Créer un profil",
+        "description": "Créez votre compte, téléchargez votre CV et entrez vos compétences. Votre profil sera vérifié."
+      },
+      "1": {
+        "title": "Matching d'emploi",
+        "description": "Notre système alimenté par l'IA identifie et recommande les opportunités les plus adaptées pour vous."
+      },
+      "2": {
+        "title": "Candidature et soutien",
+        "description": "Postulez pour des emplois adaptés. Recevez un soutien continu sur les questions de visa et de logement."
+      },
+      "3": {
+        "title": "Installation",
+        "description": "Installez-vous en Europe. Nos services de soutien continuent même après votre relocalisation."
+      }
+    },
+    "whyChooseUsTitle": "Pourquoi nous choisir",
+    "whyChooseUs": {
+      "0": {
+        "title": "Fiable et vérifié",
+        "description": "Tous les employeurs et offres d'emploi sont soigneusement vérifiés. Votre sécurité est notre priorité."
+      },
+      "1": {
+        "title": "Service de soutien complet",
+        "description": "Nous soutenons non seulement la recherche d'emploi mais aussi votre processus de visa, logement et installation."
+      },
+      "2": {
+        "title": "Équipe expérimentée",
+        "description": "Notre équipe expérimentée en marché du travail européen et processus d'immigration est toujours avec vous."
+      }
+    },
+    "testimonialsTitle": "Histoires de succès",
+    "testimonialsSubtitle": "Vraies histoires de citoyens algériens"
+  },
+  "contact": {
+    "title": "Contactez l’équipe",
+    "subtitle": "Basés à Bruxelles avec des hubs à Istanbul et Casablanca.",
+    "name": "Nom complet",
+    "email": "E-mail",
+    "message": "Votre message",
+    "submit": "Envoyer",
+    "success": "Merci ! Nous revenons vers vous sous 24h."
+  },
+  "auth": {
+    "loginTitle": "Bienvenue",
+    "registerTitle": "Créer un profil Prestalink",
+    "selectLoginType": "Sélectionner le type de connexion",
+    "selectLoginTypeDesc": "Choisissez l'un des rôles ci-dessous pour continuer",
+    "selectRegisterType": "Sélectionner le type d'inscription",
+    "selectRegisterTypeDesc": "Sélectionnez votre rôle pour créer un compte",
+    "selectRole": "Veuillez sélectionner un rôle",
+    "backToRoleSelection": "Retour aux rôles",
+    "continue": "Continuer",
+    "loginSubtitle": "Connectez-vous à votre compte",
+    "registerSubtitle": "Créer un nouveau compte",
+    "adminRegisterNote": "Note: Les comptes administrateur ne peuvent être créés que par des administrateurs existants.",
+    "email": "E-mail",
+    "password": "Mot de passe",
+    "name": "Nom complet",
+    "namePlaceholder": "Votre nom complet",
+    "phone": "Téléphone",
+    "languages": "Langues (séparées par des virgules)",
+    "languagesHint": "Entrez les langues séparées par des virgules (ex: EN, FR, AR)",
+    "login": "Connexion",
+    "register": "Inscription",
+    "loading": "Traitement...",
+    "error": "Une erreur est survenue.",
+    "registerPrompt": "Pas encore de compte ?",
+    "loginPrompt": "Vous avez déjà un compte ?",
+    "roles": {
+      "user": {
+        "title": "Chercheur d'emploi (Candidat)",
+        "description": "Trouvez et postulez à des offres d'emploi en Europe. Préparez votre CV et développez votre carrière."
+      },
+      "recruiter": {
+        "title": "Employeur (Recruteur)",
+        "description": "Créez des offres d'emploi, consultez les candidats et gérez votre processus de recrutement."
+      },
+      "admin": {
+        "title": "Administrateur (Admin)",
+        "description": "Gérez le système, surveillez les utilisateurs et contrôlez les paramètres de la plateforme."
+      }
+    }
+  },
+  "userDashboard": {
+    "welcome": "Bienvenue",
+    "welcomeUser": "Bienvenue {name}",
+    "subtitle": "Suivez vos documents, candidatures et messages recruteur.",
+    "cvStatus": "Statut CV",
+    "cvUploaded": "CV Téléchargé",
+    "cvNotUploaded": "CV Non Téléchargé",
+    "totalApplications": "Total des Candidatures",
+    "newJobMatches": "Nouvelles Correspondances",
+    "quickActions": "Actions Rapides",
+    "editProfile": "Modifier le Profil",
+    "viewJobs": "Voir les Offres",
+    "viewApplications": "Voir les Candidatures",
+    "metrics": {
+      "applications": "Candidatures",
+      "jobs": "Offres",
+      "notifications": "Notifications",
+      "languages": "Langues"
+    },
+    "jobList": "Postes disponibles",
+    "uploadTitle": "Déposer CV & certificats",
+    "selectJob": "Choisir une offre",
+    "cv": "CV",
+    "certificates": "Certificats",
+    "submit": "Envoyer la candidature",
+    "applicationSuccess": "Candidature envoyée.",
+    "applicationError": "Impossible d'envoyer la candidature.",
+    "applicationsTitle": "Suivi des candidatures",
+    "notificationsTitle": "Notifications",
+    "noApplications": "Aucune candidature.",
+    "noNotifications": "Aucune notification."
+  },
+  "recruiterDashboard": {
+    "title": "Console recruteur",
+    "subtitle": "Gérez vos offres et accélérez vos recrutements.",
+    "metrics": {
+      "jobs": "Offres actives",
+      "applications": "Candidats",
+      "countries": "Pays actifs"
+    },
+    "createJob": "Créer une offre",
+    "fields": {
+      "title": "Intitulé du poste",
+      "description": "Description",
+      "location": "Lieu",
+      "salary": "Salaire",
+      "experience": "Expérience requise",
+      "language": "Langue"
+    },
+    "publish": "Publier",
+    "success": "Offre publiée.",
+    "error": "Échec de l'action.",
+    "applicants": "Candidats",
+    "selectJob": "Choisir une offre",
+    "noApplicants": "Aucun candidat pour le moment."
+  },
+  "employerNav": {
+    "dashboard": "Tableau de bord",
+    "profile": "Profil Entreprise",
+    "createJob": "Créer une Offre",
+    "jobListings": "Offres d'emploi",
+    "notifications": "Notifications"
+  },
+  "employerDashboard": {
+    "welcome": "Bienvenue, {name}",
+    "subtitle": "Gérez vos offres d'emploi et consultez les candidats",
+    "totalActiveJobs": "Offres d'Emploi Actives",
+    "totalApplicants": "Total des Candidats",
+    "countriesHiring": "Pays de Recrutement",
+    "quickActions": "Actions Rapides",
+    "createNewJob": "Créer un Nouvel Emploi",
+    "viewJobListings": "Voir les Offres",
+    "viewApplicants": "Voir les Candidats",
+    "recentJobs": "Offres Récentes",
+    "viewDetails": "Voir les Détails"
+  },
+  "employerProfile": {
+    "title": "Profil Entreprise",
+    "subtitle": "Mettez à jour les informations de votre entreprise",
+    "incompleteWarning": "Votre profil entreprise semble incomplet. Veuillez remplir toutes les informations.",
+    "fields": {
+      "companyName": "Nom de l'Entreprise",
+      "companyDescription": "Description de l'Entreprise",
+      "industry": "Secteur",
+      "country": "Pays",
+      "city": "Ville",
+      "contactEmail": "E-mail de Contact",
+      "contactPhone": "Téléphone de Contact",
+      "companyLogo": "Logo de l'Entreprise"
+    },
+    "save": "Enregistrer",
+    "saved": "Profil mis à jour avec succès",
+    "error": "Erreur lors de la mise à jour du profil"
+  },
+  "createJob": {
+    "title": "Créer une Nouvelle Offre d'Emploi",
+    "subtitle": "Créez une offre d'emploi pour un nouveau poste",
+    "fields": {
+      "jobTitle": "Intitulé du Poste",
+      "jobDescription": "Description du Poste",
+      "location": "Localisation (Pays / Ville)",
+      "salaryRange": "Échelle Salariale",
+      "requiredExperience": "Expérience Requise",
+      "requiredLanguages": "Langues Requises",
+      "workType": "Type de Travail"
+    },
+    "workTypes": {
+      "fullTime": "Temps Plein",
+      "partTime": "Temps Partiel",
+      "seasonal": "Saisonnier"
+    },
+    "placeholders": {
+      "jobDescription": "Décrivez le poste en détail...",
+      "location": "Ex: Munich, DE",
+      "salaryRange": "Ex: €48K - €58K",
+      "requiredExperience": "Ex: 3+ ans",
+      "requiredLanguages": "Ex: EN, DE"
+    },
+    "publish": "Publier l'Offre",
+    "success": "Votre offre d'emploi est maintenant en ligne !",
+    "error": "Erreur lors de la création de l'offre",
+    "publishing": "Publication...",
+    "published": "Publié !",
+    "cancel": "Annuler"
+  },
+  "employerJobs": {
+    "title": "Gestion des Offres d'Emploi",
+    "subtitle": "Gérez toutes vos offres d'emploi",
+    "noJobs": "Vous n'avez pas encore créé d'offre d'emploi",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "viewApplicants": "Voir les Candidats",
+    "totalApplicants": "Total des Candidats",
+    "status": {
+      "active": "Active",
+      "closed": "Fermée"
+    },
+    "confirmDelete": "Êtes-vous sûr de vouloir supprimer cette offre d'emploi ?",
+    "deleted": "Offre d'emploi supprimée avec succès",
+    "error": "Erreur lors de la suppression de l'offre",
+    "loading": "Chargement..."
+  },
+  "employerJobDetail": {
+    "title": "Détails de l'Offre",
+    "applicants": "Candidats",
+    "applicantInfo": {
+      "name": "Nom",
+      "country": "Pays",
+      "experience": "Expérience",
+      "languages": "Langues",
+      "downloadCv": "Télécharger CV",
+      "viewProfile": "Voir le Profil"
+    },
+    "status": {
+      "pending": "En attente",
+      "reviewing": "En examen",
+      "viewed": "Consulté",
+      "interview": "Entretien",
+      "accepted": "Accepté",
+      "rejected": "Rejeté"
+    },
+    "noApplicants": "Aucune candidature pour cette offre pour le moment",
+    "backToJobs": "Retour aux offres",
+    "loading": "Chargement...",
+    "notFound": "Offre introuvable"
+  },
+  "applicantReview": {
+    "title": "Évaluation du Candidat",
+    "profile": "Profil",
+    "downloadCv": "Télécharger CV",
+    "downloadCertificates": "Télécharger les Certificats",
+    "internalNotes": "Notes Internes",
+    "changeStatus": "Changer le Statut",
+    "notesPlaceholder": "Écrivez vos notes sur ce candidat ici...",
+    "saveNotes": "Enregistrer les Notes",
+    "statusUpdated": "Statut mis à jour avec succès",
+    "status": {
+      "pending": "En attente",
+      "viewed": "Consulté",
+      "interview": "Entretien",
+      "accepted": "Accepté",
+      "rejected": "Rejeté"
+    },
+    "saving": "Enregistrement...",
+    "backToJob": "Retour à l'offre",
+    "loading": "Chargement...",
+    "notFound": "Candidat introuvable",
+    "files": "Fichiers"
+  },
+  "employerNotifications": {
+    "title": "Notifications",
+    "subtitle": "Consultez toutes vos notifications ici",
+    "markAllRead": "Tout marquer comme lu",
+    "noNotifications": "Aucune nouvelle notification",
+    "unread": "non lues"
+  },
+  "adminDashboard": {
+    "title": "Centre d'administration",
+    "subtitle": "Supervisez utilisateurs, recruteurs et journaux.",
+    "metrics": {
+      "jobs": "Offres",
+      "recruiters": "Recruteurs",
+      "users": "Utilisateurs",
+      "logs": "Logs"
+    },
+    "manageUsers": "Admins",
+    "manageJobs": "Vue des offres",
+    "logs": "Journaux système",
+    "noUsers": "Aucun admin trouvé.",
+    "logEntries": [
+      "Sauvegarde quotidienne réalisée",
+      "Nouveau recruteur vérifié",
+      "Archive CV synchronisée"
+    ]
+  },
+  "userNav": {
+    "dashboard": "Tableau de bord",
+    "profile": "Mon Profil",
+    "jobListings": "Offres d'emploi",
+    "applications": "Mes Candidatures",
+    "notifications": "Notifications"
+  },
+  "userProfile": {
+    "title": "Modifier le Profil",
+    "subtitle": "Mettez à jour vos informations personnelles",
+    "incompleteWarning": "Votre profil semble incomplet. Veuillez remplir toutes les informations.",
+    "fields": {
+      "fullName": "Nom Complet",
+      "email": "E-mail",
+      "phone": "Téléphone",
+      "country": "Pays",
+      "languages": "Langues",
+      "experienceLevel": "Niveau d'expérience",
+      "bio": "Biographie",
+      "profilePhoto": "Photo de profil",
+      "cv": "Télécharger CV (PDF)",
+      "certificates": "Télécharger Certificats"
+    },
+    "placeholders": {
+      "country": "Ex: Turquie, Allemagne...",
+      "bio": "Écrivez une courte biographie sur vous..."
+    },
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "saved": "Profil mis à jour avec succès",
+    "error": "Erreur lors de la mise à jour du profil"
+  },
+  "userJobs": {
+    "title": "Offres d'emploi",
+    "subtitle": "Découvrez les opportunités d'emploi qui vous correspondent",
+    "searchPlaceholder": "Rechercher des emplois...",
+    "filters": {
+      "country": "Pays",
+      "salaryRange": "Échelle salariale",
+      "position": "Poste",
+      "experience": "Expérience",
+      "language": "Langue"
+    },
+    "placeholders": {
+      "country": "Pays...",
+      "experience": "Expérience...",
+      "salaryRange": "Salaire..."
+    },
+    "apply": "Postuler",
+    "viewDetails": "Voir les détails",
+    "noJobs": "Aucune offre d'emploi pour le moment",
+    "noMatches": "Aucun emploi trouvé correspondant à vos critères",
+    "all": "Tous"
+  },
+  "jobDetail": {
+    "title": "Détails de l'emploi",
+    "location": "Localisation",
+    "salary": "Salaire",
+    "experience": "Expérience",
+    "languages": "Langues requises",
+    "description": "Description du poste",
+    "company": "Informations sur l'entreprise",
+    "applyNow": "Postuler maintenant",
+    "backToJobs": "Retour aux offres",
+    "cvRequired": "Vous devez télécharger votre CV avant de postuler.",
+    "uploadCv": "Télécharger CV",
+    "applicationSuccess": "Votre candidature a été soumise avec succès!",
+    "companyInfoComingSoon": "Informations sur l'entreprise à venir"
+  },
+  "common": {
+    "loading": "Chargement...",
+    "saving": "Enregistrement...",
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "back": "Retour"
+  },
+  "userApplications": {
+    "title": "Mes Candidatures",
+    "subtitle": "Consultez toutes vos candidatures",
+    "status": {
+      "pending": "En attente",
+      "reviewing": "En examen",
+      "interview": "Entretien",
+      "accepted": "Accepté",
+      "rejected": "Rejeté"
+    },
+    "appliedOn": "Candidature déposée le",
+    "noApplications": "Vous n'avez pas encore soumis de candidature",
+    "jobTitle": "Poste",
+    "company": "Entreprise"
+  },
+  "userNotifications": {
+    "title": "Notifications",
+    "subtitle": "Consultez toutes vos notifications ici",
+    "markAllRead": "Tout marquer comme lu",
+    "noNotifications": "Aucune nouvelle notification",
+    "unread": "non lues"
+  }
+}
+
