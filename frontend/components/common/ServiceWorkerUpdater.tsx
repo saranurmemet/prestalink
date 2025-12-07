@@ -16,30 +16,24 @@ export default function ServiceWorkerUpdater() {
 
             // Yeni service worker bulunduğunda hemen aktif et
             registration.addEventListener('updatefound', () => {
-              const newWorker = registration.installing;
-              if (newWorker) {
-                newWorker.addEventListener('statechange', () => {
-                  // Yeni service worker hazır olduğunda otomatik aktif et
-                  if (newWorker.state === 'installed') {
-                    // Eğer zaten bir controller varsa (eski service worker çalışıyorsa)
-                    if (navigator.serviceWorker.controller) {
-                      // SKIP_WAITING mesajı gönder - service worker'ı hemen aktif et
-                      newWorker.postMessage({ type: 'SKIP_WAITING' });
-                      
-                      // Service worker aktif olduğunda otomatik yenile
-                      newWorker.addEventListener('statechange', () => {
-                        if (newWorker.state === 'activated' && !refreshing) {
-                          refreshing = true;
-                          window.location.reload();
-                        }
-                      });
-                    } else {
-                      // İlk yükleme - hemen aktif et
-                      newWorker.postMessage({ type: 'SKIP_WAITING' });
-                    }
+            const newWorker = registration.installing;
+            if (newWorker) {
+              newWorker.addEventListener('statechange', () => {
+                // Yeni service worker hazır olduğunda otomatik aktif et
+                if (newWorker.state === 'installed') {
+                  // Eğer zaten bir controller varsa (eski service worker çalışıyorsa)
+                  if (navigator.serviceWorker.controller) {
+                    // SKIP_WAITING mesajı gönder - service worker'ı hemen aktif et
+                    newWorker.postMessage({ type: 'SKIP_WAITING' });
                   }
-                });
-              }
+                }
+                // Service worker aktif olduğunda otomatik yenile
+                if (newWorker.state === 'activated' && !refreshing) {
+                  refreshing = true;
+                  window.location.reload();
+                }
+              });
+            }
             });
           });
         });
