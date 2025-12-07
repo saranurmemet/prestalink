@@ -22,7 +22,26 @@ const allowedOrigins = process.env.CLIENT_URL ? process.env.CLIENT_URL.split(','
   'https://*.vercel.app', // Tüm Vercel preview URL'leri için
 ];
 
-app.use(cors({ origin: allowedOrigins, credentials: true }));
+// CORS configuration with wildcard support for Vercel
+app.use(cors({
+  origin: (origin, callback) => {
+    // Allow requests with no origin (mobile apps, Postman, etc.)
+    if (!origin) return callback(null, true);
+    
+    // Check if origin is in allowed list
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    
+    // Check if origin matches Vercel pattern
+    if (origin.includes('.vercel.app')) {
+      return callback(null, true);
+    }
+    
+    callback(new Error('Not allowed by CORS'));
+  },
+  credentials: true,
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
