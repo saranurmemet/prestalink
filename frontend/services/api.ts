@@ -70,7 +70,7 @@ export const updateProfile = (data: FormData) =>
   });
 
 export const checkUserCV = (userId: string) =>
-  api.get<{ hasCV: boolean; cvUrl?: string }>(`/users/${userId}/cv`);
+  api.get<{ hasCV: boolean; cvUrl?: string }>(`/auth/users/${userId}/cv`);
 
 export const fetchJobs = () =>
   api.get<Job[]>(API_ROUTES.jobs.base);
