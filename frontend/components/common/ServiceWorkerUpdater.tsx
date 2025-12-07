@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import { trackPWAInstall, sendPWAHeartbeat } from '@/services/analytics';
 
 export default function ServiceWorkerUpdater() {
   useEffect(() => {
@@ -41,6 +42,26 @@ export default function ServiceWorkerUpdater() {
 
       // İlk yüklemede kontrol et
       checkForUpdates();
+
+      // PWA yükleme kaydı (sadece bir kez)
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then((registrations) => {
+          if (registrations.length > 0) {
+            // Service worker varsa PWA yüklü demektir
+            trackPWAInstall('3.0.0');
+            
+            // Her 5 dakikada bir heartbeat gönder (aktif kullanıcı takibi)
+            const heartbeatInterval = setInterval(() => {
+              sendPWAHeartbeat();
+            }, 300000); // 5 dakika
+
+            // Cleanup
+            return () => {
+              clearInterval(heartbeatInterval);
+            };
+          }
+        });
+      }
 
       // Her 5 dakikada bir otomatik kontrol et (performans için optimize edildi)
       const updateInterval = setInterval(checkForUpdates, 300000);
