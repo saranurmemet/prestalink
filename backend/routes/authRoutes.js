@@ -1,5 +1,5 @@
 const express = require('express');
-const { register, login, me, loginForRole, updateProfile } = require('../controllers/authController');
+const { register, login, me, loginForRole, updateProfile, checkUserCV } = require('../controllers/authController');
 const { authMiddleware } = require('../middleware/authMiddleware');
 const upload = require('../utils/upload');
 
@@ -24,5 +24,8 @@ router.put('/me', authMiddleware, upload.fields([
   { name: 'cv', maxCount: 1 },
   { name: 'certificates', maxCount: 10 }
 ]), updateProfile);
+
+// CHECK USER CV
+router.get('/users/:userId/cv', authMiddleware, checkUserCV);
 
 module.exports = router;
