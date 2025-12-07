@@ -63,6 +63,11 @@ exports.pwaHeartbeat = asyncHandler(async (req, res) => {
 
 // İstatistikleri getir (Admin only)
 exports.getAnalytics = asyncHandler(async (req, res) => {
+  // Admin kontrolü
+  if (!req.user || (req.user.role !== 'admin' && req.user.role !== 'superadmin')) {
+    return res.status(403).json({ message: 'Access denied. Admin only.' });
+  }
+
   // Toplam yükleme sayısı
   const totalInstalls = await PWAInstall.countDocuments();
 
