@@ -2,8 +2,9 @@ const withPWA = require('next-pwa')({
   dest: 'public',
   disable: process.env.NODE_ENV === 'development',
   register: true,
-  skipWaiting: true,
+  skipWaiting: true, // Yeni service worker hemen aktif olsun
   sw: 'sw.js',
+  buildExcludes: [/middleware-manifest\.json$/],
   runtimeCaching: [
     {
       urlPattern: /^https?.*/,
@@ -12,7 +13,9 @@ const withPWA = require('next-pwa')({
         cacheName: 'offlineCache',
         expiration: {
           maxEntries: 200,
+          maxAgeSeconds: 86400, // 24 saat
         },
+        networkTimeoutSeconds: 10,
       },
     },
   ],
