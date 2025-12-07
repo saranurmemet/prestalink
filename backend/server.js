@@ -13,7 +13,7 @@ const errorHandler = require('./middleware/errorMiddleware');
 connectDB();
 
 const app = express();
-const allowedOrigins = process.env.CLIENT_URL ? process.env.CLIENT_URL.split(',') : ['http://localhost:3000'];
+const allowedOrigins = process.env.CLIENT_URL ? process.env.CLIENT_URL.split(',') : ['http://localhost:3000', 'http://10.76.212.194:3000'];
 
 app.use(cors({ origin: allowedOrigins, credentials: true }));
 app.use(express.json());

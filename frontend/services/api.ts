@@ -2,8 +2,22 @@ import axios from 'axios';
 import { API_ROUTES } from './endpoints';
 import type { User, Job, Application, Notification } from './types';
 
+// Auto-detect API URL based on current hostname
+const getApiUrl = () => {
+  if (process.env.NEXT_PUBLIC_API_URL) {
+    return process.env.NEXT_PUBLIC_API_URL;
+  }
+  if (typeof window !== 'undefined') {
+    const hostname = window.location.hostname;
+    if (hostname === '10.76.212.194' || hostname === 'localhost' || hostname === '127.0.0.1') {
+      return `http://${hostname === 'localhost' || hostname === '127.0.0.1' ? 'localhost' : '10.76.212.194'}:5000/api`;
+    }
+  }
+  return 'https://prestalink.onrender.com/api';
+};
+
 const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || 'https://prestalink.onrender.com/api',
+  baseURL: getApiUrl(),
   withCredentials: true,
 });
 
