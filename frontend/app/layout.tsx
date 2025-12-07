@@ -5,6 +5,7 @@ import AppProviders from '@/components/providers/AppProviders';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import FloatingContact from '@/components/common/FloatingContact';
+import SplashScreen from '@/components/common/SplashScreen';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -41,6 +42,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" suppressHydrationWarning>
             <body className={`${inter.variable} text-brandNavy dark:text-slate-100 antialiased`}>
               <AppProviders>
+                <SplashScreen />
                 <Header />
                 <main className="pt-20 pb-16">{children}</main>
                 <Footer />
