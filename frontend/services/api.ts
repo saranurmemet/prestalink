@@ -3,7 +3,7 @@ import { API_ROUTES } from './endpoints';
 import type { User, Job, Application, Notification } from './types';
 
 const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api',
+  baseURL: process.env.NEXT_PUBLIC_API_URL || 'https://prestalink.onrender.com/api',
   withCredentials: true,
 });
 
