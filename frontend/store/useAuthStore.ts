@@ -8,6 +8,7 @@ interface AuthState {
   user: User | null;
   token: string | null;
   setAuth: (payload: { user: User; token: string }) => void;
+  setUser: (user: User) => void;
   logout: () => void;
 }
 
@@ -20,6 +21,11 @@ export const useAuthStore = create<AuthState>()(
         set(() => {
           return { user, token };
         }),
+      setUser: (user) =>
+        set((state) => ({
+          ...state,
+          user,
+        })),
       logout: () =>
         set(() => ({
           user: null,
