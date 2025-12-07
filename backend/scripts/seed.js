@@ -82,7 +82,7 @@ const seed = async () => {
         {
           title: 'CNC Specialist',
           description: 'Leading automotive supplier in Germany seeking experienced CNC specialist. Operate and maintain precision machining equipment. Full relocation support, housing assistance, and visa sponsorship included. Professional development opportunities available.',
-          salary: '€48K - €58K',
+          salary: '€4,000 - €4,800/ay',
           location: 'Munich, DE',
           requiredExperience: '3+ years',
           requiredLanguage: 'DE',
@@ -90,7 +90,7 @@ const seed = async () => {
         {
           title: 'Hospitality Manager',
           description: 'Luxury 5-star resort in French Riviera seeking bilingual hospitality manager. Oversee guest services, staff management, and daily operations. Competitive benefits package with accommodation. Beautiful coastal location with excellent work-life balance.',
-          salary: '€42K - €50K',
+          salary: '€3,500 - €4,200/ay',
           location: 'Nice, FR',
           requiredExperience: '5+ years',
           requiredLanguage: 'FR / EN',
@@ -98,7 +98,7 @@ const seed = async () => {
         {
           title: 'Software Engineer',
           description: 'Fast-growing tech startup in Berlin looking for talented software engineer. Work with modern tech stack (React, Node.js, TypeScript). Remote-friendly with flexible hours. Equity participation and career growth opportunities.',
-          salary: '€60K - €75K',
+          salary: '€5,000 - €6,250/ay',
           location: 'Berlin, DE',
           requiredExperience: '4+ years',
           requiredLanguage: 'EN',
@@ -106,7 +106,7 @@ const seed = async () => {
         {
           title: 'Marketing Specialist',
           description: 'Digital marketing agency in Amsterdam seeking creative marketing specialist. Develop and execute campaigns for international clients. Dynamic work environment with creative freedom. Relocation support and professional training provided.',
-          salary: '€38K - €45K',
+          salary: '€3,200 - €3,750/ay',
           location: 'Amsterdam, NL',
           requiredExperience: '2+ years',
           requiredLanguage: 'EN',
@@ -140,7 +140,7 @@ const seed = async () => {
         {
           title: 'CNC Specialist',
           description: 'Automotive supplier in Germany looking for CNC expert.',
-          salary: '€48K - €58K',
+          salary: '€4,000 - €4,800/ay',
           location: 'Munich, DE',
           requiredExperience: '3+ years',
           requiredLanguage: 'DE',
@@ -148,7 +148,7 @@ const seed = async () => {
         {
           title: 'Hospitality Manager',
           description: 'Luxury resort in France seeking bilingual manager.',
-          salary: '€42K - €50K',
+          salary: '€3,500 - €4,200/ay',
           location: 'Nice, FR',
           requiredExperience: '5+ years',
           requiredLanguage: 'FR / EN',

@@ -68,7 +68,7 @@ const seed = async () => {
           {
             title: 'CNC Specialist',
             description: 'Leading automotive supplier in Germany seeking experienced CNC specialist.',
-            salary: '€48K - €58K',
+            salary: '€4,000 - €4,800/ay',
             location: 'Munich, DE',
             requiredExperience: '3+ years',
             requiredLanguage: 'DE',
@@ -77,7 +77,7 @@ const seed = async () => {
           {
             title: 'Software Engineer',
             description: 'Fast-growing tech startup in Berlin looking for talented software engineer.',
-            salary: '€60K - €75K',
+            salary: '€5,000 - €6,250/ay',
             location: 'Berlin, DE',
             requiredExperience: '4+ years',
             requiredLanguage: 'EN',
@@ -105,6 +105,7 @@ const seed = async () => {
 };
 
 seed();
+
 
 
 
