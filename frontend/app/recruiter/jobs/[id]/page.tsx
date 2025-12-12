@@ -8,6 +8,7 @@ import EmployerLayout from '@/components/layout/EmployerLayout';
 import { useLanguage } from '@/components/providers/LanguageProvider';
 import { fetchJob, fetchApplicationsByJob, deleteJob } from '@/services/api';
 import type { Job, Application, User } from '@/services/types';
+import { getStaticFileUrl } from '@/utils/apiUrl';
 import { ArrowLeft, MapPin, DollarSign, Briefcase, Globe, Users, Download, Eye, Trash2 } from 'lucide-react';
 
 const JobDetailPage = () => {
@@ -229,7 +230,7 @@ const JobDetailPage = () => {
                           <div className="flex items-center gap-2 pt-4 border-t border-slate-200 dark:border-slate-700">
                             {application.cvUrl && (
                               <a
-                                href={`${process.env.NEXT_PUBLIC_API_URL || 'https://prestalink.onrender.com'}${application.cvUrl}`}
+                                href={getStaticFileUrl(application.cvUrl)}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="flex items-center gap-2 px-4 py-2 bg-brandBlue text-white rounded-lg hover:bg-brandBlue/90 transition-colors text-sm"

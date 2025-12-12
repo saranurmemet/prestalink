@@ -2,28 +2,33 @@ import axios from 'axios';
 import { API_ROUTES } from './endpoints';
 import type { User, Job, Application, Notification } from './types';
 
-// Auto-detect API URL based on current hostname
-const getApiUrl = () => {
+// API Base URL Configuration
+// Development: http://localhost:5000/api
+// Production: Set via NEXT_PUBLIC_API_URL environment variable
+const getApiBaseURL = () => {
   if (process.env.NEXT_PUBLIC_API_URL) {
     return process.env.NEXT_PUBLIC_API_URL;
   }
-  if (typeof window !== 'undefined') {
-    const hostname = window.location.hostname;
-    if (hostname === '10.76.212.194' || hostname === '192.168.1.14' || hostname === 'localhost' || hostname === '127.0.0.1') {
-      return `http://${hostname === 'localhost' || hostname === '127.0.0.1' ? 'localhost' : hostname}:5000/api`;
-    }
+  
+  // Development fallback
+  if (process.env.NODE_ENV === 'development') {
+    return 'http://localhost:5000/api';
   }
+  
+  // Production fallback (should be set via env variable)
   return 'https://prestalink.onrender.com/api';
 };
 
 const api = axios.create({
-  baseURL: getApiUrl(),
+  baseURL: getApiBaseURL(),
   withCredentials: true,
+  timeout: 30000, // 30 saniye timeout
 });
 
 api.interceptors.request.use((config) => {
   if (typeof window !== 'undefined') {
     try {
+      // Add Authorization token
       const persisted = localStorage.getItem('prestalink-auth');
       if (persisted) {
         const parsed = JSON.parse(persisted);
@@ -31,6 +36,16 @@ api.interceptors.request.use((config) => {
         if (token) {
           config.headers.Authorization = `Bearer ${token}`;
         }
+      }
+      
+      // Add Accept-Language header for i18n error messages
+      const langStore = localStorage.getItem('prestalink-language');
+      if (langStore) {
+        const parsed = JSON.parse(langStore);
+        const lang = parsed?.state?.language || 'en';
+        config.headers['Accept-Language'] = `${lang}-${lang.toUpperCase()},${lang};q=0.9,en;q=0.8`;
+      } else {
+        config.headers['Accept-Language'] = 'en-US,en;q=0.9';
       }
     } catch (error) {
       console.error('Token parse error', error);
@@ -84,7 +99,7 @@ export const updateProfile = (data: FormData) =>
   });
 
 export const checkUserCV = (userId: string) =>
-  api.get<{ hasCV: boolean; cvUrl?: string }>(`/auth/users/${userId}/cv`);
+  api.get<{ hasCV: boolean; cvUrl?: string }>(`/users/${userId}/cv`);
 
 export const fetchJobs = () =>
   api.get<Job[]>(API_ROUTES.jobs.base);
@@ -120,6 +135,35 @@ export const fetchNotifications = () =>
 
 export const markNotificationsRead = () =>
   api.put(API_ROUTES.notifications.markRead, {});
+
+// Admin API
+export const getAdminStats = () =>
+  api.get<{
+    totalUsers: number;
+    activeUsers: number;
+    pwaInstalledUsers: number;
+    totalJobs: number;
+    totalRecruiters: number;
+    totalApplications: number;
+    usersByRole: Record<string, number>;
+    recentRegistrations: number;
+    recentJobs: number;
+  }>('/admin/stats');
+
+export const getAdminUsers = (params?: { page?: number; limit?: number; role?: string; search?: string }) =>
+  api.get<{
+    users: User[];
+    total: number;
+    page: number;
+    limit: number;
+    totalPages: number;
+  }>('/admin/users', { params });
+
+export const updateUserRole = (userId: string, role: string) =>
+  api.put<User>(`/admin/users/${userId}/role`, { role });
+
+export const markPWAInstalled = () =>
+  api.post<{ message: string; pwaInstalled: boolean }>('/admin/pwa-install');
 
 export default api;
 

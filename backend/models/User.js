@@ -63,6 +63,16 @@ const userSchema = new mongoose.Schema(
     city: {
       type: String,
     },
+    lastLogin: {
+      type: Date,
+    },
+    pwaInstalled: {
+      type: Boolean,
+      default: false,
+    },
+    pwaInstalledAt: {
+      type: Date,
+    },
   },
   {
     timestamps: true,

@@ -15,6 +15,13 @@ const errorHandler = (err, req, res, next) => {
     });
   }
   
+  // Mongoose CastError (invalid ObjectId format)
+  if (err.name === 'CastError') {
+    return res.status(404).json({
+      message: 'Resource not found',
+    });
+  }
+  
   // JWT errors
   if (err.name === 'JsonWebTokenError') {
     return res.status(401).json({

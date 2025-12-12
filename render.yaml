@@ -1,10 +1,18 @@
 services:
   - type: web
-    name: Prestalink
+    name: prestalink-backend
     rootDir: backend
     env: node
     buildCommand: "npm install"
     startCommand: "node server.js"
+    plan: free
     envVars:
+      - key: NODE_ENV
+        value: production
       - key: NODE_VERSION
         value: 22.16.0
+      # Aşağıdaki environment variables Render dashboard'dan eklenmelidir:
+      # - MONGO_URI (MongoDB connection string)
+      # - JWT_SECRET (Güçlü bir secret key)
+      # - CLIENT_URL (Frontend URL'leri, virgülle ayrılmış)
+      # - PORT (Opsiyonel, varsayılan: 5000)

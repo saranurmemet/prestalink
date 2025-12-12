@@ -1,0 +1,71 @@
+{
+  "timestamp": "2025-12-11T08:01:49.727Z",
+  "backend": {
+    "running": true,
+    "url": "http://localhost:5000"
+  },
+  "summary": {
+    "passed": 14,
+    "failed": 0,
+    "warnings": 0
+  },
+  "tests": [
+    {
+      "name": "Login with invalid credentials (user)",
+      "status": "pass"
+    },
+    {
+      "name": "Login with valid Sara credentials (user)",
+      "status": "pass"
+    },
+    {
+      "name": "Login with valid Sara credentials (recruiter)",
+      "status": "pass"
+    },
+    {
+      "name": "Login with valid Sara credentials (admin)",
+      "status": "pass"
+    },
+    {
+      "name": "Get all jobs (public)",
+      "status": "pass"
+    },
+    {
+      "name": "Jobs should have at least 1 entry",
+      "status": "pass"
+    },
+    {
+      "name": "Invalid job ID returns 404",
+      "status": "pass"
+    },
+    {
+      "name": "Applications without token returns 401",
+      "status": "pass"
+    },
+    {
+      "name": "Backend responds to health check",
+      "status": "pass"
+    },
+    {
+      "name": "Backend server.js exists",
+      "status": "pass"
+    },
+    {
+      "name": "Backend package.json valid",
+      "status": "pass"
+    },
+    {
+      "name": "Frontend package.json valid",
+      "status": "pass"
+    },
+    {
+      "name": "Backend .env or config present",
+      "status": "pass"
+    },
+    {
+      "name": "Frontend .env.local present",
+      "status": "pass"
+    }
+  ],
+  "issues": []
+}

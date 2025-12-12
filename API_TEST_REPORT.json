@@ -1,0 +1,98 @@
+{
+  "timestamp": "2025-12-11T07:57:55.587Z",
+  "summary": {
+    "total": 13,
+    "passed": 12,
+    "failed": 0,
+    "warnings": 1
+  },
+  "results": {
+    "passed": [
+      {
+        "method": "GET",
+        "url": "http://localhost:5000",
+        "status": 200,
+        "description": "Backend root endpoint"
+      },
+      {
+        "method": "POST",
+        "url": "http://localhost:5000/api/auth/login",
+        "status": 401,
+        "description": "General login endpoint"
+      },
+      {
+        "method": "POST",
+        "url": "http://localhost:5000/api/auth/user/login",
+        "status": 401,
+        "description": "User login endpoint"
+      },
+      {
+        "method": "POST",
+        "url": "http://localhost:5000/api/auth/recruiter/login",
+        "status": 401,
+        "description": "Recruiter login endpoint"
+      },
+      {
+        "method": "POST",
+        "url": "http://localhost:5000/api/auth/admin/login",
+        "status": 401,
+        "description": "Admin login endpoint"
+      },
+      {
+        "method": "GET",
+        "url": "http://localhost:5000/api/jobs",
+        "status": 200,
+        "description": "Get all jobs"
+      },
+      {
+        "method": "GET",
+        "url": "http://localhost:5000/api/jobs/invalid-id",
+        "status": 404,
+        "description": "Get job by invalid ID"
+      },
+      {
+        "method": "GET",
+        "url": "http://localhost:5000/api/applications/user/invalid-id",
+        "status": 401,
+        "description": "Get user applications (no auth)"
+      },
+      {
+        "method": "POST",
+        "url": "http://localhost:5000/api/applications",
+        "status": 401,
+        "description": "Create application (no auth)"
+      },
+      {
+        "method": "POST",
+        "url": "http://localhost:5000/api/auth/user/login",
+        "status": 200,
+        "description": "Sara User login successful"
+      },
+      {
+        "method": "POST",
+        "url": "http://localhost:5000/api/auth/recruiter/login",
+        "status": 200,
+        "description": "Sara Recruiter login successful"
+      },
+      {
+        "method": "POST",
+        "url": "http://localhost:5000/api/auth/admin/login",
+        "status": 200,
+        "description": "Sara Admin login successful"
+      }
+    ],
+    "failed": [],
+    "warnings": [
+      {
+        "method": "POST",
+        "url": "http://localhost:5000/api/auth/register",
+        "expected": [
+          201,
+          400
+        ],
+        "got": 400,
+        "description": "Register endpoint"
+      }
+    ]
+  }
+}

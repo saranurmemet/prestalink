@@ -1,7 +1,6 @@
 const express = require('express');
-const { register, login, me, loginForRole, updateProfile, checkUserCV } = require('../controllers/authController');
+const { register, login, me, loginForRole } = require('../controllers/authController');
 const { authMiddleware } = require('../middleware/authMiddleware');
-const upload = require('../utils/upload');
 
 const router = express.Router();
 
@@ -19,13 +18,5 @@ router.post('/superadmin/login', loginForRole('superadmin'));
 
 // ME (auth required)
 router.get('/me', authMiddleware, me);
-router.put('/me', authMiddleware, upload.fields([
-  { name: 'profilePhoto', maxCount: 1 },
-  { name: 'cv', maxCount: 1 },
-  { name: 'certificates', maxCount: 10 }
-]), updateProfile);
-
-// CHECK USER CV
-router.get('/users/:userId/cv', authMiddleware, checkUserCV);
 
 module.exports = router;

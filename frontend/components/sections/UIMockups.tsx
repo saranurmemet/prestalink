@@ -1,150 +1,153 @@
 'use client';
 
-import { User, Briefcase, BarChart3, Check, Clock, Circle } from 'lucide-react';
+import { LayoutDashboard, Briefcase, FileText, MessageCircle, Settings, TrendingUp, Users, Clock, CheckCircle2 } from 'lucide-react';
 
 const UIMockups = () => {
-
-  // Web/Desktop mockup items
-  const desktopItems = [
-    { title: 'Mohammed Al-Rashid', subtitle: 'Software Engineer', status: 'active', badge: 'NEW' },
-    { title: 'Fatima Al-Zahra', subtitle: 'UX Designer', status: 'review', badge: null },
-    { title: 'Ahmed Hassan Al-Mahmoud', subtitle: 'Data Analyst', status: 'active', badge: null },
-    { title: 'Khadija Al-Saud', subtitle: 'Product Manager', status: 'pending', badge: null },
-  ];
-
-  // Mobile app items
-  const mobileItems = [
-    { title: 'Senior Developer', location: 'Berlin, DE', salary: '€5,400/ay' },
-    { title: 'Product Designer', location: 'Paris, FR', salary: '€4,600/ay' },
-  ];
-
   return (
-    <div className="flex flex-col lg:flex-row gap-8 items-center justify-center animate-fade-in">
-      {/* Desktop/Web Mockup */}
-      <div className="relative w-full max-w-sm">
-        <div className="glass-panel rounded-2xl p-5 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-800 dark:to-slate-900 border-2 border-slate-200/80 dark:border-slate-700/80 shadow-lg">
-          {/* Header */}
-          <div className="flex items-center justify-between mb-5">
-            <div className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-full bg-brandBlue/20 dark:bg-brandBlue/30 flex items-center justify-center">
-                <BarChart3 className="h-4 w-4 text-brandBlue" />
-              </div>
-              <span className="text-xs font-semibold text-brandGray dark:text-slate-300">Dashboard</span>
+    <div className="relative w-full max-w-3xl mx-auto">
+      {/* Illustration-style Dashboard Mockup */}
+      <div className="relative bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-slate-800 dark:via-slate-800 dark:to-slate-900 rounded-3xl p-8 shadow-2xl overflow-hidden">
+        
+        {/* Background Decorative Circles */}
+        <div className="absolute top-0 right-0 w-64 h-64 bg-blue-400/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-48 h-48 bg-purple-400/10 rounded-full blur-3xl" />
+        
+        <div className="relative flex gap-4">
+          {/* Left Sidebar Navigation */}
+          <div className="w-16 bg-white/80 dark:bg-slate-700/50 backdrop-blur-sm rounded-2xl p-3 shadow-lg flex flex-col items-center gap-3">
+            {/* Logo */}
+            <div className="w-10 h-10 bg-gradient-to-br from-brandBlue to-purple-600 rounded-xl mb-2 flex items-center justify-center">
+              <div className="w-6 h-6 bg-white rounded-md" />
             </div>
-            <div className="h-2 w-2 rounded-full bg-brandGray/30 dark:bg-slate-500/30"></div>
-          </div>
-
-          {/* List Items */}
-          <div className="space-y-3">
-            {desktopItems.map((item, index) => (
-              <div
-                key={index}
-                className="flex items-center gap-3 p-3 rounded-xl bg-white/80 dark:bg-slate-700/80 border border-white/60 dark:border-slate-600/60 hover:shadow-md transition-all"
-              >
-                <div className="flex-shrink-0">
-                  <div className="h-10 w-10 rounded-full bg-brandBlue/10 dark:bg-brandBlue/20 flex items-center justify-center">
-                    <User className="h-5 w-5 text-brandBlue" />
-                  </div>
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-1">
-                    <p className="text-sm font-semibold text-brandNavy dark:text-slate-100 truncate">{item.title}</p>
-                    {item.badge && (
-                      <span className="text-xs px-2 py-0.5 rounded-full bg-brandOrange/20 text-brandOrange font-semibold">
-                        {item.badge}
-                      </span>
-                    )}
-                  </div>
-                  <p className="text-xs text-brandGray dark:text-slate-300 truncate">{item.subtitle}</p>
-                </div>
-                <div className="flex-shrink-0">
-                  <div
-                    className={`h-8 w-8 rounded-full flex items-center justify-center ${
-                      item.status === 'active'
-                        ? 'bg-green-500/20 text-green-700'
-                        : item.status === 'review'
-                        ? 'bg-orange-500/20 text-orange-700'
-                        : 'bg-brandBlue/20 text-brandBlue'
-                    }`}
-                  >
-                    {item.status === 'active' ? (
-                      <Check className="h-4 w-4" />
-                    ) : item.status === 'review' ? (
-                      <Clock className="h-4 w-4" />
-                    ) : (
-                      <Circle className="h-4 w-4" />
-                    )}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile App Mockup */}
-      <div className="relative w-full max-w-[280px] animate-scale-in" style={{ animationDelay: '0.2s' }}>
-        <div className="relative">
-          {/* Phone Frame */}
-          <div className="relative bg-gradient-to-br from-brandBlue to-brandBlueDark rounded-[3rem] p-3 shadow-2xl transform hover:scale-105 transition-transform duration-300">
-            {/* Notch */}
-            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-24 h-6 bg-black/30 rounded-b-2xl"></div>
             
-            {/* Screen */}
-            <div className="bg-white dark:bg-slate-800 rounded-[2.5rem] overflow-hidden min-h-[520px] flex flex-col">
-              {/* Status Bar */}
-              <div className="h-8 bg-gradient-to-r from-brandBlue/10 to-transparent dark:from-brandBlue/20 dark:to-transparent flex items-center justify-between px-4 pt-1">
-                <span className="text-xs font-semibold text-brandNavy dark:text-slate-100">9:41</span>
-                <div className="flex items-center gap-1">
-                  <div className="h-1.5 w-1.5 rounded-full bg-brandNavy"></div>
-                  <div className="h-1.5 w-1.5 rounded-full bg-brandNavy"></div>
-                  <div className="h-1.5 w-1.5 rounded-full bg-brandGray/50"></div>
+            {/* Menu Icons */}
+            <button className="w-10 h-10 rounded-xl bg-brandBlue text-white flex items-center justify-center shadow-md">
+              <LayoutDashboard className="w-5 h-5" />
+            </button>
+            <button className="w-10 h-10 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-600 flex items-center justify-center text-slate-600 dark:text-slate-300">
+              <Briefcase className="w-5 h-5" />
+            </button>
+            <button className="w-10 h-10 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-600 flex items-center justify-center text-slate-600 dark:text-slate-300">
+              <FileText className="w-5 h-5" />
+            </button>
+            <button className="w-10 h-10 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-600 flex items-center justify-center text-slate-600 dark:text-slate-300 relative">
+              <MessageCircle className="w-5 h-5" />
+              <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-white" />
+            </button>
+            
+            <div className="flex-1" />
+            
+            <button className="w-10 h-10 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-600 flex items-center justify-center text-slate-600 dark:text-slate-300">
+              <Settings className="w-5 h-5" />
+            </button>
+          </div>
+          
+          {/* Main Content Area */}
+          <div className="flex-1 space-y-3">
+            {/* Header */}
+            <div className="mb-4">
+              <h3 className="text-sm font-semibold text-slate-600 dark:text-slate-400">Dashboard Overview</h3>
+            </div>
+            
+            {/* Stats Grid */}
+            <div className="grid grid-cols-2 gap-3">
+              {/* Active Jobs Card */}
+              <div className="bg-white/90 dark:bg-slate-700/50 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-white/20">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center">
+                    <Briefcase className="w-5 h-5 text-brandBlue" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-slate-600 dark:text-slate-400">Active Jobs</p>
+                    <p className="text-2xl font-bold text-slate-800 dark:text-white">150+</p>
+                  </div>
                 </div>
               </div>
-
-              {/* App Header */}
-              <div className="px-4 py-3 border-b border-slate-100 dark:border-slate-700">
-                <div className="flex items-center gap-2">
-                  <div className="h-8 w-8 rounded-full bg-brandBlue/10 dark:bg-brandBlue/20 flex items-center justify-center">
-                    <Briefcase className="h-4 w-4 text-brandBlue" />
+              
+              {/* Applications Card */}
+              <div className="bg-white/90 dark:bg-slate-700/50 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-white/20">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-green-500/10 flex items-center justify-center">
+                    <FileText className="w-5 h-5 text-green-600" />
                   </div>
-                  <span className="text-sm font-semibold text-brandNavy dark:text-slate-100">Jobs</span>
+                  <div>
+                    <p className="text-xs text-slate-600 dark:text-slate-400">Applications</p>
+                    <p className="text-2xl font-bold text-slate-800 dark:text-white">48</p>
+                  </div>
                 </div>
               </div>
-
-              {/* Content */}
-              <div className="flex-1 p-4 space-y-3 overflow-y-auto">
-                {mobileItems.map((item, index) => (
-                  <div
-                    key={index}
-                    className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-700 p-4 shadow-sm"
-                  >
-                    <div className="flex items-start gap-3 mb-2">
-                      <div className="h-12 w-12 rounded-xl bg-brandBlue/10 dark:bg-brandBlue/20 flex items-center justify-center flex-shrink-0">
-                        <Briefcase className="h-6 w-6 text-brandBlue" />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-semibold text-brandNavy dark:text-slate-100 mb-1">{item.title}</p>
-                        <p className="text-xs text-brandGray dark:text-slate-300">{item.location}</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center justify-between mt-3 pt-3 border-t border-slate-100 dark:border-slate-600">
-                      <span className="text-sm font-bold text-brandOrange">{item.salary}</span>
-                      <button className="text-xs font-semibold text-brandBlue dark:text-brandBlue px-3 py-1.5 rounded-full bg-brandBlue/10 dark:bg-brandBlue/20">
-                        Apply
-                      </button>
-                    </div>
+              
+              {/* Interviews Card */}
+              <div className="bg-white/90 dark:bg-slate-700/50 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-white/20">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center">
+                    <Users className="w-5 h-5 text-purple-600" />
                   </div>
-                ))}
+                  <div>
+                    <p className="text-xs text-slate-600 dark:text-slate-400">Interviews</p>
+                    <p className="text-2xl font-bold text-slate-800 dark:text-white">12</p>
+                  </div>
+                </div>
               </div>
-
-              {/* Bottom Navigation */}
-              <div className="border-t border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-4 py-3">
-                <div className="flex items-center justify-around">
-                  <div className="h-8 w-8 rounded-full bg-brandGray/20 dark:bg-slate-600/20"></div>
-                  <div className="h-8 w-8 rounded-full bg-brandGray/20 dark:bg-slate-600/20"></div>
-                  <div className="h-8 w-8 rounded-full bg-brandBlue/20 dark:bg-brandBlue/30"></div>
-                  <div className="h-8 w-8 rounded-full bg-brandGray/20 dark:bg-slate-600/20"></div>
+              
+              {/* Offers Card */}
+              <div className="bg-white/90 dark:bg-slate-700/50 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-white/20">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center">
+                    <CheckCircle2 className="w-5 h-5 text-brandOrange" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-slate-600 dark:text-slate-400">Offers</p>
+                    <p className="text-2xl font-bold text-slate-800 dark:text-white">5</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Application Progress Chart */}
+            <div className="bg-white/90 dark:bg-slate-700/50 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-white/20">
+              <div className="flex items-center justify-between mb-3">
+                <h4 className="text-xs font-semibold text-slate-700 dark:text-slate-300">Application Progress</h4>
+                <TrendingUp className="w-4 h-4 text-green-600" />
+              </div>
+              <div className="flex items-end gap-2 h-20">
+                <div className="flex-1 bg-gradient-to-t from-blue-500 to-blue-400 rounded-t-lg" style={{ height: '60%' }} />
+                <div className="flex-1 bg-gradient-to-t from-green-500 to-green-400 rounded-t-lg" style={{ height: '80%' }} />
+                <div className="flex-1 bg-gradient-to-t from-purple-500 to-purple-400 rounded-t-lg" style={{ height: '90%' }} />
+                <div className="flex-1 bg-gradient-to-t from-orange-500 to-orange-400 rounded-t-lg" style={{ height: '70%' }} />
+              </div>
+            </div>
+            
+            {/* Recent Activity */}
+            <div className="bg-white/90 dark:bg-slate-700/50 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-white/20">
+              <h4 className="text-xs font-semibold text-slate-700 dark:text-slate-300 mb-3">Recent Activity</h4>
+              <div className="space-y-2">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center flex-shrink-0">
+                    <FileText className="w-4 h-4 text-brandBlue" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs font-medium text-slate-700 dark:text-slate-300 truncate">New Application</p>
+                    <p className="text-[10px] text-slate-500 dark:text-slate-400">2 hours ago</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-green-100 dark:bg-green-900/30 flex items-center justify-center flex-shrink-0">
+                    <Clock className="w-4 h-4 text-green-600" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs font-medium text-slate-700 dark:text-slate-300 truncate">Interview Scheduled</p>
+                    <p className="text-[10px] text-slate-500 dark:text-slate-400">Yesterday</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center flex-shrink-0">
+                    <CheckCircle2 className="w-4 h-4 text-brandOrange" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs font-medium text-slate-700 dark:text-slate-300 truncate">Offer Received</p>
+                    <p className="text-[10px] text-slate-500 dark:text-slate-400">3 days ago</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -156,4 +159,3 @@ const UIMockups = () => {
 };
 
 export default UIMockups;
-

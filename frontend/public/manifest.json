@@ -1,26 +1,25 @@
 {
-  "name": "PrestaLink - منصة التوظيف الأوروبي",
+  "name": "PrestaLink",
   "short_name": "PrestaLink",
-  "description": "منصة التوظيف والبحث عن عمل في أوروبا للمواطنين الجزائريين",
-  "start_url": "/?v=3",
+  "description": "Hiring, job-matching and CV management platform for international workers and European recruiters.",
+  "start_url": "/",
   "display": "standalone",
-  "orientation": "any",
+  "orientation": "portrait",
   "background_color": "#FFFFFF",
   "theme_color": "#1D6EEA",
-  "lang": "ar",
-  "version": "3.0.0",
+  "lang": "en",
   "icons": [
     {
-      "src": "/assets/logo.jpeg",
+      "src": "/assets/prestalink-logo.svg",
       "sizes": "192x192",
-      "type": "image/jpeg",
-      "purpose": "any maskable"
+      "type": "image/svg+xml",
+      "purpose": "any"
     },
     {
-      "src": "/assets/logo.jpeg",
+      "src": "/assets/prestalink-logo.svg",
       "sizes": "512x512",
-      "type": "image/jpeg",
-      "purpose": "any maskable"
+      "type": "image/svg+xml",
+      "purpose": "any"
     }
   ]
 }

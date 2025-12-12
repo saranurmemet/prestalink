@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import AppProviders from '@/components/providers/AppProviders';
@@ -16,13 +16,6 @@ export const metadata: Metadata = {
   title: 'PrestaLink | منصة التوظيف الأوروبي للمواطنين الجزائريين',
   description: 'منصة التوظيف والبحث عن عمل في أوروبا للمواطنين الجزائريين. ساعدنا آلاف المواطنين الجزائريين للعثور على وظائف في ألمانيا، فرنسا، إسبانيا وأكثر.',
   manifest: '/manifest.json',
-  themeColor: '#1D6EEA',
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 5,
-    userScalable: true,
-  },
   icons: {
     icon: '/assets/logo.jpeg',
     apple: '/assets/logo.jpeg',
@@ -37,18 +30,41 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  themeColor: '#1D6EEA',
+};
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-            <body className={`${inter.variable} text-brandNavy dark:text-slate-100 antialiased`}>
-              <AppProviders>
-                <SplashScreen />
-                <Header />
-                <main className="pt-20 pb-16">{children}</main>
-                <Footer />
-                <FloatingContact />
-              </AppProviders>
-            </body>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  const theme = localStorage.getItem('prestalink-theme') || 
+                    (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+                  document.documentElement.classList.add(theme);
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
+      <body className={`${inter.variable} text-brandNavy dark:text-slate-100 antialiased`}>
+        <AppProviders>
+          <SplashScreen />
+          <Header />
+          <main className="pt-20 pb-16">{children}</main>
+          <Footer />
+          <FloatingContact />
+        </AppProviders>
+      </body>
     </html>
   );
 }

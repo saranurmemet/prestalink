@@ -1,13 +1,13 @@
 'use client';
 
-import { LanguageProvider } from './LanguageProvider';
 import { ThemeProvider } from './ThemeProvider';
-import ServiceWorkerUpdater from '@/components/common/ServiceWorkerUpdater';
+import { LanguageProvider } from './LanguageProvider';
+import PWATracker from '@/components/common/PWATracker';
 
 const AppProviders = ({ children }: { children: React.ReactNode }) => (
   <ThemeProvider>
     <LanguageProvider>
-      <ServiceWorkerUpdater />
+      <PWATracker />
       {children}
     </LanguageProvider>
   </ThemeProvider>

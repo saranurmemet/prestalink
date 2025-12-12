@@ -8,6 +8,7 @@ import EmployerLayout from '@/components/layout/EmployerLayout';
 import { useLanguage } from '@/components/providers/LanguageProvider';
 import { fetchApplicationsByJob, updateApplicationStatus, fetchProfile } from '@/services/api';
 import type { Application, User } from '@/services/types';
+import { getStaticFileUrl } from '@/utils/apiUrl';
 import { ArrowLeft, Download, FileText, Save, CheckCircle2 } from 'lucide-react';
 
 const ApplicantReviewPage = () => {
@@ -184,7 +185,7 @@ const ApplicantReviewPage = () => {
                     <div className="space-y-3">
                       {application.cvUrl && (
                         <a
-                          href={`${process.env.NEXT_PUBLIC_API_URL || 'https://prestalink.onrender.com'}${application.cvUrl}`}
+                          href={getStaticFileUrl(application.cvUrl)}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="flex items-center gap-3 px-4 py-3 bg-brandBlue/10 hover:bg-brandBlue/20 rounded-lg transition-colors group"
@@ -210,7 +211,7 @@ const ApplicantReviewPage = () => {
                             {application.certificates.map((cert, index) => (
                               <a
                                 key={index}
-                                href={`${process.env.NEXT_PUBLIC_API_URL || 'https://prestalink.onrender.com'}${cert}`}
+                                href={getStaticFileUrl(cert)}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="flex items-center gap-2 px-4 py-2 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 rounded-lg transition-colors text-sm"

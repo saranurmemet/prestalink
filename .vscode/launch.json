@@ -1,0 +1,39 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "PrestaLink Dev (Chrome)",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}/frontend",
+      "preLaunchTask": "PrestaLink Full Dev",
+      "runtimeArgs": [
+        "--user-data-dir=${workspaceFolder}/.vscode/chrome-profile"
+      ],
+      "presentation": {
+        "hidden": false,
+        "group": "PrestaLink"
+      },
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "name": "PrestaLink Dev (Edge)",
+      "type": "msedge",
+      "request": "launch",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}/frontend",
+      "preLaunchTask": "PrestaLink Full Dev",
+      "presentation": {
+        "hidden": false,
+        "group": "PrestaLink"
+      }
+    }
+  ],
+  "compounds": [
+    {
+      "name": "PrestaLink Full Stack",
+      "configurations": ["PrestaLink Dev (Chrome)"]
+    }
+  ]
+}

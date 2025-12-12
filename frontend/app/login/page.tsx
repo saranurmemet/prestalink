@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useState, useEffect, useRef } from 'react';
 import type { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
 import { loginUser } from '@/services/api';
@@ -19,6 +19,8 @@ const LoginPage = () => {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [selectedRole, setSelectedRole] = useState<UserRole | null>(null);
+  const formRef = useRef<HTMLFormElement>(null);
+  const autoLoginAttempted = useRef(false);
 
   const roles = [
     {
@@ -44,6 +46,50 @@ const LoginPage = () => {
     },
   ];
 
+  // URL parametrelerinden otomatik doldurma (hook'lar her zaman aynı sırada olmalı)
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
+    const params = new URLSearchParams(window.location.search);
+    const roleParam = params.get('role') as UserRole | null;
+    const emailParam = params.get('email');
+    const passwordParam = params.get('password');
+    const autoParam = params.get('auto') === 'true';
+
+    if (roleParam && roles.find(r => r.value === roleParam)) {
+      setSelectedRole(roleParam);
+    }
+
+    // Otomatik giriş (sadece bir kez, selectedRole set edildikten sonra)
+    if (autoParam && roleParam && emailParam && passwordParam && !autoLoginAttempted.current) {
+      autoLoginAttempted.current = true;
+      // Form render olmasını bekle
+      setTimeout(() => {
+        if (formRef.current) {
+          const emailInput = formRef.current.querySelector('input[name="email"]') as HTMLInputElement;
+          const passwordInput = formRef.current.querySelector('input[name="password"]') as HTMLInputElement;
+          const submitButton = formRef.current.querySelector('button[type="submit"]') as HTMLButtonElement;
+
+          if (emailInput) {
+            emailInput.value = emailParam;
+            emailInput.dispatchEvent(new Event('input', { bubbles: true }));
+          }
+          if (passwordInput) {
+            passwordInput.value = passwordParam;
+            passwordInput.dispatchEvent(new Event('input', { bubbles: true }));
+          }
+
+          // Otomatik submit
+          if (emailInput?.value && passwordInput?.value && submitButton) {
+            setTimeout(() => {
+              submitButton.click();
+            }, 500);
+          }
+        }
+      }, 1500);
+    }
+  }, []); // Sadece mount'ta çalış
+
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!selectedRole) {
@@ -57,13 +103,46 @@ const LoginPage = () => {
 
     try {
       setLoading(true);
+      setError(null);
       const response = await loginUser({ email, password }, selectedRole);
       setAuth(response.data);
       const dashboardRoute = getDashboardRoute(response.data.user.role);
       router.push(dashboardRoute);
     } catch (error) {
       const axiosError = error as AxiosError<{ message?: string }>;
-      setError(axiosError.response?.data?.message || t('auth.error'));
+      
+      // Daha açıklayıcı hata mesajları
+      if (!axiosError.response) {
+        // Network hatası - backend'e bağlanılamıyor
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || (process.env.NODE_ENV === 'development' ? 'http://localhost:5000/api' : 'https://prestalink.onrender.com/api');
+        setError(
+          t('auth.networkError') || 
+          `Backend'e bağlanılamıyor. Lütfen backend'in çalıştığından emin olun. (API: ${apiUrl})`
+        );
+      } else if (axiosError.response.status === 401) {
+        setError(
+          axiosError.response.data?.message || 
+          t('auth.invalidCredentials') || 
+          'Email veya şifre hatalı. Lütfen tekrar deneyin.'
+        );
+      } else if (axiosError.response.status === 403) {
+        setError(
+          axiosError.response.data?.message || 
+          t('auth.forbidden') || 
+          'Bu rol için giriş yapma yetkiniz yok.'
+        );
+      } else if (axiosError.response.status >= 500) {
+        setError(
+          t('auth.serverError') || 
+          'Sunucu hatası. Lütfen daha sonra tekrar deneyin.'
+        );
+      } else {
+        setError(
+          axiosError.response?.data?.message || 
+          t('auth.error') || 
+          'Bir hata oluştu. Lütfen tekrar deneyin.'
+        );
+      }
     } finally {
       setLoading(false);
     }
@@ -144,7 +223,7 @@ const LoginPage = () => {
             <h2 className="text-2xl font-bold text-brandNavy dark:text-slate-100 mb-2">{t('auth.login')}</h2>
             <p className="text-sm text-brandGray dark:text-slate-300">{t('auth.loginSubtitle')}</p>
           </div>
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="text-sm font-semibold text-brandGray dark:text-slate-300">{t('auth.email')}</label>
               <input name="email" type="email" required className="input mt-1" placeholder="ornek@email.com" />

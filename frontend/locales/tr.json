@@ -298,6 +298,10 @@
     "register": "Kayıt Ol",
     "loading": "İşleniyor...",
     "error": "Bir hata oluştu.",
+    "networkError": "Backend'e bağlanılamıyor. Lütfen backend'in çalıştığından emin olun.",
+    "invalidCredentials": "Email veya şifre hatalı. Lütfen tekrar deneyin.",
+    "forbidden": "Bu rol için giriş yapma yetkiniz yok.",
+    "serverError": "Sunucu hatası. Lütfen daha sonra tekrar deneyin.",
     "registerPrompt": "Hesabınız yok mu?",
     "loginPrompt": "Zaten hesabınız var mı?",
     "roles": {
