@@ -3,20 +3,24 @@ import { API_ROUTES } from './endpoints';
 import type { User, Job, Application, Notification } from './types';
 
 // API Base URL Configuration
-// Development: http://localhost:5000/api
-// Production: Set via NEXT_PUBLIC_API_URL environment variable
+// CRITICAL: Must ONLY use NEXT_PUBLIC_API_URL from environment
+// Local PC: http://localhost:5000/api
+// Local Mobile/PWA: http://<LAN-IP>:5000/api (from .env.local)
+// Deployment: https://<backend-domain>/api (from environment)
 const getApiBaseURL = () => {
-  if (process.env.NEXT_PUBLIC_API_URL) {
-    return process.env.NEXT_PUBLIC_API_URL;
+  // MUST be set in environment - no production fallback allowed
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  
+  if (!apiUrl) {
+    // Only log in development - production MUST have env variable set
+    if (process.env.NODE_ENV === 'development') {
+      console.warn('WARNING: NEXT_PUBLIC_API_URL not set. Using default http://localhost:5000/api');
+      return 'http://localhost:5000/api';
+    }
+    throw new Error('NEXT_PUBLIC_API_URL environment variable is not set');
   }
   
-  // Development fallback
-  if (process.env.NODE_ENV === 'development') {
-    return 'http://localhost:5000/api';
-  }
-  
-  // Production fallback (should be set via env variable)
-  return 'https://prestalink.onrender.com/api';
+  return apiUrl;
 };
 
 const api = axios.create({

@@ -7,12 +7,9 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "https://prestalink.onrender.com/api/$1"
+      "destination": "${NEXT_PUBLIC_API_URL}/$1"
     }
-  ],
-  "env": {
-    "NEXT_PUBLIC_API_URL": "https://prestalink.onrender.com/api"
-  }
+  ]
 }
 
 

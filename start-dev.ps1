@@ -47,6 +47,34 @@ foreach ($path in $cachePaths) {
 
 Write-Host ""
 
+# 3. Backend başlat
+Write-Host "3. Backend başlatılıyor..." -ForegroundColor Yellow
+$backendJob = Start-Job -ScriptBlock {
+    Set-Location "C:\Users\RANDOM\Desktop\prestalink\backend"
+    node server.js
+}
+Write-Host "   Backend başlatıldı (Job ID: $($backendJob.Id))" -ForegroundColor Green
+Start-Sleep -Seconds 3
+
+# 4. Frontend başlat
+Write-Host "4. Frontend başlatılıyor..." -ForegroundColor Yellow
+$frontendJob = Start-Job -ScriptBlock {
+    Set-Location "C:\Users\RANDOM\Desktop\prestalink\frontend"
+    npm run dev
+}
+Write-Host "   Frontend başlatıldı (Job ID: $($frontendJob.Id))" -ForegroundColor Green
+Start-Sleep -Seconds 5
+
+Write-Host ""
+Write-Host "================================" -ForegroundColor Cyan
+Write-Host "✅ PrestaLink HAZIR!" -ForegroundColor Green
+Write-Host "================================" -ForegroundColor Cyan
+Write-Host "Backend:  http://localhost:5000" -ForegroundColor White
+Write-Host "Frontend: http://localhost:3000" -ForegroundColor White
+Write-Host ""
+Write-Host "Durdurmak için: .\stop-dev.ps1" -ForegroundColor Yellow
+Write-Host ""
+
 # 3. Dependencies Kontrolü
 Write-Host "3. Dependencies kontrol ediliyor..." -ForegroundColor Yellow
 

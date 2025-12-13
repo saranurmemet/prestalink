@@ -12,22 +12,29 @@ interface ProtectedPageProps {
 
 const ProtectedPage = ({ children, roles }: ProtectedPageProps) => {
   const router = useRouter();
-  const { user } = useAuthStore();
+  const { user, hasHydrated } = useAuthStore();
   const [authorized, setAuthorized] = useState(false);
 
   useEffect(() => {
+    // CRITICAL: Do NOT decide redirect until store is hydrated from localStorage
+    if (!hasHydrated) {
+      return;
+    }
+
     if (!user) {
       router.replace('/login');
       return;
     }
+
     if (roles && !roles.includes(user.role)) {
       router.replace('/');
       return;
     }
-    setAuthorized(true);
-  }, [user, roles, router]);
 
-  if (!authorized) {
+    setAuthorized(true);
+  }, [user, roles, router, hasHydrated]);
+
+  if (!hasHydrated || !authorized) {
     return (
       <div className="page-container flex min-h-[40vh] items-center justify-center py-20 text-brandGray">
         <div className="flex flex-col items-center gap-4">

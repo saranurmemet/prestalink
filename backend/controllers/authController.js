@@ -9,15 +9,7 @@ const sanitizeUser = (user) => {
 };
 
 const baseLogin = async (req, res) => {
-  let { email, password } = req.body;
-  
-  // Transform email if role-based login (e.g., sara@prestalink.app + admin -> sara_admin@prestalink.app)
-  if (req.requiredRole && email && !email.includes('_')) {
-    const emailParts = email.split('@');
-    if (emailParts.length === 2) {
-      email = `${emailParts[0]}_${req.requiredRole}@${emailParts[1]}`;
-    }
-  }
+  const { email, password, role: selectedRole } = req.body;
   
   const user = await User.findOne({ email });
 
@@ -25,7 +17,37 @@ const baseLogin = async (req, res) => {
     return res.status(401).json({ message: 'Invalid credentials' });
   }
 
-  if (req.requiredRole && user.role !== req.requiredRole) {
+  // Çoklu rol desteği
+  if (user.roles && user.roles.length > 0) {
+    // Belirli role'e zorunlu giriş (ör: /auth/recruiter/login)
+    if (req.requiredRole) {
+      if (!user.roles.includes(req.requiredRole)) {
+        return res.status(403).json({ 
+          message: 'You do not have permission for this role',
+          availableRoles: user.roles 
+        });
+      }
+      // RequiredRole seç
+      user.activeRole = req.requiredRole;
+      user.role = req.requiredRole;
+    } else if (selectedRole) {
+      // Frontend'den gelen rol seçimini kullan
+      if (!user.roles.includes(selectedRole)) {
+        return res.status(403).json({ 
+          message: 'You do not have permission for this role',
+          availableRoles: user.roles 
+        });
+      }
+      // ActiveRole'ü güncelle
+      user.activeRole = selectedRole;
+      user.role = selectedRole;
+    } else {
+      // Rol seçilmemişse mevcut activeRole veya ilk rol
+      user.activeRole = user.activeRole || user.roles[0];
+      user.role = user.activeRole;
+    }
+  } else if (req.requiredRole && user.role !== req.requiredRole) {
+    // Eski sistem için fallback - tek role varsa kontrol et
     return res.status(403).json({ message: 'Forbidden for this role' });
   }
 
@@ -37,6 +59,7 @@ const baseLogin = async (req, res) => {
   res.json({
     user: sanitizeUser(user),
     token,
+    availableRoles: user.roles || [user.role]
   });
 };
 
@@ -73,5 +96,77 @@ exports.loginForRole = (role) =>
 
 exports.me = asyncHandler(async (req, res) => {
   res.json({ user: req.user });
+});
+
+exports.updateProfile = asyncHandler(async (req, res) => {
+  const userId = req.user._id;
+  const {
+    name,
+    phone,
+    country,
+    experienceLevel,
+    bio,
+    languages,
+    // Recruiter/Employer fields
+    companyName,
+    companyDescription,
+    industry,
+    city,
+    email: contactEmail,
+  } = req.body;
+
+  // Kullanıcıyı bul
+  const user = await User.findById(userId);
+  if (!user) {
+    return res.status(404).json({ message: 'User not found' });
+  }
+
+  // String alanları güncelle
+  if (name) user.name = name;
+  if (phone) user.phone = phone;
+  if (country) user.country = country;
+  if (experienceLevel) user.experienceLevel = experienceLevel;
+  if (bio) user.bio = bio;
+  
+  // Languages - array
+  if (languages) {
+    // languages[] şeklinde gelebilir veya languages
+    const langs = Array.isArray(languages) ? languages : (languages ? [languages] : []);
+    user.languages = langs.filter(l => l); // empty values filtreleme
+  }
+
+  // Recruiter/Employer fields
+  if (companyName) user.companyName = companyName;
+  if (companyDescription) user.companyDescription = companyDescription;
+  if (industry) user.industry = industry;
+  if (city) user.city = city;
+
+  // File uploads - Dosya yüklüyse path'i kaydet
+  if (req.files) {
+    // Profile Photo
+    if (req.files.profilePhoto && req.files.profilePhoto[0]) {
+      user.profilePhoto = `/uploads/profilePhotos/${req.files.profilePhoto[0].filename}`;
+    }
+
+    // CV
+    if (req.files.cv && req.files.cv[0]) {
+      user.cvUrl = `/uploads/cvs/${req.files.cv[0].filename}`;
+    }
+
+    // Certificates
+    if (req.files.certificates && req.files.certificates.length > 0) {
+      user.certificates = req.files.certificates.map(
+        (file) => `/uploads/certificates/${file.filename}`
+      );
+    }
+  }
+
+  // Save user
+  await user.save();
+
+  res.json({
+    user: sanitizeUser(user),
+    message: 'Profile updated successfully',
+  });
 });
 

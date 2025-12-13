@@ -1,6 +1,7 @@
 /**
  * Get API base URL without /api suffix
  * Used for static file URLs (uploads, etc.)
+ * CRITICAL: Must use NEXT_PUBLIC_API_URL from environment
  */
 export const getApiBaseUrl = (): string => {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
@@ -12,11 +13,12 @@ export const getApiBaseUrl = (): string => {
   
   // Development fallback
   if (process.env.NODE_ENV === 'development') {
+    console.warn('WARNING: NEXT_PUBLIC_API_URL not set in development. Using localhost:5000');
     return 'http://localhost:5000';
   }
   
-  // Production fallback
-  return 'https://prestalink.onrender.com';
+  // Production: MUST fail if API URL not set
+  throw new Error('NEXT_PUBLIC_API_URL environment variable is required in production');
 };
 
 /**

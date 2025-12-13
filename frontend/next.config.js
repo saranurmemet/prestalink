@@ -1,6 +1,44 @@
 const withPWA = require('next-pwa')({
   dest: 'public',
-  disable: process.env.NODE_ENV === 'development',
+  // CRITICAL FIX: Disable PWA in development to avoid stale cache issues during testing
+  // In production, set PWA_ENABLED environment variable explicitly to enable
+  disable: process.env.NODE_ENV === 'development' || process.env.PWA_ENABLED !== 'true',
+  
+  // Do NOT cache auth-related endpoints
+  skipWaiting: true, // Always update service worker
+  clientsClaim: true,
+  
+  // Add runtime caching config that EXCLUDES auth endpoints
+  runtimeCaching: [
+    // Do NOT cache auth requests - they must always be fresh
+    // /api/auth/* will use NetworkFirst by default (good)
+    
+    // Cache API calls with network-first strategy (network preferred)
+    {
+      urlPattern: /^https?.*\/api\/(?!auth\/).*/i,
+      handler: 'NetworkFirst',
+      options: {
+        cacheName: 'api-cache',
+        networkTimeoutSeconds: 10,
+        expiration: {
+          maxEntries: 50,
+          maxAgeSeconds: 300, // 5 minutes - short TTL for data endpoints
+        },
+      },
+    },
+    // Cache static assets
+    {
+      urlPattern: /\.(?:js|css|woff2?)$/i,
+      handler: 'CacheFirst',
+      options: {
+        cacheName: 'static-assets',
+        expiration: {
+          maxEntries: 100,
+          maxAgeSeconds: 86400, // 24 hours
+        },
+      },
+    },
+  ],
 });
 
 const nextConfig = {
@@ -12,6 +50,25 @@ const nextConfig = {
   },
   images: {
     unoptimized: true,
+  },
+  
+  // Add cache control headers to prevent browser cache issues
+  headers: async () => {
+    return [
+      {
+        source: '/api/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'no-cache, no-store, must-revalidate',
+          },
+          {
+            key: 'Pragma',
+            value: 'no-cache',
+          },
+        ],
+      },
+    ];
   },
 };
 

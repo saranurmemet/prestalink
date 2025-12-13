@@ -18,7 +18,7 @@ const LoginPage = () => {
   const { t } = useLanguage();
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-  const [selectedRole, setSelectedRole] = useState<UserRole | null>(null);
+  const [selectedRole, setSelectedRole] = useState<UserRole | null>(null); // Show role selection first
   const formRef = useRef<HTMLFormElement>(null);
   const autoLoginAttempted = useRef(false);
 
@@ -100,8 +100,8 @@ const LoginPage = () => {
     try {
       setLoading(true);
       setError(null);
-      // Rol parametresi gönderme - backend kullanıcının rolünü döndürecek
-      const response = await loginUser({ email, password });
+      // Seçilen rolü gönder - backend doğrulaması yapacak
+      const response = await loginUser({ email, password }, selectedRole);
       setAuth(response.data);
       const dashboardRoute = getDashboardRoute(response.data.user.role);
       router.push(dashboardRoute);
@@ -111,7 +111,7 @@ const LoginPage = () => {
       // Daha açıklayıcı hata mesajları
       if (!axiosError.response) {
         // Network hatası - backend'e bağlanılamıyor
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || (process.env.NODE_ENV === 'development' ? 'http://localhost:5000/api' : 'https://prestalink.onrender.com/api');
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'API_URL_NOT_SET';
         setError(
           t('auth.networkError') || 
           `Backend'e bağlanılamıyor. Lütfen backend'in çalıştığından emin olun. (API: ${apiUrl})`

@@ -14,32 +14,47 @@ connectDB();
 
 const app = express();
 
-// CORS Configuration - Production ve Development için
-const allowedOrigins = process.env.CLIENT_URL 
-  ? process.env.CLIENT_URL.split(',').map(url => url.trim())
-  : ['http://localhost:3000'];
+// CORS Configuration - CRITICAL for stability
+// Must explicitly list allowed origins - never use wildcard with credentials
+const allowedOrigins = [];
 
-// Production URL'lerini otomatik ekle (eğer production modundaysa)
+// Development: Always allow localhost
+if (process.env.NODE_ENV !== 'production') {
+  allowedOrigins.push('http://localhost:3000');
+  // Allow any local IP for PWA/mobile testing on same network
+  allowedOrigins.push(/^http:\/\/192\.168\.\d{1,3}\.\d{1,3}:3000$/);
+  allowedOrigins.push(/^http:\/\/10\.\d{1,3}\.\d{1,3}\.\d{1,3}:3000$/);
+  allowedOrigins.push(/^http:\/\/172\.(1[6-9]|2[0-9]|3[01])\.\d{1,3}\.\d{1,3}:3000$/);
+}
+
+// Production: Use CLIENT_URL from environment (required)
+if (process.env.CLIENT_URL) {
+  const urls = process.env.CLIENT_URL.split(',').map(url => url.trim());
+  allowedOrigins.push(...urls);
+}
+
+// Fallback production URLs (explicit, no wildcards)
 if (process.env.NODE_ENV === 'production') {
-  // Vercel ve Render URL'lerini ekle
-  const productionUrls = [
-    'https://prestalink.vercel.app',
-    'https://*.vercel.app',
-    'https://prestalink.onrender.com',
-  ];
-  allowedOrigins.push(...productionUrls);
+  if (process.env.CLIENT_URL) {
+    // Already configured above
+  } else {
+    // These should come from environment - only add if explicitly needed
+    allowedOrigins.push('https://prestalink.vercel.app');
+    allowedOrigins.push('https://prestalink.onrender.com');
+  }
 }
 
 app.use(cors({ 
   origin: (origin, callback) => {
-    // Origin yoksa (mobile app, Postman vb.) izin ver
-    if (!origin) return callback(null, true);
+    // Allow requests without origin (mobile apps, some servers, etc.)
+    if (!origin) {
+      return callback(null, true);
+    }
     
-    // Wildcard kontrolü
+    // Check against allowed origins
     const isAllowed = allowedOrigins.some(allowed => {
-      if (allowed.includes('*')) {
-        const pattern = allowed.replace('*', '.*');
-        return new RegExp(`^${pattern}$`).test(origin);
+      if (allowed instanceof RegExp) {
+        return allowed.test(origin);
       }
       return allowed === origin;
     });
@@ -47,12 +62,14 @@ app.use(cors({
     if (isAllowed) {
       callback(null, true);
     } else {
-      callback(new Error('Not allowed by CORS'));
+      console.warn(`CORS blocked origin: ${origin}`);
+      callback(new Error('Not allowed by CORS policy'));
     }
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'Accept-Language'],
+  maxAge: 86400, // 24 hours
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

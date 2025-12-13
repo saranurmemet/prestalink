@@ -38,7 +38,7 @@ const allowedMimeImage = ['image/png', 'image/jpeg', 'image/jpg'];
 
 const fileFilter = (req, file, cb) => {
   // CV veya sertifika için
-  if (file.fieldname === 'cv' || file.fieldname === 'certificate') {
+  if (file.fieldname === 'cv' || file.fieldname === 'certificates') {
     if (allowedMimeCV.includes(file.mimetype)) {
       cb(null, true);
     } else {

@@ -28,6 +28,16 @@ const userSchema = new mongoose.Schema(
       enum: ['user', 'recruiter', 'admin', 'superadmin'],
       default: 'user',
     },
+    roles: {
+      type: [String],
+      enum: ['user', 'recruiter', 'admin', 'superadmin'],
+      default: ['user'],
+    },
+    activeRole: {
+      type: String,
+      enum: ['user', 'recruiter', 'admin', 'superadmin'],
+      default: 'user',
+    },
     languages: {
       type: [String],
       default: [],
