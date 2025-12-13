@@ -207,7 +207,11 @@
     "backToJobs": "Back to jobs",
     "viewFullPage": "View Full Page",
     "apply": "Apply now",
-    "onlyUsersCanApply": "Only users can apply for jobs"
+    "onlyUsersCanApply": "Only users can apply for jobs",
+    "searchPlaceholder": "Search by title or location",
+    "filterPlaceholder": "Filter by language (e.g. EN)",
+    "noMatches": "No jobs match your filters.",
+    "noJobsYet": "No jobs yet."
   },
   "process": {
     "tag": "Our Process",

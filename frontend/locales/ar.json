@@ -207,7 +207,11 @@
     "backToJobs": "العودة إلى الوظائف",
     "viewFullPage": "عرض الصفحة الكاملة",
     "apply": "قدّم الآن",
-    "onlyUsersCanApply": "المستخدمون فقط يمكنهم التقديم"
+    "onlyUsersCanApply": "المستخدمون فقط يمكنهم التقديم",
+    "searchPlaceholder": "ابحث حسب العنوان أو الموقع",
+    "filterPlaceholder": "تصفية حسب اللغة (مثل AR)",
+    "noMatches": "لا توجد وظائف تطابق فلاترك.",
+    "noJobsYet": "لا توجد وظائف حتى الآن."
   },
   "process": {
     "tag": "عملنا",

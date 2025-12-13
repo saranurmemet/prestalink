@@ -207,7 +207,11 @@
     "backToJobs": "İş ilanlarına dön",
     "viewFullPage": "Tam Sayfayı Gör",
     "apply": "Hemen başvur",
-    "onlyUsersCanApply": "Sadece kullanıcılar işlere başvurabilir"
+    "onlyUsersCanApply": "Sadece kullanıcılar işlere başvurabilir",
+    "searchPlaceholder": "Başlık veya konum araması yapın",
+    "filterPlaceholder": "Dil filtresini kullan (örneğin TR)",
+    "noMatches": "Filtrelerinize uygun iş bulunamadı.",
+    "noJobsYet": "Henüz iş ilanı yok."
   },
   "process": {
     "tag": "İş Sürecimiz",

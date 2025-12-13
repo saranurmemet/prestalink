@@ -207,7 +207,11 @@
     "backToJobs": "Retour aux offres",
     "viewFullPage": "Voir la page complète",
     "apply": "Postuler",
-    "onlyUsersCanApply": "Seuls les utilisateurs peuvent postuler"
+    "onlyUsersCanApply": "Seuls les utilisateurs peuvent postuler",
+    "searchPlaceholder": "Rechercher par titre ou lieu",
+    "filterPlaceholder": "Filtrer par langue (ex: FR)",
+    "noMatches": "Aucune offre ne correspond à vos filtres.",
+    "noJobsYet": "Aucune offre pour le moment."
   },
   "process": {
     "tag": "Notre processus",

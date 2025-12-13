@@ -56,14 +56,14 @@ const JobsPage = () => {
       <div className="glass-panel flex flex-col gap-4 p-6 md:flex-row animate-fade-in" style={{ animationDelay: '0.1s' }}>
         <input
           type="text"
-          placeholder="Search title or location"
+          placeholder={t('jobs.searchPlaceholder')}
           value={search}
           onChange={(event) => setSearch(event.target.value)}
           className="input md:flex-1"
         />
         <input
           type="text"
-          placeholder="Filter by language (e.g. EN)"
+          placeholder={t('jobs.filterPlaceholder')}
           value={languageFilter}
           onChange={(event) => setLanguageFilter(event.target.value)}
           className="input md:w-60"
@@ -78,7 +78,7 @@ const JobsPage = () => {
         {!filteredJobs.length && (
           <div className="col-span-2 animate-fade-in">
             <div className="glass-panel p-12 text-center">
-              <p className="text-lg text-brandGray dark:text-slate-300">{search ? 'No jobs match your filters.' : 'No jobs yet.'}</p>
+              <p className="text-lg text-brandGray dark:text-slate-300">{search ? t('jobs.noMatches') : t('jobs.noJobsYet')}</p>
             </div>
           </div>
         )}
