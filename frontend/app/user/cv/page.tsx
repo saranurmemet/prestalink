@@ -155,7 +155,7 @@ CV Last Updated: December 13, 2025`;
   };
 
   return (
-    <ProtectedPage allowedRoles={['user']}>
+    <ProtectedPage roles={['user']}>
       <UserLayout>
         <div className="page-container py-8 px-6">
           <div className="max-w-4xl mx-auto">

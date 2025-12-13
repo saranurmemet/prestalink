@@ -11,14 +11,14 @@ export type LanguageCode = 'en' | 'tr' | 'fr' | 'ar';
 interface LanguageContextShape {
   language: LanguageCode;
   setLanguage: (lang: LanguageCode) => void;
-  t: (key: string) => string;
+  t: (key: string, params?: Record<string, string | number>) => string;
   translations: Record<string, unknown>;
 }
 
 const LanguageContext = createContext<LanguageContextShape>({
   language: 'en',
   setLanguage: () => undefined,
-  t: (key) => key,
+  t: (key, params) => key,
   translations: {},
 });
 
@@ -53,7 +53,7 @@ export const LanguageProvider = ({ children }: { children: React.ReactNode }) =>
     () => ({
       language,
       setLanguage,
-      t: (key: string) => {
+      t: (key: string, params?: Record<string, string | number>) => {
         const segments = key.split('.');
         let current: unknown = resources[language];
         for (const segment of segments) {
@@ -62,7 +62,16 @@ export const LanguageProvider = ({ children }: { children: React.ReactNode }) =>
           }
           current = (current as Record<string, unknown>)[segment];
         }
-        return typeof current === 'string' ? current : key;
+        let result = typeof current === 'string' ? current : key;
+        
+        // Replace {{key}} with params
+        if (params) {
+          Object.entries(params).forEach(([paramKey, paramValue]) => {
+            result = result.replace(new RegExp(`{{${paramKey}}}`, 'g'), String(paramValue));
+          });
+        }
+        
+        return result;
       },
       translations: resources[language],
     }),

@@ -7,6 +7,10 @@ export interface User {
   phone: string;
   role: UserRole;
   languages: string[];
+  profilePhoto?: string;
+  bio?: string;
+  certifications?: string[];
+  cvUrl?: string;
   createdAt?: string;
 }
 
