@@ -426,7 +426,7 @@
     "register": "Kayıt Ol",
     "loading": "İşleniyor...",
     "error": "Bir hata oluştu.",
-    "networkError": "Backend'e bağlanılamıyor. Lütfen backend'in çalıştığından emin olun.",
+    "networkError": "Sunucuya bağlanılamıyor. Lütfen internet bağlantınızı kontrol edin ve tekrar deneyin.",
     "invalidCredentials": "Email veya şifre hatalı. Lütfen tekrar deneyin.",
     "forbidden": "Bu rol için giriş yapma yetkiniz yok.",
     "serverError": "Sunucu hatası. Lütfen daha sonra tekrar deneyin.",

@@ -425,8 +425,9 @@
     "login": "Connexion",
     "register": "Inscription",
     "loading": "Traitement...",
-    "error": "Une erreur est survenue.",
-    "registerPrompt": "Pas encore de compte ?",
+    "error": "Une erreur est survenue.",    "networkError": "Impossible de se connecter au serveur. V\u00e9rifiez votre connexion Internet et r\u00e9essayez.",
+    "invalidCredentials": "E-mail ou mot de passe invalide. Veuillez r\u00e9essayer.",
+    "forbidden": "Vous n'avez pas la permission d'acc\u00e9der \u00e0 ce r\u00f4le.",    "registerPrompt": "Pas encore de compte ?",
     "loginPrompt": "Vous avez déjà un compte ?",
     "roles": {
       "user": {

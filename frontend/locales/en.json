@@ -426,6 +426,9 @@
     "register": "Register",
     "loading": "Processing...",
     "error": "Something went wrong.",
+    "networkError": "Cannot connect to server. Please check your internet connection and try again.",
+    "invalidCredentials": "Invalid email or password. Please try again.",
+    "forbidden": "You don't have permission to access this role.",
     "registerPrompt": "Don't have an account?",
     "loginPrompt": "Already have an account?",
     "roles": {
