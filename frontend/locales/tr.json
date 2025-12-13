@@ -11,12 +11,38 @@
   "footer": {
     "rights": "Tüm hakları saklıdır."
   },
+  "heroPreview": {
+    "title": "Canlı İşe Alım Paneli",
+    "subtitle": "İşler • Başvurular • Durum",
+    "matchedJobs": "Eşleşen İşler",
+    "applicationsSent": "Gönderilen başvurular",
+    "cvScore": "CV Puanı",
+    "successRate": "Başarı oranı",
+    "recruitersOnline": "Çevrimiçi işverenler",
+    "interviewScheduled": "Görüşme planlandı",
+    "timeAgo": "5 dk önce"
+  },
+  "uiMockups": {
+    "dashboardOverview": "Panel Özeti",
+    "activeJobs": "Aktif İşler",
+    "applications": "Başvurular",
+    "interviews": "Görüşmeler",
+    "offers": "Teklifler",
+    "applicationProgress": "Başvuru İlerlemesi",
+    "recentActivity": "Son Aktiviteler",
+    "newApplication": "Yeni Başvuru",
+    "hoursAgo": "{{hours}} saat önce",
+    "interviewScheduled": "Görüşme Planlandı",
+    "yesterday": "Dün",
+    "offerReceived": "Teklif Alındı",
+    "daysAgo": "{{days}} gün önce"
+  },
   "hero": {
-    "tag": "Profesyonel Avrupa İş Yerleştirme Hizmeti",
-    "title": "Europass CV Hazırlama ve Otomatik İş Başvuru Platformu",
-    "subtitle": "Sizin için Avrupa standartlarında Europass CV hazırlıyoruz, yapay zeka ile en uygun işleri seçiyoruz ve otomatik olarak firmalara başvurunuzu yapıyoruz. Vize süreçlerinden yerleşime kadar tüm adımlarda yanınızdayız.",
+    "tag": "Cezayir Vatandaşları İçin Profesyonel Avrupa Süreç Yönetimi",
+    "title": "Avrupa'da Çalışma Hayallerinizi Gerçeğe Dönüştürüyoruz",
+    "subtitle": "CV hazırlığından vize süreçlerine, yerleşimden iş başvurularına kadar tüm süreci profesyonelce yönetiyoruz. Prestalink ile Avrupa'da kariyer yolculuğunuz başlıyor.",
     "ctaPrimary": "Hemen iletişime geç",
-    "ctaSecondary": "Hizmetlerimizi keşfet",
+    "ctaSecondary": "İş İlanlarını Gör",
     "stats": {
       "placements": "Başarılı yerleştirme",
       "partners": "İşe alım ortağı",
@@ -31,6 +57,104 @@
         "2": { "name": "Sara / Şef", "role": "EN & FR - Paris", "language": "AR" }
       }
     }
+  },
+  "liveActivity": {
+    "title": "Canlı Süreç Akışı",
+    "subtitle": "Gerçek zamanlı olarak diğer adayların süreçlerini görün",
+    "refreshing": "Güncelleniyor",
+    "justNow": "Şimdi",
+    "minsAgo": "dk önce",
+    "activities": {
+      "europassReady": "Europass CV hazırlandı",
+      "applicationSent": "başvuru gönderildi",
+      "interviewScheduled": "görüşme planlandı",
+      "visaApproved": "vize onaylandı",
+      "profileReviewed": "profil incelendi",
+      "documentApproved": "belge onaylandı"
+    },
+    "users": {
+      "user1": "Mehmet A.",
+      "user2": "Fatima K.",
+      "user3": "Yacine B.",
+      "user4": "Sara M.",
+      "user5": "Omar S.",
+      "user6": "Leila T."
+    }
+  },
+  "processSteps": {
+    "title": "Süreç Adımları",
+    "subtitle": "İletişimden yerleşime kadar her adımda yanınızdayız",
+    "step1": {
+      "title": "1. İletişim & Form",
+      "desc": "WhatsApp üzerinden iletişime geçin veya formdan başvurun. İlk görüşmede tüm bilgilerinizi paylaşın."
+    },
+    "step2": {
+      "title": "2. CV & Europass Hazırlığı",
+      "desc": "Ekibimiz profesyonel CV'nizi ve Avrupa standartlarında Europass dosyanızı hazırlar."
+    },
+    "step3": {
+      "title": "3. Çeviri & Lokalizasyon",
+      "desc": "Belgeleriniz hedef ülke diline (Almanca, Fransızca, İngilizce) profesyonelce çevrilir."
+    },
+    "step4": {
+      "title": "4. İş Başvuruları",
+      "desc": "Uygun pozisyonlara başvurularınızı yapıyoruz. Siz de uygulamamızdan başvuru yapabilirsiniz."
+    },
+    "step5": {
+      "title": "5. Takip & Koordinasyon",
+      "desc": "Firma geri dönüşlerini takip ediyor, görüşme süreçlerini koordine ediyoruz."
+    },
+    "step6": {
+      "title": "6. Vize & Belgeler",
+      "desc": "Davet mektubu alıyor, vize belgelerini hazırlıyor ve süreç boyunca rehberlik ediyoruz."
+    }
+  },
+  "benefitsGrid": {
+    "title": "Neden Prestalink?",
+    "subtitle": "Sadece iş platformu değil, tam kapsamlı süreç yönetimi",
+    "benefit1": {
+      "title": "Profesyonel Hazırlık",
+      "desc": "CV, Europass ve belge hazırlığında uzman ekibimizin desteği"
+    },
+    "benefit2": {
+      "title": "Çoklu Dil Desteği",
+      "desc": "TR, EN, FR, AR dillerinde platform ve belgeler"
+    },
+    "benefit3": {
+      "title": "Gerçek Zamanlı Takip",
+      "desc": "Sürecinizi adım adım uygulamamızdan takip edin"
+    },
+    "benefit4": {
+      "title": "Şeffaf İletişim",
+      "desc": "Her adımda bilgilendirme, gizli ücret yok"
+    },
+    "benefit5": {
+      "title": "Hızlı Başlangıç",
+      "desc": "İlk görüşmeden 48 saat içinde işleme başlıyoruz"
+    },
+    "benefit6": {
+      "title": "Vize Desteği",
+      "desc": "Davet mektubundan vize randevusuna tam destek"
+    }
+  },
+  "trustIndicators": {
+    "title": "Güvenilir Ortaklarımız",
+    "subtitle": "Avrupa'nın önde gelen şirketleri ile çalışıyoruz",
+    "stat1": "2400+",
+    "label1": "Başarılı Yerleştirme",
+    "stat2": "150+",
+    "label2": "Aktif İş İlanı",
+    "stat3": "94%",
+    "label3": "Başarı Oranı",
+    "stat4": "48 saat",
+    "label4": "Ortalama Yanıt"
+  },
+  "ctaFinal": {
+    "title": "Avrupa'da kariyer yolculuğunuza bugün başlayın",
+    "subtitle": "Binlerce Cezayir vatandaşı gibi siz de hayallerinize ulaşın",
+    "btnForm": "Başvuru Formu",
+    "btnWhatsApp": "WhatsApp İletişim",
+    "btnJobs": "İş İlanları"
   },
   "features": {
     "tag": "Kapsamlı Hizmetlerimiz",

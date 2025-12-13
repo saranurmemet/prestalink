@@ -11,12 +11,38 @@
   "footer": {
     "rights": "Tous droits réservés."
   },
+  "heroPreview": {
+    "title": "Tableau de Recrutement en Direct",
+    "subtitle": "Offres • Candidatures • Statut",
+    "matchedJobs": "Offres Correspondantes",
+    "applicationsSent": "Candidatures envoyées",
+    "cvScore": "Score CV",
+    "successRate": "Taux de réussite",
+    "recruitersOnline": "Recruteurs en ligne",
+    "interviewScheduled": "Entretien programmé",
+    "timeAgo": "il y a 5 min"
+  },
+  "uiMockups": {
+    "dashboardOverview": "Aperçu du Tableau de Bord",
+    "activeJobs": "Emplois Actifs",
+    "applications": "Candidatures",
+    "interviews": "Entretiens",
+    "offers": "Offres",
+    "applicationProgress": "Progression des Candidatures",
+    "recentActivity": "Activité Récente",
+    "newApplication": "Nouvelle Candidature",
+    "hoursAgo": "il y a {{hours}} heures",
+    "interviewScheduled": "Entretien Programmé",
+    "yesterday": "Hier",
+    "offerReceived": "Offre Reçue",
+    "daysAgo": "il y a {{days}} jours"
+  },
   "hero": {
-    "tag": "Service professionnel de placement d'emploi en Europe",
-    "title": "Plateforme de préparation de CV Europass et de candidature automatique",
-    "subtitle": "Nous préparons des CV Europass selon les normes européennes, sélectionnons les emplois les plus adaptés avec l'intelligence artificielle et soumettons automatiquement vos candidatures aux entreprises. Nous sommes à vos côtés à chaque étape des processus de visa jusqu'à l'installation.",
+    "tag": "Gestion Professionnelle des Procédures Européennes pour Citoyens Algériens",
+    "title": "Réalisez Vos Rêves de Carrière en Europe",
+    "subtitle": "De la préparation du CV aux procédures de visa, de l'installation aux candidatures - nous gérons professionnellement tout le processus. Votre parcours professionnel européen commence avec Prestalink.",
     "ctaPrimary": "Contactez-nous maintenant",
-    "ctaSecondary": "Découvrez nos services",
+    "ctaSecondary": "Voir les Offres d'Emploi",
     "stats": {
       "placements": "Placements réussis",
       "partners": "Partenaires",
@@ -31,6 +57,104 @@
         "2": { "name": "Sara / Chef", "role": "EN & FR - Paris", "language": "AR" }
       }
     }
+  },
+  "liveActivity": {
+    "title": "Flux de Procédures en Direct",
+    "subtitle": "Voyez les procédures d'autres candidats en temps réel",
+    "refreshing": "Actualisation",
+    "justNow": "À l'instant",
+    "minsAgo": "min",
+    "activities": {
+      "europassReady": "CV Europass préparé",
+      "applicationSent": "candidature envoyée",
+      "interviewScheduled": "entretien programmé",
+      "visaApproved": "visa approuvé",
+      "profileReviewed": "profil examiné",
+      "documentApproved": "document approuvé"
+    },
+    "users": {
+      "user1": "Mehmet A.",
+      "user2": "Fatima K.",
+      "user3": "Yacine B.",
+      "user4": "Sara M.",
+      "user5": "Omar S.",
+      "user6": "Leila T."
+    }
+  },
+  "processSteps": {
+    "title": "Étapes du Procédé",
+    "subtitle": "Nous sommes à vos côtés à chaque étape, du contact à l'installation",
+    "step1": {
+      "title": "1. Contact & Formulaire",
+      "desc": "Contactez-nous via WhatsApp ou postulez via le formulaire. Partagez toutes vos informations lors du premier entretien."
+    },
+    "step2": {
+      "title": "2. Préparation CV & Europass",
+      "desc": "Notre équipe prépare votre CV professionnel et votre dossier Europass selon les normes européennes."
+    },
+    "step3": {
+      "title": "3. Traduction & Localisation",
+      "desc": "Vos documents sont traduits professionnellement dans la langue du pays cible (allemand, français, anglais)."
+    },
+    "step4": {
+      "title": "4. Candidatures",
+      "desc": "Nous soumettons vos candidatures aux postes appropriés. Vous pouvez également postuler via notre application."
+    },
+    "step5": {
+      "title": "5. Suivi & Coordination",
+      "desc": "Nous suivons les réponses des entreprises et coordonnons les processus d'entretien."
+    },
+    "step6": {
+      "title": "6. Visa & Documents",
+      "desc": "Nous obtenons les lettres d'invitation, préparons les documents de visa et vous guidons tout au long du processus."
+    }
+  },
+  "benefitsGrid": {
+    "title": "Pourquoi Prestalink?",
+    "subtitle": "Pas seulement une plateforme d'emploi, mais une gestion complète des procédures",
+    "benefit1": {
+      "title": "Préparation Professionnelle",
+      "desc": "Soutien d'équipe experte pour la préparation de CV, Europass et documents"
+    },
+    "benefit2": {
+      "title": "Support Multilingue",
+      "desc": "Plateforme et documents en TR, EN, FR, AR"
+    },
+    "benefit3": {
+      "title": "Suivi en Temps Réel",
+      "desc": "Suivez votre processus étape par étape via notre application"
+    },
+    "benefit4": {
+      "title": "Communication Transparente",
+      "desc": "Mises à jour à chaque étape, pas de frais cachés"
+    },
+    "benefit5": {
+      "title": "Démarrage Rapide",
+      "desc": "Nous commençons le traitement dans les 48 heures suivant le premier entretien"
+    },
+    "benefit6": {
+      "title": "Support Visa",
+      "desc": "Soutien complet de la lettre d'invitation au rendez-vous visa"
+    }
+  },
+  "trustIndicators": {
+    "title": "Nos Partenaires de Confiance",
+    "subtitle": "Nous travaillons avec les entreprises leaders d'Europe",
+    "stat1": "2400+",
+    "label1": "Placements Réussis",
+    "stat2": "150+",
+    "label2": "Offres d'Emploi Actives",
+    "stat3": "94%",
+    "label3": "Taux de Réussite",
+    "stat4": "48 heures",
+    "label4": "Réponse Moyenne"
+  },
+  "ctaFinal": {
+    "title": "Commencez votre parcours professionnel européen aujourd'hui",
+    "subtitle": "Réalisez vos rêves comme des milliers de citoyens algériens",
+    "btnForm": "Formulaire de Candidature",
+    "btnWhatsApp": "Contact WhatsApp",
+    "btnJobs": "Offres d'Emploi"
   },
   "features": {
     "tag": "Nos services complets",

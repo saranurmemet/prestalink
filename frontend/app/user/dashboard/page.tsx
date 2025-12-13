@@ -65,10 +65,23 @@ const UserDashboard = () => {
         {/* Welcome Section */}
         <section className="mb-8">
           <div className="bg-gradient-to-r from-brandBlue to-brandBlue/80 rounded-2xl p-8 text-white shadow-lg">
-            <h1 className="text-3xl font-bold mb-2">
-              {t('userDashboard.welcomeUser').replace('{name}', user?.name || 'Kullanıcı')}
-            </h1>
-            <p className="text-white/90">{t('userDashboard.subtitle')}</p>
+            <div className="flex items-center gap-6">
+              {/* Profile Photo */}
+              <div className="flex-shrink-0">
+                <img
+                  src={user?.profilePhoto || 'https://i.pravatar.cc/150?img=12'}
+                  alt={user?.name || 'Profile'}
+                  className="w-24 h-24 rounded-full border-4 border-white/30 shadow-xl object-cover"
+                />
+              </div>
+              {/* Welcome Text */}
+              <div className="flex-1">
+                <h1 className="text-3xl font-bold mb-2">
+                  {t('userDashboard.welcomeUser').replace('{name}', user?.name || 'Kullanıcı')}
+                </h1>
+                <p className="text-white/90">{t('userDashboard.subtitle')}</p>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -80,15 +93,24 @@ const UserDashboard = () => {
               <h3 className="text-sm font-medium text-slate-600 dark:text-slate-400">
                 {t('userDashboard.cvStatus')}
               </h3>
-              {hasCV ? (
+              {hasCV || user?.cvUrl ? (
                 <CheckCircle2 className="w-5 h-5 text-green-500" />
               ) : (
                 <XCircle className="w-5 h-5 text-red-500" />
               )}
             </div>
-            <p className={`text-2xl font-bold ${hasCV ? 'text-green-600' : 'text-red-600'}`}>
-              {hasCV ? t('userDashboard.cvUploaded') : t('userDashboard.cvNotUploaded')}
+            <p className={`text-2xl font-bold ${hasCV || user?.cvUrl ? 'text-green-600' : 'text-red-600'}`}>
+              {hasCV || user?.cvUrl ? t('userDashboard.cvUploaded') : t('userDashboard.cvNotUploaded')}
             </p>
+            {(hasCV || user?.cvUrl) && (
+              <Link
+                href="/user/cv"
+                className="mt-3 inline-flex items-center gap-2 text-sm text-brandBlue hover:text-brandBlue/80 font-medium"
+              >
+                <FileText className="w-4 h-4" />
+                CV'yi Görüntüle
+              </Link>
+            )}
           </div>
 
           {/* Total Applications */}

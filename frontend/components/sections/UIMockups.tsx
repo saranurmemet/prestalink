@@ -1,8 +1,11 @@
 'use client';
 
 import { LayoutDashboard, Briefcase, FileText, MessageCircle, Settings, TrendingUp, Users, Clock, CheckCircle2 } from 'lucide-react';
+import { useLanguage } from '@/components/providers/LanguageProvider';
 
 const UIMockups = () => {
+  const { t } = useLanguage();
+  
   return (
     <div className="relative w-full max-w-3xl mx-auto">
       {/* Illustration-style Dashboard Mockup */}
@@ -46,7 +49,7 @@ const UIMockups = () => {
           <div className="flex-1 space-y-3">
             {/* Header */}
             <div className="mb-4">
-              <h3 className="text-sm font-semibold text-slate-600 dark:text-slate-400">Dashboard Overview</h3>
+              <h3 className="text-sm font-semibold text-slate-600 dark:text-slate-400">{t('uiMockups.dashboardOverview')}</h3>
             </div>
             
             {/* Stats Grid */}
@@ -58,7 +61,7 @@ const UIMockups = () => {
                     <Briefcase className="w-5 h-5 text-brandBlue" />
                   </div>
                   <div>
-                    <p className="text-xs text-slate-600 dark:text-slate-400">Active Jobs</p>
+                    <p className="text-xs text-slate-600 dark:text-slate-400">{t('uiMockups.activeJobs')}</p>
                     <p className="text-2xl font-bold text-slate-800 dark:text-white">150+</p>
                   </div>
                 </div>
@@ -71,7 +74,7 @@ const UIMockups = () => {
                     <FileText className="w-5 h-5 text-green-600" />
                   </div>
                   <div>
-                    <p className="text-xs text-slate-600 dark:text-slate-400">Applications</p>
+                    <p className="text-xs text-slate-600 dark:text-slate-400">{t('uiMockups.applications')}</p>
                     <p className="text-2xl font-bold text-slate-800 dark:text-white">48</p>
                   </div>
                 </div>
@@ -84,7 +87,7 @@ const UIMockups = () => {
                     <Users className="w-5 h-5 text-purple-600" />
                   </div>
                   <div>
-                    <p className="text-xs text-slate-600 dark:text-slate-400">Interviews</p>
+                    <p className="text-xs text-slate-600 dark:text-slate-400">{t('uiMockups.interviews')}</p>
                     <p className="text-2xl font-bold text-slate-800 dark:text-white">12</p>
                   </div>
                 </div>
@@ -97,7 +100,7 @@ const UIMockups = () => {
                     <CheckCircle2 className="w-5 h-5 text-brandOrange" />
                   </div>
                   <div>
-                    <p className="text-xs text-slate-600 dark:text-slate-400">Offers</p>
+                    <p className="text-xs text-slate-600 dark:text-slate-400">{t('uiMockups.offers')}</p>
                     <p className="text-2xl font-bold text-slate-800 dark:text-white">5</p>
                   </div>
                 </div>
@@ -107,7 +110,7 @@ const UIMockups = () => {
             {/* Application Progress Chart */}
             <div className="bg-white/90 dark:bg-slate-700/50 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-white/20">
               <div className="flex items-center justify-between mb-3">
-                <h4 className="text-xs font-semibold text-slate-700 dark:text-slate-300">Application Progress</h4>
+                <h4 className="text-xs font-semibold text-slate-700 dark:text-slate-300">{t('uiMockups.applicationProgress')}</h4>
                 <TrendingUp className="w-4 h-4 text-green-600" />
               </div>
               <div className="flex items-end gap-2 h-20">
@@ -120,15 +123,15 @@ const UIMockups = () => {
             
             {/* Recent Activity */}
             <div className="bg-white/90 dark:bg-slate-700/50 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-white/20">
-              <h4 className="text-xs font-semibold text-slate-700 dark:text-slate-300 mb-3">Recent Activity</h4>
+              <h4 className="text-xs font-semibold text-slate-700 dark:text-slate-300 mb-3">{t('uiMockups.recentActivity')}</h4>
               <div className="space-y-2">
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center flex-shrink-0">
                     <FileText className="w-4 h-4 text-brandBlue" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-xs font-medium text-slate-700 dark:text-slate-300 truncate">New Application</p>
-                    <p className="text-[10px] text-slate-500 dark:text-slate-400">2 hours ago</p>
+                    <p className="text-xs font-medium text-slate-700 dark:text-slate-300 truncate">{t('uiMockups.newApplication')}</p>
+                    <p className="text-[10px] text-slate-500 dark:text-slate-400">{t('uiMockups.hoursAgo', { hours: 2 })}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
@@ -136,8 +139,8 @@ const UIMockups = () => {
                     <Clock className="w-4 h-4 text-green-600" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-xs font-medium text-slate-700 dark:text-slate-300 truncate">Interview Scheduled</p>
-                    <p className="text-[10px] text-slate-500 dark:text-slate-400">Yesterday</p>
+                    <p className="text-xs font-medium text-slate-700 dark:text-slate-300 truncate">{t('uiMockups.interviewScheduled')}</p>
+                    <p className="text-[10px] text-slate-500 dark:text-slate-400">{t('uiMockups.yesterday')}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
@@ -145,8 +148,8 @@ const UIMockups = () => {
                     <CheckCircle2 className="w-4 h-4 text-brandOrange" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-xs font-medium text-slate-700 dark:text-slate-300 truncate">Offer Received</p>
-                    <p className="text-[10px] text-slate-500 dark:text-slate-400">3 days ago</p>
+                    <p className="text-xs font-medium text-slate-700 dark:text-slate-300 truncate">{t('uiMockups.offerReceived')}</p>
+                    <p className="text-[10px] text-slate-500 dark:text-slate-400">{t('uiMockups.daysAgo', { days: 3 })}</p>
                   </div>
                 </div>
               </div>

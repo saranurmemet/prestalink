@@ -13,9 +13,34 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'PrestaLink | منصة التوظيف الأوروبي للمواطنين الجزائريين',
-  description: 'منصة التوظيف والبحث عن عمل في أوروبا للمواطنين الجزائريين. ساعدنا آلاف المواطنين الجزائريين للعثور على وظائف في ألمانيا، فرنسا، إسبانيا وأكثر.',
+  title: 'PrestaLink | Professional Europe Process Management for Algerian Citizens',
+  description: 'Turn your European work dreams into reality. We professionally manage the entire process from CV preparation to visa processes, settlement to job applications. Your European career journey starts with Prestalink.',
+  keywords: 'European jobs, Algerian citizens, work in Europe, Europass CV, visa support, job placement, process management, work abroad, Europe career',
+  authors: [{ name: 'PrestaLink' }],
   manifest: '/manifest.json',
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    alternateLocale: ['fr_FR', 'ar_DZ', 'tr_TR'],
+    url: 'https://prestalink.app',
+    siteName: 'PrestaLink',
+    title: 'PrestaLink | Professional Europe Process Management',
+    description: 'Your European career journey starts here. Comprehensive process management from CV preparation to settlement.',
+    images: [
+      {
+        url: '/assets/logo.jpeg',
+        width: 1200,
+        height: 630,
+        alt: 'PrestaLink - European Career Process Management',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'PrestaLink | Professional Europe Process Management',
+    description: 'Your European career journey starts here.',
+    images: ['/assets/logo.jpeg'],
+  },
   icons: {
     icon: '/assets/logo.jpeg',
     apple: '/assets/logo.jpeg',

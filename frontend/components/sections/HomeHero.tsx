@@ -58,7 +58,7 @@ const HomeHero = () => {
             {/* CTA Buttons */}
             <div className="flex flex-wrap gap-4">
               <Link 
-                href="/register" 
+                href="/contact" 
                 className="group inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-brandBlue to-blue-600 text-white font-semibold shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all"
               >
                 <span>{t('hero.ctaPrimary')}</span>

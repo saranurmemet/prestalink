@@ -92,10 +92,6 @@ const LoginPage = () => {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!selectedRole) {
-      setError(t('auth.selectRole') || 'Please select a role');
-      return;
-    }
 
     const formData = new FormData(event.currentTarget);
     const email = formData.get('email') as string;
@@ -104,7 +100,8 @@ const LoginPage = () => {
     try {
       setLoading(true);
       setError(null);
-      const response = await loginUser({ email, password }, selectedRole);
+      // Rol parametresi gönderme - backend kullanıcının rolünü döndürecek
+      const response = await loginUser({ email, password });
       setAuth(response.data);
       const dashboardRoute = getDashboardRoute(response.data.user.role);
       router.push(dashboardRoute);

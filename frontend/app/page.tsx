@@ -3,9 +3,12 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import HomeHero from '@/components/sections/HomeHero';
+import LiveActivityFeed from '@/components/LiveActivityFeed';
+import ProcessSteps from '@/components/ProcessSteps';
 import JobHighlights from '@/components/sections/JobHighlights';
-import QuickFeatures from '@/components/sections/QuickFeatures';
-import ProcessSection from '@/components/sections/ProcessSection';
+import BenefitsGrid from '@/components/BenefitsGrid';
+import TrustIndicators from '@/components/TrustIndicators';
+import CTAFinal from '@/components/CTAFinal';
 import { useAuthStore } from '@/store/useAuthStore';
 import { getDashboardRoute } from '@/utils/routing';
 
@@ -25,11 +28,14 @@ export default function Home() {
   }
 
   return (
-    <div className="space-y-6 pb-8">
+    <div className="space-y-0">
       <HomeHero />
-      <ProcessSection />
+      <LiveActivityFeed />
+      <ProcessSteps />
       <JobHighlights />
-      <QuickFeatures />
+      <BenefitsGrid />
+      <TrustIndicators />
+      <CTAFinal />
     </div>
   );
 }
