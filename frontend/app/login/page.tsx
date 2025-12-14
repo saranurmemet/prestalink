@@ -148,10 +148,13 @@ const LoginPage = () => {
       // Daha açıklayıcı hata mesajları
       if (!axiosError.response) {
         // Network hatası - backend'e bağlanılamıyor
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'API_URL_NOT_SET';
+        // Render free tier cold start için özel mesaj
+        const errorMessage = (axiosError as any).userMessage || 
+          (axiosError.code === 'ECONNABORTED' || axiosError.message?.includes('timeout')
+            ? 'Server is starting up. This may take up to 60 seconds. Please wait and try again.'
+            : 'Cannot connect to server. Please check your internet connection and try again.');
         setError(
-          t('auth.networkError') || 
-          `Backend'e bağlanılamıyor. Lütfen backend'in çalıştığından emin olun. (API: ${apiUrl})`
+          t('auth.networkError') || errorMessage
         );
       } else if (axiosError.response.status === 401) {
         setError(

@@ -85,7 +85,9 @@ api.interceptors.response.use(
           // Render free tier cold start can take 50+ seconds
           // Show user-friendly message for timeout errors
           if (error.code === 'ECONNABORTED' || error.message.includes('timeout')) {
-            error.userMessage = 'Server is starting up. Please wait a moment and try again.';
+            error.userMessage = 'Server is starting up. This may take up to 60 seconds. Please wait and try again.';
+          } else if (error.code === 'ERR_NETWORK' || error.message.includes('Network Error')) {
+            error.userMessage = 'Cannot connect to server. The server may be starting up. Please wait a moment and try again.';
           } else {
             error.userMessage = 'Cannot connect to server. Please check your internet connection and try again.';
           }
