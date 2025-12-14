@@ -21,6 +21,7 @@ const LoginPage = () => {
   const [selectedRole, setSelectedRole] = useState<UserRole | null>(null); // Show role selection first
   const formRef = useRef<HTMLFormElement>(null);
   const autoLoginAttempted = useRef(false);
+  const [retryCount, setRetryCount] = useState(0);
 
   const roles = [
     {
@@ -156,6 +157,16 @@ const LoginPage = () => {
         setError(
           t('auth.networkError') || errorMessage
         );
+        // Retry için count artır (max 2 retry)
+        if (retryCount < 2 && (axiosError.code === 'ECONNABORTED' || axiosError.message?.includes('timeout'))) {
+          setRetryCount(retryCount + 1);
+          // 5 saniye sonra otomatik retry
+          setTimeout(() => {
+            if (formRef.current) {
+              formRef.current.requestSubmit();
+            }
+          }, 5000);
+        }
       } else if (axiosError.response.status === 401) {
         setError(
           axiosError.response.data?.message || 
