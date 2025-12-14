@@ -135,6 +135,15 @@ app.get('/api/test', (req, res) => {
   res.json({ ok: true, message: 'API Test Endpoint Working', timestamp: new Date().toISOString() });
 });
 
+// Keep-alive endpoint for Render free tier (prevents spin down)
+app.get('/api/keepalive', (req, res) => {
+  res.json({ 
+    status: 'alive', 
+    timestamp: new Date().toISOString(),
+    message: 'Service is active'
+  });
+});
+
 // Load and mount routes with detailed logging
 console.log('🔌 [STARTUP] Mounting API routes...');
 
