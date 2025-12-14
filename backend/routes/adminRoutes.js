@@ -143,8 +143,40 @@ router.post('/seed-comprehensive-profiles', async (req, res) => {
           'Advanced Manufacturing Techniques (Siemens Technical Academy, 2021)',
           'Occupational Health & Safety Training (Ministry of Labor, 2023)'
         ],
-        profilePhoto: '/uploads/profilePhotos/mehmet.png',
-        cvUrl: '/uploads/cvs/mehmet_cv.pdf'
+        profilePhoto: 'https://i.pravatar.cc/400?img=12',
+        cvUrl: '/uploads/cvs/mehmet_cv.pdf',
+        cvContent: `MEHMET DEMIR
+Quality Control Specialist
+
+PROFESSIONAL SUMMARY
+Experienced Quality Control Specialist with 6+ years of expertise in automotive and precision manufacturing. Certified CNC operator with strong background in metrology, inspection systems, and ISO 9001 standards. Fluent in Turkish, English, French, and Arabic.
+
+WORK EXPERIENCE
+Senior Quality Control Specialist | ABC Manufacturing | 2019 - Present
+- Led quality inspection teams for automotive components
+- Implemented ISO 9001 quality management systems
+- Reduced defect rates by 35% through process improvements
+- Trained 15+ team members on quality standards
+
+Quality Inspector | XYZ Industries | 2017 - 2019
+- Performed dimensional inspections using CMM equipment
+- Maintained quality documentation and reports
+- Collaborated with production teams to resolve quality issues
+
+EDUCATION
+Bachelor of Mechanical Engineering | Istanbul Technical University | 2016
+
+SKILLS
+- Quality Control & Assurance
+- CNC Programming & Operation
+- CMM Operation (Zeiss, Mitutoyo)
+- ISO 9001 Implementation
+- Six Sigma Methodologies
+- Metrology & Precision Measurement
+- Problem Solving & Root Cause Analysis
+
+LANGUAGES
+Turkish (Native), English (Fluent), French (Fluent), Arabic (Conversational)`
       },
       'ahmet@prestalink.app': {
         name: 'Ahmet Suriye',
@@ -162,8 +194,38 @@ router.post('/seed-comprehensive-profiles', async (req, res) => {
           'Docker & Kubernetes Fundamentals (2022)',
           'Agile & Scrum Master Certification (2020)'
         ],
-        profilePhoto: '/uploads/profilePhotos/ahmet.png',
-        cvUrl: '/uploads/cvs/ahmet_cv.pdf'
+        profilePhoto: 'https://api.dicebear.com/7.x/avataaars/svg?seed=ahmet',
+        cvUrl: '/uploads/cvs/ahmet_cv.pdf',
+        cvContent: `AHMET SURIYE
+Software Engineer
+
+PROFESSIONAL SUMMARY
+Full-stack Software Engineer with 5 years of experience building scalable web applications. Expert in React, Node.js, and cloud technologies. Passionate about clean code, best practices, and continuous learning.
+
+WORK EXPERIENCE
+Senior Software Engineer | TechCorp Solutions | 2021 - Present
+- Developed and maintained microservices architecture using Node.js
+- Built responsive frontend applications with React and TypeScript
+- Reduced API response time by 40% through optimization
+- Led team of 3 junior developers
+
+Software Developer | StartupXYZ | 2019 - 2021
+- Developed RESTful APIs using Express.js and MongoDB
+- Implemented real-time features using WebSockets
+- Collaborated with cross-functional teams in agile environment
+
+EDUCATION
+Bachelor of Computer Science | Middle East Technical University | 2019
+
+TECHNICAL SKILLS
+- Frontend: React, TypeScript, Next.js, Redux, Tailwind CSS
+- Backend: Node.js, Express, NestJS, REST APIs, GraphQL
+- Databases: MongoDB, PostgreSQL, Redis
+- Cloud: AWS (EC2, S3, Lambda), Docker, Kubernetes
+- Tools: Git, Docker, Jenkins, Jira, Postman
+
+LANGUAGES
+Turkish (Native), English (Fluent), German (Intermediate)`
       },
       'sara@prestalink.app': {
         name: 'Sara Soley',
@@ -181,8 +243,48 @@ router.post('/seed-comprehensive-profiles', async (req, res) => {
           'Emergency Nursing Certification (2020)',
           'Infection Control & Prevention Training (2023)'
         ],
-        profilePhoto: '/uploads/profilePhotos/sara.png',
-        cvUrl: '/uploads/cvs/sara_cv.pdf'
+        profilePhoto: 'https://api.dicebear.com/7.x/avataaars/svg?seed=sara',
+        cvUrl: '/uploads/cvs/sara_cv.pdf',
+        cvContent: `SARA SOLEY
+Registered Nurse
+
+PROFESSIONAL SUMMARY
+Dedicated Registered Nurse with 4 years of experience in intensive care and emergency departments. Certified in BLS, ACLS, and PALS. Fluent in French, Arabic, English, and Turkish. Committed to providing compassionate, high-quality patient care.
+
+WORK EXPERIENCE
+ICU Nurse | Algiers Medical Center | 2021 - Present
+- Provided critical care to patients in intensive care unit
+- Monitored vital signs and administered medications
+- Collaborated with multidisciplinary healthcare teams
+- Trained 5 new nurses on ICU protocols
+
+Emergency Department Nurse | City Hospital | 2019 - 2021
+- Treated patients in emergency situations
+- Performed triage and initial assessments
+- Assisted in emergency procedures and surgeries
+- Maintained accurate patient records
+
+EDUCATION
+Bachelor of Nursing | University of Algiers | 2019
+
+CERTIFICATIONS
+- BLS (Basic Life Support) - Current
+- ACLS (Advanced Cardiac Life Support) - Current
+- PALS (Pediatric Advanced Life Support) - Current
+- Critical Care Nursing Certificate
+- Emergency Nursing Certification
+
+SKILLS
+- Critical Care Nursing
+- Emergency Response
+- Patient Assessment & Monitoring
+- Medication Administration
+- Wound Care & Dressing
+- Patient Education
+- Multilingual Communication
+
+LANGUAGES
+French (Native), Arabic (Native), English (Fluent), Turkish (Conversational)`
       },
       'sarad@prestalink.app': {
         name: 'Sarad Kaşgarlı',
@@ -200,8 +302,51 @@ router.post('/seed-comprehensive-profiles', async (req, res) => {
           'International Recruitment Strategies (2021)',
           'LinkedIn Recruiter Certification (2020)'
         ],
-        profilePhoto: '/uploads/profilePhotos/sarad.png',
-        cvUrl: '/uploads/cvs/sarad_cv.pdf'
+        profilePhoto: 'https://api.dicebear.com/7.x/avataaars/svg?seed=sarad',
+        cvUrl: '/uploads/cvs/sarad_cv.pdf',
+        cvContent: `SARAD KAŞGARLI
+HR & Recruitment Specialist
+
+PROFESSIONAL SUMMARY
+Strategic HR Professional with 7 years of experience in recruitment and talent acquisition. Specialized in international recruitment for European markets. Expert in employer branding, candidate sourcing, and building high-performing teams.
+
+WORK EXPERIENCE
+Senior Recruitment Specialist | Global Talent Solutions | 2020 - Present
+- Managed end-to-end recruitment process for 200+ positions annually
+- Developed and executed recruitment strategies for European markets
+- Reduced time-to-hire by 30% through process optimization
+- Built strong talent pipelines using LinkedIn, job boards, and networking
+- Collaborated with hiring managers to define job requirements
+
+HR Coordinator | International HR Services | 2017 - 2020
+- Sourced and screened candidates for various positions
+- Conducted interviews and coordinated hiring processes
+- Maintained applicant tracking system (ATS)
+- Organized recruitment events and job fairs
+
+EDUCATION
+Master of Human Resources Management | University of Oran | 2017
+Bachelor of Business Administration | University of Oran | 2015
+
+CERTIFICATIONS
+- SHRM Certified Professional (SHRM-CP)
+- Talent Acquisition Specialist Certification
+- HR Analytics & Data-Driven Recruitment
+- Employer Branding Certificate
+- International Recruitment Strategies
+
+SKILLS
+- Talent Acquisition & Sourcing
+- Interviewing & Assessment
+- Employer Branding
+- ATS Management (Greenhouse, Lever, Workday)
+- LinkedIn Recruiter
+- HR Analytics & Reporting
+- Candidate Relationship Management
+- International Recruitment
+
+LANGUAGES
+French (Native), Arabic (Native), English (Fluent), Turkish (Conversational)`
       }
     };
 
@@ -231,6 +376,7 @@ router.post('/seed-comprehensive-profiles', async (req, res) => {
       user.certificates = profile.certificates;
       if (profile.profilePhoto) user.profilePhoto = profile.profilePhoto;
       if (profile.cvUrl) user.cvUrl = profile.cvUrl;
+      if (profile.cvContent) user.cvContent = profile.cvContent;
 
       await user.save();
       results.profilesUpdated++;
@@ -349,131 +495,282 @@ router.post('/seed-comprehensive-profiles', async (req, res) => {
       results.jobsCreated++;
     }
 
-    // 3. Başvurular oluştur
+    // 3. Başvurular oluştur - Her kullanıcı için farklı işlere başvuru
     const candidateUsers = users.filter(u => 
       ['mehmet@prestalink.app', 'ahmet@prestalink.app', 'sara@prestalink.app'].includes(u.email)
     );
 
-    for (const candidate of candidateUsers) {
-      const jobsToApply = createdJobs.slice(0, 2);
-      for (const job of jobsToApply) {
-        const existing = await Application.findOne({ userId: candidate._id, jobId: job._id });
+    // Mehmet için - Quality Control işlerine
+    const mehmet = candidateUsers.find(u => u.email === 'mehmet@prestalink.app');
+    if (mehmet) {
+      const mehmetJobs = createdJobs.filter(j => 
+        j.title.includes('Quality') || j.title.includes('Engineer')
+      );
+      const mehmetStatuses = ['pending', 'reviewing', 'viewed', 'interview'];
+      for (let i = 0; i < Math.min(mehmetJobs.length, 4); i++) {
+        const job = mehmetJobs[i];
+        const existing = await Application.findOne({ userId: mehmet._id, jobId: job._id });
         if (existing) continue;
-
         await Application.create({
-          userId: candidate._id,
+          userId: mehmet._id,
           jobId: job._id,
-          cvUrl: candidate.cvUrl,
-          certificates: candidate.certificates || [],
-          status: 'pending',
+          cvUrl: mehmet.cvUrl,
+          certificates: mehmet.certificates || [],
+          status: mehmetStatuses[i % mehmetStatuses.length],
           messages: []
         });
         results.applicationsCreated++;
       }
     }
 
-    // 4. Bildirimler oluştur
+    // Ahmet için - Software Developer işlerine
+    const ahmet = candidateUsers.find(u => u.email === 'ahmet@prestalink.app');
+    if (ahmet) {
+      const ahmetJobs = createdJobs.filter(j => 
+        j.title.includes('Software') || j.title.includes('Developer') || j.title.includes('React') || j.title.includes('Node')
+      );
+      const ahmetStatuses = ['pending', 'reviewing', 'viewed', 'interview', 'accepted'];
+      for (let i = 0; i < Math.min(ahmetJobs.length, 5); i++) {
+        const job = ahmetJobs[i];
+        const existing = await Application.findOne({ userId: ahmet._id, jobId: job._id });
+        if (existing) continue;
+        await Application.create({
+          userId: ahmet._id,
+          jobId: job._id,
+          cvUrl: ahmet.cvUrl,
+          certificates: ahmet.certificates || [],
+          status: ahmetStatuses[i % ahmetStatuses.length],
+          messages: []
+        });
+        results.applicationsCreated++;
+      }
+    }
+
+    // Sara için - Nurse işlerine
+    const sara = candidateUsers.find(u => u.email === 'sara@prestalink.app');
+    if (sara) {
+      const saraJobs = createdJobs.filter(j => 
+        j.title.includes('Nurse') || j.title.includes('ICU') || j.title.includes('Emergency')
+      );
+      const saraStatuses = ['pending', 'reviewing', 'viewed', 'interview', 'accepted'];
+      for (let i = 0; i < Math.min(saraJobs.length, 3); i++) {
+        const job = saraJobs[i];
+        const existing = await Application.findOne({ userId: sara._id, jobId: job._id });
+        if (existing) continue;
+        await Application.create({
+          userId: sara._id,
+          jobId: job._id,
+          cvUrl: sara.cvUrl,
+          certificates: sara.certificates || [],
+          status: saraStatuses[i % saraStatuses.length],
+          messages: []
+        });
+        results.applicationsCreated++;
+      }
+    }
+
+    // 4. Bildirimler oluştur - Her kullanıcı için 5-6 bildirim
     const notifications = [
-      // Mehmet için
+      // Mehmet için (5 bildirim)
       {
         targetUserId: employerMap['mehmet@prestalink.app'],
         title: 'Application Received',
         message: 'Your application for Senior Quality Control Engineer has been received and is under review.',
-        read: false
+        read: false,
+        createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000)
       },
       {
         targetUserId: employerMap['mehmet@prestalink.app'],
         title: 'Interview Scheduled',
         message: 'Congratulations! Your interview for Quality Assurance Manager is scheduled for next week. Please check your email for details.',
-        read: false
+        read: false,
+        createdAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000)
+      },
+      {
+        targetUserId: employerMap['mehmet@prestalink.app'],
+        title: 'Application Viewed',
+        message: 'Your application for Senior Quality Control Engineer has been viewed by the employer.',
+        read: false,
+        createdAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000)
       },
       {
         targetUserId: employerMap['mehmet@prestalink.app'],
         title: 'Profile Update Required',
         message: 'Please update your CV and certificates to improve your application chances.',
-        read: true
+        read: true,
+        createdAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000)
       },
-      // Ahmet için
+      {
+        targetUserId: employerMap['mehmet@prestalink.app'],
+        title: 'Welcome to PrestaLink',
+        message: 'Welcome! Your profile has been created. Start applying for jobs in Europe!',
+        read: true,
+        createdAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
+      },
+      // Ahmet için (6 bildirim)
       {
         targetUserId: employerMap['ahmet@prestalink.app'],
         title: 'New Job Match',
         message: 'We found 5 new job opportunities matching your profile as a Software Engineer. Check them out!',
-        read: false
+        read: false,
+        createdAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000)
       },
       {
         targetUserId: employerMap['ahmet@prestalink.app'],
         title: 'Application Status Update',
         message: 'Your application for Full-Stack Software Developer has moved to the interview stage.',
-        read: false
+        read: false,
+        createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000)
+      },
+      {
+        targetUserId: employerMap['ahmet@prestalink.app'],
+        title: 'Application Accepted',
+        message: 'Great news! Your application for Backend Node.js Developer has been accepted!',
+        read: false,
+        createdAt: new Date(Date.now() - 4 * 24 * 60 * 60 * 1000)
+      },
+      {
+        targetUserId: employerMap['ahmet@prestalink.app'],
+        title: 'Interview Reminder',
+        message: 'Your interview for Frontend React Developer is scheduled for tomorrow at 2 PM.',
+        read: false,
+        createdAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000)
+      },
+      {
+        targetUserId: employerMap['ahmet@prestalink.app'],
+        title: 'Profile Complete',
+        message: 'Your profile has been completed successfully. You can now apply for jobs!',
+        read: true,
+        createdAt: new Date(Date.now() - 6 * 24 * 60 * 60 * 1000)
       },
       {
         targetUserId: employerMap['ahmet@prestalink.app'],
         title: 'Welcome to PrestaLink',
         message: 'Welcome! Complete your profile to start applying for jobs in Europe.',
-        read: true
+        read: true,
+        createdAt: new Date(Date.now() - 8 * 24 * 60 * 60 * 1000)
       },
-      // Sara için
+      // Sara için (6 bildirim)
       {
         targetUserId: employerMap['sara@prestalink.app'],
         title: 'Application Accepted',
         message: 'Great news! Your application for ICU Registered Nurse has been accepted. Welcome to the team!',
-        read: false
+        read: false,
+        createdAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000)
       },
       {
         targetUserId: employerMap['sara@prestalink.app'],
         title: 'Document Required',
         message: 'Please upload your updated nursing license to complete your application.',
-        read: false
+        read: false,
+        createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000)
       },
       {
         targetUserId: employerMap['sara@prestalink.app'],
         title: 'New Opportunity',
         message: 'A new Emergency Department Nurse position in Lyon matches your profile. Apply now!',
-        read: false
+        read: false,
+        createdAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000)
+      },
+      {
+        targetUserId: employerMap['sara@prestalink.app'],
+        title: 'Interview Scheduled',
+        message: 'Your interview for Emergency Department Nurse is scheduled for next Monday at 10 AM.',
+        read: false,
+        createdAt: new Date(Date.now() - 4 * 24 * 60 * 60 * 1000)
+      },
+      {
+        targetUserId: employerMap['sara@prestalink.app'],
+        title: 'Application Viewed',
+        message: 'Your application for ICU Registered Nurse has been viewed by the hospital.',
+        read: true,
+        createdAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000)
       },
       {
         targetUserId: employerMap['sara@prestalink.app'],
         title: 'Profile Complete',
         message: 'Your profile has been completed successfully. You can now apply for jobs!',
-        read: true
+        read: true,
+        createdAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
       },
-      // Sarad için (recruiter)
+      // Sarad için (recruiter) - 6 bildirim
       {
         targetUserId: employerMap['sarad@prestalink.app'],
         title: 'New Application Received',
         message: 'You have received 5 new applications for the Senior Quality Control Engineer position.',
-        read: false
+        read: false,
+        createdAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000)
       },
       {
         targetUserId: employerMap['sarad@prestalink.app'],
         title: 'Job Posting Live',
         message: 'Your job posting for Full-Stack Software Developer is now live and receiving applications.',
-        read: false
+        read: false,
+        createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000)
       },
       {
         targetUserId: employerMap['sarad@prestalink.app'],
         title: 'Candidate Match Found',
         message: 'A highly qualified candidate (Mehmet Demir) has applied for your Quality Control position.',
-        read: false
+        read: false,
+        createdAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000)
+      },
+      {
+        targetUserId: employerMap['sarad@prestalink.app'],
+        title: 'New Application',
+        message: 'You have received 3 new applications for the ICU Registered Nurse position.',
+        read: false,
+        createdAt: new Date(Date.now() - 4 * 24 * 60 * 60 * 1000)
       },
       {
         targetUserId: employerMap['sarad@prestalink.app'],
         title: 'Weekly Summary',
         message: 'This week you received 12 new applications across all your job postings.',
-        read: true
+        read: true,
+        createdAt: new Date(Date.now() - 6 * 24 * 60 * 60 * 1000)
       },
-      // Ahmet için (recruiter)
+      {
+        targetUserId: employerMap['sarad@prestalink.app'],
+        title: 'Welcome to PrestaLink',
+        message: 'Welcome! Your recruiter account has been set up. Start posting jobs!',
+        read: true,
+        createdAt: new Date(Date.now() - 8 * 24 * 60 * 60 * 1000)
+      },
+      // Ahmet için (recruiter) - 5 bildirim
       {
         targetUserId: employerMap['ahmet@prestalink.app'],
         title: 'New Application',
         message: 'You have received 3 new applications for the Frontend React Developer position.',
-        read: false
+        read: false,
+        createdAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000)
       },
       {
         targetUserId: employerMap['ahmet@prestalink.app'],
         title: 'Job Posted Successfully',
         message: 'Your job posting for Backend Node.js Developer is now live.',
-        read: true
+        read: false,
+        createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000)
+      },
+      {
+        targetUserId: employerMap['ahmet@prestalink.app'],
+        title: 'Candidate Review',
+        message: 'A candidate (Ahmet Suriye) has applied for your Backend Node.js Developer position.',
+        read: false,
+        createdAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000)
+      },
+      {
+        targetUserId: employerMap['ahmet@prestalink.app'],
+        title: 'Application Status',
+        message: 'You have 8 pending applications to review across all your job postings.',
+        read: true,
+        createdAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000)
+      },
+      {
+        targetUserId: employerMap['ahmet@prestalink.app'],
+        title: 'Welcome to PrestaLink',
+        message: 'Welcome! Your recruiter account is ready. Start posting jobs!',
+        read: true,
+        createdAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
       }
     ];
 

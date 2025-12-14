@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useLanguage } from '@/components/providers/LanguageProvider';
 import { useAuthStore } from '@/store/useAuthStore';
+import ThemeToggle from '@/components/common/ThemeToggle';
+import LanguageSwitcher from '@/components/common/LanguageSwitcher';
 
 interface MenuItem {
   href: string;
@@ -70,7 +72,11 @@ const MobileMenu = ({ items }: { items: MenuItem[] }) => {
                 </Link>
               ))}
             </nav>
-            <div className="mt-4 border-t border-slate-100 dark:border-slate-700 pt-4">
+            <div className="mt-4 border-t border-slate-100 dark:border-slate-700 pt-4 space-y-3">
+              <div className="flex items-center justify-between gap-2">
+                <ThemeToggle />
+                <LanguageSwitcher />
+              </div>
               {user ? (
                 <button
                   type="button"

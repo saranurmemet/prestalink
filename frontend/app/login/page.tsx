@@ -199,35 +199,35 @@ const LoginPage = () => {
 
   if (!selectedRole) {
     return (
-      <div className="page-container py-20 animate-fade-in">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-brandNavy dark:text-slate-100 mb-4">{t('auth.selectLoginType')}</h1>
-          <p className="text-lg text-brandGray dark:text-slate-300">{t('auth.selectLoginTypeDesc')}</p>
+      <div className="page-container py-20 animate-fade-in px-4 sm:px-6">
+        <div className="text-center mb-8 max-w-3xl mx-auto">
+          <h1 className="text-3xl sm:text-4xl font-bold text-brandNavy dark:text-slate-100 mb-4">{t('auth.selectLoginType')}</h1>
+          <p className="text-base sm:text-lg text-brandGray dark:text-slate-300">{t('auth.selectLoginTypeDesc')}</p>
         </div>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 max-w-7xl mx-auto">
+        <div className="grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4 max-w-7xl mx-auto">
           {roles.map((role) => {
             const IconComponent = role.icon;
             return (
               <button
                 key={role.value}
                 onClick={() => setSelectedRole(role.value)}
-                className="glass-panel p-6 sm:p-8 text-center card-hover group animate-fade-in"
+                className="glass-panel p-5 sm:p-6 md:p-8 text-center card-hover group animate-fade-in relative overflow-hidden"
                 style={{ animationDelay: `${roles.indexOf(role) * 0.1}s` }}
               >
-                <div className={`mx-auto mb-4 flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-2xl bg-gradient-to-br ${role.gradient} text-white transition-transform duration-300 group-hover:scale-110 shadow-lg`}>
-                  <IconComponent className="h-7 w-7 sm:h-8 sm:w-8" strokeWidth={2.5} />
+                <div className={`mx-auto mb-3 sm:mb-4 flex h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 items-center justify-center rounded-2xl bg-gradient-to-br ${role.gradient} text-white transition-transform duration-300 group-hover:scale-110 shadow-lg`}>
+                  <IconComponent className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8" strokeWidth={2.5} />
                 </div>
-                <h3 className="text-lg sm:text-xl font-semibold text-brandNavy dark:text-slate-100 mb-2">{t(role.titleKey)}</h3>
-                <p className="text-xs sm:text-sm text-brandGray dark:text-slate-300 mb-4 leading-relaxed">{t(role.descKey)}</p>
-                <div className="flex items-center justify-center gap-2 text-brandBlue font-semibold text-sm sm:text-base">
+                <h3 className="text-base sm:text-lg md:text-xl font-semibold text-brandNavy dark:text-slate-100 mb-2">{t(role.titleKey)}</h3>
+                <p className="text-xs sm:text-sm text-brandGray dark:text-slate-300 mb-3 sm:mb-4 leading-relaxed min-h-[3rem] sm:min-h-[3.5rem]">{t(role.descKey)}</p>
+                <div className="flex items-center justify-center gap-2 text-brandBlue font-semibold text-xs sm:text-sm md:text-base mt-auto">
                   <span>{t('auth.continue')}</span>
-                  <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5 transition-transform group-hover:translate-x-1" />
+                  <ChevronRight className="h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 transition-transform group-hover:translate-x-1 flex-shrink-0" />
                 </div>
               </button>
             );
           })}
         </div>
-        <div className="text-center mt-8 sm:mt-10">
+        <div className="text-center mt-8 sm:mt-10 px-4">
           <p className="text-sm sm:text-base text-brandGray dark:text-slate-300">
             {t('auth.registerPrompt')}{' '}
             <Link href="/register" className="font-semibold text-brandBlue hover:underline">

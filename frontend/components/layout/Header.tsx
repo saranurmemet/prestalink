@@ -23,9 +23,11 @@ const Header = () => {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/40 bg-white/70 backdrop-blur-2xl transition-all duration-300 hover:bg-white/80 dark:border-slate-700/40 dark:bg-slate-900/70 dark:hover:bg-slate-900/80">
-      <div className="page-container flex h-20 items-center justify-between gap-4">
-        <Logo />
-        <nav className="hidden items-center gap-6 md:flex">
+      <div className="page-container flex h-20 items-center justify-between gap-4 px-4 sm:px-6">
+        <div className="flex-shrink-0">
+          <Logo />
+        </div>
+        <nav className="hidden items-center gap-6 md:flex flex-1 justify-center">
           {navItems.map((item) => (
             <Link
               key={item.href}
@@ -43,25 +45,29 @@ const Header = () => {
             </Link>
           ))}
         </nav>
-        <div className="flex items-center gap-3">
-          <ThemeToggle />
-          <LanguageSwitcher />
+        <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+          <div className="hidden sm:flex items-center gap-2">
+            <ThemeToggle />
+            <LanguageSwitcher />
+          </div>
           {user ? (
-            <button
-              type="button"
-              className="rounded-full border border-white/60 bg-white/70 px-5 py-2 text-sm font-semibold text-brandBlue shadow-soft transition-all duration-300 hover:bg-brandBlue hover:text-white hover:scale-105 hover:shadow-md active:scale-100 dark:border-slate-600/60 dark:bg-slate-800/70 dark:text-slate-200 dark:hover:bg-brandBlue"
-              onClick={logout}
-            >
-              {t('nav.logout')}
-            </button>
+            <>
+              <button
+                type="button"
+                className="hidden sm:block rounded-full border border-white/60 bg-white/70 px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold text-brandBlue shadow-soft transition-all duration-300 hover:bg-brandBlue hover:text-white hover:scale-105 hover:shadow-md active:scale-100 dark:border-slate-600/60 dark:bg-slate-800/70 dark:text-slate-200 dark:hover:bg-brandBlue"
+                onClick={logout}
+              >
+                {t('nav.logout')}
+              </button>
+            </>
           ) : (
-            <div className="flex items-center gap-2">
-              <Link href="/login" className="text-sm font-semibold text-brandGray hover:text-brandBlue transition-colors dark:text-slate-300 dark:hover:text-brandBlue">
+            <div className="hidden sm:flex items-center gap-2">
+              <Link href="/login" className="text-xs sm:text-sm font-semibold text-brandGray hover:text-brandBlue transition-colors dark:text-slate-300 dark:hover:text-brandBlue whitespace-nowrap">
                 {t('nav.login')}
               </Link>
               <Link
                 href="/register"
-                className="rounded-full bg-brandOrange px-5 py-2 text-sm font-semibold text-white shadow-soft transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-brandOrange/30 active:scale-100"
+                className="rounded-full bg-brandOrange px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold text-white shadow-soft transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-brandOrange/30 active:scale-100 whitespace-nowrap"
               >
                 {t('nav.register')}
               </Link>

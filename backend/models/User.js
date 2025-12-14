@@ -57,6 +57,9 @@ const userSchema = new mongoose.Schema(
     cvUrl: {
       type: String,
     },
+    cvContent: {
+      type: String,
+    },
     certificates: {
       type: [String],
       default: [],
