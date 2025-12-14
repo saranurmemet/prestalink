@@ -35,7 +35,7 @@ const getApiBaseURL = () => {
 const api = axios.create({
   baseURL: getApiBaseURL(),
   withCredentials: true,
-  timeout: 30000, // 30 saniye timeout
+  timeout: 60000, // 60 saniye timeout (Render free tier cold start için)
 });
 
 api.interceptors.request.use(
@@ -79,9 +79,16 @@ api.interceptors.response.use(
   (error) => {
     if (typeof window !== 'undefined') {
       try {
-        // Handle network errors
+        // Handle network errors (timeout, connection refused, etc.)
         if (!error.response) {
           console.error('Network error:', error.message);
+          // Render free tier cold start can take 50+ seconds
+          // Show user-friendly message for timeout errors
+          if (error.code === 'ECONNABORTED' || error.message.includes('timeout')) {
+            error.userMessage = 'Server is starting up. Please wait a moment and try again.';
+          } else {
+            error.userMessage = 'Cannot connect to server. Please check your internet connection and try again.';
+          }
           // Don't redirect on network errors - let components handle it
           return Promise.reject(error);
         }
