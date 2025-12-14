@@ -86,7 +86,16 @@ const corsOptions = {
         try {
           const allowedHost = new URL(allowedUrl).hostname;
           const originHost = new URL(origin).hostname;
-          return originHost === allowedHost || originHost.endsWith('.' + allowedHost);
+          // Exact match
+          if (originHost === allowedHost) return true;
+          // Subdomain match (e.g., *.vercel.app)
+          if (originHost.endsWith('.' + allowedHost)) return true;
+          // Vercel preview deployments pattern (*-git-*-*.vercel.app)
+          if (allowedHost.includes('vercel.app') && originHost.includes('vercel.app')) {
+            // Allow all vercel.app subdomains for preview deployments
+            return true;
+          }
+          return false;
         } catch (e) {
           return origin === allowedUrl || origin.startsWith(allowedUrl);
         }
