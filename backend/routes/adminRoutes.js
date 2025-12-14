@@ -27,28 +27,31 @@ router.post('/seed-users', async (req, res) => {
 
     const testUsers = [
       {
-        name: 'Sara Yılmaz',
+        name: 'Sara Soley',
         email: 'sara@prestalink.app',
         phone: '+213555111111',
         password: 'sara',
         role: 'user',
-        languages: ['FR', 'AR']
+        languages: ['FR', 'AR'],
+        gender: 'female'
       },
       {
-        name: 'Sarad Admin',
+        name: 'Sarad Kaşgarlı',
         email: 'sarad@prestalink.app',
         phone: '+213555222222',
         password: 'sarad',
         role: 'admin',
-        languages: ['TR', 'EN', 'FR', 'AR']
+        languages: ['TR', 'EN', 'FR', 'AR'],
+        gender: 'female'
       },
       {
-        name: 'Ahmet Kaya',
+        name: 'Ahmet Suriye',
         email: 'ahmet@prestalink.app',
         phone: '+905551234567',
         password: 'ahmet',
         role: 'recruiter',
-        languages: ['TR', 'EN']
+        languages: ['TR', 'EN'],
+        gender: 'male'
       },
       {
         name: 'Mehmet Demir',
@@ -56,7 +59,8 @@ router.post('/seed-users', async (req, res) => {
         phone: '+213555333333',
         password: 'mehmet',
         role: 'user',
-        languages: ['TR', 'FR']
+        languages: ['TR', 'FR'],
+        gender: 'male'
       }
     ];
 
