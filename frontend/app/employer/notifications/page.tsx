@@ -22,7 +22,7 @@ const EmployerNotifications = () => {
       try {
         const response = await fetchNotifications();
         // Filter notifications by role - only show employer/recruiter/admin notifications
-        const userRole = user?.activeRole || user?.role?.[0] || 'user';
+        const userRole = user?.role || 'user';
         const allowedRoles = ['recruiter', 'employer', 'admin', 'superadmin'];
         
         const filteredNotifications = response.data.filter((notif: Notification) => {
