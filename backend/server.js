@@ -62,10 +62,14 @@ console.log('📱 [STARTUP] Express app created');
 // Production: Use explicit CLIENT_URL from environment
 const corsOptions = {
   origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps, Postman, curl, health checks)
+    if (!origin) {
+      return callback(null, true);
+    }
+    
     // Development: Allow all localhost and local network origins
     if (process.env.NODE_ENV !== 'production') {
-      if (!origin || 
-          origin.startsWith('http://localhost:') || 
+      if (origin.startsWith('http://localhost:') || 
           origin.startsWith('http://127.0.0.1:') ||
           /^http:\/\/192\.168\.\d{1,3}\.\d{1,3}:\d+$/.test(origin) ||
           /^http:\/\/10\.\d{1,3}\.\d{1,3}\.\d{1,3}:\d+$/.test(origin) ||
@@ -77,7 +81,18 @@ const corsOptions = {
     // Production: Use CLIENT_URL from environment
     if (process.env.CLIENT_URL) {
       const allowedUrls = process.env.CLIENT_URL.split(',').map(url => url.trim());
-      if (allowedUrls.includes(origin)) {
+      // Check if origin matches any allowed URL (exact match or subdomain)
+      const isAllowed = allowedUrls.some(allowedUrl => {
+        try {
+          const allowedHost = new URL(allowedUrl).hostname;
+          const originHost = new URL(origin).hostname;
+          return originHost === allowedHost || originHost.endsWith('.' + allowedHost);
+        } catch (e) {
+          return origin === allowedUrl || origin.startsWith(allowedUrl);
+        }
+      });
+      
+      if (isAllowed) {
         return callback(null, true);
       }
     }
