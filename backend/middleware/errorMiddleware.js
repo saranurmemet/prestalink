@@ -1,5 +1,11 @@
 const errorHandler = (err, req, res, next) => {
-  console.error(err.stack);
+  // Log error for debugging
+  console.error('❌ [ERROR]', {
+    message: err.message,
+    stack: err.stack,
+    url: req.originalUrl,
+    method: req.method,
+  });
   
   // Mongoose validation error
   if (err.name === 'ValidationError') {
@@ -10,8 +16,9 @@ const errorHandler = (err, req, res, next) => {
   
   // Mongoose duplicate key error
   if (err.code === 11000) {
+    const field = Object.keys(err.keyPattern || {})[0] || 'field';
     return res.status(400).json({
-      message: 'Duplicate field value entered',
+      message: `${field} already exists`,
     });
   }
   
@@ -35,10 +42,14 @@ const errorHandler = (err, req, res, next) => {
     });
   }
   
+  // Default error response
   const statusCode = res.statusCode && res.statusCode !== 200 ? res.statusCode : 500;
   res.status(statusCode).json({
     message: err.message || 'Internal Server Error',
-    ...(process.env.NODE_ENV === 'development' && { stack: err.stack }),
+    ...(process.env.NODE_ENV === 'development' && { 
+      stack: err.stack,
+      error: err.name 
+    }),
   });
 };
 

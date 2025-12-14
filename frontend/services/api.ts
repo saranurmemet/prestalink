@@ -8,16 +8,25 @@ import type { User, Job, Application, Notification } from './types';
 // Local Mobile/PWA: http://<LAN-IP>:5000/api (from .env.local)
 // Deployment: https://<backend-domain>/api (from environment)
 const getApiBaseURL = () => {
-  // MUST be set in environment - no production fallback allowed
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-  
-  if (!apiUrl) {
-    // Only log in development - production MUST have env variable set
-    if (process.env.NODE_ENV === 'development') {
-      console.warn('WARNING: NEXT_PUBLIC_API_URL not set. Using default http://localhost:5000/api');
+  // Development fallback for stability
+  if (typeof window !== 'undefined') {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+    
+    if (apiUrl) {
+      return apiUrl;
+    }
+    
+    // Development fallback - only in browser
+    if (process.env.NODE_ENV === 'development' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+      console.warn('⚠️ NEXT_PUBLIC_API_URL not set, using development fallback: http://localhost:5000/api');
       return 'http://localhost:5000/api';
     }
-    throw new Error('NEXT_PUBLIC_API_URL environment variable is not set');
+  }
+  
+  // Server-side or production: MUST be set
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  if (!apiUrl) {
+    throw new Error('NEXT_PUBLIC_API_URL environment variable is required. Set it in .env.local for development or environment variables for production');
   }
   
   return apiUrl;
@@ -29,57 +38,90 @@ const api = axios.create({
   timeout: 30000, // 30 saniye timeout
 });
 
-api.interceptors.request.use((config) => {
-  if (typeof window !== 'undefined') {
-    try {
-      // Add Authorization token
-      const persisted = localStorage.getItem('prestalink-auth');
-      if (persisted) {
-        const parsed = JSON.parse(persisted);
-        const token = parsed?.state?.token;
-        if (token) {
-          config.headers.Authorization = `Bearer ${token}`;
+api.interceptors.request.use(
+  (config) => {
+    if (typeof window !== 'undefined') {
+      try {
+        // Add Authorization token
+        const persisted = localStorage.getItem('prestalink-auth');
+        if (persisted) {
+          const parsed = JSON.parse(persisted);
+          const token = parsed?.state?.token;
+          if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+          }
         }
+        
+        // Add Accept-Language header for i18n error messages
+        const langStore = localStorage.getItem('prestalink-language');
+        if (langStore) {
+          const parsed = JSON.parse(langStore);
+          const lang = parsed?.state?.language || 'en';
+          config.headers['Accept-Language'] = `${lang}-${lang.toUpperCase()},${lang};q=0.9,en;q=0.8`;
+        } else {
+          config.headers['Accept-Language'] = 'en-US,en;q=0.9';
+        }
+      } catch (error) {
+        console.error('Token parse error', error);
+        // Continue without token if parse fails
       }
-      
-      // Add Accept-Language header for i18n error messages
-      const langStore = localStorage.getItem('prestalink-language');
-      if (langStore) {
-        const parsed = JSON.parse(langStore);
-        const lang = parsed?.state?.language || 'en';
-        config.headers['Accept-Language'] = `${lang}-${lang.toUpperCase()},${lang};q=0.9,en;q=0.8`;
-      } else {
-        config.headers['Accept-Language'] = 'en-US,en;q=0.9';
-      }
-    } catch (error) {
-      console.error('Token parse error', error);
     }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
   }
-  return config;
-});
+);
 
 // Response interceptor for error handling
 api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (typeof window !== 'undefined') {
-      // Handle 401 Unauthorized - Token expired or invalid
-      if (error.response?.status === 401) {
-        // Clear auth state
-        localStorage.removeItem('prestalink-auth');
-        // Redirect to login page
-        if (window.location.pathname !== '/login' && window.location.pathname !== '/register') {
-          window.location.href = '/login';
+      try {
+        // Handle network errors
+        if (!error.response) {
+          console.error('Network error:', error.message);
+          // Don't redirect on network errors - let components handle it
+          return Promise.reject(error);
         }
-      }
-      // Handle 403 Forbidden - Insufficient permissions
-      if (error.response?.status === 403) {
-        // Optionally redirect or show error message
-        console.error('Access forbidden:', error.response?.data?.message || 'You do not have permission to access this resource');
+
+        // Handle 401 Unauthorized - Token expired or invalid
+        if (error.response?.status === 401) {
+          // Clear auth state
+          try {
+            localStorage.removeItem('prestalink-auth');
+          } catch (e) {
+            console.error('Failed to clear auth:', e);
+          }
+          
+          // Redirect to login page ONLY if not on public pages
+          const publicPaths = ['/', '/login', '/register', '/jobs', '/about', '/contact'];
+          const currentPath = window.location.pathname;
+          const isPublicPath = publicPaths.some(path => 
+            currentPath === path || currentPath.startsWith(path + '/')
+          );
+          
+          if (!isPublicPath) {
+            window.location.href = '/login';
+          }
+        }
+        
+        // Handle 403 Forbidden - Insufficient permissions
+        if (error.response?.status === 403) {
+          console.error('Access forbidden:', error.response?.data?.message || 'You do not have permission to access this resource');
+        }
+        
+        // Handle 500+ Server errors
+        if (error.response?.status >= 500) {
+          console.error('Server error:', error.response?.data?.message || 'Internal server error');
+        }
+      } catch (e) {
+        console.error('Error in response interceptor:', e);
       }
     }
     return Promise.reject(error);
-  },
+  }
 );
 
 export const registerUser = (payload: Partial<User> & { password: string }) =>

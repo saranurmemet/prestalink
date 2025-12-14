@@ -51,6 +51,44 @@
     "widget": {
       "candidates": "İncelenen adaylar",
       "updated": "Canlı akış",
+      "tabs": {
+        "dashboard": "Kontrol Paneli",
+        "jobs": "İşler",
+        "candidates": "Adaylar"
+      },
+      "stats": {
+        "totalApplications": "Toplam Başvuru",
+        "activeJobs": "Aktif İşler",
+        "partnerCompanies": "Ortak Şirketler",
+        "successRate": "Başarı Oranı"
+      },
+      "changes": {
+        "fromLastMonth": "Geçen aydan %12 artış",
+        "newThisWeek": "Bu hafta 8 yeni",
+        "newPartners": "3 yeni ortak",
+        "improvement": "%2 iyileşme"
+      },
+      "monthlyApplications": "Son 6 Ay Aylık Başvurular",
+      "chartLegend": {
+        "applications": "Başvurular",
+        "interviews": "Mülakatlar",
+        "hired": "İşe Alınanlar"
+      },
+      "recentApplications": "Son Başvurular",
+      "appliedTo": "Başvurulan:",
+      "status": {
+        "new": "Yeni",
+        "review": "İnceleme",
+        "match": "Eşleşme"
+      },
+      "months": {
+        "jan": "Oca",
+        "feb": "Şub",
+        "mar": "Mar",
+        "apr": "Nis",
+        "may": "May",
+        "jun": "Haz"
+      },
       "items": {
         "0": { "name": "Leyla / CNC", "role": "5 yıl deneyim - Münih", "language": "FR" },
         "1": { "name": "Omar / Hemşire", "role": "B1 Almanca - Hamburg", "language": "TR" },
@@ -443,7 +481,11 @@
       },
       "admin": {
         "title": "Yönetici (Admin)",
-        "description": "Sistemi yönetin, kullanıcıları izleyin ve platform ayarlarını kontrol edin."
+        "description": "Kullanıcıları ve işverenleri kontrol edin, başvuruları yönetin ve platform aktivitelerini izleyin."
+      },
+      "superadmin": {
+        "title": "Sistem Yöneticisi",
+        "description": "Tüm uygulamayı kontrol edin, sistem ayarlarını yönetin ve platform genelinde tam yetkiye sahip olun."
       }
     }
   },
@@ -665,9 +707,14 @@
   "userNav": {
     "dashboard": "Dashboard",
     "profile": "Profilim",
+    "cv": "CV Yönetimi",
     "jobListings": "İş İlanları",
+    "favorites": "Favori İşler",
     "applications": "Başvurularım",
-    "notifications": "Bildirimler"
+    "messages": "Mesajlar",
+    "statistics": "İstatistikler",
+    "notifications": "Bildirimler",
+    "settings": "Ayarlar"
   },
   "userProfile": {
     "title": "Profil Düzenle",
@@ -728,6 +775,7 @@
     "backToJobs": "İş İlanlarına Dön",
     "cvRequired": "Başvuru yapmak için önce CV'nizi yüklemeniz gerekiyor.",
     "uploadCv": "CV Yükle",
+    "cvFetchError": "CV dosyası yüklenemedi. Lütfen profil sayfanızdan CV'nizi kontrol edin.",
     "applicationSuccess": "Başvurunuz başarıyla gönderildi!",
     "companyInfoComingSoon": "Şirket bilgileri yakında eklenecek"
   },
@@ -752,6 +800,76 @@
     "markAllRead": "Tümünü Okundu İşaretle",
     "noNotifications": "Yeni bildiriminiz yok",
     "unread": "Okunmamış"
+  },
+  "userMessages": {
+    "title": "Mesajlar",
+    "subtitle": "İşverenler ve işe alım uzmanları ile iletişim",
+    "emptyTitle": "Henüz mesaj yok",
+    "emptyDescription": "İşverenlerden gelen mesajlar burada görünecek",
+    "new": "Yeni",
+    "sampleMessage1": "Merhaba, başvurunuzu inceledik. Görüşme için uygun musunuz?",
+    "sampleMessage2": "CV'nizi beğendik. Ek bilgi paylaşabilir misiniz?"
+  },
+  "userFavorites": {
+    "title": "Favori İşler",
+    "subtitle": "Kaydettiğiniz iş ilanlarını buradan görüntüleyebilirsiniz",
+    "emptyTitle": "Henüz favori iş yok",
+    "emptyDescription": "Beğendiğiniz iş ilanlarını favorilere ekleyerek burada görüntüleyebilirsiniz",
+    "goToJobs": "İş İlanlarına Git",
+    "remove": "Favorilerden çıkar"
+  },
+  "userStatistics": {
+    "title": "İstatistiklerim",
+    "subtitle": "Kariyer yolculuğunuzun özeti ve performans metrikleri",
+    "profileCompletion": "Profil Tamamlanma",
+    "completionRate": "Tamamlanma Oranı",
+    "totalApplications": "Toplam Başvuru",
+    "applicationsSent": "Gönderilen başvurular",
+    "totalJobs": "Mevcut İşler",
+    "activeJobs": "Aktif iş ilanları",
+    "applicationStatuses": "Başvuru Durumları",
+    "pending": "Beklemede",
+    "reviewing": "İnceleniyor",
+    "interview": "Görüşme",
+    "accepted": "Kabul Edildi",
+    "rejected": "Reddedildi",
+    "successRate": "Başarı Oranı",
+    "acceptedApplications": "Kabul edilen başvurular"
+  },
+  "userSettings": {
+    "title": "Ayarlar",
+    "subtitle": "Hesap ve uygulama ayarlarınızı yönetin",
+    "notifications": {
+      "title": "Bildirim Ayarları",
+      "email": {
+        "label": "E-posta Bildirimleri",
+        "description": "Yeni iş ilanları ve başvuru güncellemeleri için e-posta al"
+      },
+      "push": {
+        "label": "Push Bildirimleri",
+        "description": "Tarayıcı bildirimleri al"
+      },
+      "sms": {
+        "label": "SMS Bildirimleri",
+        "description": "Önemli güncellemeler için SMS al"
+      }
+    },
+    "privacy": {
+      "title": "Gizlilik Ayarları",
+      "profileVisibility": {
+        "label": "Profil Görünürlüğü",
+        "description": "İşverenlerin profilinizi görmesine izin ver"
+      },
+      "cvVisibility": {
+        "label": "CV Görünürlüğü",
+        "description": "İşverenlerin CV'nizi indirmesine izin ver"
+      }
+    },
+    "account": {
+      "title": "Hesap İşlemleri",
+      "changePassword": "Şifre Değiştir",
+      "deleteAccount": "Hesabı Sil"
+    }
   },
   "common": {
     "loading": "Yükleniyor...",

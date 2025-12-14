@@ -1,4 +1,6 @@
 # PrestaLink Geliştirme Başlatıcı
+# Düzeltilmiş versiyon - Terminal crash sorunu çözüldü
+
 Write-Host "================================" -ForegroundColor Cyan
 Write-Host "PrestaLink Başlatılıyor..." -ForegroundColor Cyan
 Write-Host "================================" -ForegroundColor Cyan
@@ -27,56 +29,8 @@ foreach ($port in $ports) {
 Write-Host "   Portlar hazır" -ForegroundColor Green
 Write-Host ""
 
-# 2. Frontend Cache Temizleme
-Write-Host "2. Frontend cache temizleniyor..." -ForegroundColor Yellow
-$cachePaths = @(
-    ".\frontend\.next",
-    ".\frontend\out"
-)
-
-foreach ($path in $cachePaths) {
-    if (Test-Path $path) {
-        try {
-            Remove-Item -Path $path -Recurse -Force -ErrorAction Stop
-            Write-Host "   $(Split-Path $path -Leaf) temizlendi" -ForegroundColor Green
-        } catch {
-            Write-Host "   $(Split-Path $path -Leaf) temizlenemedi" -ForegroundColor Yellow
-        }
-    }
-}
-
-Write-Host ""
-
-# 3. Backend başlat
-Write-Host "3. Backend başlatılıyor..." -ForegroundColor Yellow
-$backendJob = Start-Job -ScriptBlock {
-    Set-Location "C:\Users\RANDOM\Desktop\prestalink\backend"
-    node server.js
-}
-Write-Host "   Backend başlatıldı (Job ID: $($backendJob.Id))" -ForegroundColor Green
-Start-Sleep -Seconds 3
-
-# 4. Frontend başlat
-Write-Host "4. Frontend başlatılıyor..." -ForegroundColor Yellow
-$frontendJob = Start-Job -ScriptBlock {
-    Set-Location "C:\Users\RANDOM\Desktop\prestalink\frontend"
-    npm run dev
-}
-Write-Host "   Frontend başlatıldı (Job ID: $($frontendJob.Id))" -ForegroundColor Green
-Start-Sleep -Seconds 5
-
-Write-Host ""
-Write-Host "================================" -ForegroundColor Cyan
-Write-Host "✅ PrestaLink HAZIR!" -ForegroundColor Green
-Write-Host "================================" -ForegroundColor Cyan
-Write-Host "Backend:  http://localhost:5000" -ForegroundColor White
-Write-Host "Frontend: http://localhost:3000" -ForegroundColor White
-Write-Host ""
-Write-Host "Durdurmak için: .\stop-dev.ps1" -ForegroundColor Yellow
-Write-Host ""
-
-# 3. Dependencies Kontrolü
-Write-Host "3. Dependencies kontrol ediliyor..." -ForegroundColor Yellow
+# 2. Dependencies Kontrolü
+Write-Host "2. Dependencies kontrol ediliyor..." -ForegroundColor Yellow
 
 if (-not (Test-Path ".\backend\node_modules")) {
     Write-Host "   Backend dependencies yükleniyor..." -ForegroundColor Yellow
@@ -97,27 +51,79 @@ if (-not (Test-Path ".\frontend\node_modules")) {
 Write-Host "   Dependencies hazır" -ForegroundColor Green
 Write-Host ""
 
-# 4. Backend'i Başlat
+# 3. Frontend Cache Temizleme
+Write-Host "3. Frontend cache temizleniyor..." -ForegroundColor Yellow
+$cachePaths = @(
+    ".\frontend\.next",
+    ".\frontend\out"
+)
+
+foreach ($path in $cachePaths) {
+    if (Test-Path $path) {
+        try {
+            Remove-Item -Path $path -Recurse -Force -ErrorAction Stop
+            Write-Host "   $(Split-Path $path -Leaf) temizlendi" -ForegroundColor Green
+        } catch {
+            Write-Host "   $(Split-Path $path -Leaf) temizlenemedi" -ForegroundColor Yellow
+        }
+    }
+}
+
+Write-Host ""
+
+# 4. Backend'i Başlat (Start-Process ile - daha stabil)
 Write-Host "4. Backend başlatılıyor (Port 5000)..." -ForegroundColor Yellow
-$backendPath = Join-Path $PWD "backend"
-Start-Process powershell -ArgumentList "-NoExit", "-Command", "cd '$backendPath'; Write-Host 'Backend çalışıyor...' -ForegroundColor Green; npm run dev"
-Write-Host "   Backend başlatıldı, hazır olması bekleniyor..." -ForegroundColor Green
-Start-Sleep -Seconds 5
-Write-Host ""
+$backendPath = Resolve-Path ".\backend"
+$backendScript = @"
+cd '$backendPath'
+Write-Host '🚀 Backend başlatılıyor...' -ForegroundColor Green
+Write-Host '📁 Dizin: $backendPath' -ForegroundColor Cyan
+`$env:NODE_ENV = 'development'
+node server.js
+Write-Host ''
+Write-Host 'Backend durduruldu. Bu pencereyi kapatabilirsiniz.' -ForegroundColor Yellow
+pause
+"@
 
-# 5. Frontend'i Başlat
+try {
+    Start-Process powershell -ArgumentList "-NoExit", "-Command", $backendScript -ErrorAction Stop
+    Write-Host "   ✅ Backend başlatıldı (yeni PowerShell penceresi açıldı)" -ForegroundColor Green
+    Start-Sleep -Seconds 3
+} catch {
+    Write-Host "   ❌ Backend başlatılamadı: $_" -ForegroundColor Red
+    exit 1
+}
+
+# 5. Frontend'i Başlat (Start-Process ile - daha stabil)
 Write-Host "5. Frontend başlatılıyor (Port 3000)..." -ForegroundColor Yellow
-$frontendPath = Join-Path $PWD "frontend"
-Start-Process powershell -ArgumentList "-NoExit", "-Command", "cd '$frontendPath'; Write-Host 'Frontend çalışıyor...' -ForegroundColor Green; npm run dev"
-Write-Host "   Frontend başlatıldı" -ForegroundColor Green
-Write-Host ""
+$frontendPath = Resolve-Path ".\frontend"
+$frontendScript = @"
+cd '$frontendPath'
+Write-Host '🚀 Frontend başlatılıyor...' -ForegroundColor Green
+Write-Host '📁 Dizin: $frontendPath' -ForegroundColor Cyan
+npm run dev
+Write-Host ''
+Write-Host 'Frontend durduruldu. Bu pencereyi kapatabilirsiniz.' -ForegroundColor Yellow
+pause
+"@
 
+try {
+    Start-Process powershell -ArgumentList "-NoExit", "-Command", $frontendScript -ErrorAction Stop
+    Write-Host "   ✅ Frontend başlatıldı (yeni PowerShell penceresi açıldı)" -ForegroundColor Green
+    Start-Sleep -Seconds 3
+} catch {
+    Write-Host "   ❌ Frontend başlatılamadı: $_" -ForegroundColor Red
+    exit 1
+}
+
+Write-Host ""
 Write-Host "================================" -ForegroundColor Green
-Write-Host "BAŞARILI!" -ForegroundColor Green
+Write-Host "✅ BAŞARILI!" -ForegroundColor Green
 Write-Host "================================" -ForegroundColor Green
 Write-Host ""
 Write-Host "Backend:  http://localhost:5000" -ForegroundColor Cyan
 Write-Host "Frontend: http://localhost:3000" -ForegroundColor Cyan
 Write-Host ""
-Write-Host "Durdurmak için: .\stop-dev.ps1" -ForegroundColor Yellow
+Write-Host "💡 Her iki sunucu da ayrı PowerShell pencerelerinde çalışıyor." -ForegroundColor Yellow
+Write-Host "💡 Durdurmak için: .\stop-dev.ps1" -ForegroundColor Yellow
 Write-Host ""

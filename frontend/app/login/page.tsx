@@ -9,7 +9,7 @@ import { useAuthStore } from '@/store/useAuthStore';
 import { useLanguage } from '@/components/providers/LanguageProvider';
 import { getDashboardRoute } from '@/utils/routing';
 import Link from 'next/link';
-import { User, Briefcase, Shield, ChevronRight } from 'lucide-react';
+import { User, Briefcase, Shield, ShieldCheck, ChevronRight } from 'lucide-react';
 import type { UserRole } from '@/services/types';
 
 const LoginPage = () => {
@@ -43,6 +43,13 @@ const LoginPage = () => {
       titleKey: 'auth.roles.admin.title',
       descKey: 'auth.roles.admin.description',
       gradient: 'from-purple-600 to-purple-800',
+    },
+    {
+      value: 'superadmin' as UserRole,
+      icon: ShieldCheck,
+      titleKey: 'auth.roles.superadmin.title',
+      descKey: 'auth.roles.superadmin.description',
+      gradient: 'from-red-600 to-red-800',
     },
   ];
 
@@ -109,7 +116,29 @@ const LoginPage = () => {
       }
       
       // Seçilen rolü gönder - backend doğrulaması yapacak
-      const response = await loginUser({ email, password }, selectedRole);
+      // Admin kartı için hem admin hem superadmin denemesi yapılıyor
+      let response;
+      if (selectedRole === 'admin') {
+        try {
+          // Önce admin olarak dene
+          response = await loginUser({ email, password }, 'admin');
+        } catch (adminError: any) {
+          // Eğer admin olarak giriş yapılamazsa, superadmin olarak dene
+          if (adminError.response?.status === 403) {
+            try {
+              response = await loginUser({ email, password }, 'superadmin');
+            } catch (superadminError: any) {
+              // Her ikisi de başarısız olursa ilk hatayı göster
+              throw adminError;
+            }
+          } else {
+            throw adminError;
+          }
+        }
+      } else {
+        response = await loginUser({ email, password }, selectedRole);
+      }
+      
       setAuth(response.data);
       const dashboardRoute = getDashboardRoute(response.data.user.role);
       router.push(dashboardRoute);
@@ -160,31 +189,31 @@ const LoginPage = () => {
           <h1 className="text-4xl font-bold text-brandNavy dark:text-slate-100 mb-4">{t('auth.selectLoginType')}</h1>
           <p className="text-lg text-brandGray dark:text-slate-300">{t('auth.selectLoginTypeDesc')}</p>
         </div>
-        <div className="grid gap-6 md:grid-cols-3 max-w-5xl mx-auto">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 max-w-7xl mx-auto">
           {roles.map((role) => {
             const IconComponent = role.icon;
             return (
               <button
                 key={role.value}
                 onClick={() => setSelectedRole(role.value)}
-                className="glass-panel p-8 text-center card-hover group animate-fade-in"
+                className="glass-panel p-6 sm:p-8 text-center card-hover group animate-fade-in"
                 style={{ animationDelay: `${roles.indexOf(role) * 0.1}s` }}
               >
-                <div className={`mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br ${role.gradient} text-white transition-transform duration-300 group-hover:scale-110`}>
-                  <IconComponent className="h-8 w-8" />
+                <div className={`mx-auto mb-4 flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-2xl bg-gradient-to-br ${role.gradient} text-white transition-transform duration-300 group-hover:scale-110 shadow-lg`}>
+                  <IconComponent className="h-7 w-7 sm:h-8 sm:w-8" strokeWidth={2.5} />
                 </div>
-                <h3 className="text-xl font-semibold text-brandNavy dark:text-slate-100 mb-2">{t(role.titleKey)}</h3>
-                <p className="text-sm text-brandGray dark:text-slate-300 mb-4">{t(role.descKey)}</p>
-                <div className="flex items-center justify-center gap-2 text-brandBlue font-semibold">
+                <h3 className="text-lg sm:text-xl font-semibold text-brandNavy dark:text-slate-100 mb-2">{t(role.titleKey)}</h3>
+                <p className="text-xs sm:text-sm text-brandGray dark:text-slate-300 mb-4 leading-relaxed">{t(role.descKey)}</p>
+                <div className="flex items-center justify-center gap-2 text-brandBlue font-semibold text-sm sm:text-base">
                   <span>{t('auth.continue')}</span>
-                  <ChevronRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                  <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5 transition-transform group-hover:translate-x-1" />
                 </div>
               </button>
             );
           })}
         </div>
-        <div className="text-center mt-8">
-          <p className="text-sm text-brandGray dark:text-slate-300">
+        <div className="text-center mt-8 sm:mt-10">
+          <p className="text-sm sm:text-base text-brandGray dark:text-slate-300">
             {t('auth.registerPrompt')}{' '}
             <Link href="/register" className="font-semibold text-brandBlue hover:underline">
               {t('auth.register')}

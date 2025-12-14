@@ -9,7 +9,12 @@ const languages: Array<{ code: LanguageCode; label: string; flag: string }> = [
   { code: 'fr', label: 'Français', flag: '🇫🇷' },
   { code: 'en', label: 'English', flag: '🇬🇧' },
   { code: 'tr', label: 'Türkçe', flag: '🇹🇷' },
-] as const;
+];
+
+// Ensure no duplicates by code
+const uniqueLanguages = languages.filter((lang, index, self) => 
+  index === self.findIndex((l) => l.code === lang.code)
+);
 
 const LanguageSwitcher = () => {
   const { language, setLanguage } = useLanguage();
@@ -21,7 +26,7 @@ const LanguageSwitcher = () => {
     <>
       {/* Desktop - Button Group */}
       <div className="hidden md:flex items-center gap-1 rounded-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-2 py-1 shadow-sm transition-all duration-300 hover:shadow-md">
-        {languages.map((lang) => (
+        {uniqueLanguages.map((lang) => (
           <button
             key={lang.code}
             type="button"
@@ -59,7 +64,7 @@ const LanguageSwitcher = () => {
             
             {/* Dropdown Menu */}
             <div className="absolute right-0 top-full mt-2 z-50 w-48 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-xl overflow-hidden animate-fade-in">
-              {languages.map((lang) => (
+              {uniqueLanguages.map((lang) => (
                 <button
                   key={lang.code}
                   type="button"

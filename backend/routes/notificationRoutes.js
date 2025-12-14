@@ -8,4 +8,3 @@ router.get('/', authMiddleware, getNotifications);
 router.put('/mark-read', authMiddleware, markRead);
 
 module.exports = router;
-

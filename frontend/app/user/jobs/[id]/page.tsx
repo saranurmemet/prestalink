@@ -10,6 +10,7 @@ import { useLanguage } from '@/components/providers/LanguageProvider';
 import { fetchJob, submitApplication, fetchApplicationsByUser } from '@/services/api';
 import type { Job, Application } from '@/services/types';
 import { MapPin, DollarSign, Briefcase, Globe, ArrowLeft, CheckCircle2, AlertCircle } from 'lucide-react';
+import { getStaticFileUrl } from '@/utils/apiUrl';
 
 const JobDetail = () => {
   const params = useParams();
@@ -42,12 +43,16 @@ const JobDetail = () => {
   useEffect(() => {
     const checkCV = async () => {
       if (!user) return;
+      // Check if user has CV in profile or in previous applications
+      const hasProfileCV = !!user.cvUrl;
       try {
         const appsResponse = await fetchApplicationsByUser(user._id);
         const hasUploadedCV = appsResponse.data.some((app: Application) => app.cvUrl);
-        setHasCV(hasUploadedCV);
+        setHasCV(hasProfileCV || hasUploadedCV);
       } catch (error) {
         console.error('Error checking CV:', error);
+        // Fallback to profile CV check
+        setHasCV(hasProfileCV);
       }
     };
     checkCV();
@@ -57,7 +62,7 @@ const JobDetail = () => {
     if (!user || !job) return;
 
     // Check if CV exists
-    if (!hasCV) {
+    if (!hasCV && !user.cvUrl) {
       setShowCvWarning(true);
       return;
     }
@@ -67,11 +72,37 @@ const JobDetail = () => {
 
     try {
       const formData = new FormData();
-      formData.append('userId', user._id);
       formData.append('jobId', job._id);
       
-      // We'll need to get CV from profile, but for now we'll just submit
-      // In a real implementation, we'd fetch the user's CV URL
+      // Get CV file from user profile
+      if (user.cvUrl) {
+        try {
+          // Fetch CV file from URL using getStaticFileUrl helper
+          const cvUrl = getStaticFileUrl(user.cvUrl);
+          
+          const cvResponse = await fetch(cvUrl);
+          if (cvResponse.ok) {
+            const cvBlob = await cvResponse.blob();
+            // Get file extension from URL or default to pdf
+            const fileName = user.cvUrl.split('/').pop() || `cv_${user._id}.pdf`;
+            const cvFile = new File([cvBlob], fileName, { type: cvBlob.type || 'application/pdf' });
+            formData.append('cv', cvFile);
+          } else {
+            throw new Error('CV dosyası yüklenemedi');
+          }
+        } catch (cvError) {
+          console.error('Error fetching CV:', cvError);
+          alert(t('jobDetail.cvFetchError') || 'CV dosyası yüklenemedi. Lütfen profil sayfanızdan CV\'nizi kontrol edin.');
+          setApplying(false);
+          return;
+        }
+      } else {
+        // If no CV in profile, show warning
+        setShowCvWarning(true);
+        setApplying(false);
+        return;
+      }
+      
       await submitApplication(formData);
       setSuccessMessage(true);
       
@@ -81,7 +112,8 @@ const JobDetail = () => {
       }, 2000);
     } catch (error: any) {
       console.error('Error applying:', error);
-      alert(error.response?.data?.message || 'Başvuru gönderilemedi');
+      const errorMessage = error.response?.data?.message || error.message || 'Başvuru gönderilemedi';
+      alert(errorMessage);
     } finally {
       setApplying(false);
     }

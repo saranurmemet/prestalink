@@ -4,12 +4,14 @@ import { useEffect, useState } from 'react';
 import ProtectedPage from '@/components/layout/ProtectedPage';
 import EmployerLayout from '@/components/layout/EmployerLayout';
 import { useLanguage } from '@/components/providers/LanguageProvider';
+import { useAuthStore } from '@/store/useAuthStore';
 import { fetchNotifications, markNotificationsRead } from '@/services/api';
 import type { Notification } from '@/services/types';
 import { Bell, CheckCircle2 } from 'lucide-react';
 
 const EmployerNotifications = () => {
   const { t } = useLanguage();
+  const { user } = useAuthStore();
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [loading, setLoading] = useState(true);
   const [markingRead, setMarkingRead] = useState(false);
@@ -19,7 +21,30 @@ const EmployerNotifications = () => {
       setLoading(true);
       try {
         const response = await fetchNotifications();
-        setNotifications(response.data);
+        // Filter notifications by role - only show employer/recruiter/admin notifications
+        const userRole = user?.activeRole || user?.role?.[0] || 'user';
+        const allowedRoles = ['recruiter', 'employer', 'admin', 'superadmin'];
+        
+        const filteredNotifications = response.data.filter((notif: Notification) => {
+          // If notification has targetRole, it must match user's role
+          if ((notif as any).targetRole) {
+            return allowedRoles.includes((notif as any).targetRole) && 
+                   ((notif as any).targetRole === userRole || allowedRoles.includes(userRole));
+          }
+          // If no targetRole, only show if user is employer/recruiter/admin (backward compatibility)
+          // But filter out user-specific notifications (like "başvurunuz kabul edildi")
+          const message = notif.message?.toLowerCase() || '';
+          const title = notif.title?.toLowerCase() || '';
+          const isUserNotification = message.includes('başvurunuz') || 
+                                     message.includes('application') ||
+                                     title.includes('başvuru') ||
+                                     title.includes('application');
+          
+          // Only show if it's NOT a user notification and user has employer role
+          return !isUserNotification && allowedRoles.includes(userRole);
+        });
+        
+        setNotifications(filteredNotifications);
       } catch (error) {
         console.error('Error loading notifications:', error);
       } finally {
@@ -27,7 +52,7 @@ const EmployerNotifications = () => {
       }
     };
     loadNotifications();
-  }, []);
+  }, [user]);
 
   const handleMarkAllRead = async () => {
     setMarkingRead(true);

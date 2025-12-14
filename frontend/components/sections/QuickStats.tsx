@@ -14,8 +14,8 @@ const QuickStats = () => {
           { value: '4', labelKey: 'hero.stats.languages', icon: '🌍' },
         ].map((stat) => (
           <div key={stat.labelKey} className="glass-panel p-4 text-center card-hover">
-            <p className="text-2xl font-bold text-brandBlue">{stat.value}</p>
-            <p className="text-xs text-brandGray mt-1">{t(stat.labelKey)}</p>
+            <p className="text-2xl font-bold text-brandBlue dark:text-blue-400">{stat.value}</p>
+            <p className="text-xs text-brandGray dark:text-slate-300 mt-1">{t(stat.labelKey)}</p>
           </div>
         ))}
       </div>

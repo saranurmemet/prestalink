@@ -13,6 +13,7 @@ import {
 } from '@/services/api';
 import type { Job, Application, Notification } from '@/services/types';
 import { Edit3, Briefcase, FileText, CheckCircle2, XCircle } from 'lucide-react';
+import { getProfilePhotoUrl } from '@/utils/apiUrl';
 
 const UserDashboard = () => {
   const { user } = useAuthStore();
@@ -69,7 +70,7 @@ const UserDashboard = () => {
               {/* Profile Photo */}
               <div className="flex-shrink-0">
                 <img
-                  src={user?.profilePhoto || 'https://i.pravatar.cc/150?img=12'}
+                  src={getProfilePhotoUrl(user?.profilePhoto)}
                   alt={user?.name || 'Profile'}
                   className="w-24 h-24 rounded-full border-4 border-white/30 shadow-xl object-cover"
                 />

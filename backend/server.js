@@ -1,3 +1,15 @@
+// Global error handler for uncaught exceptions
+process.on('uncaughtException', (error) => {
+  console.error('❌ [FATAL] Uncaught Exception:', error);
+  console.error('Stack:', error.stack);
+  // Don't exit - allow server to continue
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('❌ [FATAL] Unhandled Rejection at:', promise, 'reason:', reason);
+  // Don't exit - allow server to continue
+});
+
 console.log('🚀 [STARTUP] Starting PrestaLink Backend Server');
 console.log(`🕐 [STARTUP] Timestamp: ${new Date().toISOString()}`);
 console.log(`📁 [STARTUP] Working directory: ${process.cwd()}`);
@@ -10,76 +22,78 @@ const cookieParser = require('cookie-parser');
 const dotenv = require('dotenv');
 
 console.log('📦 [STARTUP] Loading .env file...');
-dotenv.config();
-console.log(`🔧 [STARTUP] NODE_ENV: ${process.env.NODE_ENV}`);
+try {
+  dotenv.config();
+  console.log(`🔧 [STARTUP] NODE_ENV: ${process.env.NODE_ENV || 'development'}`);
+  
+  // Check critical environment variables
+  const requiredEnvVars = ['MONGO_URI', 'JWT_SECRET'];
+  const missingVars = requiredEnvVars.filter(varName => !process.env[varName]);
+  if (missingVars.length > 0) {
+    console.error('❌ [STARTUP] Missing required environment variables:', missingVars.join(', '));
+    console.error('❌ [STARTUP] Please set these in your .env file');
+  } else {
+    console.log('✅ [STARTUP] All required environment variables are set');
+  }
+} catch (err) {
+  console.warn('⚠️  [STARTUP] Error loading .env file:', err.message);
+}
 
 const connectDB = require('./config/db');
 const errorHandler = require('./middleware/errorMiddleware');
 
 console.log('🗄️  [STARTUP] Connecting to MongoDB...');
-connectDB();
-console.log('✅ [STARTUP] MongoDB connection initiated');
+// MongoDB connection is async - don't block server startup
+try {
+  connectDB().catch(err => {
+    console.error('⚠️  [STARTUP] MongoDB connection failed, but server will continue:', err.message);
+  });
+  console.log('✅ [STARTUP] MongoDB connection initiated (async)');
+} catch (err) {
+  console.error('⚠️  [STARTUP] Error initiating MongoDB connection:', err.message);
+  console.warn('⚠️  [STARTUP] Server will continue without database');
+}
 
 const app = express();
 console.log('📱 [STARTUP] Express app created');
 
 // CORS Configuration - CRITICAL for stability
-// Must explicitly list allowed origins - never use wildcard with credentials
-const allowedOrigins = [];
-
-// Development: Always allow localhost
-if (process.env.NODE_ENV !== 'production') {
-  allowedOrigins.push('http://localhost:3000');
-  // Allow any local IP for PWA/mobile testing on same network
-  allowedOrigins.push(/^http:\/\/192\.168\.\d{1,3}\.\d{1,3}:3000$/);
-  allowedOrigins.push(/^http:\/\/10\.\d{1,3}\.\d{1,3}\.\d{1,3}:3000$/);
-  allowedOrigins.push(/^http:\/\/172\.(1[6-9]|2[0-9]|3[01])\.\d{1,3}\.\d{1,3}:3000$/);
-}
-
-// Production: Use CLIENT_URL from environment (required)
-if (process.env.CLIENT_URL) {
-  const urls = process.env.CLIENT_URL.split(',').map(url => url.trim());
-  allowedOrigins.push(...urls);
-}
-
-// Fallback production URLs (explicit, no wildcards)
-if (process.env.NODE_ENV === 'production') {
-  if (process.env.CLIENT_URL) {
-    // Already configured above
-  } else {
-    // These should come from environment - only add if explicitly needed
-    allowedOrigins.push('https://prestalink.vercel.app');
-    allowedOrigins.push('https://prestalink.onrender.com');
-  }
-}
-
-app.use(cors({ 
+// Development: Allow all localhost origins
+// Production: Use explicit CLIENT_URL from environment
+const corsOptions = {
   origin: (origin, callback) => {
-    // Allow requests without origin (mobile apps, some servers, etc.)
-    if (!origin) {
-      return callback(null, true);
-    }
-    
-    // Check against allowed origins
-    const isAllowed = allowedOrigins.some(allowed => {
-      if (allowed instanceof RegExp) {
-        return allowed.test(origin);
+    // Development: Allow all localhost and local network origins
+    if (process.env.NODE_ENV !== 'production') {
+      if (!origin || 
+          origin.startsWith('http://localhost:') || 
+          origin.startsWith('http://127.0.0.1:') ||
+          /^http:\/\/192\.168\.\d{1,3}\.\d{1,3}:\d+$/.test(origin) ||
+          /^http:\/\/10\.\d{1,3}\.\d{1,3}\.\d{1,3}:\d+$/.test(origin) ||
+          /^http:\/\/172\.(1[6-9]|2[0-9]|3[01])\.\d{1,3}\.\d{1,3}:\d+$/.test(origin)) {
+        return callback(null, true);
       }
-      return allowed === origin;
-    });
-    
-    if (isAllowed) {
-      callback(null, true);
-    } else {
-      console.warn(`CORS blocked origin: ${origin}`);
-      callback(new Error('Not allowed by CORS policy'));
     }
+    
+    // Production: Use CLIENT_URL from environment
+    if (process.env.CLIENT_URL) {
+      const allowedUrls = process.env.CLIENT_URL.split(',').map(url => url.trim());
+      if (allowedUrls.includes(origin)) {
+        return callback(null, true);
+      }
+    }
+    
+    console.warn(`CORS blocked origin: ${origin}`);
+    callback(new Error('Not allowed by CORS policy'));
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'Accept-Language'],
-  maxAge: 86400, // 24 hours
-}));
+  allowedHeaders: ['Content-Type', 'Authorization', 'Accept-Language', 'X-Requested-With'],
+  exposedHeaders: ['Content-Type', 'Authorization'],
+  maxAge: 86400,
+  optionsSuccessStatus: 204,
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -89,6 +103,16 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+// Health check endpoint
+app.get('/api/health', (req, res) => {
+  res.json({ 
+    status: 'ok', 
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime(),
+    environment: process.env.NODE_ENV || 'development'
+  });
+});
 
 // Test endpoint to verify API is working
 app.get('/api/test', (req, res) => {
@@ -171,32 +195,64 @@ app.use(errorHandler);
 const PORT = process.env.PORT || 5000;
 const HOST = process.env.HOST || '0.0.0.0';
 
-const server = app.listen(PORT, HOST, () => {
-  console.log('\n═══════════════════════════════════════════');
-  console.log('🎉 [SUCCESS] PrestaLink Backend is LIVE!');
-  console.log('═══════════════════════════════════════════');
-  console.log(`🌐 Server: http://${HOST}:${PORT}`);
-  console.log(`🔒 Environment: ${process.env.NODE_ENV || 'development'}`);
-  console.log(`📡 CORS Origins: ${process.env.CLIENT_URL || 'prestalink.vercel.app'}`);
-  console.log('═══════════════════════════════════════════\n');
-  
-  // List all mounted routes
-  console.log('📍 Mounted API Endpoints:');
-  console.log('   ✅ GET  /api/test');
-  console.log('   ✅ GET  /api/debug/routes');
-  console.log('   ✅ POST /api/auth/register');
-  console.log('   ✅ POST /api/auth/login');
-  console.log('   ✅ GET  /api/auth/me');
-  console.log('   ✅ GET  /api/jobs');
-  console.log('   ✅ POST /api/applications');
-  console.log('═══════════════════════════════════════════\n');
-});
+let server;
+
+try {
+  server = app.listen(PORT, HOST, () => {
+    console.log('\n═══════════════════════════════════════════');
+    console.log('🎉 [SUCCESS] PrestaLink Backend is LIVE!');
+    console.log('═══════════════════════════════════════════');
+    console.log(`🌐 Server: http://${HOST}:${PORT}`);
+    console.log(`🔒 Environment: ${process.env.NODE_ENV || 'development'}`);
+    console.log(`📡 CORS Origins: ${process.env.CLIENT_URL || 'http://localhost:3000 (development)'}`);
+    console.log('═══════════════════════════════════════════\n');
+    
+    // List all mounted routes
+    console.log('📍 Mounted API Endpoints:');
+    console.log('   ✅ GET  /api/health');
+    console.log('   ✅ GET  /api/test');
+    console.log('   ✅ GET  /api/debug/routes');
+    console.log('   ✅ POST /api/auth/register');
+    console.log('   ✅ POST /api/auth/login');
+    console.log('   ✅ GET  /api/auth/me');
+    console.log('   ✅ GET  /api/jobs');
+    console.log('   ✅ POST /api/applications');
+    console.log('═══════════════════════════════════════════\n');
+  });
+
+  // Error handling for server
+  server.on('error', (error) => {
+    if (error.code === 'EADDRINUSE') {
+      console.error(`❌ [ERROR] Port ${PORT} is already in use`);
+      console.error('   Please stop the process using this port or change PORT in .env');
+    } else {
+      console.error('❌ [ERROR] Server error:', error);
+    }
+  });
+} catch (error) {
+  console.error('❌ [FATAL] Failed to start server:', error);
+  console.error('Stack:', error.stack);
+  process.exit(1);
+}
 
 // Graceful shutdown
 process.on('SIGTERM', () => {
   console.log('🛑 [SHUTDOWN] SIGTERM signal received: closing HTTP server');
-  server.close(() => {
-    console.log('✅ [SHUTDOWN] HTTP server closed');
-  });
+  if (server) {
+    server.close(() => {
+      console.log('✅ [SHUTDOWN] HTTP server closed');
+      process.exit(0);
+    });
+  }
+});
+
+process.on('SIGINT', () => {
+  console.log('🛑 [SHUTDOWN] SIGINT signal received: closing HTTP server');
+  if (server) {
+    server.close(() => {
+      console.log('✅ [SHUTDOWN] HTTP server closed');
+      process.exit(0);
+    });
+  }
 });
 

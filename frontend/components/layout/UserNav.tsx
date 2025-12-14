@@ -7,7 +7,13 @@ import {
   User, 
   Briefcase, 
   FileText, 
-  Bell 
+  Bell,
+  FileCheck,
+  Heart,
+  BarChart3,
+  Settings,
+  MessageSquare,
+  Star
 } from 'lucide-react';
 import { useLanguage } from '@/components/providers/LanguageProvider';
 
@@ -18,9 +24,14 @@ const UserNav = () => {
   const navItems = [
     { href: '/user/dashboard', icon: LayoutDashboard, label: t('userNav.dashboard') },
     { href: '/user/profile', icon: User, label: t('userNav.profile') },
+    { href: '/user/cv', icon: FileCheck, label: t('userNav.cv') },
     { href: '/user/jobs', icon: Briefcase, label: t('userNav.jobListings') },
+    { href: '/user/favorites', icon: Heart, label: t('userNav.favorites') },
     { href: '/user/applications', icon: FileText, label: t('userNav.applications') },
+    { href: '/user/messages', icon: MessageSquare, label: t('userNav.messages') },
+    { href: '/user/statistics', icon: BarChart3, label: t('userNav.statistics') },
     { href: '/user/notifications', icon: Bell, label: t('userNav.notifications') },
+    { href: '/user/settings', icon: Settings, label: t('userNav.settings') },
   ];
 
   return (

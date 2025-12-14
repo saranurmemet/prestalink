@@ -1,199 +1,139 @@
-# 🎯 DEPLOYMENT CHECKLIST - AT A GLANCE
+# PrestaLink Deployment Checklist
 
-## ✅ COMPLETED (All Green)
+## Pre-Deployment Requirements
 
-### Repository Analysis
-- [x] Frontend root: `/frontend` (Next.js 14.2.11)
-- [x] Backend root: `/backend` (Express.js)
-- [x] API prefix: `/api` (correct)
-- [x] Deployment platforms: Vercel + Render + MongoDB Atlas
-
-### Security Checks
-- [x] No hardcoded localhost in frontend code
-- [x] No hardcoded production URLs in frontend code
-- [x] No `/api/api` issues
-- [x] Auth hydration guard in place
-- [x] Protected routes wait for hydration
-- [x] CORS: Explicit origins only
-- [x] PWA: Auth endpoints excluded from cache
-- [x] vercel.json: Updated (environment-driven)
-
-### Git & GitHub
-- [x] Commit: `c75d978` created
-- [x] Commit message: "Stability fixes + Production deployment prep"
-- [x] Pushed to: `https://github.com/memetsaranur/PrestaLink` (main)
-- [x] 54 files updated/created
-
-### Documentation Generated
-- [x] DEPLOY_NOW.md (follow this!)
-- [x] DEPLOYMENT_COMPLETE.md
-- [x] PRODUCTION_DEPLOYMENT_PLAN.md
-- [x] Troubleshooting guide
+### ✅ Local Testing (MUST COMPLETE FIRST)
+- [ ] Backend runs locally: `cd backend && npm run dev`
+- [ ] Backend health check: `http://localhost:5000/api/health` returns 200
+- [ ] Frontend runs locally: `cd frontend && npm run dev`
+- [ ] Frontend builds successfully: `cd frontend && npm run build`
+- [ ] Frontend production server: `cd frontend && npm run start`
+- [ ] Auth flow tested: Register → Login → Dashboard → Logout
+- [ ] All roles tested: User, Recruiter, Admin
+- [ ] Protected routes working
+- [ ] API calls working from frontend
 
 ---
 
-## 📋 WHAT YOU NEED TO DO NOW
+## Backend Deployment (Render)
 
-### Before You Start:
-1. Read: **[DEPLOY_NOW.md](DEPLOY_NOW.md)**
-2. Have ready:
-   - GitHub account (already used)
-   - MongoDB Atlas account (create at mongodb.com)
-   - Render account (create at render.com)
-   - Vercel account (create at vercel.com)
-
-### Phase 1: MongoDB Atlas (5 min)
+### Environment Variables (Set in Render Dashboard)
 ```
-1. Create free cluster
-2. Create user: prestalink-admin (strong password!)
-3. Allow access from 0.0.0.0/0
-4. Get connection string (MONGO_URI)
+NODE_ENV=production
+PORT=5000
+HOST=0.0.0.0
+MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/prestalink?retryWrites=true&w=majority
+JWT_SECRET=<generate-strong-secret-32-chars-min>
+CLIENT_URL=https://your-frontend-domain.vercel.app
 ```
 
-### Phase 2: Render Backend (15 min)
-```
-1. New Web Service
-2. Select PrestaLink GitHub repo
-3. Root: backend/
-4. Set environment variables:
-   - NODE_ENV = production
-   - MONGO_URI = (from MongoDB)
-   - JWT_SECRET = (generate: openssl rand -hex 32)
-   - CLIENT_URL = (blank for now)
-   - PORT = 5000
-5. Deploy and wait
-6. Get backend URL: https://prestalink-backend-xxxxx.onrender.com
-```
+### Build Configuration
+- **Root Directory:** `backend`
+- **Build Command:** `npm install`
+- **Start Command:** `node server.js`
+- **Node Version:** 22.16.0 (or latest LTS)
 
-### Phase 3: Vercel Frontend (10 min)
-```
-1. New Project
-2. Select PrestaLink GitHub repo
-3. Root: frontend/
-4. Deploy
-5. Add environment variable:
-   - NEXT_PUBLIC_API_URL = https://prestalink-backend-xxxxx.onrender.com/api
-6. Redeploy
-7. Get frontend URL: https://prestalink.vercel.app
-```
-
-### Phase 4: Update Backend (2 min)
-```
-1. Render → prestalink-backend → Environment
-2. Add: CLIENT_URL = https://prestalink.vercel.app
-3. Save (auto-redeploy)
-```
-
-### Phase 5: Test (15 min)
-Run all 8 tests (detailed in DEPLOY_NOW.md):
-- [ ] Backend health check
-- [ ] Frontend loads
-- [ ] CORS headers correct
-- [ ] Refresh stability (F5 × 5)
-- [ ] Persistence (close/reopen)
-- [ ] Protected routes
-- [ ] API URL correct
-- [ ] Console clean
+### Post-Deployment Tests
+- [ ] Health check: `https://your-backend.onrender.com/api/health`
+- [ ] Test endpoint: `https://your-backend.onrender.com/api/test`
+- [ ] CORS working (check browser console)
+- [ ] Auth endpoints accessible
 
 ---
 
-## 🔑 KEY INFORMATION
+## Frontend Deployment (Vercel)
 
-### GitHub Repository
+### Environment Variables (Set in Vercel Dashboard)
 ```
-URL: https://github.com/memetsaranur/PrestaLink
-Branch: main
-Commit: c75d978 (pushed)
+NEXT_PUBLIC_API_URL=https://your-backend.onrender.com/api
 ```
 
-### API Configuration
-```
-Backend: Express.js
-API Prefix: /api
-Routes: /api/auth, /api/jobs, /api/applications, /api/notifications, /api/admin
-```
+### Build Configuration
+- **Framework Preset:** Next.js
+- **Root Directory:** `frontend` (or leave empty if using vercel.json)
+- **Build Command:** `cd frontend && npm run build` (if root directory not set)
+- **Output Directory:** `frontend/.next` (if root directory not set)
+- **Install Command:** `cd frontend && npm install` (if root directory not set)
 
-### Expected Domains (After Deployment)
-```
-Frontend: https://prestalink.vercel.app
-Backend: https://prestalink-backend-xxxxx.onrender.com
-Database: MongoDB Atlas (cloud)
-```
+### Post-Deployment Tests
+- [ ] Frontend loads: `https://your-frontend.vercel.app`
+- [ ] Login page accessible
+- [ ] API calls working (check Network tab)
+- [ ] No CORS errors
+- [ ] Register flow works
+- [ ] Login flow works
+- [ ] Dashboard loads after login
+- [ ] Protected routes redirect to login when not authenticated
+
+---
+
+## Critical Checks
+
+### CORS Configuration
+- ✅ Development: Allows `http://localhost:3000`
+- ✅ Production: Uses `CLIENT_URL` environment variable
+- ✅ No wildcard origins (security)
 
 ### Environment Variables
-```
-NEXT_PUBLIC_API_URL=https://prestalink-backend-xxxxx.onrender.com/api
-NODE_ENV=production
-MONGO_URI=mongodb+srv://prestalink-admin:PASSWORD@...
-JWT_SECRET=(32+ random chars)
-CLIENT_URL=https://prestalink.vercel.app
-PORT=5000
-```
+- ✅ Backend: All required variables set
+- ✅ Frontend: `NEXT_PUBLIC_API_URL` set correctly
+- ✅ No hardcoded URLs in code
+
+### Security
+- ✅ JWT_SECRET is strong (32+ characters)
+- ✅ MongoDB connection string is secure
+- ✅ No secrets in code or git
 
 ---
 
-## 🚀 DEPLOYMENT TIMELINE
+## Deployment Order
 
-| Step | Platform | Duration | Status |
-|------|----------|----------|--------|
-| 1 | MongoDB Atlas | 5 min | TODO |
-| 2 | Render | 15 min | TODO |
-| 3 | Vercel | 10 min | TODO |
-| 4 | Render Update | 2 min | TODO |
-| 5 | Tests | 15 min | TODO |
-| **TOTAL** | **All** | **~47 min** | **TODO** |
+1. **Deploy Backend First**
+   - Set all environment variables
+   - Wait for successful deployment
+   - Test backend endpoints
 
----
+2. **Update Frontend ENV**
+   - Set `NEXT_PUBLIC_API_URL` to backend URL
+   - Deploy frontend
+   - Test full flow
 
-## 💡 IMPORTANT NOTES
-
-1. **Deploy in Order:** MongoDB → Render → Vercel → Update Backend
-2. **Wait for Deploy:** Each step takes time, be patient
-3. **Copy Values:** Save backend URL before deploying frontend
-4. **All Tests Must Pass:** If any test fails, see troubleshooting in DEPLOY_NOW.md
-5. **No Secrets Needed:** User doesn't ask for any passwords/secrets
-6. **Environment-Driven:** No hardcoded URLs in code anymore
+3. **Update Backend CORS**
+   - Add frontend URL to `CLIENT_URL` if needed
+   - Redeploy backend if CORS changes
 
 ---
 
-## ⚠️ CRITICAL CHECKS
+## Rollback Plan
 
-Before going live, verify:
-- [ ] NEXT_PUBLIC_API_URL ends with `/api` (not `/api/api`)
-- [ ] NEXT_PUBLIC_API_URL matches backend domain exactly
-- [ ] CLIENT_URL in Render matches frontend domain exactly
-- [ ] MONGO_URI has correct password
-- [ ] JWT_SECRET is strong (32+ random characters)
-- [ ] All 8 tests pass before marking deployment complete
-
----
-
-## 📞 IF SOMETHING BREAKS
-
-1. Check DEPLOY_NOW.md troubleshooting section
-2. Common issues:
-   - CORS error → Update CLIENT_URL
-   - Redirect loop → Check hydration
-   - Cannot reach API → Check NEXT_PUBLIC_API_URL
-   - /api/api → URL must end with /api only
+If deployment fails:
+1. Check deployment logs
+2. Verify environment variables
+3. Test locally with production ENV values
+4. Rollback to previous deployment
+5. Fix issues and redeploy
 
 ---
 
-## ✨ WHEN DEPLOYMENT IS COMPLETE
+## Post-Deployment Monitoring
 
-```
-✅ Frontend loads at https://prestalink.vercel.app
-✅ Users can login
-✅ Dashboard shows (no redirects on refresh)
-✅ All API calls go to production backend
-✅ No errors in console
-✅ All 8 tests PASS
-
-🎉 APPLICATION IS LIVE IN PRODUCTION
-```
+- [ ] Monitor error logs
+- [ ] Check API response times
+- [ ] Verify database connections
+- [ ] Test user registration
+- [ ] Test user login
+- [ ] Monitor CORS errors
+- [ ] Check build logs for warnings
 
 ---
 
-**Status:** ✅ Ready to deploy  
-**Commit:** c75d978 (pushed to GitHub)  
-**Next:** Follow [DEPLOY_NOW.md](DEPLOY_NOW.md)
+## Support Contacts
+
+- Backend Issues: Check Render logs
+- Frontend Issues: Check Vercel logs
+- Database Issues: Check MongoDB Atlas logs
+
+
+
+
+

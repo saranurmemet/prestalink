@@ -25,4 +25,3 @@ router.get('/job/:id', authMiddleware, authorizeRoles('recruiter', 'admin', 'sup
 router.put('/:id/status', authMiddleware, authorizeRoles('recruiter', 'admin', 'superadmin'), updateApplicationStatus);
 
 module.exports = router;
-

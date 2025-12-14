@@ -50,7 +50,7 @@ const AboutPage = () => {
 
       {/* How We Work Section */}
       <div className="glass-panel p-8 animate-fade-in">
-        <h2 className="text-2xl font-bold text-brandNavy dark:text-blue-300 mb-6">{t('about.howWeWorkTitle')}</h2>
+        <h2 className="text-2xl font-bold text-brandNavy dark:text-white mb-6">{t('about.howWeWorkTitle')}</h2>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           {[
             { step: '1', titleKey: 'about.steps.0.title', descKey: 'about.steps.0.description' },
@@ -62,7 +62,7 @@ const AboutPage = () => {
               <div className="h-12 w-12 rounded-full bg-brandBlue text-white font-bold text-xl flex items-center justify-center mx-auto mb-3">
                 {step.step}
               </div>
-              <h3 className="text-base font-semibold text-brandNavy dark:text-blue-300 mb-2">
+              <h3 className="text-base font-semibold text-brandNavy dark:text-white mb-2">
                 {t(step.titleKey)}
               </h3>
               <p className="text-sm text-brandGray dark:text-slate-300 leading-relaxed">
@@ -76,7 +76,7 @@ const AboutPage = () => {
       {/* Mission & Vision */}
       <div className="grid gap-6 md:grid-cols-2">
         <div className="glass-panel p-8 card-hover animate-fade-in">
-          <h2 className="text-2xl font-bold text-brandNavy dark:text-blue-300 mb-4">{t('about.missionTitle')}</h2>
+          <h2 className="text-2xl font-bold text-brandNavy dark:text-white mb-4">{t('about.missionTitle')}</h2>
           <p className="text-base text-brandGray dark:text-slate-300 leading-relaxed">{t('about.missionBody')}</p>
         </div>
         <div className="glass-panel p-8 card-hover animate-fade-in" style={{ animationDelay: '0.1s' }}>
@@ -87,7 +87,7 @@ const AboutPage = () => {
 
       {/* Values */}
       <div className="glass-panel p-8 card-hover animate-fade-in" style={{ animationDelay: '0.2s' }}>
-        <h2 className="text-2xl font-bold text-brandNavy dark:text-blue-300 mb-6">{t('about.valuesTitle')}</h2>
+        <h2 className="text-2xl font-bold text-brandNavy dark:text-white mb-6">{t('about.valuesTitle')}</h2>
         <ul className="space-y-5 text-base text-brandGray dark:text-slate-300">
           {[t('about.values.0'), t('about.values.1'), t('about.values.2')].map((value, index) => (
             <li key={index} className="flex items-start gap-4 transition-colors hover:text-brandBlue dark:hover:text-blue-300">
@@ -118,7 +118,7 @@ const AboutPage = () => {
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brandBlue/10 dark:bg-brandBlue/20 mb-4">
                   <IconComponent className="h-6 w-6 text-brandBlue" />
                 </div>
-                <h3 className="text-lg font-semibold text-brandNavy dark:text-blue-300 mb-2">
+                <h3 className="text-lg font-semibold text-brandNavy dark:text-white mb-2">
                   {t(`about.services.${service.index}.title`)}
                 </h3>
                 <p className="text-sm text-brandGray dark:text-slate-300 leading-relaxed">
@@ -132,7 +132,7 @@ const AboutPage = () => {
 
       {/* Why Choose Us Section */}
       <div className="glass-panel p-8 animate-fade-in">
-        <h2 className="text-2xl font-bold text-brandNavy dark:text-blue-300 mb-6">{t('about.whyChooseUsTitle')}</h2>
+        <h2 className="text-2xl font-bold text-brandNavy dark:text-white mb-6">{t('about.whyChooseUsTitle')}</h2>
         <div className="grid gap-6 md:grid-cols-3">
           {[
             { titleKey: 'about.whyChooseUs.0.title', descKey: 'about.whyChooseUs.0.description' },
@@ -140,7 +140,7 @@ const AboutPage = () => {
             { titleKey: 'about.whyChooseUs.2.title', descKey: 'about.whyChooseUs.2.description' },
           ].map((item, index) => (
             <div key={item.titleKey} className="animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
-              <h3 className="text-lg font-semibold text-brandNavy dark:text-blue-300 mb-2">
+              <h3 className="text-lg font-semibold text-brandNavy dark:text-white mb-2">
                 {t(item.titleKey)}
               </h3>
               <p className="text-sm text-brandGray dark:text-slate-300 leading-relaxed">
@@ -153,7 +153,7 @@ const AboutPage = () => {
 
       {/* Stats Section */}
       <div className="glass-panel p-8 animate-fade-in">
-        <h2 className="text-2xl font-bold text-brandNavy dark:text-blue-300 text-center mb-8">
+        <h2 className="text-2xl font-bold text-brandNavy dark:text-white text-center mb-8">
           {t('about.statsTitle')}
         </h2>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -189,7 +189,7 @@ const AboutPage = () => {
           <p className="pill mx-auto bg-brandBlue/10 text-brandBlue dark:bg-brandBlue/20 w-fit">
             {t('about.testimonialsTitle')}
           </p>
-          <h2 className="text-3xl font-bold text-brandNavy dark:text-blue-300">{t('testimonials.title')}</h2>
+          <h2 className="text-3xl font-bold text-brandNavy dark:text-white">{t('testimonials.title')}</h2>
           <p className="text-base text-brandGray dark:text-slate-300 max-w-2xl mx-auto">
             {t('about.testimonialsSubtitle')}
           </p>

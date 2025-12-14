@@ -1,0 +1,44 @@
+{
+  // PowerShell Editor Services - HTTP/2 Devre Dışı
+  // Bu ayar bağlantı sorunlarını çözer
+  "http.systemCertificates": false,
+  "http.proxySupport": "off",
+  
+  // PowerShell Editor Services Ayarları
+  "powershell.enableProfileLoading": false,
+  "powershell.powerShellDefaultVersion": "Windows PowerShell",
+  "powershell.powerShellAdditionalExePaths": {
+    "Windows PowerShell": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
+  },
+  
+  // PowerShell Editor Services - Bağlantı Ayarları
+  "powershell.integratedConsole.showOnStartup": false,
+  "powershell.scriptAnalysis.enable": true,
+  "powershell.codeFormatting.preset": "OTBS",
+  
+  // HTTP/2 Devre Dışı (PowerShell Editor Services için kritik)
+  "http.experimental.enableHttp2": false,
+  
+  // Proxy Ayarları (VPN/Proxy sorunları için)
+  "http.proxy": "",
+  "http.proxyStrictSSL": false,
+  
+  // Terminal Ayarları
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "terminal.integrated.profiles.windows": {
+    "PowerShell": {
+      "source": "PowerShell",
+      "icon": "terminal-powershell"
+    }
+  },
+  
+  // Editor Services Timeout Ayarları
+  "powershell.developer.editorServicesWaitForDebugger": false,
+  "powershell.developer.bundledModulesPath": "",
+  
+  // Loglama (hata tespiti için)
+  "powershell.developer.editorServicesLogLevel": "Normal"
+}
+
+
+

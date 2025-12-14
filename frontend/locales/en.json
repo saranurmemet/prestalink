@@ -51,6 +51,44 @@
     "widget": {
       "candidates": "Candidates in review",
       "updated": "Live feed",
+      "tabs": {
+        "dashboard": "Dashboard",
+        "jobs": "Jobs",
+        "candidates": "Candidates"
+      },
+      "stats": {
+        "totalApplications": "Total Applications",
+        "activeJobs": "Active Jobs",
+        "partnerCompanies": "Partner Companies",
+        "successRate": "Success Rate"
+      },
+      "changes": {
+        "fromLastMonth": "+12% from last month",
+        "newThisWeek": "8 new this week",
+        "newPartners": "3 new partners",
+        "improvement": "+2% improvement"
+      },
+      "monthlyApplications": "Monthly Applications Last 6 months",
+      "chartLegend": {
+        "applications": "Applications",
+        "interviews": "Interviews",
+        "hired": "Hired"
+      },
+      "recentApplications": "Recent Applications",
+      "appliedTo": "Applied to:",
+      "status": {
+        "new": "New",
+        "review": "Review",
+        "match": "Match"
+      },
+      "months": {
+        "jan": "Jan",
+        "feb": "Feb",
+        "mar": "Mar",
+        "apr": "Apr",
+        "may": "May",
+        "jun": "Jun"
+      },
       "items": {
         "0": { "name": "Leyla / CNC", "role": "5 yrs exp - Munich", "language": "FR" },
         "1": { "name": "Omar / Nurse", "role": "B1 German - Hamburg", "language": "TR" },
@@ -442,7 +480,11 @@
       },
       "admin": {
         "title": "Administrator (Admin)",
-        "description": "Manage the system, monitor users and control platform settings."
+        "description": "Control users and employers, manage applications and monitor platform activities."
+      },
+      "superadmin": {
+        "title": "System Administrator",
+        "description": "Control the entire application, manage system settings and have full authority across the platform."
       }
     }
   },
@@ -664,9 +706,14 @@
   "userNav": {
     "dashboard": "Dashboard",
     "profile": "My Profile",
+    "cv": "CV Management",
     "jobListings": "Job Listings",
+    "favorites": "Favorite Jobs",
     "applications": "My Applications",
-    "notifications": "Notifications"
+    "messages": "Messages",
+    "statistics": "Statistics",
+    "notifications": "Notifications",
+    "settings": "Settings"
   },
   "userProfile": {
     "title": "Edit Profile",
@@ -727,6 +774,7 @@
     "backToJobs": "Back to Jobs",
     "cvRequired": "You need to upload your CV before applying.",
     "uploadCv": "Upload CV",
+    "cvFetchError": "CV file could not be loaded. Please check your CV from your profile page.",
     "applicationSuccess": "Your application has been submitted successfully!",
     "companyInfoComingSoon": "Company information coming soon"
   },
@@ -760,6 +808,76 @@
     "markAllRead": "Mark All as Read",
     "noNotifications": "No new notifications",
     "unread": "unread"
+  },
+  "userMessages": {
+    "title": "Messages",
+    "subtitle": "Communicate with employers and recruitment specialists",
+    "emptyTitle": "No messages yet",
+    "emptyDescription": "Messages from employers will appear here",
+    "new": "New",
+    "sampleMessage1": "Hello, we have reviewed your application. Are you available for an interview?",
+    "sampleMessage2": "We liked your CV. Could you share additional information?"
+  },
+  "userFavorites": {
+    "title": "Favorite Jobs",
+    "subtitle": "View your saved job listings here",
+    "emptyTitle": "No favorite jobs yet",
+    "emptyDescription": "Add job listings to favorites to view them here",
+    "goToJobs": "Go to Job Listings",
+    "remove": "Remove from favorites"
+  },
+  "userStatistics": {
+    "title": "My Statistics",
+    "subtitle": "Summary of your career journey and performance metrics",
+    "profileCompletion": "Profile Completion",
+    "completionRate": "Completion Rate",
+    "totalApplications": "Total Applications",
+    "applicationsSent": "Applications sent",
+    "totalJobs": "Available Jobs",
+    "activeJobs": "Active job listings",
+    "applicationStatuses": "Application Statuses",
+    "pending": "Pending",
+    "reviewing": "In Review",
+    "interview": "Interview",
+    "accepted": "Accepted",
+    "rejected": "Rejected",
+    "successRate": "Success Rate",
+    "acceptedApplications": "Accepted applications"
+  },
+  "userSettings": {
+    "title": "Settings",
+    "subtitle": "Manage your account and application settings",
+    "notifications": {
+      "title": "Notification Settings",
+      "email": {
+        "label": "Email Notifications",
+        "description": "Receive emails for new job listings and application updates"
+      },
+      "push": {
+        "label": "Push Notifications",
+        "description": "Receive browser notifications"
+      },
+      "sms": {
+        "label": "SMS Notifications",
+        "description": "Receive SMS for important updates"
+      }
+    },
+    "privacy": {
+      "title": "Privacy Settings",
+      "profileVisibility": {
+        "label": "Profile Visibility",
+        "description": "Allow employers to view your profile"
+      },
+      "cvVisibility": {
+        "label": "CV Visibility",
+        "description": "Allow employers to download your CV"
+      }
+    },
+    "account": {
+      "title": "Account Actions",
+      "changePassword": "Change Password",
+      "deleteAccount": "Delete Account"
+    }
   }
 }
 

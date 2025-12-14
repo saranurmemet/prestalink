@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const User = require('../models/User');
 const generateToken = require('../utils/generateToken');
 const asyncHandler = require('../utils/asyncHandler');
@@ -9,58 +10,81 @@ const sanitizeUser = (user) => {
 };
 
 const baseLogin = async (req, res) => {
-  const { email, password, role: selectedRole } = req.body;
-  
-  const user = await User.findOne({ email });
-
-  if (!user || !(await user.matchPassword(password))) {
-    return res.status(401).json({ message: 'Invalid credentials' });
-  }
-
-  // Çoklu rol desteği
-  if (user.roles && user.roles.length > 0) {
-    // Belirli role'e zorunlu giriş (ör: /auth/recruiter/login)
-    if (req.requiredRole) {
-      if (!user.roles.includes(req.requiredRole)) {
-        return res.status(403).json({ 
-          message: 'You do not have permission for this role',
-          availableRoles: user.roles 
-        });
-      }
-      // RequiredRole seç
-      user.activeRole = req.requiredRole;
-      user.role = req.requiredRole;
-    } else if (selectedRole) {
-      // Frontend'den gelen rol seçimini kullan
-      if (!user.roles.includes(selectedRole)) {
-        return res.status(403).json({ 
-          message: 'You do not have permission for this role',
-          availableRoles: user.roles 
-        });
-      }
-      // ActiveRole'ü güncelle
-      user.activeRole = selectedRole;
-      user.role = selectedRole;
-    } else {
-      // Rol seçilmemişse mevcut activeRole veya ilk rol
-      user.activeRole = user.activeRole || user.roles[0];
-      user.role = user.activeRole;
+  try {
+    const { email, password, role: selectedRole } = req.body;
+    
+    // Check if database is connected
+    if (mongoose.connection.readyState !== 1) {
+      console.error('❌ [AUTH] Database not connected. ReadyState:', mongoose.connection.readyState);
+      return res.status(500).json({ 
+        message: 'Database connection error. Please try again later.' 
+      });
     }
-  } else if (req.requiredRole && user.role !== req.requiredRole) {
-    // Eski sistem için fallback - tek role varsa kontrol et
-    return res.status(403).json({ message: 'Forbidden for this role' });
+    
+    const user = await User.findOne({ email });
+
+    if (!user || !(await user.matchPassword(password))) {
+      return res.status(401).json({ message: 'Invalid credentials' });
+    }
+
+    // Çoklu rol desteği
+    if (user.roles && user.roles.length > 0) {
+      // Belirli role'e zorunlu giriş (ör: /auth/recruiter/login)
+      if (req.requiredRole) {
+        if (!user.roles.includes(req.requiredRole)) {
+          return res.status(403).json({ 
+            message: 'You do not have permission for this role',
+            availableRoles: user.roles 
+          });
+        }
+        // RequiredRole seç
+        user.activeRole = req.requiredRole;
+        user.role = req.requiredRole;
+      } else if (selectedRole) {
+        // Frontend'den gelen rol seçimini kullan
+        if (!user.roles.includes(selectedRole)) {
+          return res.status(403).json({ 
+            message: 'You do not have permission for this role',
+            availableRoles: user.roles 
+          });
+        }
+        // ActiveRole'ü güncelle
+        user.activeRole = selectedRole;
+        user.role = selectedRole;
+      } else {
+        // Rol seçilmemişse mevcut activeRole veya ilk rol
+        user.activeRole = user.activeRole || user.roles[0];
+        user.role = user.activeRole;
+      }
+    } else if (req.requiredRole && user.role !== req.requiredRole) {
+      // Eski sistem için fallback - tek role varsa kontrol et
+      return res.status(403).json({ message: 'Forbidden for this role' });
+    }
+
+    // Update last login time
+    user.lastLogin = new Date();
+    await user.save();
+
+    // Check if JWT_SECRET is set
+    if (!process.env.JWT_SECRET) {
+      console.error('❌ [AUTH] JWT_SECRET is not defined');
+      return res.status(500).json({ 
+        message: 'Server configuration error. Please contact support.' 
+      });
+    }
+
+    const token = generateToken({ id: user._id, role: user.role });
+    res.json({
+      user: sanitizeUser(user),
+      token,
+      availableRoles: user.roles || [user.role]
+    });
+  } catch (error) {
+    console.error('❌ [AUTH] Login error:', error);
+    console.error('❌ [AUTH] Error stack:', error.stack);
+    // Re-throw to be caught by asyncHandler
+    throw error;
   }
-
-  // Update last login time
-  user.lastLogin = new Date();
-  await user.save();
-
-  const token = generateToken({ id: user._id, role: user.role });
-  res.json({
-    user: sanitizeUser(user),
-    token,
-    availableRoles: user.roles || [user.role]
-  });
 };
 
 exports.register = asyncHandler(async (req, res) => {

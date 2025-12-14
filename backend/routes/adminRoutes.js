@@ -24,4 +24,3 @@ router.get('/users', getUsers);
 router.put('/users/:userId/role', updateUserRole);
 
 module.exports = router;
-

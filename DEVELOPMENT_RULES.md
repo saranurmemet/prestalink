@@ -91,3 +91,12 @@ Kullanıcı "Deploy et" dedikten sonra:
 **Bu kurallar tüm PrestaLink projesi için geçerlidir!**
 
 
+
+
+
+
+
+
+
+
+

@@ -51,6 +51,44 @@
     "widget": {
       "candidates": "Candidats en revue",
       "updated": "Flux en direct",
+      "tabs": {
+        "dashboard": "Tableau de bord",
+        "jobs": "Emplois",
+        "candidates": "Candidats"
+      },
+      "stats": {
+        "totalApplications": "Total des candidatures",
+        "activeJobs": "Emplois actifs",
+        "partnerCompanies": "Entreprises partenaires",
+        "successRate": "Taux de réussite"
+      },
+      "changes": {
+        "fromLastMonth": "+12% par rapport au mois dernier",
+        "newThisWeek": "8 nouveaux cette semaine",
+        "newPartners": "3 nouveaux partenaires",
+        "improvement": "+2% d'amélioration"
+      },
+      "monthlyApplications": "Candidatures mensuelles des 6 derniers mois",
+      "chartLegend": {
+        "applications": "Candidatures",
+        "interviews": "Entretiens",
+        "hired": "Embauchés"
+      },
+      "recentApplications": "Candidatures récentes",
+      "appliedTo": "Candidature pour:",
+      "status": {
+        "new": "Nouveau",
+        "review": "En examen",
+        "match": "Correspondance"
+      },
+      "months": {
+        "jan": "Jan",
+        "feb": "Fév",
+        "mar": "Mar",
+        "apr": "Avr",
+        "may": "Mai",
+        "jun": "Jun"
+      },
       "items": {
         "0": { "name": "Leyla / CNC", "role": "5 ans exp - Munich", "language": "FR" },
         "1": { "name": "Omar / Infirmier", "role": "B1 Allemand - Hambourg", "language": "TR" },
@@ -440,7 +478,11 @@
       },
       "admin": {
         "title": "Administrateur (Admin)",
-        "description": "Gérez le système, surveillez les utilisateurs et contrôlez les paramètres de la plateforme."
+        "description": "Contrôlez les utilisateurs et les employeurs, gérez les candidatures et surveillez les activités de la plateforme."
+      },
+      "superadmin": {
+        "title": "Administrateur Système",
+        "description": "Contrôlez toute l'application, gérez les paramètres système et disposez d'une autorité complète sur la plateforme."
       }
     }
   },
@@ -662,9 +704,14 @@
   "userNav": {
     "dashboard": "Tableau de bord",
     "profile": "Mon Profil",
+    "cv": "Gestion CV",
     "jobListings": "Offres d'emploi",
+    "favorites": "Emplois Favoris",
     "applications": "Mes Candidatures",
-    "notifications": "Notifications"
+    "messages": "Messages",
+    "statistics": "Statistiques",
+    "notifications": "Notifications",
+    "settings": "Paramètres"
   },
   "userProfile": {
     "title": "Modifier le Profil",
@@ -725,6 +772,7 @@
     "backToJobs": "Retour aux offres",
     "cvRequired": "Vous devez télécharger votre CV avant de postuler.",
     "uploadCv": "Télécharger CV",
+    "cvFetchError": "Le fichier CV n'a pas pu être chargé. Veuillez vérifier votre CV depuis votre page de profil.",
     "applicationSuccess": "Votre candidature a été soumise avec succès!",
     "companyInfoComingSoon": "Informations sur l'entreprise à venir"
   },
@@ -758,6 +806,76 @@
     "markAllRead": "Tout marquer comme lu",
     "noNotifications": "Aucune nouvelle notification",
     "unread": "non lues"
+  },
+  "userMessages": {
+    "title": "Messages",
+    "subtitle": "Communiquez avec les employeurs et les spécialistes du recrutement",
+    "emptyTitle": "Aucun message pour le moment",
+    "emptyDescription": "Les messages des employeurs apparaîtront ici",
+    "new": "Nouveau",
+    "sampleMessage1": "Bonjour, nous avons examiné votre candidature. Êtes-vous disponible pour un entretien?",
+    "sampleMessage2": "Nous avons aimé votre CV. Pourriez-vous partager des informations supplémentaires?"
+  },
+  "userFavorites": {
+    "title": "Emplois Favoris",
+    "subtitle": "Consultez vos offres d'emploi enregistrées ici",
+    "emptyTitle": "Aucun emploi favori pour le moment",
+    "emptyDescription": "Ajoutez des offres d'emploi aux favoris pour les consulter ici",
+    "goToJobs": "Aller aux Offres d'Emploi",
+    "remove": "Retirer des favoris"
+  },
+  "userStatistics": {
+    "title": "Mes Statistiques",
+    "subtitle": "Résumé de votre parcours professionnel et métriques de performance",
+    "profileCompletion": "Complétion du Profil",
+    "completionRate": "Taux de Complétion",
+    "totalApplications": "Total des Candidatures",
+    "applicationsSent": "Candidatures envoyées",
+    "totalJobs": "Emplois Disponibles",
+    "activeJobs": "Offres d'emploi actives",
+    "applicationStatuses": "Statuts des Candidatures",
+    "pending": "En attente",
+    "reviewing": "En examen",
+    "interview": "Entretien",
+    "accepted": "Accepté",
+    "rejected": "Rejeté",
+    "successRate": "Taux de Réussite",
+    "acceptedApplications": "Candidatures acceptées"
+  },
+  "userSettings": {
+    "title": "Paramètres",
+    "subtitle": "Gérez vos paramètres de compte et d'application",
+    "notifications": {
+      "title": "Paramètres de Notification",
+      "email": {
+        "label": "Notifications par E-mail",
+        "description": "Recevoir des e-mails pour les nouvelles offres d'emploi et mises à jour de candidatures"
+      },
+      "push": {
+        "label": "Notifications Push",
+        "description": "Recevoir des notifications du navigateur"
+      },
+      "sms": {
+        "label": "Notifications SMS",
+        "description": "Recevoir des SMS pour les mises à jour importantes"
+      }
+    },
+    "privacy": {
+      "title": "Paramètres de Confidentialité",
+      "profileVisibility": {
+        "label": "Visibilité du Profil",
+        "description": "Permettre aux employeurs de voir votre profil"
+      },
+      "cvVisibility": {
+        "label": "Visibilité du CV",
+        "description": "Permettre aux employeurs de télécharger votre CV"
+      }
+    },
+    "account": {
+      "title": "Actions du Compte",
+      "changePassword": "Changer le Mot de Passe",
+      "deleteAccount": "Supprimer le Compte"
+    }
   }
 }
 

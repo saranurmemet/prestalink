@@ -1,16 +1,132 @@
 <svg width="680" height="520" viewBox="0 0 680 520" xmlns="http://www.w3.org/2000/svg">
-  <rect width="680" height="520" rx="48" fill="#F5F8FE"/>
-  <rect x="80" y="60" width="200" height="400" rx="36" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
-  <rect x="120" y="120" width="120" height="36" rx="12" fill="#1D6EEA" opacity=".1"/>
-  <rect x="120" y="180" width="120" height="36" rx="12" fill="#1D6EEA" opacity=".15"/>
-  <rect x="110" y="250" width="140" height="44" rx="16" fill="#F47B20"/>
-  <rect x="110" y="320" width="140" height="90" rx="18" fill="#F9FBFF" stroke="#E2E8F0" stroke-width="2"/>
-  <rect x="320" y="40" width="220" height="440" rx="48" fill="#1D6EEA"/>
-  <rect x="356" y="120" width="148" height="160" rx="28" fill="#FFFFFF"/>
-  <rect x="350" y="330" width="156" height="38" rx="16" fill="#F47B20"/>
-  <rect x="350" y="390" width="156" height="38" rx="16" fill="#FFFFFF" opacity=".4"/>
-  <circle cx="430" cy="80" r="16" fill="#FFFFFF" opacity=".4"/>
-  <circle cx="430" cy="200" r="58" fill="#1D6EEA" opacity=".12"/>
-  <rect x="560" y="140" width="44" height="240" rx="20" fill="#1D6EEA" opacity=".35"/>
+  <!-- Background -->
+  <rect width="680" height="520" rx="48" fill="#0F172A"/>
+  
+  <!-- Professional Dashboard Container - No border -->
+  <rect x="40" y="40" width="600" height="440" rx="32" fill="#1E293B"/>
+  
+  <!-- Top Navigation Bar -->
+  <rect x="40" y="40" width="600" height="56" rx="32" fill="#0F172A"/>
+  <text x="60" y="72" font-family="Arial, sans-serif" font-size="16" font-weight="600" fill="#E2E8F0">Dashboard</text>
+  <text x="180" y="72" font-family="Arial, sans-serif" font-size="16" fill="#94A3B8">Jobs</text>
+  <text x="270" y="72" font-family="Arial, sans-serif" font-size="16" fill="#94A3B8">Candidates</text>
+  <circle cx="560" cy="66" r="10" fill="#F47B20"/>
+  
+  <!-- Header with text -->
+  <circle cx="60" cy="110" r="5" fill="#F47B20"/>
+  <text x="75" y="115" font-family="Arial, sans-serif" font-size="18" font-weight="600" fill="#E2E8F0">Candidates in review</text>
+  
+  <!-- Top Stats Row - 4 Cards with Real Data -->
+  <!-- Card 1: Total Applications -->
+  <rect x="60" y="120" width="130" height="100" rx="12" fill="#1E293B"/>
+  <text x="75" y="148" font-family="Arial, sans-serif" font-size="13" fill="#94A3B8">Total Applications</text>
+  <text x="75" y="175" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#F47B20">2,547</text>
+  <text x="75" y="195" font-family="Arial, sans-serif" font-size="11" fill="#64748B">+12% from last month</text>
+  <circle cx="200" cy="190" r="4" fill="#10B981"/>
+  
+  <!-- Card 2: Active Jobs -->
+  <rect x="210" y="120" width="130" height="100" rx="12" fill="#1E293B"/>
+  <text x="225" y="148" font-family="Arial, sans-serif" font-size="13" fill="#94A3B8">Active Jobs</text>
+  <text x="225" y="175" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#3B82F6">184</text>
+  <text x="225" y="195" font-family="Arial, sans-serif" font-size="11" fill="#64748B">8 new this week</text>
+  <circle cx="350" cy="190" r="4" fill="#10B981"/>
+  
+  <!-- Card 3: Companies -->
+  <rect x="360" y="120" width="130" height="100" rx="12" fill="#1E293B"/>
+  <text x="375" y="148" font-family="Arial, sans-serif" font-size="13" fill="#94A3B8">Partner Companies</text>
+  <text x="375" y="175" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#10B981">127</text>
+  <text x="375" y="195" font-family="Arial, sans-serif" font-size="11" fill="#64748B">3 new partners</text>
+  <circle cx="500" cy="190" r="4" fill="#F47B20"/>
+  
+  <!-- Card 4: Success Rate -->
+  <rect x="510" y="120" width="110" height="100" rx="12" fill="#1E293B"/>
+  <text x="525" y="148" font-family="Arial, sans-serif" font-size="13" fill="#94A3B8">Success Rate</text>
+  <text x="525" y="175" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#8B5CF6">94%</text>
+  <text x="525" y="195" font-family="Arial, sans-serif" font-size="11" fill="#64748B">+2% improvement</text>
+  
+  <!-- Main Analytics Chart Section -->
+  <rect x="60" y="240" width="280" height="200" rx="16" fill="#1E293B"/>
+  <text x="75" y="270" font-family="Arial, sans-serif" font-size="16" font-weight="600" fill="#E2E8F0">Monthly Applications</text>
+  <text x="240" y="270" font-family="Arial, sans-serif" font-size="13" fill="#94A3B8">Last 6 months</text>
+  
+  <!-- Chart Area Background -->
+  <rect x="75" y="285" width="250" height="140" rx="8" fill="#0F172A"/>
+  
+  <!-- Chart Grid Lines -->
+  <line x1="75" y1="325" x2="325" y2="325" stroke="#334155" stroke-width="0.5" opacity="0.2"/>
+  <line x1="75" y1="365" x2="325" y2="365" stroke="#334155" stroke-width="0.5" opacity="0.2"/>
+  <line x1="75" y1="405" x2="325" y2="405" stroke="#334155" stroke-width="0.5" opacity="0.2"/>
+  
+  <!-- Bar Chart with Labels -->
+  <rect x="85" y="385" width="18" height="40" rx="3" fill="#F47B20"/>
+  <text x="94" y="435" font-family="Arial, sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Jan</text>
+  
+  <rect x="110" y="365" width="18" height="60" rx="3" fill="#3B82F6"/>
+  <text x="119" y="435" font-family="Arial, sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Feb</text>
+  
+  <rect x="135" y="375" width="18" height="50" rx="3" fill="#F47B20"/>
+  <text x="144" y="435" font-family="Arial, sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Mar</text>
+  
+  <rect x="160" y="345" width="18" height="80" rx="3" fill="#3B82F6"/>
+  <text x="169" y="435" font-family="Arial, sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Apr</text>
+  
+  <rect x="185" y="355" width="18" height="70" rx="3" fill="#F47B20"/>
+  <text x="194" y="435" font-family="Arial, sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">May</text>
+  
+  <rect x="210" y="335" width="18" height="90" rx="3" fill="#3B82F6"/>
+  <text x="219" y="435" font-family="Arial, sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Jun</text>
+  
+  <!-- Line Chart Overlay -->
+  <path d="M 94 385 L 119 365 L 144 375 L 169 345 L 194 355 L 219 335" 
+        stroke="#F47B20" stroke-width="2" fill="none" opacity="0.6" stroke-linecap="round"/>
+  
+  <!-- Right Side: Candidate List with Real Names -->
+  <rect x="360" y="240" width="260" height="200" rx="16" fill="#1E293B"/>
+  <text x="375" y="270" font-family="Arial, sans-serif" font-size="16" font-weight="600" fill="#E2E8F0">Recent Applications</text>
+  
+  <!-- Candidate 1 -->
+  <rect x="375" y="285" width="240" height="55" rx="8" fill="#0F172A"/>
+  <circle cx="395" cy="312" r="14" fill="#3B82F6"/>
+  <text x="418" y="302" font-family="Arial, sans-serif" font-size="14" font-weight="600" fill="#E2E8F0">Sara Ahmed</text>
+  <text x="418" y="318" font-family="Arial, sans-serif" font-size="12" fill="#94A3B8">Nurse - Healthcare</text>
+  <text x="418" y="332" font-family="Arial, sans-serif" font-size="11" fill="#64748B">Applied to: Hospital Paris</text>
+  <rect x="570" y="300" width="40" height="22" rx="4" fill="#F47B20" opacity="0.2"/>
+  <text x="590" y="314" font-family="Arial, sans-serif" font-size="11" font-weight="600" fill="#F47B20" text-anchor="middle">New</text>
+  
+  <!-- Candidate 2 -->
+  <rect x="375" y="350" width="240" height="55" rx="8" fill="#0F172A"/>
+  <circle cx="395" cy="377" r="14" fill="#10B981"/>
+  <text x="418" y="367" font-family="Arial, sans-serif" font-size="14" font-weight="600" fill="#E2E8F0">Mehmet Yılmaz</text>
+  <text x="418" y="383" font-family="Arial, sans-serif" font-size="12" fill="#94A3B8">Engineer - IT</text>
+  <text x="418" y="397" font-family="Arial, sans-serif" font-size="11" fill="#64748B">Applied to: TechCorp Berlin</text>
+  <rect x="570" y="365" width="40" height="22" rx="4" fill="#3B82F6" opacity="0.2"/>
+  <text x="590" y="379" font-family="Arial, sans-serif" font-size="11" font-weight="600" fill="#3B82F6" text-anchor="middle">Review</text>
+  
+  <!-- Candidate 3 -->
+  <rect x="375" y="415" width="240" height="55" rx="8" fill="#0F172A"/>
+  <circle cx="395" cy="442" r="14" fill="#8B5CF6"/>
+  <text x="418" y="432" font-family="Arial, sans-serif" font-size="14" font-weight="600" fill="#E2E8F0">Fatima Benali</text>
+  <text x="418" y="448" font-family="Arial, sans-serif" font-size="12" fill="#94A3B8">Teacher - Education</text>
+  <text x="418" y="462" font-family="Arial, sans-serif" font-size="11" fill="#64748B">Applied to: School Lyon</text>
+  <rect x="570" y="430" width="40" height="22" rx="4" fill="#10B981" opacity="0.2"/>
+  <text x="590" y="444" font-family="Arial, sans-serif" font-size="11" font-weight="600" fill="#10B981" text-anchor="middle">Match</text>
+  
+  <!-- Bottom Section: Data Table with Real Company Names -->
+  <rect x="60" y="460" width="560" height="20" rx="8" fill="#1E293B"/>
+  <text x="75" y="475" font-family="Arial, sans-serif" font-size="12" fill="#94A3B8">Company</text>
+  <text x="150" y="475" font-family="Arial, sans-serif" font-size="12" fill="#94A3B8">Position</text>
+  <text x="250" y="475" font-family="Arial, sans-serif" font-size="12" fill="#94A3B8">Location</text>
+  <text x="370" y="475" font-family="Arial, sans-serif" font-size="12" fill="#F47B20" font-weight="600">Hospital Paris</text>
+  <text x="470" y="475" font-family="Arial, sans-serif" font-size="12" fill="#10B981" font-weight="600">Active</text>
+  <text x="550" y="475" font-family="Arial, sans-serif" font-size="12" fill="#3B82F6" font-weight="600">12</text>
+  
+  <!-- Legend with Text -->
+  <circle cx="75" cy="280" r="4" fill="#F47B20"/>
+  <text x="85" y="284" font-family="Arial, sans-serif" font-size="12" fill="#94A3B8">Applications</text>
+  
+  <circle cx="150" cy="280" r="4" fill="#3B82F6"/>
+  <text x="160" y="284" font-family="Arial, sans-serif" font-size="12" fill="#94A3B8">Interviews</text>
+  
+  <circle cx="225" cy="280" r="4" fill="#10B981"/>
+  <text x="235" y="284" font-family="Arial, sans-serif" font-size="12" fill="#94A3B8">Hired</text>
 </svg>
-

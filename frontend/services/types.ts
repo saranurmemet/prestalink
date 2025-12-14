@@ -44,6 +44,7 @@ export interface Application {
 export interface Notification {
   _id: string;
   targetUserId: string;
+  targetRole?: 'user' | 'recruiter' | 'employer' | 'admin' | 'superadmin';
   title: string;
   message: string;
   read: boolean;

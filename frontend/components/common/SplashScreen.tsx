@@ -5,9 +5,12 @@ import Image from 'next/image';
 
 const SplashScreen = () => {
   const [isVisible, setIsVisible] = useState(true);
-  const [isMounted, setIsMounted] = useState(true);
+  const [isMounted, setIsMounted] = useState(false); // Start as false to prevent hydration mismatch
 
   useEffect(() => {
+    // Only mount on client-side
+    setIsMounted(true);
+
     // Minimum splash screen duration (2 seconds)
     const minDuration = 2000;
     const startTime = Date.now();
@@ -34,6 +37,7 @@ const SplashScreen = () => {
     }
   }, []);
 
+  // Don't render on server-side to prevent hydration mismatch
   if (!isMounted) return null;
 
   return (
@@ -61,10 +65,10 @@ const SplashScreen = () => {
 
         {/* App Name */}
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-white mb-2 animate-fade-in">
+          <h1 className="text-4xl font-bold text-white mb-2 animate-fade-in" suppressHydrationWarning>
             Presta<span className="text-brandOrange">Link</span>
           </h1>
-          <p className="text-white/80 text-sm animate-fade-in" style={{ animationDelay: '0.2s' }}>
+          <p className="text-white/80 text-sm animate-fade-in" style={{ animationDelay: '0.2s' }} suppressHydrationWarning>
             منصة التوظيف الأوروبي
           </p>
         </div>

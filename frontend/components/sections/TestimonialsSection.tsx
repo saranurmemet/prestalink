@@ -30,8 +30,8 @@ const TestimonialsSection = () => {
     <section className="page-container py-16 animate-fade-in bg-gradient-to-b from-transparent via-brandBlue/5 to-transparent">
       <div className="space-y-4 text-center mb-12">
         <p className="pill mx-auto bg-brandBlue/10 text-brandBlue">{t('testimonials.tag')}</p>
-        <h2 className="section-title">{t('testimonials.title')}</h2>
-        <p className="text-lg text-brandGray max-w-2xl mx-auto">{t('testimonials.subtitle')}</p>
+        <h2 className="section-title dark:text-white">{t('testimonials.title')}</h2>
+        <p className="text-lg text-brandGray dark:text-slate-200 max-w-2xl mx-auto">{t('testimonials.subtitle')}</p>
       </div>
       <div className="grid gap-6 md:grid-cols-3">
         {testimonials.map((testimonial, index) => (
@@ -41,11 +41,11 @@ const TestimonialsSection = () => {
                 {testimonial.country}
               </div>
               <div>
-                <p className="font-semibold text-brandNavy">{t(testimonial.nameKey)}</p>
-                <p className="text-sm text-brandGray">{t(testimonial.roleKey)}</p>
+                <p className="font-semibold text-brandNavy dark:text-white">{t(testimonial.nameKey)}</p>
+                <p className="text-sm text-brandGray dark:text-slate-300">{t(testimonial.roleKey)}</p>
               </div>
             </div>
-            <p className="text-sm text-brandGray leading-relaxed">&ldquo;{t(testimonial.textKey)}&rdquo;</p>
+            <p className="text-sm text-brandGray dark:text-slate-300 leading-relaxed">&ldquo;{t(testimonial.textKey)}&rdquo;</p>
             <div className="flex gap-1 mt-4">
               {[...Array(5)].map((_, i) => (
                 <span key={i} className="text-brandOrange">★</span>

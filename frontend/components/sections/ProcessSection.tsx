@@ -61,7 +61,7 @@ const ProcessSection = () => {
     <section className="page-container py-16 animate-fade-in">
       <div className="space-y-4 text-center mb-12">
         <p className="pill mx-auto bg-brandOrange/10 text-brandOrange dark:bg-brandOrange/20 w-fit">{t('process.tag')}</p>
-        <h2 className="text-3xl font-bold text-brandNavy dark:text-blue-300 sm:text-4xl">{t('process.title')}</h2>
+        <h2 className="text-3xl font-bold text-brandNavy dark:text-white sm:text-4xl">{t('process.title')}</h2>
         <p className="text-lg text-brandGray dark:text-slate-300 max-w-2xl mx-auto">{t('process.subtitle')}</p>
       </div>
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
@@ -78,7 +78,7 @@ const ProcessSection = () => {
                     {step.number}
                   </span>
                 </div>
-                <h3 className="text-lg font-semibold text-brandNavy dark:text-blue-300 mb-2 group-hover:text-brandBlue transition-colors">
+                <h3 className="text-lg font-semibold text-brandNavy dark:text-white mb-2 group-hover:text-brandBlue dark:group-hover:text-blue-400 transition-colors">
                   {t(step.titleKey)}
                 </h3>
                 <p className="text-sm text-brandGray dark:text-slate-300 leading-relaxed">{t(step.bodyKey)}</p>

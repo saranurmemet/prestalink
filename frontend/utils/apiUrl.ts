@@ -11,14 +11,16 @@ export const getApiBaseUrl = (): string => {
     return apiUrl.replace(/\/api\/?$/, '');
   }
   
-  // Development fallback
-  if (process.env.NODE_ENV === 'development') {
-    console.warn('WARNING: NEXT_PUBLIC_API_URL not set in development. Using localhost:5000');
-    return 'http://localhost:5000';
+  // Development fallback for stability
+  if (typeof window !== 'undefined') {
+    if (process.env.NODE_ENV === 'development' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+      console.warn('⚠️ NEXT_PUBLIC_API_URL not set, using development fallback: http://localhost:5000');
+      return 'http://localhost:5000';
+    }
   }
   
-  // Production: MUST fail if API URL not set
-  throw new Error('NEXT_PUBLIC_API_URL environment variable is required in production');
+  // Production or server-side: MUST fail if API URL not set
+  throw new Error('NEXT_PUBLIC_API_URL environment variable is required. Set it in .env.local for development or environment variables for production');
 };
 
 /**
@@ -35,5 +37,27 @@ export const getStaticFileUrl = (path: string): string => {
   
   return `${getApiBaseUrl()}${normalizedPath}`;
 };
+
+/**
+ * Get profile photo URL - handles both relative paths and full URLs
+ */
+export const getProfilePhotoUrl = (profilePhoto?: string | null): string => {
+  if (!profilePhoto) {
+    return 'https://i.pravatar.cc/150?img=12';
+  }
+  
+  // If already a full URL, return as is
+  if (profilePhoto.startsWith('http://') || profilePhoto.startsWith('https://')) {
+    return profilePhoto;
+  }
+  
+  // Relative path - prepend API base URL
+  const normalizedPath = profilePhoto.startsWith('/') ? profilePhoto : `/${profilePhoto}`;
+  return `${getApiBaseUrl()}${normalizedPath}`;
+};
+
+
+
+
 
 

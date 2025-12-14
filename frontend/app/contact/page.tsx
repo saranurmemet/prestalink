@@ -18,8 +18,8 @@ const ContactPage = () => {
     <div className="page-container py-20 animate-fade-in">
       <div className="grid gap-10 lg:grid-cols-2">
         <div className="glass-panel space-y-4 p-8 animate-slide-up">
-          <h1 className="section-title">{t('contact.title')}</h1>
-          <p className="text-lg text-brandGray">{t('contact.subtitle')}</p>
+          <h1 className="section-title dark:text-white">{t('contact.title')}</h1>
+          <p className="text-lg text-brandGray dark:text-slate-200">{t('contact.subtitle')}</p>
           <div className="space-y-4 mt-6">
             <a
               href="mailto:hello@prestalink.com"
@@ -109,15 +109,15 @@ const ContactPage = () => {
         </div>
         <form onSubmit={handleSubmit} className="glass-panel space-y-4 p-8 animate-fade-in" style={{ animationDelay: '0.2s' }}>
           <div>
-            <label className="text-sm font-semibold text-brandGray">{t('contact.name')}</label>
+            <label className="text-sm font-semibold text-brandGray dark:text-slate-300">{t('contact.name')}</label>
             <input name="name" type="text" required className="input mt-1" />
           </div>
           <div>
-            <label className="text-sm font-semibold text-brandGray">{t('contact.email')}</label>
+            <label className="text-sm font-semibold text-brandGray dark:text-slate-300">{t('contact.email')}</label>
             <input name="email" type="email" required className="input mt-1" />
           </div>
           <div>
-            <label className="text-sm font-semibold text-brandGray">{t('contact.message')}</label>
+            <label className="text-sm font-semibold text-brandGray dark:text-slate-300">{t('contact.message')}</label>
             <textarea name="message" required rows={5} className="input mt-1 resize-none" />
           </div>
           <button type="submit" className="w-full rounded-full bg-brandBlue py-3 font-semibold text-white shadow-soft transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-brandBlue/30 active:scale-100">

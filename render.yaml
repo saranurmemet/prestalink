@@ -11,8 +11,11 @@ services:
         value: production
       - key: NODE_VERSION
         value: 22.16.0
+      - key: PORT
+        value: 5000
+      - key: HOST
+        value: 0.0.0.0
       # Aşağıdaki environment variables Render dashboard'dan eklenmelidir:
-      # - MONGO_URI (MongoDB connection string)
-      # - JWT_SECRET (Güçlü bir secret key)
-      # - CLIENT_URL (Frontend URL'leri, virgülle ayrılmış)
-      # - PORT (Opsiyonel, varsayılan: 5000)
+      # - MONGO_URI (MongoDB connection string - MongoDB Atlas'tan alınacak)
+      # - JWT_SECRET (Güçlü bir secret key - 32+ karakter rastgele string)
+      # - CLIENT_URL (Frontend URL - Vercel'den alınacak, örn: https://prestalink.vercel.app)

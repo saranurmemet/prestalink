@@ -50,7 +50,7 @@ const JobsPage = () => {
     <div className="page-container space-y-8 py-20 animate-fade-in">
       <div className="glass-panel p-8 text-center animate-slide-up">
         <p className="pill mx-auto bg-brandBlue/10 dark:bg-brandBlue/20 text-brandBlue">{t('jobs.tag')}</p>
-        <h1 className="section-title">{t('jobs.title')}</h1>
+        <h1 className="section-title dark:text-white">{t('jobs.title')}</h1>
         <p className="text-lg text-brandGray dark:text-slate-300">{t('jobs.subtitle')}</p>
       </div>
       <div className="glass-panel flex flex-col gap-4 p-6 md:flex-row animate-fade-in" style={{ animationDelay: '0.1s' }}>

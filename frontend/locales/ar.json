@@ -51,6 +51,44 @@
     "widget": {
       "candidates": "مرشحون قيد المراجعة",
       "updated": "تحديث مباشر",
+      "tabs": {
+        "dashboard": "لوحة التحكم",
+        "jobs": "الوظائف",
+        "candidates": "المرشحون"
+      },
+      "stats": {
+        "totalApplications": "إجمالي الطلبات",
+        "activeJobs": "الوظائف النشطة",
+        "partnerCompanies": "الشركات الشريكة",
+        "successRate": "معدل النجاح"
+      },
+      "changes": {
+        "fromLastMonth": "+12% من الشهر الماضي",
+        "newThisWeek": "8 جديد هذا الأسبوع",
+        "newPartners": "3 شركاء جدد",
+        "improvement": "+2% تحسن"
+      },
+      "monthlyApplications": "الطلبات الشهرية آخر 6 أشهر",
+      "chartLegend": {
+        "applications": "الطلبات",
+        "interviews": "المقابلات",
+        "hired": "المعينون"
+      },
+      "recentApplications": "الطلبات الأخيرة",
+      "appliedTo": "تم التقديم على:",
+      "status": {
+        "new": "جديد",
+        "review": "قيد المراجعة",
+        "match": "مطابقة"
+      },
+      "months": {
+        "jan": "ينا",
+        "feb": "فبر",
+        "mar": "مار",
+        "apr": "أبر",
+        "may": "ماي",
+        "jun": "يون"
+      },
       "items": {
         "0": { "name": "ليلى / CNC", "role": "خبرة 5 سنوات - ميونيخ", "language": "FR" },
         "1": { "name": "عمر / ممرض", "role": "B1 ألماني - هامبورغ", "language": "TR" },
@@ -442,7 +480,11 @@
       },
       "admin": {
         "title": "مدير (مسؤول)",
-        "description": "إدارة النظام ومراقبة المستخدمين والتحكم في إعدادات المنصة."
+        "description": "التحكم في المستخدمين وأصحاب العمل، وإدارة الطلبات ومراقبة أنشطة المنصة."
+      },
+      "superadmin": {
+        "title": "مدير النظام",
+        "description": "التحكم في التطبيق بالكامل، وإدارة إعدادات النظام والحصول على صلاحيات كاملة عبر المنصة."
       }
     }
   },
@@ -664,9 +706,14 @@
   "userNav": {
     "dashboard": "لوحة التحكم",
     "profile": "الملف الشخصي",
+    "cv": "إدارة السيرة الذاتية",
     "jobListings": "قائمة الوظائف",
+    "favorites": "الوظائف المفضلة",
     "applications": "طلباتي",
-    "notifications": "الإشعارات"
+    "messages": "الرسائل",
+    "statistics": "الإحصائيات",
+    "notifications": "الإشعارات",
+    "settings": "الإعدادات"
   },
   "userProfile": {
     "title": "تعديل الملف الشخصي",
@@ -727,6 +774,7 @@
     "backToJobs": "العودة إلى الوظائف",
     "cvRequired": "تحتاج إلى رفع سيرتك الذاتية قبل التقديم.",
     "uploadCv": "رفع السيرة الذاتية",
+    "cvFetchError": "تعذر تحميل ملف السيرة الذاتية. يرجى التحقق من سيرتك الذاتية من صفحة ملفك الشخصي.",
     "applicationSuccess": "تم إرسال طلبك بنجاح!",
     "companyInfoComingSoon": "معلومات الشركة قريباً"
   },
@@ -760,6 +808,76 @@
     "markAllRead": "تعيين الكل كمقروء",
     "noNotifications": "لا توجد إشعارات جديدة",
     "unread": "غير مقروء"
+  },
+  "userMessages": {
+    "title": "الرسائل",
+    "subtitle": "التواصل مع أصحاب العمل وأخصائيي التوظيف",
+    "emptyTitle": "لا توجد رسائل بعد",
+    "emptyDescription": "ستظهر رسائل أصحاب العمل هنا",
+    "new": "جديد",
+    "sampleMessage1": "مرحباً، قمنا بمراجعة طلبك. هل أنت متاح لإجراء مقابلة؟",
+    "sampleMessage2": "لقد أعجبنا بسيرتك الذاتية. هل يمكنك مشاركة معلومات إضافية؟"
+  },
+  "userFavorites": {
+    "title": "الوظائف المفضلة",
+    "subtitle": "عرض قوائم الوظائف المحفوظة هنا",
+    "emptyTitle": "لا توجد وظائف مفضلة بعد",
+    "emptyDescription": "أضف قوائم الوظائف إلى المفضلة لعرضها هنا",
+    "goToJobs": "الذهاب إلى قوائم الوظائف",
+    "remove": "إزالة من المفضلة"
+  },
+  "userStatistics": {
+    "title": "إحصائياتي",
+    "subtitle": "ملخص رحلتك المهنية ومقاييس الأداء",
+    "profileCompletion": "اكتمال الملف الشخصي",
+    "completionRate": "معدل الاكتمال",
+    "totalApplications": "إجمالي الطلبات",
+    "applicationsSent": "الطلبات المرسلة",
+    "totalJobs": "الوظائف المتاحة",
+    "activeJobs": "قوائم الوظائف النشطة",
+    "applicationStatuses": "حالات الطلبات",
+    "pending": "قيد الانتظار",
+    "reviewing": "قيد المراجعة",
+    "interview": "مقابلة",
+    "accepted": "مقبول",
+    "rejected": "مرفوض",
+    "successRate": "معدل النجاح",
+    "acceptedApplications": "الطلبات المقبولة"
+  },
+  "userSettings": {
+    "title": "الإعدادات",
+    "subtitle": "إدارة إعدادات حسابك والتطبيق",
+    "notifications": {
+      "title": "إعدادات الإشعارات",
+      "email": {
+        "label": "إشعارات البريد الإلكتروني",
+        "description": "تلقي رسائل بريد إلكتروني لقوائم الوظائف الجديدة وتحديثات الطلبات"
+      },
+      "push": {
+        "label": "الإشعارات الفورية",
+        "description": "تلقي إشعارات المتصفح"
+      },
+      "sms": {
+        "label": "إشعارات الرسائل النصية",
+        "description": "تلقي رسائل نصية للتحديثات المهمة"
+      }
+    },
+    "privacy": {
+      "title": "إعدادات الخصوصية",
+      "profileVisibility": {
+        "label": "رؤية الملف الشخصي",
+        "description": "السماح لأصحاب العمل بعرض ملفك الشخصي"
+      },
+      "cvVisibility": {
+        "label": "رؤية السيرة الذاتية",
+        "description": "السماح لأصحاب العمل بتنزيل سيرتك الذاتية"
+      }
+    },
+    "account": {
+      "title": "إجراءات الحساب",
+      "changePassword": "تغيير كلمة المرور",
+      "deleteAccount": "حذف الحساب"
+    }
   }
 }
 

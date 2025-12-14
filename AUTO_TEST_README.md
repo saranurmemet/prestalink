@@ -126,3 +126,12 @@ Test tamamlandığında:
 **Rapor:** `TEST_REPORT.md` (test sonrası oluşturulacak)
 
 
+
+
+
+
+
+
+
+
+
