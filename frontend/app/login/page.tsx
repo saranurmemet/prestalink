@@ -100,6 +100,14 @@ const LoginPage = () => {
     try {
       setLoading(true);
       setError(null);
+      
+      // Rol seçilmediğini kontrol et
+      if (!selectedRole) {
+        setError('Please select a role');
+        setLoading(false);
+        return;
+      }
+      
       // Seçilen rolü gönder - backend doğrulaması yapacak
       const response = await loginUser({ email, password }, selectedRole);
       setAuth(response.data);
