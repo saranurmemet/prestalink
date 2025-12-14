@@ -106,8 +106,9 @@ const LoginPage = () => {
     const password = formData.get('password') as string;
 
     try {
-      setLoading(true);
       setError(null);
+      setLoading(true);
+      setRetryCount(0); // Reset retry count on new attempt
       
       // Rol seçilmediğini kontrol et
       if (!selectedRole) {
