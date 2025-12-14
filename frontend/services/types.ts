@@ -22,6 +22,7 @@ export interface Job {
   location: string;
   requiredExperience?: string;
   requiredLanguage?: string;
+  workType?: string;
   createdAt?: string;
 }
 
