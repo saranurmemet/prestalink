@@ -32,7 +32,7 @@ const CVPage = () => {
         // CV içeriğini ayarla
         if ((updatedUser as any)?.cvContent) {
           setCvContent((updatedUser as any).cvContent);
-        } else if (user.cvContent) {
+        } else if ((user as any)?.cvContent) {
           setCvContent((user as any).cvContent);
         } else {
           setCvContent('CV içeriği bulunamadı. Lütfen profil sayfanızdan CV\'nizi yükleyin.');
