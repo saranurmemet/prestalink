@@ -321,22 +321,29 @@
   },
   "testimonials": {
     "tag": "Histoires de succès",
-    "title": "Ce que disent nos candidats",
-    "subtitle": "De vraies histoires de personnes qui ont trouvé leur emploi parfait grâce à Prestalink.",
-    "item1": {
-      "name": "Leyla K.",
-      "role": "Spécialiste CNC, Munich",
-      "text": "Prestalink a rendu ma relocalisation en Allemagne si fluide. L'équipe de soutien a aidé avec tout, des documents à la recherche d'un appartement."
+    "title": "Ce que disent nos utilisateurs",
+    "subtitle": "Expériences réelles de nos utilisateurs qui ont trouvé un emploi grâce à PrestaLink",
+    "foundJob": "Emploi trouvé",
+    "story1": {
+      "name": "Amine Bensalem",
+      "role": "Spécialiste en contrôle qualité",
+      "location": "Algérie → Berlin, Allemagne",
+      "text": "Grâce à PrestaLink, j'ai trouvé un emploi de qualité en Allemagne. La plateforme est très conviviale et vous pouvez communiquer directement avec les employeurs. Le processus de téléchargement du CV et de candidature est très facile. Je travaille maintenant à Berlin et je suis très heureux !",
+      "job": "Ingénieur senior en contrôle qualité"
     },
-    "item2": {
-      "name": "Omar S.",
-      "role": "Infirmier, Hambourg",
-      "text": "En tant que professionnel de la santé, j'avais besoin d'opportunités vérifiées. Prestalink m'a connecté avec des employeurs de confiance et je travaille maintenant dans mon emploi de rêve."
+    "story2": {
+      "name": "Fatima Zohra",
+      "role": "Infirmière diplômée",
+      "location": "Algérie → Paris, France",
+      "text": "Je voulais trouver un emploi en France en tant qu'infirmière. PrestaLink a de nombreuses offres d'emploi dans le secteur de la santé et le processus de candidature est très rapide. Les employeurs répondent rapidement. Je travaille maintenant dans un hôpital à Paris !",
+      "job": "Infirmière en soins intensifs"
     },
-    "item3": {
-      "name": "Sara M.",
-      "role": "Chef, Paris",
-      "text": "La plateforme multilingue a facilité la communication. En 2 mois, j'ai eu plusieurs offres et j'ai choisi la meilleure pour ma carrière."
+    "story3": {
+      "name": "Karim Benali",
+      "role": "Ingénieur logiciel",
+      "location": "Algérie → Amsterdam, Pays-Bas",
+      "text": "Je voulais faire carrière en Europe en tant qu'ingénieur logiciel. PrestaLink a de nombreuses offres d'emploi d'entreprises technologiques. Ma candidature a été acceptée et je travaille maintenant à Amsterdam. La plateforme est vraiment professionnelle !",
+      "job": "Développeur Full-Stack"
     }
   },
   "cta": {
@@ -717,11 +724,19 @@
     "title": "Modifier le Profil",
     "subtitle": "Mettez à jour vos informations personnelles",
     "incompleteWarning": "Votre profil semble incomplet. Veuillez remplir toutes les informations.",
+    "profileCompletion": "Complétion du Profil",
+    "profileIncomplete": "Profil Incomplet",
+    "personalInformation": "Informations Personnelles",
+    "careerInformation": "Informations de Carrière",
+    "filesAndDocuments": "Fichiers et Documents",
+    "city": "Ville",
+    "characters": "caractères",
     "fields": {
       "fullName": "Nom Complet",
       "email": "E-mail",
       "phone": "Téléphone",
       "country": "Pays",
+      "city": "Ville",
       "languages": "Langues",
       "experienceLevel": "Niveau d'expérience",
       "bio": "Biographie",
@@ -731,7 +746,34 @@
     },
     "placeholders": {
       "country": "Ex: Turquie, Allemagne...",
-      "bio": "Écrivez une courte biographie sur vous..."
+      "city": "Votre ville",
+      "bio": "Écrivez une courte biographie sur vous...",
+      "name": "Votre nom et prénom",
+      "email": "email@example.com",
+      "phone": "+90 555 123 4567"
+    },
+    "experienceLevels": {
+      "entry": "Niveau Débutant (0-2 ans)",
+      "mid": "Niveau Intermédiaire (3-5 ans)",
+      "senior": "Niveau Senior (5+ ans)"
+    },
+    "upload": {
+      "photo": "Télécharger une Photo",
+      "photoHint": "PNG, JPG (Max 5MB)",
+      "cv": "Télécharger un Fichier CV",
+      "cvHint": "Format PDF (Max 10MB)",
+      "certificates": "Télécharger des Fichiers de Certificats",
+      "certificatesHint": "PDF, JPG, PNG (Max 5MB par fichier)",
+      "certificatesSelected": "certificats sélectionnés"
+    },
+    "languageNames": {
+      "TR": "Turc",
+      "EN": "Anglais",
+      "FR": "Français",
+      "DE": "Allemand",
+      "AR": "Arabe",
+      "ES": "Espagnol",
+      "IT": "Italien"
     },
     "save": "Enregistrer",
     "cancel": "Annuler",

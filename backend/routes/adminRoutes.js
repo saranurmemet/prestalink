@@ -143,7 +143,7 @@ router.post('/seed-comprehensive-profiles', async (req, res) => {
           'Advanced Manufacturing Techniques (Siemens Technical Academy, 2021)',
           'Occupational Health & Safety Training (Ministry of Labor, 2023)'
         ],
-        profilePhoto: 'https://i.pravatar.cc/400?img=12',
+        profilePhoto: '/uploads/profile-photos/mehmet.png',
         cvUrl: '/uploads/cvs/mehmet_cv.pdf',
         cvContent: `MEHMET DEMIR
 Quality Control Specialist
@@ -194,7 +194,7 @@ Turkish (Native), English (Fluent), French (Fluent), Arabic (Conversational)`
           'Docker & Kubernetes Fundamentals (2022)',
           'Agile & Scrum Master Certification (2020)'
         ],
-        profilePhoto: 'https://api.dicebear.com/7.x/avataaars/svg?seed=ahmet',
+        profilePhoto: '/uploads/profile-photos/ahmet.png',
         cvUrl: '/uploads/cvs/ahmet_cv.pdf',
         cvContent: `AHMET SURIYE
 Software Engineer
@@ -243,7 +243,7 @@ Turkish (Native), English (Fluent), German (Intermediate)`
           'Emergency Nursing Certification (2020)',
           'Infection Control & Prevention Training (2023)'
         ],
-        profilePhoto: 'https://api.dicebear.com/7.x/avataaars/svg?seed=sara',
+        profilePhoto: '/uploads/profile-photos/sara.png',
         cvUrl: '/uploads/cvs/sara_cv.pdf',
         cvContent: `SARA SOLEY
 Registered Nurse
@@ -302,7 +302,7 @@ French (Native), Arabic (Native), English (Fluent), Turkish (Conversational)`
           'International Recruitment Strategies (2021)',
           'LinkedIn Recruiter Certification (2020)'
         ],
-        profilePhoto: 'https://api.dicebear.com/7.x/avataaars/svg?seed=sarad',
+        profilePhoto: '/uploads/profile-photos/sarad.png',
         cvUrl: '/uploads/cvs/sarad_cv.pdf',
         cvContent: `SARAD KAŞGARLI
 HR & Recruitment Specialist

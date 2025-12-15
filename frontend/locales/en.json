@@ -321,22 +321,29 @@
   },
   "testimonials": {
     "tag": "Success stories",
-    "title": "What our candidates say",
-    "subtitle": "Real stories from people who found their perfect job through Prestalink.",
-    "item1": {
-      "name": "Leyla K.",
-      "role": "CNC Specialist, Munich",
-      "text": "Prestalink made my relocation to Germany so smooth. The support team helped with everything from documents to finding an apartment."
+    "title": "What Our Users Say",
+    "subtitle": "Real experiences from our users who found jobs through PrestaLink",
+    "foundJob": "Found Job",
+    "story1": {
+      "name": "Amine Bensalem",
+      "role": "Quality Control Specialist",
+      "location": "Algeria → Berlin, Germany",
+      "text": "Thanks to PrestaLink, I found a quality job in Germany. The platform is very user-friendly and you can communicate directly with employers. The CV upload and application process is very easy. I'm now working in Berlin and very happy!",
+      "job": "Senior Quality Control Engineer"
     },
-    "item2": {
-      "name": "Omar S.",
-      "role": "Nurse, Hamburg",
-      "text": "As a healthcare professional, I needed verified opportunities. Prestalink connected me with trusted employers and I'm now working in my dream job."
+    "story2": {
+      "name": "Fatima Zohra",
+      "role": "Registered Nurse",
+      "location": "Algeria → Paris, France",
+      "text": "I wanted to find a job in France as a nurse. PrestaLink has many healthcare sector job postings and the application process is very fast. Employers respond quickly. I'm now working in a hospital in Paris!",
+      "job": "ICU Registered Nurse"
     },
-    "item3": {
-      "name": "Sara M.",
-      "role": "Chef, Paris",
-      "text": "The multilingual platform made it easy to communicate. Within 2 months, I had multiple offers and chose the best one for my career."
+    "story3": {
+      "name": "Karim Benali",
+      "role": "Software Engineer",
+      "location": "Algeria → Amsterdam, Netherlands",
+      "text": "I wanted to build a career in Europe as a software engineer. PrestaLink has many technology company job postings. My application was accepted and I'm now working in Amsterdam. The platform is truly professional!",
+      "job": "Full-Stack Software Developer"
     }
   },
   "cta": {
@@ -719,11 +726,19 @@
     "title": "Edit Profile",
     "subtitle": "Update your personal information",
     "incompleteWarning": "Your profile appears incomplete. Please fill in all information.",
+    "profileCompletion": "Profile Completion",
+    "profileIncomplete": "Profile Incomplete",
+    "personalInformation": "Personal Information",
+    "careerInformation": "Career Information",
+    "filesAndDocuments": "Files and Documents",
+    "city": "City",
+    "characters": "characters",
     "fields": {
       "fullName": "Full Name",
       "email": "Email",
       "phone": "Phone",
       "country": "Country",
+      "city": "City",
       "languages": "Languages",
       "experienceLevel": "Experience Level",
       "bio": "Short Bio",
@@ -733,7 +748,34 @@
     },
     "placeholders": {
       "country": "E.g: Turkey, Germany...",
-      "bio": "Write a short bio about yourself..."
+      "city": "Your city",
+      "bio": "Write a short bio about yourself...",
+      "name": "Your name and surname",
+      "email": "email@example.com",
+      "phone": "+90 555 123 4567"
+    },
+    "experienceLevels": {
+      "entry": "Entry Level (0-2 years)",
+      "mid": "Mid Level (3-5 years)",
+      "senior": "Senior (5+ years)"
+    },
+    "upload": {
+      "photo": "Upload Photo",
+      "photoHint": "PNG, JPG (Max 5MB)",
+      "cv": "Upload CV File",
+      "cvHint": "PDF format (Max 10MB)",
+      "certificates": "Upload Certificate Files",
+      "certificatesHint": "PDF, JPG, PNG (Max 5MB per file)",
+      "certificatesSelected": "certificates selected"
+    },
+    "languageNames": {
+      "TR": "Turkish",
+      "EN": "English",
+      "FR": "French",
+      "DE": "German",
+      "AR": "Arabic",
+      "ES": "Spanish",
+      "IT": "Italian"
     },
     "save": "Save",
     "cancel": "Cancel",

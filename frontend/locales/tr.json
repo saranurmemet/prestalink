@@ -321,22 +321,29 @@
   },
   "testimonials": {
     "tag": "Başarı hikayeleri",
-    "title": "Adaylarımız ne diyor",
-    "subtitle": "Prestalink aracılığıyla mükemmel işlerini bulan insanlardan gerçek hikayeler.",
-    "item1": {
-      "name": "Leyla K.",
-      "role": "CNC Uzmanı, Münih",
-      "text": "Prestalink, Almanya'ya yerleşmemi çok kolaylaştırdı. Destek ekibi belgelerden daire bulmaya kadar her konuda yardımcı oldu."
+    "title": "Kullanıcılarımız Ne Diyor?",
+    "subtitle": "PrestaLink ile iş bulan kullanıcılarımızın gerçek deneyimleri",
+    "foundJob": "Bulduğu İş",
+    "story1": {
+      "name": "Amine Bensalem",
+      "role": "Kalite Kontrol Uzmanı",
+      "location": "Cezayir → Berlin, Almanya",
+      "text": "PrestaLink sayesinde Almanya'da kaliteli bir iş buldum. Platform çok kullanıcı dostu ve işverenlerle doğrudan iletişim kurabiliyorsunuz. CV yükleme ve başvuru süreci çok kolay. Şimdi Berlin'de çalışıyorum ve çok mutluyum!",
+      "job": "Kıdemli Kalite Kontrol Mühendisi"
     },
-    "item2": {
-      "name": "Omar S.",
-      "role": "Hemşire, Hamburg",
-      "text": "Sağlık profesyoneli olarak doğrulanmış fırsatlara ihtiyacım vardı. Prestalink beni güvenilir işverenlerle buluşturdu ve şimdi hayal ettiğim işte çalışıyorum."
+    "story2": {
+      "name": "Fatima Zohra",
+      "role": "Kayıtlı Hemşire",
+      "location": "Cezayir → Paris, Fransa",
+      "text": "Hemşire olarak Fransa'da iş bulmak istiyordum. PrestaLink'te birçok sağlık sektörü iş ilanı var ve başvuru süreci çok hızlı. İşverenler hızlı geri dönüş yapıyor. Artık Paris'te bir hastanede çalışıyorum!",
+      "job": "Yoğun Bakım Hemşiresi"
     },
-    "item3": {
-      "name": "Sara M.",
-      "role": "Şef, Paris",
-      "text": "Çok dilli platform iletişimi kolaylaştırdı. 2 ay içinde birden fazla teklif aldım ve kariyerim için en iyisini seçtim."
+    "story3": {
+      "name": "Karim Benali",
+      "role": "Yazılım Mühendisi",
+      "location": "Cezayir → Amsterdam, Hollanda",
+      "text": "Yazılım mühendisi olarak Avrupa'da kariyer yapmak istiyordum. PrestaLink'te birçok teknoloji şirketi ilanı var. Başvurum kabul edildi ve şimdi Amsterdam'da çalışıyorum. Platform gerçekten profesyonel!",
+      "job": "Full-Stack Yazılım Geliştirici"
     }
   },
   "cta": {
@@ -720,11 +727,19 @@
     "title": "Profil Düzenle",
     "subtitle": "Kişisel bilgilerinizi güncelleyin",
     "incompleteWarning": "Profiliniz eksik görünüyor. Lütfen tüm bilgileri doldurun.",
+    "profileCompletion": "Profil Tamamlanma",
+    "profileIncomplete": "Profil Eksik",
+    "personalInformation": "Kişisel Bilgiler",
+    "careerInformation": "Kariyer Bilgileri",
+    "filesAndDocuments": "Dosyalar ve Belgeler",
+    "city": "Şehir",
+    "characters": "karakter",
     "fields": {
       "fullName": "Ad Soyad",
       "email": "E-posta",
       "phone": "Telefon",
       "country": "Ülke",
+      "city": "Şehir",
       "languages": "Diller",
       "experienceLevel": "Deneyim Seviyesi",
       "bio": "Kısa Özgeçmiş",
@@ -734,7 +749,34 @@
     },
     "placeholders": {
       "country": "Örn: Türkiye, Almanya...",
-      "bio": "Kendiniz hakkında kısa bilgi..."
+      "city": "Şehir adınız",
+      "bio": "Kendiniz hakkında kısa bilgi...",
+      "name": "Adınız ve soyadınız",
+      "email": "email@example.com",
+      "phone": "+90 555 123 4567"
+    },
+    "experienceLevels": {
+      "entry": "Başlangıç Seviyesi (0-2 yıl)",
+      "mid": "Orta Seviye (3-5 yıl)",
+      "senior": "Kıdemli (5+ yıl)"
+    },
+    "upload": {
+      "photo": "Fotoğraf Yükle",
+      "photoHint": "PNG, JPG (Max 5MB)",
+      "cv": "CV Dosyası Yükle",
+      "cvHint": "PDF formatında (Max 10MB)",
+      "certificates": "Sertifika Dosyaları Yükle",
+      "certificatesHint": "PDF, JPG, PNG (Max 5MB her dosya)",
+      "certificatesSelected": "sertifika seçildi"
+    },
+    "languageNames": {
+      "TR": "Türkçe",
+      "EN": "English",
+      "FR": "Français",
+      "DE": "Deutsch",
+      "AR": "العربية",
+      "ES": "Español",
+      "IT": "Italiano"
     },
     "save": "Kaydet",
     "cancel": "İptal",

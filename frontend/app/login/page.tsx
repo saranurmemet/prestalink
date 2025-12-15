@@ -210,16 +210,21 @@ const LoginPage = () => {
             return (
               <button
                 key={role.value}
-                onClick={() => setSelectedRole(role.value)}
-                className="glass-panel p-5 sm:p-6 md:p-8 text-center card-hover group animate-fade-in relative overflow-hidden"
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  setSelectedRole(role.value);
+                }}
+                className="glass-panel p-5 sm:p-6 md:p-8 text-center card-hover group animate-fade-in relative overflow-hidden cursor-pointer"
                 style={{ animationDelay: `${roles.indexOf(role) * 0.1}s` }}
               >
-                <div className={`mx-auto mb-3 sm:mb-4 flex h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 items-center justify-center rounded-2xl bg-gradient-to-br ${role.gradient} text-white transition-transform duration-300 group-hover:scale-110 shadow-lg`}>
+                <div className={`mx-auto mb-3 sm:mb-4 flex h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 items-center justify-center rounded-2xl bg-gradient-to-br ${role.gradient} text-white transition-transform duration-300 group-hover:scale-110 shadow-lg pointer-events-none`}>
                   <IconComponent className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8" strokeWidth={2.5} />
                 </div>
-                <h3 className="text-base sm:text-lg md:text-xl font-semibold text-brandNavy dark:text-slate-100 mb-2">{t(role.titleKey)}</h3>
-                <p className="text-xs sm:text-sm text-brandGray dark:text-slate-300 mb-3 sm:mb-4 leading-relaxed min-h-[3rem] sm:min-h-[3.5rem]">{t(role.descKey)}</p>
-                <div className="flex items-center justify-center gap-2 text-brandBlue font-semibold text-xs sm:text-sm md:text-base mt-auto">
+                <h3 className="text-base sm:text-lg md:text-xl font-semibold text-brandNavy dark:text-slate-100 mb-2 pointer-events-none">{t(role.titleKey)}</h3>
+                <p className="text-xs sm:text-sm text-brandGray dark:text-slate-300 mb-3 sm:mb-4 leading-relaxed min-h-[3rem] sm:min-h-[3.5rem] pointer-events-none">{t(role.descKey)}</p>
+                <div className="flex items-center justify-center gap-2 text-brandBlue font-semibold text-xs sm:text-sm md:text-base mt-auto pointer-events-none">
                   <span>{t('auth.continue')}</span>
                   <ChevronRight className="h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 transition-transform group-hover:translate-x-1 flex-shrink-0" />
                 </div>
