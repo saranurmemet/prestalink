@@ -127,6 +127,8 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+// Serve profile photos from public directory
+app.use('/uploads/profile-photos', express.static(path.join(__dirname, 'public', 'profile-photos')));
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
