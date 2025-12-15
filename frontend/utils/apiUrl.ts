@@ -53,7 +53,15 @@ export const getProfilePhotoUrl = (profilePhoto?: string | null): string => {
   
   // Relative path - prepend API base URL
   const normalizedPath = profilePhoto.startsWith('/') ? profilePhoto : `/${profilePhoto}`;
-  return `${getApiBaseUrl()}${normalizedPath}`;
+  const apiBaseUrl = getApiBaseUrl();
+  const fullUrl = `${apiBaseUrl}${normalizedPath}`;
+  
+  // Debug log in development
+  if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
+    console.log('Profile Photo URL:', { profilePhoto, apiBaseUrl, fullUrl });
+  }
+  
+  return fullUrl;
 };
 
 
