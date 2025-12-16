@@ -206,6 +206,14 @@
       "title": "Matching d'emploi par IA",
       "body": "Notre technologie IA avancée identifie automatiquement les opportunités d'emploi les plus adaptées à votre profil, expérience et objectifs."
     },
+    "matching": {
+      "title": "Matching d'emploi par IA",
+      "body": "Notre technologie IA avancée identifie automatiquement les opportunités d'emploi les plus adaptées à votre profil, expérience et objectifs."
+    },
+    "cvVault": {
+      "title": "Archives CV",
+      "body": "Stockez en toute sécurité tous vos CV et gérez les versions dans différentes langues. Accédez-y et mettez-les à jour quand vous en avez besoin."
+    },
     "autoApplication": {
       "title": "Gestion automatique des candidatures",
       "body": "Nous soumettons automatiquement vos candidatures aux entreprises adaptées avec votre CV localisé et suivons tout le processus."
@@ -344,6 +352,21 @@
       "location": "Algérie → Amsterdam, Pays-Bas",
       "text": "Je voulais faire carrière en Europe en tant qu'ingénieur logiciel. PrestaLink a de nombreuses offres d'emploi d'entreprises technologiques. Ma candidature a été acceptée et je travaille maintenant à Amsterdam. La plateforme est vraiment professionnelle !",
       "job": "Développeur Full-Stack"
+    },
+    "item1": {
+      "name": "Amine Bensalem",
+      "role": "Spécialiste en contrôle qualité",
+      "text": "Grâce à PrestaLink, j'ai trouvé un emploi de qualité en Allemagne. La plateforme est très conviviale et vous pouvez communiquer directement avec les employeurs. Le processus de téléchargement de CV et de candidature est très facile. Je travaille maintenant à Berlin et je suis très heureux !"
+    },
+    "item2": {
+      "name": "Fatima Zohra",
+      "role": "Infirmière diplômée",
+      "text": "Je voulais trouver un emploi en France en tant qu'infirmière. PrestaLink a de nombreuses offres d'emploi dans le secteur de la santé et le processus de candidature est très rapide. Les employeurs répondent rapidement. Je travaille maintenant dans un hôpital à Paris !"
+    },
+    "item3": {
+      "name": "Karim Benali",
+      "role": "Ingénieur logiciel",
+      "text": "Je voulais faire carrière en Europe en tant qu'ingénieur logiciel. PrestaLink a de nombreuses offres d'emploi d'entreprises technologiques. Ma candidature a été acceptée et je travaille maintenant à Amsterdam. La plateforme est vraiment professionnelle !"
     }
   },
   "cta": {

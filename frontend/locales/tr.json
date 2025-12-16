@@ -206,6 +206,14 @@
       "title": "Yapay Zeka İş Eşleştirme",
       "body": "Gelişmiş AI teknolojisi ile profilinize, deneyiminize ve hedeflerinize en uygun iş fırsatlarını otomatik olarak belirliyoruz."
     },
+    "matching": {
+      "title": "Yapay Zeka İş Eşleştirme",
+      "body": "Gelişmiş AI teknolojisi ile profilinize, deneyiminize ve hedeflerinize en uygun iş fırsatlarını otomatik olarak belirliyoruz."
+    },
+    "cvVault": {
+      "title": "CV Arşivi",
+      "body": "Tüm CV'lerinizi güvenli bir şekilde saklayın ve farklı dillerde versiyonlarınızı yönetin. İstediğiniz zaman erişin ve güncelleyin."
+    },
     "autoApplication": {
       "title": "Otomatik Başvuru Yönetimi",
       "body": "Hedef ülke diline göre lokalize edilmiş CV'nizle uygun firmalara otomatik olarak başvuru yapıyor ve tüm süreci takip ediyoruz."
@@ -344,6 +352,21 @@
       "location": "Cezayir → Amsterdam, Hollanda",
       "text": "Yazılım mühendisi olarak Avrupa'da kariyer yapmak istiyordum. PrestaLink'te birçok teknoloji şirketi ilanı var. Başvurum kabul edildi ve şimdi Amsterdam'da çalışıyorum. Platform gerçekten profesyonel!",
       "job": "Full-Stack Yazılım Geliştirici"
+    },
+    "item1": {
+      "name": "Amine Bensalem",
+      "role": "Kalite Kontrol Uzmanı",
+      "text": "PrestaLink sayesinde Almanya'da kaliteli bir iş buldum. Platform çok kullanıcı dostu ve işverenlerle doğrudan iletişim kurabiliyorsunuz. CV yükleme ve başvuru süreci çok kolay. Şimdi Berlin'de çalışıyorum ve çok mutluyum!"
+    },
+    "item2": {
+      "name": "Fatima Zohra",
+      "role": "Kayıtlı Hemşire",
+      "text": "Hemşire olarak Fransa'da iş bulmak istiyordum. PrestaLink'te birçok sağlık sektörü iş ilanı var ve başvuru süreci çok hızlı. İşverenler hızlı geri dönüş yapıyor. Artık Paris'te bir hastanede çalışıyorum!"
+    },
+    "item3": {
+      "name": "Karim Benali",
+      "role": "Yazılım Mühendisi",
+      "text": "Yazılım mühendisi olarak Avrupa'da kariyer yapmak istiyordum. PrestaLink'te birçok teknoloji şirketi ilanı var. Başvurum kabul edildi ve şimdi Amsterdam'da çalışıyorum. Platform gerçekten profesyonel!"
     }
   },
   "cta": {

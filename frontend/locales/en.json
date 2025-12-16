@@ -206,6 +206,14 @@
       "title": "AI Job Matching",
       "body": "Our advanced AI technology automatically identifies the most suitable job opportunities for your profile, experience and goals."
     },
+    "matching": {
+      "title": "AI Job Matching",
+      "body": "Our advanced AI technology automatically identifies the most suitable job opportunities for your profile, experience and goals."
+    },
+    "cvVault": {
+      "title": "CV Vault",
+      "body": "Securely store all your CVs and manage versions in different languages. Access and update them anytime you need."
+    },
     "autoApplication": {
       "title": "Automatic Application Management",
       "body": "We automatically submit applications to suitable companies with your localized CV and track the entire process."
@@ -344,6 +352,21 @@
       "location": "Algeria → Amsterdam, Netherlands",
       "text": "I wanted to build a career in Europe as a software engineer. PrestaLink has many technology company job postings. My application was accepted and I'm now working in Amsterdam. The platform is truly professional!",
       "job": "Full-Stack Software Developer"
+    },
+    "item1": {
+      "name": "Amine Bensalem",
+      "role": "Quality Control Specialist",
+      "text": "Thanks to PrestaLink, I found a quality job in Germany. The platform is very user-friendly and you can communicate directly with employers. The CV upload and application process is very easy. I'm now working in Berlin and very happy!"
+    },
+    "item2": {
+      "name": "Fatima Zohra",
+      "role": "Registered Nurse",
+      "text": "I wanted to find a job in France as a nurse. PrestaLink has many healthcare sector job postings and the application process is very fast. Employers respond quickly. I'm now working in a hospital in Paris!"
+    },
+    "item3": {
+      "name": "Karim Benali",
+      "role": "Software Engineer",
+      "text": "I wanted to build a career in Europe as a software engineer. PrestaLink has many technology company job postings. My application was accepted and I'm now working in Amsterdam. The platform is truly professional!"
     }
   },
   "cta": {

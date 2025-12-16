@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import ProtectedPage from '@/components/layout/ProtectedPage';
 import UserLayout from '@/components/layout/UserLayout';
 import { useAuthStore } from '@/store/useAuthStore';
@@ -18,6 +19,7 @@ import { getProfilePhotoUrl } from '@/utils/apiUrl';
 const UserDashboard = () => {
   const { user } = useAuthStore();
   const { t } = useLanguage();
+  const router = useRouter();
   const [jobs, setJobs] = useState<Job[]>([]);
   const [applications, setApplications] = useState<Application[]>([]);
   const [notifications, setNotifications] = useState<Notification[]>([]);
@@ -182,8 +184,9 @@ const UserDashboard = () => {
           </div>
 
           {/* Total Applications */}
-          <div 
-            className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-md border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all duration-300 hover:scale-105"
+          <Link
+            href="/user/applications"
+            className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-md border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer"
             style={{ animation: 'fadeInUp 0.6s ease-out 0.2s both' }}
           >
             <h3 className="text-sm font-medium text-slate-600 dark:text-slate-400 mb-2">
@@ -193,11 +196,12 @@ const UserDashboard = () => {
             <p className="text-xs text-slate-500 dark:text-slate-400">
               {applications.length > 0 ? 'Aktif başvurular' : 'Henüz başvuru yok'}
             </p>
-          </div>
+          </Link>
 
           {/* New Job Matches */}
-          <div 
-            className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-md border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all duration-300 hover:scale-105"
+          <Link
+            href="/user/jobs"
+            className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-md border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer"
             style={{ animation: 'fadeInUp 0.6s ease-out 0.3s both' }}
           >
             <h3 className="text-sm font-medium text-slate-600 dark:text-slate-400 mb-2">
@@ -207,20 +211,28 @@ const UserDashboard = () => {
             <p className="text-xs text-slate-500 dark:text-slate-400">
               Size uygun işler
             </p>
-          </div>
+          </Link>
 
           {/* Unread Notifications */}
           <div 
-            className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-md border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all duration-300 hover:scale-105"
+            className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-md border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer relative"
             style={{ animation: 'fadeInUp 0.6s ease-out 0.4s both' }}
+            onClick={() => router.push('/user/notifications')}
           >
             <h3 className="text-sm font-medium text-slate-600 dark:text-slate-400 mb-2">
               {t('userDashboard.metrics.notifications')}
             </h3>
             <p className="text-3xl font-bold text-purple-600 mb-1">{unreadNotifications}</p>
-            <p className="text-xs text-slate-500 dark:text-slate-400">
+            <p className="text-xs text-slate-500 dark:text-slate-400 mb-2">
               {unreadNotifications > 0 ? 'Okunmamış bildirim' : 'Tüm bildirimler okundu'}
             </p>
+            <Link
+              href="/user/settings"
+              className="text-xs text-brandBlue hover:text-brandBlue/80 font-medium absolute bottom-2 right-2 z-10"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {t('userSettings.title')} →
+            </Link>
           </div>
         </section>
 
