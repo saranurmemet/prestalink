@@ -522,9 +522,23 @@
     "welcome": "مرحبًا",
     "welcomeUser": "مرحبًا {name}",
     "subtitle": "ارفع مستنداتك وتابع طلباتك وتواصل مع المجندين.",
+    "profileCompletion": "اكتمال الملف الشخصي",
     "cvStatus": "حالة السيرة الذاتية",
     "cvUploaded": "تم رفع السيرة الذاتية",
     "cvNotUploaded": "لم يتم رفع السيرة الذاتية",
+    "viewCv": "عرض السيرة الذاتية",
+    "activeApplications": "الطلبات النشطة",
+    "noApplicationsYet": "لا توجد طلبات بعد",
+    "suitableJobs": "وظائف مناسبة لك",
+    "unreadNotification": "إشعار غير مقروء",
+    "allNotificationsRead": "تمت قراءة جميع الإشعارات",
+    "updateProfileDesc": "قم بتحديث ملفك الشخصي",
+    "viewJobsDesc": "عرض قوائم الوظائف",
+    "badges": {
+      "cvUploaded": "تم رفع السيرة الذاتية",
+      "applications": "{{count}} طلب",
+      "profileCompleted": "اكتمل الملف الشخصي"
+    },
     "totalApplications": "إجمالي الطلبات",
     "newJobMatches": "وظائف جديدة متطابقة",
     "quickActions": "إجراءات سريعة",
@@ -851,6 +865,12 @@
     "delete": "حذف",
     "edit": "تعديل",
     "back": "رجوع"
+  },
+  "pwa": {
+    "updateAvailable": "تحديث جديد متاح!",
+    "updateDescription": "قم بالتحديث لتحديث التطبيق.",
+    "update": "تحديث",
+    "updating": "جاري التحديث..."
   },
   "userApplications": {
     "title": "طلباتي",

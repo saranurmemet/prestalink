@@ -522,9 +522,23 @@
     "welcome": "Welcome",
     "welcomeUser": "Welcome {name}",
     "subtitle": "Track your documents, monitor applications and respond to recruiter messages.",
+    "profileCompletion": "Profile Completion",
     "cvStatus": "CV Status",
     "cvUploaded": "CV Uploaded",
     "cvNotUploaded": "CV Not Uploaded",
+    "viewCv": "View CV",
+    "activeApplications": "Active applications",
+    "noApplicationsYet": "No applications yet",
+    "suitableJobs": "Jobs suitable for you",
+    "unreadNotification": "Unread notification",
+    "allNotificationsRead": "All notifications read",
+    "updateProfileDesc": "Update your profile",
+    "viewJobsDesc": "View job listings",
+    "badges": {
+      "cvUploaded": "CV Uploaded",
+      "applications": "{{count}} Applications",
+      "profileCompleted": "Profile Completed"
+    },
     "totalApplications": "Total Applications",
     "newJobMatches": "New Job Matches",
     "quickActions": "Quick Actions",
@@ -851,6 +865,12 @@
     "delete": "Delete",
     "edit": "Edit",
     "back": "Back"
+  },
+  "pwa": {
+    "updateAvailable": "New update available!",
+    "updateDescription": "Refresh to update the app.",
+    "update": "Update",
+    "updating": "Updating..."
   },
   "userApplications": {
     "title": "My Applications",

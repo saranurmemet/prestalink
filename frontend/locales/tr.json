@@ -523,9 +523,23 @@
     "welcome": "Hoş Geldiniz",
     "welcomeUser": "Hoş Geldiniz {name}",
     "subtitle": "Belgelerinizi yükleyin, başvurularınızı izleyin ve işe alım uzmanlarıyla iletişimde kalın.",
+    "profileCompletion": "Profil Tamamlanma",
     "cvStatus": "CV Durumu",
     "cvUploaded": "CV Yüklendi",
     "cvNotUploaded": "CV Yüklenmedi",
+    "viewCv": "CV'yi Görüntüle",
+    "activeApplications": "Aktif başvurular",
+    "noApplicationsYet": "Henüz başvuru yok",
+    "suitableJobs": "Size uygun işler",
+    "unreadNotification": "Okunmamış bildirim",
+    "allNotificationsRead": "Tüm bildirimler okundu",
+    "updateProfileDesc": "Profilinizi güncelleyin",
+    "viewJobsDesc": "İş ilanlarını görüntüleyin",
+    "badges": {
+      "cvUploaded": "CV Yüklendi",
+      "applications": "{{count}} Başvuru",
+      "profileCompleted": "Profil Tamamlandı"
+    },
     "totalApplications": "Toplam Başvuru",
     "newJobMatches": "Yeni İş Eşleşmeleri",
     "quickActions": "Hızlı İşlemler",
@@ -944,6 +958,12 @@
     "delete": "Sil",
     "edit": "Düzenle",
     "back": "Geri"
+  },
+  "pwa": {
+    "updateAvailable": "Yeni güncelleme mevcut!",
+    "updateDescription": "Uygulamayı güncellemek için yenileyin.",
+    "update": "Güncelle",
+    "updating": "Güncelleniyor..."
   }
 }
 

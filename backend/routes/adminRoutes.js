@@ -5,6 +5,10 @@ const User = require('../models/User');
 const Job = require('../models/Job');
 const Application = require('../models/Application');
 const Notification = require('../models/Notification');
+const { authMiddleware, authorizeRoles } = require('../middleware/authMiddleware');
+
+// All admin routes require authentication
+router.use(authMiddleware);
 
 // Seed endpoint - Sadece production'da bir kez çalıştırılmalı
 router.post('/seed-users', async (req, res) => {
@@ -790,6 +794,53 @@ French (Native), Arabic (Native), English (Fluent), Turkish (Conversational)`
     res.status(500).json({ 
       message: 'Failed', 
       error: error.message 
+    });
+  }
+});
+
+// Send notification to all users
+router.post('/notify-all-users', authorizeRoles('admin', 'superadmin'), async (req, res) => {
+  try {
+
+    const { title, message, targetRole } = req.body;
+
+    if (!title || !message) {
+      return res.status(400).json({ message: 'Title and message are required' });
+    }
+
+    // Get all users (optionally filter by role)
+    const query = {};
+    if (targetRole) {
+      query.role = targetRole;
+    }
+
+    const users = await User.find(query).select('_id');
+    
+    if (users.length === 0) {
+      return res.status(404).json({ message: 'No users found' });
+    }
+
+    // Create notifications for all users
+    const notifications = users.map(user => ({
+      targetUserId: user._id,
+      targetRole: targetRole || null,
+      title,
+      message,
+      read: false,
+    }));
+
+    await Notification.insertMany(notifications);
+
+    res.json({
+      success: true,
+      message: `Notification sent to ${notifications.length} users`,
+      count: notifications.length,
+    });
+  } catch (error) {
+    console.error('Error sending notifications:', error);
+    res.status(500).json({
+      message: 'Failed to send notifications',
+      error: error.message,
     });
   }
 });

@@ -520,9 +520,23 @@
     "welcome": "Bienvenue",
     "welcomeUser": "Bienvenue {name}",
     "subtitle": "Suivez vos documents, candidatures et messages recruteur.",
+    "profileCompletion": "Complétion du Profil",
     "cvStatus": "Statut CV",
     "cvUploaded": "CV Téléchargé",
     "cvNotUploaded": "CV Non Téléchargé",
+    "viewCv": "Voir le CV",
+    "activeApplications": "Candidatures actives",
+    "noApplicationsYet": "Aucune candidature pour le moment",
+    "suitableJobs": "Emplois adaptés pour vous",
+    "unreadNotification": "Notification non lue",
+    "allNotificationsRead": "Toutes les notifications sont lues",
+    "updateProfileDesc": "Mettez à jour votre profil",
+    "viewJobsDesc": "Voir les offres d'emploi",
+    "badges": {
+      "cvUploaded": "CV Téléchargé",
+      "applications": "{{count}} Candidatures",
+      "profileCompleted": "Profil Complété"
+    },
     "totalApplications": "Total des Candidatures",
     "newJobMatches": "Nouvelles Correspondances",
     "quickActions": "Actions Rapides",
@@ -849,6 +863,12 @@
     "delete": "Supprimer",
     "edit": "Modifier",
     "back": "Retour"
+  },
+  "pwa": {
+    "updateAvailable": "Nouvelle mise à jour disponible !",
+    "updateDescription": "Actualisez pour mettre à jour l'application.",
+    "update": "Mettre à jour",
+    "updating": "Mise à jour..."
   },
   "userApplications": {
     "title": "Mes Candidatures",

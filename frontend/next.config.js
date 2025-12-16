@@ -5,7 +5,7 @@ const withPWA = require('next-pwa')({
   disable: process.env.NODE_ENV === 'development' || process.env.PWA_ENABLED !== 'true',
   
   // Do NOT cache auth-related endpoints
-  skipWaiting: true, // Always update service worker
+  skipWaiting: false, // Wait for user confirmation before updating
   clientsClaim: true,
   
   // Add runtime caching config that EXCLUDES auth endpoints

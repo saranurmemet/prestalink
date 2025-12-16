@@ -76,9 +76,9 @@ const UserDashboard = () => {
 
   // Başarı rozetleri
   const badges = [
-    ...(hasCV || user?.cvUrl ? [{ icon: Award, label: 'CV Yüklendi', color: 'text-yellow-600', bgColor: 'bg-yellow-100 dark:bg-yellow-900/20' }] : []),
-    ...(applications.length > 0 ? [{ icon: Star, label: `${applications.length} Başvuru`, color: 'text-blue-600', bgColor: 'bg-blue-100 dark:bg-blue-900/20' }] : []),
-    ...(profileCompletion >= 80 ? [{ icon: TrendingUp, label: 'Profil Tamamlandı', color: 'text-green-600', bgColor: 'bg-green-100 dark:bg-green-900/20' }] : []),
+    ...(hasCV || user?.cvUrl ? [{ icon: Award, label: t('userDashboard.badges.cvUploaded'), color: 'text-yellow-600', bgColor: 'bg-yellow-100 dark:bg-yellow-900/20' }] : []),
+    ...(applications.length > 0 ? [{ icon: Star, label: t('userDashboard.badges.applications').replace('{{count}}', String(applications.length)), color: 'text-blue-600', bgColor: 'bg-blue-100 dark:bg-blue-900/20' }] : []),
+    ...(profileCompletion >= 80 ? [{ icon: TrendingUp, label: t('userDashboard.badges.profileCompleted'), color: 'text-green-600', bgColor: 'bg-green-100 dark:bg-green-900/20' }] : []),
   ];
 
   const content = (
@@ -111,7 +111,7 @@ const UserDashboard = () => {
                 {/* Profile Completion Bar */}
                 <div className="mt-4">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm text-white/90">Profil Tamamlanma</span>
+                    <span className="text-sm text-white/90">{t('userDashboard.profileCompletion')}</span>
                     <span className="text-sm font-semibold text-white">{profileCompletion}%</span>
                   </div>
                   <div className="w-full bg-white/20 rounded-full h-2 overflow-hidden">
@@ -178,7 +178,7 @@ const UserDashboard = () => {
                 className="mt-3 inline-flex items-center gap-2 text-sm text-brandBlue hover:text-brandBlue/80 font-medium"
               >
                 <FileText className="w-4 h-4" />
-                CV'yi Görüntüle
+                {t('userDashboard.viewCv')}
               </Link>
             )}
           </div>
@@ -194,7 +194,7 @@ const UserDashboard = () => {
             </h3>
             <p className="text-3xl font-bold text-brandBlue mb-1">{applications.length}</p>
             <p className="text-xs text-slate-500 dark:text-slate-400">
-              {applications.length > 0 ? 'Aktif başvurular' : 'Henüz başvuru yok'}
+              {applications.length > 0 ? t('userDashboard.activeApplications') : t('userDashboard.noApplicationsYet')}
             </p>
           </Link>
 
@@ -209,7 +209,7 @@ const UserDashboard = () => {
             </h3>
             <p className="text-3xl font-bold text-brandOrange mb-1">{recommendedJobs.length}</p>
             <p className="text-xs text-slate-500 dark:text-slate-400">
-              Size uygun işler
+              {t('userDashboard.suitableJobs')}
             </p>
           </Link>
 
@@ -224,7 +224,7 @@ const UserDashboard = () => {
             </h3>
             <p className="text-3xl font-bold text-purple-600 mb-1">{unreadNotifications}</p>
             <p className="text-xs text-slate-500 dark:text-slate-400 mb-2">
-              {unreadNotifications > 0 ? 'Okunmamış bildirim' : 'Tüm bildirimler okundu'}
+              {unreadNotifications > 0 ? t('userDashboard.unreadNotification') : t('userDashboard.allNotificationsRead')}
             </p>
             <Link
               href="/user/settings"
@@ -253,7 +253,7 @@ const UserDashboard = () => {
                 <h3 className="font-semibold text-slate-800 dark:text-slate-200">
                   {t('userDashboard.editProfile')}
                 </h3>
-                <p className="text-sm text-slate-600 dark:text-slate-400">Profilinizi güncelleyin</p>
+                <p className="text-sm text-slate-600 dark:text-slate-400">{t('userDashboard.updateProfileDesc')}</p>
               </div>
             </Link>
 
@@ -268,7 +268,7 @@ const UserDashboard = () => {
                 <h3 className="font-semibold text-slate-800 dark:text-slate-200">
                   {t('userDashboard.viewJobs')}
                 </h3>
-                <p className="text-sm text-slate-600 dark:text-slate-400">İş ilanlarını görüntüleyin</p>
+                <p className="text-sm text-slate-600 dark:text-slate-400">{t('userDashboard.viewJobsDesc')}</p>
               </div>
             </Link>
 
