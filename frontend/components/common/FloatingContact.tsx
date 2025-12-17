@@ -3,7 +3,9 @@
 import { MessageCircle, Phone, Settings, Mail, Headphones } from 'lucide-react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { useLanguage } from '@/components/providers/LanguageProvider';
+import { useFloatingContactStore } from '@/store/useFloatingContactStore';
 
 interface FloatingContactProps {
   phoneNumber?: string;
@@ -20,10 +22,16 @@ const FloatingContact = ({
   message = 'Merhaba, PrestaLink hakkında bilgi almak istiyorum.',
   showSettingsHint = true
 }: FloatingContactProps) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const { isOpen, toggle, close } = useFloatingContactStore();
   const [showHint, setShowHint] = useState(true);
   const router = useRouter();
+  const pathname = usePathname();
   const { t } = useLanguage();
+
+  // User dashboard pages already have a bottom nav.
+  // Hide the floating launcher there and let the bottom nav trigger the panel.
+  const hideLauncher = !!pathname?.startsWith('/user');
+  const containerBottomClass = hideLauncher ? 'bottom-20' : 'bottom-4';
   
   const handleWhatsApp = () => {
     const encodedMessage = encodeURIComponent(message);
@@ -64,9 +72,9 @@ const FloatingContact = ({
   };
 
   return (
-    <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50">
+    <div className={`fixed ${containerBottomClass} right-4 sm:bottom-6 sm:right-6 z-50`}>
       {/* Settings Hint Message */}
-      {showSettingsHint && showHint && !isOpen && (
+      {showSettingsHint && showHint && !isOpen && !hideLauncher && (
         <div className="mb-2 mr-12 sm:mr-16 flex items-center animate-fade-in">
           <button
             onClick={handleSettingsClick}
@@ -122,10 +130,11 @@ const FloatingContact = ({
       )}
 
       {/* Main Toggle Button - Kurumsal Tasarım */}
+      {!hideLauncher && (
       <div className="relative">
         <button
           onClick={() => {
-            setIsOpen(!isOpen);
+            toggle();
             if (!isOpen) setShowHint(false);
           }}
           className={`group relative flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-xl text-white shadow-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl ${
@@ -137,7 +146,7 @@ const FloatingContact = ({
           title="İletişime geç"
         >
           {isOpen ? (
-            <span className="text-xl sm:text-2xl font-bold">×</span>
+            <span className="text-xl sm:text-2xl font-bold" onClick={close}>×</span>
           ) : (
             <>
               <Headphones className="h-5 w-5 sm:h-6 sm:w-6 group-hover:scale-110 transition-transform" strokeWidth={2.5} />
@@ -149,6 +158,7 @@ const FloatingContact = ({
           )}
         </button>
       </div>
+      )}
     </div>
   );
 };

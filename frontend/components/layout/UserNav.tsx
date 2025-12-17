@@ -14,17 +14,20 @@ import {
   BarChart3,
   Settings,
   MessageSquare,
-  Star
+  Star,
+  Headphones
 } from 'lucide-react';
 import { useLanguage } from '@/components/providers/LanguageProvider';
 import { fetchNotifications } from '@/services/api';
 import { useAuthStore } from '@/store/useAuthStore';
+import { useFloatingContactStore } from '@/store/useFloatingContactStore';
 
 const UserNav = () => {
   const pathname = usePathname();
   const { t } = useLanguage();
   const { user } = useAuthStore();
   const [unreadCount, setUnreadCount] = useState(0);
+  const toggleContact = useFloatingContactStore((s) => s.toggle);
 
   useEffect(() => {
     if (!user) return;
@@ -60,6 +63,16 @@ const UserNav = () => {
     { href: '/user/statistics', icon: BarChart3, label: t('userNav.statistics') },
     { href: '/user/notifications', icon: Bell, label: t('userNav.notifications'), showBadge: true },
     { href: '/user/settings', icon: Settings, label: t('userNav.settings') },
+  ];
+
+  // Mobile bottom bar: show the core items + a "Contact" action that opens the support panel
+  const mobileItems = [
+    navItems[0], // dashboard
+    navItems[1], // profile
+    navItems[2], // cv
+    navItems[3], // jobs
+    navItems[4], // favorites
+    { href: '#contact', icon: Headphones, label: t('nav.contactSupport'), onClick: toggleContact },
   ];
 
   return (
@@ -119,7 +132,7 @@ const UserNav = () => {
       {/* Mobile Horizontal Navigation */}
       <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-lg">
         <div className="flex items-center justify-around px-2 py-2 overflow-x-auto scrollbar-hide">
-          {navItems.slice(0, 5).map((item) => {
+          {mobileItems.map((item) => {
             const Icon = item.icon;
             const isActive = pathname === item.href || 
               (item.href !== '/user/dashboard' && pathname?.startsWith(item.href));
@@ -127,27 +140,45 @@ const UserNav = () => {
             const showBadge = item.showBadge && unreadCount > 0;
             
             return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`
-                  flex flex-col items-center justify-center gap-1 px-2 sm:px-3 py-2 rounded-lg transition-all duration-200 relative min-w-[60px]
-                  ${isActive 
-                    ? 'text-brandBlue' 
-                    : 'text-slate-600 dark:text-slate-400'
-                  }
-                `}
-              >
-                <div className="relative flex-shrink-0">
-                  <Icon className="w-5 h-5" />
-                  {showBadge && (
-                    <span className="absolute -top-1 -right-1 flex items-center justify-center min-w-[16px] h-[16px] px-1 rounded-full text-[10px] font-bold bg-red-500 text-white border-2 border-white dark:border-slate-900 animate-pulse">
-                      {unreadCount > 9 ? '9+' : unreadCount}
-                    </span>
-                  )}
-                </div>
-                <span className="text-[10px] sm:text-xs font-medium text-center leading-tight">{item.label}</span>
-              </Link>
+              item.onClick ? (
+                <button
+                  key={item.href}
+                  type="button"
+                  onClick={item.onClick}
+                  className={`
+                    flex flex-col items-center justify-center gap-1 px-2 sm:px-3 py-2 rounded-lg transition-all duration-200 relative min-w-[60px]
+                    text-slate-600 dark:text-slate-400 hover:text-brandBlue
+                  `}
+                  aria-label={item.label}
+                >
+                  <div className="relative flex-shrink-0">
+                    <Icon className="w-5 h-5" />
+                  </div>
+                  <span className="text-[10px] sm:text-xs font-medium text-center leading-tight">{item.label}</span>
+                </button>
+              ) : (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`
+                    flex flex-col items-center justify-center gap-1 px-2 sm:px-3 py-2 rounded-lg transition-all duration-200 relative min-w-[60px]
+                    ${isActive 
+                      ? 'text-brandBlue' 
+                      : 'text-slate-600 dark:text-slate-400'
+                    }
+                  `}
+                >
+                  <div className="relative flex-shrink-0">
+                    <Icon className="w-5 h-5" />
+                    {showBadge && (
+                      <span className="absolute -top-1 -right-1 flex items-center justify-center min-w-[16px] h-[16px] px-1 rounded-full text-[10px] font-bold bg-red-500 text-white border-2 border-white dark:border-slate-900 animate-pulse">
+                        {unreadCount > 9 ? '9+' : unreadCount}
+                      </span>
+                    )}
+                  </div>
+                  <span className="text-[10px] sm:text-xs font-medium text-center leading-tight">{item.label}</span>
+                </Link>
+              )
             );
           })}
         </div>

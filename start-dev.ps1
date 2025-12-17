@@ -79,6 +79,9 @@ cd '$backendPath'
 Write-Host '🚀 Backend başlatılıyor...' -ForegroundColor Green
 Write-Host '📁 Dizin: $backendPath' -ForegroundColor Cyan
 `$env:NODE_ENV = 'development'
+`$env:CLIENT_URL = 'http://localhost:3000'
+`$env:MONGO_URI = 'mongodb://localhost:27017/prestalink'
+`$env:JWT_SECRET = 'prestalink-local-dev-secret'
 node server.js
 Write-Host ''
 Write-Host 'Backend durduruldu. Bu pencereyi kapatabilirsiniz.' -ForegroundColor Yellow
@@ -101,6 +104,7 @@ $frontendScript = @"
 cd '$frontendPath'
 Write-Host '🚀 Frontend başlatılıyor...' -ForegroundColor Green
 Write-Host '📁 Dizin: $frontendPath' -ForegroundColor Cyan
+`$env:NEXT_PUBLIC_API_URL = 'http://localhost:5000/api'
 npm run dev
 Write-Host ''
 Write-Host 'Frontend durduruldu. Bu pencereyi kapatabilirsiniz.' -ForegroundColor Yellow
