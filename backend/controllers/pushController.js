@@ -3,7 +3,17 @@ const asyncHandler = require('../utils/asyncHandler');
 const PushSubscription = require('../models/PushSubscription');
 const User = require('../models/User');
 
-function requireVapid() {
+function getVapidPublicKeyOnly() {
+  const publicKey = process.env.VAPID_PUBLIC_KEY;
+  if (!publicKey) {
+    const err = new Error('Missing VAPID_PUBLIC_KEY in backend environment.');
+    err.statusCode = 500;
+    throw err;
+  }
+  return publicKey;
+}
+
+function requireVapidForSend() {
   const publicKey = process.env.VAPID_PUBLIC_KEY;
   const privateKey = process.env.VAPID_PRIVATE_KEY;
   const subject = process.env.VAPID_SUBJECT || process.env.CLIENT_URL || 'mailto:hello@prestalink.app';
@@ -19,7 +29,7 @@ function requireVapid() {
 }
 
 async function sendToUserSubscriptions(userId, payload) {
-  requireVapid();
+  requireVapidForSend();
 
   const subs = await PushSubscription.find({ userId });
   if (!subs.length) {
@@ -50,7 +60,7 @@ async function sendToUserSubscriptions(userId, payload) {
 }
 
 exports.getVapidPublicKey = asyncHandler(async (req, res) => {
-  const { publicKey } = requireVapid();
+  const publicKey = getVapidPublicKeyOnly();
   res.json({ key: publicKey });
 });
 

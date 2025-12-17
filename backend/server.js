@@ -35,6 +35,12 @@ try {
   } else {
     console.log('✅ [STARTUP] All required environment variables are set');
   }
+
+  // Push (Web Push) env visibility
+  const hasVapidPublic = !!process.env.VAPID_PUBLIC_KEY;
+  const hasVapidPrivate = !!process.env.VAPID_PRIVATE_KEY;
+  console.log(`🔔 [STARTUP] VAPID_PUBLIC_KEY set: ${hasVapidPublic}`);
+  console.log(`🔔 [STARTUP] VAPID_PRIVATE_KEY set: ${hasVapidPrivate}`);
 } catch (err) {
   console.warn('⚠️  [STARTUP] Error loading .env file:', err.message);
 }
