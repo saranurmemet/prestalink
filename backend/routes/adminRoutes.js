@@ -901,4 +901,62 @@ router.post('/users/grant-all-roles', authorizeRoles('admin', 'superadmin'), asy
   }
 });
 
+// Bootstrap (seed-secret protected): allow granting roles before any admin exists
+// NOTE: Keep allowlisted to avoid broad privilege escalation.
+router.post('/bootstrap/grant-all-roles', async (req, res) => {
+  try {
+    const secretKey = req.headers['x-seed-secret'] || req.body?.secretKey;
+    const expectedSecret = process.env.SEED_SECRET || 'prestalink-seed-2024';
+
+    if (secretKey !== expectedSecret) {
+      return res.status(403).json({ message: 'Unauthorized' });
+    }
+
+    const allowlist = new Set(['mehmet@prestalink.app', 'sarad@prestalink.app']);
+    const requestedEmails = Array.isArray(req.body?.emails) ? req.body.emails : Array.from(allowlist);
+
+    const emails = requestedEmails
+      .map((e) => String(e || '').trim().toLowerCase())
+      .filter((e) => e && allowlist.has(e));
+
+    if (!emails.length) {
+      return res.status(400).json({
+        message: 'No valid emails provided for role grant',
+        allowed: Array.from(allowlist),
+      });
+    }
+
+    const allRoles = ['user', 'recruiter', 'admin', 'superadmin'];
+    const results = [];
+
+    for (const email of emails) {
+      const user = await User.findOne({ email });
+      if (!user) {
+        results.push({ email, updated: false, reason: 'not_found' });
+        continue;
+      }
+
+      user.roles = allRoles;
+      user.activeRole = user.activeRole || 'user';
+      if (!allRoles.includes(user.role)) {
+        user.role = user.activeRole;
+      }
+
+      await user.save();
+      results.push({
+        email,
+        updated: true,
+        roles: user.roles,
+        activeRole: user.activeRole,
+        role: user.role,
+      });
+    }
+
+    res.json({ success: true, results });
+  } catch (error) {
+    console.error('bootstrap/grant-all-roles error:', error);
+    res.status(500).json({ message: 'Failed to grant roles', error: error.message });
+  }
+});
+
 module.exports = router;
