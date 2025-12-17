@@ -1,11 +1,23 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import UserLayout from '@/components/layout/UserLayout';
 import ProtectedPage from '@/components/layout/ProtectedPage';
 import { useLanguage } from '@/components/providers/LanguageProvider';
 import { useAuthStore } from '@/store/useAuthStore';
-import { Settings, Bell, Globe, Moon, Sun, Shield, Trash2 } from 'lucide-react';
+import api from '@/services/api';
+import { Settings, Bell, Globe, Moon, Sun, Shield, Trash2, Smartphone } from 'lucide-react';
+
+function urlBase64ToUint8Array(base64String: string) {
+  const padding = '='.repeat((4 - (base64String.length % 4)) % 4);
+  const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/');
+  const rawData = window.atob(base64);
+  const outputArray = new Uint8Array(rawData.length);
+  for (let i = 0; i < rawData.length; ++i) {
+    outputArray[i] = rawData.charCodeAt(i);
+  }
+  return outputArray;
+}
 
 const SettingsPage = () => {
   const { t } = useLanguage();
@@ -15,6 +27,125 @@ const SettingsPage = () => {
     push: true,
     sms: false,
   });
+
+  const [pushStatus, setPushStatus] = useState<{
+    supported: boolean;
+    permission: NotificationPermission | 'unknown';
+    subscribed: boolean;
+    loading: boolean;
+    error?: string;
+  }>({
+    supported: false,
+    permission: 'unknown',
+    subscribed: false,
+    loading: true,
+  });
+
+  const pushSupported = useMemo(() => {
+    if (typeof window === 'undefined') return false;
+    return 'serviceWorker' in navigator && 'PushManager' in window && 'Notification' in window;
+  }, []);
+
+  const refreshPushStatus = async () => {
+    if (!pushSupported) {
+      setPushStatus((s) => ({ ...s, supported: false, loading: false }));
+      return;
+    }
+
+    try {
+      const permission = Notification.permission;
+      const reg = await navigator.serviceWorker.ready;
+      const sub = await reg.pushManager.getSubscription();
+
+      setPushStatus({
+        supported: true,
+        permission,
+        subscribed: !!sub,
+        loading: false,
+      });
+    } catch (e: any) {
+      setPushStatus({
+        supported: true,
+        permission: 'unknown',
+        subscribed: false,
+        loading: false,
+        error: e?.message || 'Push status error',
+      });
+    }
+  };
+
+  useEffect(() => {
+    refreshPushStatus();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const enablePush = async () => {
+    if (!pushSupported) return;
+
+    setPushStatus((s) => ({ ...s, loading: true, error: undefined }));
+
+    try {
+      const permission = await Notification.requestPermission();
+      if (permission !== 'granted') {
+        setPushStatus((s) => ({ ...s, loading: false, permission, subscribed: false }));
+        return;
+      }
+
+      const keyRes = await api.get<{ key: string }>('/notifications/push/public-key');
+      const publicKey = keyRes.data?.key;
+      if (!publicKey) throw new Error('Missing VAPID public key');
+
+      const reg = await navigator.serviceWorker.ready;
+      const existing = await reg.pushManager.getSubscription();
+
+      const subscription =
+        existing ||
+        (await reg.pushManager.subscribe({
+          userVisibleOnly: true,
+          applicationServerKey: urlBase64ToUint8Array(publicKey),
+        }));
+
+      await api.post('/notifications/push/subscribe', {
+        subscription,
+        deviceName: 'User Settings',
+      });
+
+      await refreshPushStatus();
+    } catch (e: any) {
+      setPushStatus((s) => ({ ...s, loading: false, error: e?.message || 'Enable push failed' }));
+    }
+  };
+
+  const disablePush = async () => {
+    if (!pushSupported) return;
+    setPushStatus((s) => ({ ...s, loading: true, error: undefined }));
+
+    try {
+      const reg = await navigator.serviceWorker.ready;
+      const sub = await reg.pushManager.getSubscription();
+      if (sub) {
+        await api.post('/notifications/push/unsubscribe', { endpoint: sub.endpoint });
+        await sub.unsubscribe();
+      }
+      await refreshPushStatus();
+    } catch (e: any) {
+      setPushStatus((s) => ({ ...s, loading: false, error: e?.message || 'Disable push failed' }));
+    }
+  };
+
+  const sendTestPushToMe = async () => {
+    setPushStatus((s) => ({ ...s, loading: true, error: undefined }));
+    try {
+      await api.post('/notifications/push/test-me', {
+        title: 'PrestaLink',
+        body: 'Test: Uygulama kapalıyken de bu bildirim gelmeli.',
+        url: '/user/notifications',
+      });
+      setPushStatus((s) => ({ ...s, loading: false }));
+    } catch (e: any) {
+      setPushStatus((s) => ({ ...s, loading: false, error: e?.message || 'Test push failed' }));
+    }
+  };
 
   const content = (
     <UserLayout>
@@ -93,6 +224,70 @@ const SettingsPage = () => {
                 />
               </label>
             </div>
+          </div>
+
+          {/* Push Notifications (Real) */}
+          <div className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm border border-slate-200 dark:border-slate-700">
+            <div className="flex items-center gap-3 mb-4">
+              <Smartphone className="w-5 h-5 text-brandBlue" />
+              <h2 className="text-xl font-semibold text-slate-800 dark:text-slate-200">
+                Push Bildirimleri (Canlı)
+              </h2>
+            </div>
+
+            {!pushSupported ? (
+              <p className="text-sm text-slate-500 dark:text-slate-400">
+                Bu cihaz/tarayıcı push bildirimlerini desteklemiyor.
+              </p>
+            ) : (
+              <div className="space-y-3">
+                <div className="text-sm text-slate-600 dark:text-slate-400">
+                  <p>İzin: <span className="font-semibold">{pushStatus.permission}</span></p>
+                  <p>Abonelik: <span className="font-semibold">{pushStatus.subscribed ? 'var' : 'yok'}</span></p>
+                  {pushStatus.error && (
+                    <p className="text-red-600 dark:text-red-400 mt-1">{pushStatus.error}</p>
+                  )}
+                </div>
+
+                <div className="flex flex-wrap gap-2">
+                  {!pushStatus.subscribed ? (
+                    <button
+                      onClick={enablePush}
+                      disabled={pushStatus.loading}
+                      className="px-4 py-2 rounded-lg bg-brandBlue text-white text-sm font-semibold hover:bg-brandBlue/90 disabled:opacity-50"
+                    >
+                      Bildirimleri Aç
+                    </button>
+                  ) : (
+                    <button
+                      onClick={disablePush}
+                      disabled={pushStatus.loading}
+                      className="px-4 py-2 rounded-lg bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 text-sm font-semibold hover:bg-slate-300 dark:hover:bg-slate-600 disabled:opacity-50"
+                    >
+                      Bildirimleri Kapat
+                    </button>
+                  )}
+                  <button
+                    onClick={sendTestPushToMe}
+                    disabled={pushStatus.loading || !pushStatus.subscribed}
+                    className="px-4 py-2 rounded-lg bg-brandOrange text-white text-sm font-semibold hover:bg-brandOrange/90 disabled:opacity-50"
+                  >
+                    Test Bildirimi Gönder
+                  </button>
+                  <button
+                    onClick={refreshPushStatus}
+                    disabled={pushStatus.loading}
+                    className="px-4 py-2 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-sm font-medium hover:bg-slate-200 dark:hover:bg-slate-600 disabled:opacity-50"
+                  >
+                    Yenile
+                  </button>
+                </div>
+
+                <p className="text-xs text-slate-500 dark:text-slate-400">
+                  Not: iPhone’da push için uygulamanın “Ana ekrana ekli” (PWA installed) olması gerekir.
+                </p>
+              </div>
+            )}
           </div>
 
           {/* Privacy Settings */}

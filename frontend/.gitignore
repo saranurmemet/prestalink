@@ -41,3 +41,12 @@ yarn-error.log*
 next-env.d.ts
 
 .vercel
+
+# next-pwa generated artifacts (generated during build; do not commit)
+/public/sw.js
+/public/workbox-*.js
+/public/workbox-*.js.map
+/public/worker-*.js
+/public/worker-*.js.map
+/public/fallback-*.js
+/public/fallback-*.js.map

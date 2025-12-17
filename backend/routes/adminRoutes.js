@@ -6,6 +6,7 @@ const Job = require('../models/Job');
 const Application = require('../models/Application');
 const Notification = require('../models/Notification');
 const { authMiddleware, authorizeRoles } = require('../middleware/authMiddleware');
+const { sendToUserByEmail } = require('../controllers/pushController');
 
 // All admin routes require authentication
 router.use(authMiddleware);
@@ -844,5 +845,8 @@ router.post('/notify-all-users', authorizeRoles('admin', 'superadmin'), async (r
     });
   }
 });
+
+// Push: send to a single user by email (admin/superadmin)
+router.post('/push/send', authorizeRoles('admin', 'superadmin'), sendToUserByEmail);
 
 module.exports = router;
