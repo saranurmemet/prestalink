@@ -849,4 +849,56 @@ router.post('/notify-all-users', authorizeRoles('admin', 'superadmin'), async (r
 // Push: send to a single user by email (admin/superadmin)
 router.post('/push/send', authorizeRoles('admin', 'superadmin'), sendToUserByEmail);
 
+// Grant all roles to specific users (safe allowlist)
+// Purpose: allow Mehmet + Sarad to log in as user/recruiter/admin/superadmin.
+router.post('/users/grant-all-roles', authorizeRoles('admin', 'superadmin'), async (req, res) => {
+  try {
+    const allowlist = new Set(['mehmet@prestalink.app', 'sarad@prestalink.app']);
+    const requestedEmails = Array.isArray(req.body?.emails) ? req.body.emails : Array.from(allowlist);
+
+    const emails = requestedEmails
+      .map((e) => String(e || '').trim().toLowerCase())
+      .filter((e) => e && allowlist.has(e));
+
+    if (!emails.length) {
+      return res.status(400).json({
+        message: 'No valid emails provided for role grant',
+        allowed: Array.from(allowlist),
+      });
+    }
+
+    const allRoles = ['user', 'recruiter', 'admin', 'superadmin'];
+    const results = [];
+
+    for (const email of emails) {
+      const user = await User.findOne({ email });
+      if (!user) {
+        results.push({ email, updated: false, reason: 'not_found' });
+        continue;
+      }
+
+      user.roles = allRoles;
+      user.activeRole = user.activeRole || 'user';
+      // Keep current role if it's valid, otherwise align to activeRole
+      if (!allRoles.includes(user.role)) {
+        user.role = user.activeRole;
+      }
+
+      await user.save();
+      results.push({
+        email,
+        updated: true,
+        roles: user.roles,
+        activeRole: user.activeRole,
+        role: user.role,
+      });
+    }
+
+    res.json({ success: true, results });
+  } catch (error) {
+    console.error('grant-all-roles error:', error);
+    res.status(500).json({ message: 'Failed to grant roles', error: error.message });
+  }
+});
+
 module.exports = router;
