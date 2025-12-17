@@ -1,8 +1,8 @@
 const withPWA = require('next-pwa')({
   dest: 'public',
-  // CRITICAL FIX: Disable PWA in development to avoid stale cache issues during testing
-  // In production, set PWA_ENABLED environment variable explicitly to enable
-  disable: process.env.NODE_ENV === 'development' || process.env.PWA_ENABLED !== 'true',
+  // Disable PWA only in development to avoid stale cache issues while iterating.
+  // In production we keep PWA enabled so installed apps can receive updates.
+  disable: process.env.NODE_ENV === 'development',
   
   // Do NOT cache auth-related endpoints
   skipWaiting: false, // Wait for user confirmation before updating
