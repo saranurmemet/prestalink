@@ -4,7 +4,9 @@ const PushSubscription = require('../models/PushSubscription');
 const User = require('../models/User');
 
 function getVapidPublicKeyOnly() {
-  const publicKey = process.env.VAPID_PUBLIC_KEY;
+  const publicKey = String(process.env.VAPID_PUBLIC_KEY || '')
+    .trim()
+    .replace(/\s+/g, '');
   if (!publicKey) {
     const err = new Error('Missing VAPID_PUBLIC_KEY in backend environment.');
     err.statusCode = 500;
@@ -14,8 +16,12 @@ function getVapidPublicKeyOnly() {
 }
 
 function requireVapidForSend() {
-  const publicKey = process.env.VAPID_PUBLIC_KEY;
-  const privateKey = process.env.VAPID_PRIVATE_KEY;
+  const publicKey = String(process.env.VAPID_PUBLIC_KEY || '')
+    .trim()
+    .replace(/\s+/g, '');
+  const privateKey = String(process.env.VAPID_PRIVATE_KEY || '')
+    .trim()
+    .replace(/\s+/g, '');
   const subject = process.env.VAPID_SUBJECT || process.env.CLIENT_URL || 'mailto:hello@prestalink.app';
 
   if (!publicKey || !privateKey) {
