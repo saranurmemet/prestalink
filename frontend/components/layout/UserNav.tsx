@@ -3,7 +3,8 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { 
+import type { LucideIcon } from 'lucide-react';
+import {
   LayoutDashboard, 
   User, 
   Briefcase, 
@@ -14,13 +15,20 @@ import {
   BarChart3,
   Settings,
   MessageSquare,
-  Star,
   Headphones
 } from 'lucide-react';
 import { useLanguage } from '@/components/providers/LanguageProvider';
 import { fetchNotifications } from '@/services/api';
 import { useAuthStore } from '@/store/useAuthStore';
 import { useFloatingContactStore } from '@/store/useFloatingContactStore';
+
+type NavItem = {
+  href: string;
+  icon: LucideIcon;
+  label: string;
+  showBadge?: boolean;
+  onClick?: () => void;
+};
 
 const UserNav = () => {
   const pathname = usePathname();
@@ -52,27 +60,27 @@ const UserNav = () => {
     return () => clearInterval(interval);
   }, [user]);
 
-  const navItems = [
-    { href: '/user/dashboard', icon: LayoutDashboard, label: t('userNav.dashboard') },
-    { href: '/user/profile', icon: User, label: t('userNav.profile') },
-    { href: '/user/cv', icon: FileCheck, label: t('userNav.cv') },
-    { href: '/user/jobs', icon: Briefcase, label: t('userNav.jobListings') },
-    { href: '/user/favorites', icon: Heart, label: t('userNav.favorites') },
-    { href: '/user/applications', icon: FileText, label: t('userNav.applications') },
-    { href: '/user/messages', icon: MessageSquare, label: t('userNav.messages') },
-    { href: '/user/statistics', icon: BarChart3, label: t('userNav.statistics') },
-    { href: '/user/notifications', icon: Bell, label: t('userNav.notifications'), showBadge: true },
-    { href: '/user/settings', icon: Settings, label: t('userNav.settings') },
+  const navItems: NavItem[] = [
+    { href: '/user/dashboard', icon: LayoutDashboard, label: String(t('userNav.dashboard')) },
+    { href: '/user/profile', icon: User, label: String(t('userNav.profile')) },
+    { href: '/user/cv', icon: FileCheck, label: String(t('userNav.cv')) },
+    { href: '/user/jobs', icon: Briefcase, label: String(t('userNav.jobListings')) },
+    { href: '/user/favorites', icon: Heart, label: String(t('userNav.favorites')) },
+    { href: '/user/applications', icon: FileText, label: String(t('userNav.applications')) },
+    { href: '/user/messages', icon: MessageSquare, label: String(t('userNav.messages')) },
+    { href: '/user/statistics', icon: BarChart3, label: String(t('userNav.statistics')) },
+    { href: '/user/notifications', icon: Bell, label: String(t('userNav.notifications')), showBadge: true },
+    { href: '/user/settings', icon: Settings, label: String(t('userNav.settings')) },
   ];
 
   // Mobile bottom bar: show the core items + a "Contact" action that opens the support panel
-  const mobileItems = [
+  const mobileItems: NavItem[] = [
     navItems[0], // dashboard
     navItems[1], // profile
     navItems[2], // cv
     navItems[3], // jobs
     navItems[4], // favorites
-    { href: '#contact', icon: Headphones, label: t('nav.contactSupport'), onClick: toggleContact },
+    { href: '#contact', icon: Headphones, label: String(t('nav.contactSupport')), onClick: toggleContact },
   ];
 
   return (
