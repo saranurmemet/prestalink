@@ -8,6 +8,11 @@ import PWAUpdatePrompt from '@/components/common/PWAUpdatePrompt';
 
 const GOOGLE_CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || '';
 
+// Debug: Log Google Client ID (remove after testing)
+if (typeof window !== 'undefined') {
+  console.log('🔍 [DEBUG] GOOGLE_CLIENT_ID:', GOOGLE_CLIENT_ID ? '✅ SET' : '❌ NOT SET');
+}
+
 const AppProviders = ({ children }: { children: React.ReactNode }) => (
   <ThemeProvider>
     <LanguageProvider>
