@@ -7,8 +7,9 @@ import type { User } from '@/services/types';
 interface AuthState {
   user: User | null;
   token: string | null;
+  rememberMe: boolean;
   hasHydrated: boolean;
-  setAuth: (payload: { user: User; token: string }) => void;
+  setAuth: (payload: { user: User; token: string; rememberMe?: boolean }) => void;
   setUser: (user: User) => void;
   logout: () => void;
   setHasHydrated: (hydrated: boolean) => void;
@@ -19,10 +20,11 @@ export const useAuthStore = create<AuthState>()(
     (set) => ({
       user: null,
       token: null,
+      rememberMe: true,
       hasHydrated: false,
-      setAuth: ({ user, token }) =>
+      setAuth: ({ user, token, rememberMe = true }) =>
         set(() => {
-          return { user, token };
+          return { user, token, rememberMe };
         }),
       setUser: (user) =>
         set((state) => ({
@@ -33,6 +35,7 @@ export const useAuthStore = create<AuthState>()(
         set(() => ({
           user: null,
           token: null,
+          rememberMe: true,
         })),
       setHasHydrated: (hydrated: boolean) =>
         set(() => ({

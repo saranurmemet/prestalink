@@ -501,6 +501,7 @@
     "serverError": "Sunucu hatası. Lütfen daha sonra tekrar deneyin.",
     "registerPrompt": "Hesabınız yok mu?",
     "loginPrompt": "Zaten hesabınız var mı?",
+    "rememberMe": "Beni hatırla",
     "roles": {
       "user": {
         "title": "İş Arayan (Aday)",

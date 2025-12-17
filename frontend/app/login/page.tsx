@@ -19,6 +19,7 @@ const LoginPage = () => {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [selectedRole, setSelectedRole] = useState<UserRole | null>(null); // Show role selection first
+  const [rememberMe, setRememberMe] = useState(true); // Default to true (beni hatırla)
   const formRef = useRef<HTMLFormElement>(null);
   const autoLoginAttempted = useRef(false);
   const [retryCount, setRetryCount] = useState(0);
@@ -141,7 +142,7 @@ const LoginPage = () => {
         response = await loginUser({ email, password }, selectedRole);
       }
       
-      setAuth(response.data);
+      setAuth({ ...response.data, rememberMe });
       const dashboardRoute = getDashboardRoute(response.data.user.role);
       router.push(dashboardRoute);
     } catch (error) {
@@ -285,6 +286,18 @@ const LoginPage = () => {
             <div>
               <label className="text-sm font-semibold text-brandGray dark:text-slate-300">{t('auth.password')}</label>
               <input name="password" type="password" required className="input mt-1" placeholder="••••••••" />
+            </div>
+            <div className="flex items-center gap-2">
+              <input
+                type="checkbox"
+                id="rememberMe"
+                checked={rememberMe}
+                onChange={(e) => setRememberMe(e.target.checked)}
+                className="w-4 h-4 text-brandBlue border-slate-300 rounded focus:ring-brandBlue focus:ring-2"
+              />
+              <label htmlFor="rememberMe" className="text-sm text-brandGray dark:text-slate-300 cursor-pointer">
+                {t('auth.rememberMe')}
+              </label>
             </div>
             {error && <p className="text-sm text-red-500 dark:text-red-400 animate-fade-in">{error}</p>}
             <button

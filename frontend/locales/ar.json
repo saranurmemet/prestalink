@@ -500,6 +500,7 @@
     "forbidden": "ليس لديك إذن بالوصول إلى هذا الدور.",
     "registerPrompt": "ليس لديك حساب؟",
     "loginPrompt": "لديك حساب بالفعل؟",
+    "rememberMe": "تذكرني",
     "roles": {
       "user": {
         "title": "باحث عن عمل (مرشح)",
