@@ -11,6 +11,13 @@ export default function PWAUpdatePrompt() {
       return;
     }
 
+    // Ensure the service worker is registered (required for Push + updates)
+    const ensureRegistered = async () => {
+      const existing = await navigator.serviceWorker.getRegistration();
+      if (existing) return existing;
+      return navigator.serviceWorker.register('/sw.js');
+    };
+
     const checkForUpdates = () => {
       registrationRef.current?.update().catch(() => {});
     };
@@ -36,7 +43,8 @@ export default function PWAUpdatePrompt() {
     let interval: number | undefined;
     let updateFoundHandler: (() => void) | undefined;
 
-    navigator.serviceWorker.ready
+    ensureRegistered()
+      .then(() => navigator.serviceWorker.ready)
       .then((reg) => {
         registrationRef.current = reg;
 
