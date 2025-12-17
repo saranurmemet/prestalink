@@ -7,6 +7,9 @@ const pushSubscriptionSchema = new mongoose.Schema(
     subscription: { type: mongoose.Schema.Types.Mixed, required: true },
     userAgent: { type: String },
     deviceName: { type: String },
+    // UI language at time of subscribe (drives localized push content)
+    locale: { type: String, default: 'en', index: true },
+    acceptLanguage: { type: String },
   },
   { timestamps: true }
 );

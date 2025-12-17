@@ -3,6 +3,27 @@ const asyncHandler = require('../utils/asyncHandler');
 const PushSubscription = require('../models/PushSubscription');
 const User = require('../models/User');
 
+const SUPPORTED_LOCALES = ['en', 'tr', 'fr', 'ar'];
+
+function normalizeLocale(input) {
+  if (!input) return 'en';
+  const v = String(input).trim().toLowerCase();
+  // accept-language like: "tr-TR,tr;q=0.9,en;q=0.8"
+  const first = v.split(',')[0] || v;
+  const base = first.split('-')[0] || first;
+  return SUPPORTED_LOCALES.includes(base) ? base : 'en';
+}
+
+function getLocalizedNewMatch(locale) {
+  const map = {
+    tr: { title: 'Yeni eşleşme', body: 'Yeni bir eşleşme aldınız.' },
+    en: { title: 'New match', body: 'You received a new match.' },
+    fr: { title: 'Nouvelle correspondance', body: 'Vous avez reçu une nouvelle correspondance.' },
+    ar: { title: 'مطابقة جديدة', body: 'لديك مطابقة جديدة.' },
+  };
+  return map[locale] || map.en;
+}
+
 function getVapidPublicKeyOnly() {
   const publicKey = String(process.env.VAPID_PUBLIC_KEY || '')
     .trim()
@@ -44,11 +65,21 @@ async function sendToUserSubscriptions(userId, payload) {
     throw err;
   }
 
-  const body = JSON.stringify(payload);
-
   const results = await Promise.allSettled(
     subs.map(async (s) => {
       try {
+        const locale = normalizeLocale(s.locale || s.acceptLanguage);
+
+        const resolvedPayload =
+          payload && payload.i18nKey === 'newMatch'
+            ? {
+                title: getLocalizedNewMatch(locale).title,
+                body: getLocalizedNewMatch(locale).body,
+                url: payload.url || '/user/dashboard',
+              }
+            : payload;
+
+        const body = Buffer.from(JSON.stringify(resolvedPayload), 'utf8');
         await webpush.sendNotification(s.subscription, body);
         return { ok: true };
       } catch (e) {
@@ -76,12 +107,14 @@ exports.getMyPushStatus = asyncHandler(async (req, res) => {
 });
 
 exports.subscribe = asyncHandler(async (req, res) => {
-  const { subscription, deviceName } = req.body || {};
+  const { subscription, deviceName, language } = req.body || {};
   const endpoint = subscription?.endpoint;
 
   if (!endpoint || !subscription?.keys?.p256dh || !subscription?.keys?.auth) {
     return res.status(400).json({ message: 'Invalid subscription payload' });
   }
+
+  const locale = normalizeLocale(language || req.headers['accept-language']);
 
   // Ensure endpoint uniqueness across users: upsert by endpoint
   await PushSubscription.findOneAndUpdate(
@@ -92,6 +125,8 @@ exports.subscribe = asyncHandler(async (req, res) => {
       subscription,
       userAgent: req.headers['user-agent'],
       deviceName: deviceName || null,
+      locale,
+      acceptLanguage: req.headers['accept-language'] || null,
     },
     { upsert: true, new: true, setDefaultsOnInsert: true }
   );
@@ -109,11 +144,17 @@ exports.unsubscribe = asyncHandler(async (req, res) => {
 
 // For quick testing: send a push notification to yourself
 exports.sendTestToMe = asyncHandler(async (req, res) => {
-  const payload = {
-    title: req.body?.title || 'PrestaLink',
-    body: req.body?.body || 'Test bildirimi: Push çalışıyor.',
-    url: req.body?.url || '/user/notifications',
-  };
+  const payload =
+    req.body?.body || req.body?.title
+      ? {
+          title: req.body?.title || 'PrestaLink',
+          body: req.body?.body || 'Test',
+          url: req.body?.url || '/user/notifications',
+        }
+      : {
+          i18nKey: 'newMatch',
+          url: req.body?.url || '/user/dashboard',
+        };
 
   const results = await sendToUserSubscriptions(req.user._id, payload);
   res.json({ success: true, results });
@@ -121,17 +162,23 @@ exports.sendTestToMe = asyncHandler(async (req, res) => {
 
 // Admin helper: send push to user by email
 exports.sendToUserByEmail = asyncHandler(async (req, res) => {
-  const { email, title, body, url } = req.body || {};
+  const { email, title, body, url, i18nKey } = req.body || {};
   if (!email) return res.status(400).json({ message: 'email is required' });
 
   const user = await User.findOne({ email: String(email).toLowerCase() }).select('_id email name');
   if (!user) return res.status(404).json({ message: 'User not found' });
 
-  const payload = {
-    title: title || 'PrestaLink',
-    body: body || 'Yeni bir bildiriminiz var.',
-    url: url || '/user/dashboard',
-  };
+  const payload =
+    body || title
+      ? {
+          title: title || 'PrestaLink',
+          body: body || '',
+          url: url || '/user/dashboard',
+        }
+      : {
+          i18nKey: i18nKey || 'newMatch',
+          url: url || '/user/dashboard',
+        };
 
   const results = await sendToUserSubscriptions(user._id, payload);
   res.json({ success: true, user, results });

@@ -32,7 +32,7 @@ function withTimeout<T>(promise: Promise<T>, ms: number, label = 'timeout') {
 }
 
 const SettingsPage = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { user } = useAuthStore();
   const [notifications, setNotifications] = useState({
     email: true,
@@ -140,6 +140,7 @@ const SettingsPage = () => {
       await api.post('/notifications/push/subscribe', {
         subscription,
         deviceName: 'User Settings',
+        language,
       });
 
       await refreshPushStatus();
