@@ -962,6 +962,168 @@
       "changePassword": "Changer le Mot de Passe",
       "deleteAccount": "Supprimer le Compte"
     }
+  },
+  "relativeTime": {
+    "justNow": "À l’instant",
+    "minutesAgo": "il y a {{minutes}} min",
+    "hoursAgo": "il y a {{hours}} h",
+    "daysAgo": "il y a {{days}} j"
+  },
+  "employerNav": {
+    "dashboard": "Tableau de bord",
+    "profile": "Profil entreprise",
+    "createJob": "Créer une offre",
+    "jobListings": "Offres",
+    "notifications": "Notifications"
+  },
+  "employerDashboard": {
+    "welcome": "Bienvenue, {{name}}",
+    "subtitle": "Gérez vos offres, suivez les candidats et accélérez le recrutement.",
+    "profileCompletion": "Complétion du profil",
+    "totalActiveJobs": "Offres actives",
+    "totalApplicants": "Total candidats",
+    "unreadNotifications": "Notifications non lues",
+    "countriesHiring": "Pays de recrutement",
+    "quickActions": "Actions rapides",
+    "createNewJob": "Créer une nouvelle offre",
+    "createJobDesc": "Publier un nouveau poste",
+    "viewJobListings": "Voir les offres",
+    "completeProfile": "Compléter le profil",
+    "completeProfileDesc": "Mettre à jour les informations de l’entreprise",
+    "recentApplicants": "Candidatures récentes",
+    "viewAll": "Voir tout",
+    "unknownApplicant": "Candidat",
+    "recentJobs": "Offres récentes",
+    "applicantsCount": "{{count}} candidatures"
+  },
+  "employerJobs": {
+    "title": "Mes offres",
+    "subtitle": "Gérez vos offres publiées",
+    "loading": "Chargement...",
+    "noJobs": "Vous n'avez pas encore créé d'offre",
+    "confirmDelete": "Êtes-vous sûr de vouloir supprimer cette offre ?",
+    "error": "Une erreur est survenue lors du traitement de l'offre",
+    "totalApplicants": "candidats",
+    "viewApplicants": "Voir les candidats",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "status": {
+      "active": "Active",
+      "closed": "Fermée"
+    }
+  },
+  "employerJobDetail": {
+    "backToJobs": "Retour aux offres",
+    "notFound": "Offre introuvable",
+    "applicants": "Candidats",
+    "noApplicants": "Aucune candidature pour le moment",
+    "unknownApplicant": "Candidat",
+    "applicantInfo": {
+      "country": "Pays",
+      "experience": "Expérience",
+      "languages": "Langues",
+      "downloadCv": "Télécharger le CV",
+      "viewProfile": "Voir le profil"
+    },
+    "status": {
+      "pending": "En attente",
+      "reviewing": "En examen",
+      "viewed": "Vu",
+      "interview": "Entretien",
+      "accepted": "Accepté",
+      "rejected": "Rejeté"
+    }
+  },
+  "applicantReview": {
+    "title": "Revue du candidat",
+    "profile": "Profil",
+    "files": "Fichiers",
+    "backToJob": "Retour à l'offre",
+    "loading": "Chargement...",
+    "notFound": "Candidature introuvable",
+    "downloadCv": "Télécharger le CV",
+    "downloadCertificates": "Télécharger les certificats",
+    "changeStatus": "Mettre à jour le statut",
+    "internalNotes": "Notes internes",
+    "notesPlaceholder": "Ajouter des notes...",
+    "saving": "Enregistrement...",
+    "saveNotes": "Enregistrer les notes",
+    "statusUpdated": "Mis à jour",
+    "fields": {
+      "fullName": "Nom complet",
+      "email": "E-mail",
+      "phone": "Téléphone",
+      "country": "Pays",
+      "languages": "Langues",
+      "experience": "Expérience"
+    },
+    "errors": {
+      "updateStatus": "Échec de la mise à jour du statut",
+      "saveNotes": "Échec de l'enregistrement des notes"
+    },
+    "status": {
+      "pending": "En attente",
+      "viewed": "Vu",
+      "interview": "Entretien",
+      "accepted": "Accepté",
+      "rejected": "Rejeté"
+    }
+  },
+  "employerNotifications": {
+    "title": "Notifications",
+    "subtitle": "Consultez vos notifications",
+    "markAllRead": "Tout marquer comme lu",
+    "unreadBanner": "{{count}} notifications non lues",
+    "noNotifications": "Aucune nouvelle notification"
+  },
+  "employerProfile": {
+    "title": "Profil entreprise",
+    "subtitle": "Modifier les informations de l’entreprise",
+    "incompleteWarning": "Complétez votre profil pour gagner la confiance des candidats.",
+    "saved": "Profil enregistré",
+    "error": "Échec de l'enregistrement du profil",
+    "save": "Enregistrer",
+    "fields": {
+      "companyName": "Nom de l’entreprise",
+      "companyDescription": "Description de l’entreprise",
+      "industry": "Secteur",
+      "country": "Pays",
+      "city": "Ville",
+      "contactEmail": "E-mail de contact",
+      "contactPhone": "Téléphone de contact",
+      "companyLogo": "Logo de l’entreprise"
+    }
+  },
+  "createJob": {
+    "title": "Nouvelle offre",
+    "subtitle": "Saisissez les détails et publiez",
+    "success": "Offre publiée",
+    "error": "Échec de la publication",
+    "publishing": "Publication...",
+    "published": "Publiée",
+    "publish": "Publier",
+    "cancel": "Annuler",
+    "fields": {
+      "jobTitle": "Intitulé du poste",
+      "jobDescription": "Description du poste",
+      "location": "Localisation",
+      "salaryRange": "Fourchette salariale",
+      "requiredExperience": "Expérience requise",
+      "requiredLanguages": "Langues requises",
+      "workType": "Type de contrat"
+    },
+    "placeholders": {
+      "jobDescription": "Décrivez le poste...",
+      "location": "Ville, pays...",
+      "salaryRange": "ex. 2000€-3000€",
+      "requiredExperience": "ex. 2+ ans",
+      "requiredLanguages": "ex. Anglais, Français"
+    },
+    "workTypes": {
+      "fullTime": "Temps plein",
+      "partTime": "Temps partiel",
+      "seasonal": "Saisonnier"
+    }
   }
 }
 

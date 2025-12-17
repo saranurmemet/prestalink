@@ -10,7 +10,7 @@ import type { Notification } from '@/services/types';
 import { Bell, CheckCircle2 } from 'lucide-react';
 
 const EmployerNotifications = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { user } = useAuthStore();
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [loading, setLoading] = useState(true);
@@ -23,7 +23,7 @@ const EmployerNotifications = () => {
         const response = await fetchNotifications();
         // Filter notifications by role - only show employer/recruiter/admin notifications
         const userRole = user?.role || 'user';
-        const allowedRoles = ['recruiter', 'employer', 'admin', 'superadmin'];
+        const allowedRoles = ['recruiter', 'admin', 'superadmin'];
         
         const filteredNotifications = response.data.filter((notif: Notification) => {
           // If notification has targetRole, it must match user's role
@@ -74,16 +74,12 @@ const EmployerNotifications = () => {
     const now = new Date();
     const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000);
 
-    if (diffInSeconds < 60) return 'Az önce';
-    if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)} dakika önce`;
-    if (diffInSeconds < 86400) return `${Math.floor(diffInSeconds / 3600)} saat önce`;
-    if (diffInSeconds < 604800) return `${Math.floor(diffInSeconds / 86400)} gün önce`;
+    if (diffInSeconds < 60) return t('relativeTime.justNow');
+    if (diffInSeconds < 3600) return t('relativeTime.minutesAgo', { minutes: Math.floor(diffInSeconds / 60) });
+    if (diffInSeconds < 86400) return t('relativeTime.hoursAgo', { hours: Math.floor(diffInSeconds / 3600) });
+    if (diffInSeconds < 604800) return t('relativeTime.daysAgo', { days: Math.floor(diffInSeconds / 86400) });
 
-    return date.toLocaleDateString('tr-TR', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    });
+    return new Intl.DateTimeFormat(language, { year: 'numeric', month: 'long', day: 'numeric' }).format(date);
   };
 
   const content = (
@@ -111,7 +107,7 @@ const EmployerNotifications = () => {
         {unreadCount > 0 && (
           <div className="mb-4 px-4 py-2 bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-800 rounded-lg">
             <p className="text-sm text-orange-800 dark:text-orange-200">
-              {unreadCount} {t('employerNotifications.unread')} bildirim
+              {t('employerNotifications.unreadBanner', { count: unreadCount })}
             </p>
           </div>
         )}

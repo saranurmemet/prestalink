@@ -45,7 +45,7 @@ const JobDetailPage = () => {
       await deleteJob(params.id as string);
       router.push('/employer/jobs');
     } catch (error) {
-      alert('İlan silinirken hata oluştu');
+      alert(t('employerJobs.error'));
     }
   };
 
@@ -190,7 +190,7 @@ const JobDetailPage = () => {
                           <div className="flex items-start justify-between mb-4">
                             <div className="flex-1">
                               <h3 className="text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2">
-                                {applicantData?.name || 'Aday'}
+                                {applicantData?.name || t('employerJobDetail.unknownApplicant')}
                               </h3>
                               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
                                 <div>

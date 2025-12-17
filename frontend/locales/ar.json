@@ -964,6 +964,168 @@
       "changePassword": "تغيير كلمة المرور",
       "deleteAccount": "حذف الحساب"
     }
+  },
+  "relativeTime": {
+    "justNow": "الآن",
+    "minutesAgo": "منذ {{minutes}} دقيقة",
+    "hoursAgo": "منذ {{hours}} ساعة",
+    "daysAgo": "منذ {{days}} يوم"
+  },
+  "employerNav": {
+    "dashboard": "لوحة التحكم",
+    "profile": "ملف الشركة",
+    "createJob": "إنشاء وظيفة",
+    "jobListings": "الوظائف",
+    "notifications": "الإشعارات"
+  },
+  "employerDashboard": {
+    "welcome": "مرحباً، {{name}}",
+    "subtitle": "أدر إعلاناتك، تابع المتقدمين، وسرّع التوظيف.",
+    "profileCompletion": "اكتمال الملف",
+    "totalActiveJobs": "وظائف نشطة",
+    "totalApplicants": "إجمالي المتقدمين",
+    "unreadNotifications": "إشعارات غير مقروءة",
+    "countriesHiring": "دول التوظيف",
+    "quickActions": "إجراءات سريعة",
+    "createNewJob": "إنشاء إعلان جديد",
+    "createJobDesc": "نشر منصب جديد",
+    "viewJobListings": "عرض الوظائف",
+    "completeProfile": "أكمل ملفك",
+    "completeProfileDesc": "حدّث معلومات الشركة",
+    "recentApplicants": "أحدث الطلبات",
+    "viewAll": "عرض الكل",
+    "unknownApplicant": "مرشح",
+    "recentJobs": "أحدث الوظائف",
+    "applicantsCount": "{{count}} طلب"
+  },
+  "employerJobs": {
+    "title": "وظائفي",
+    "subtitle": "إدارة إعلانات الوظائف الخاصة بك",
+    "loading": "جاري التحميل...",
+    "noJobs": "لم تقم بإنشاء أي وظيفة بعد",
+    "confirmDelete": "هل أنت متأكد أنك تريد حذف هذه الوظيفة؟",
+    "error": "حدث خطأ أثناء معالجة الوظيفة",
+    "totalApplicants": "متقدم",
+    "viewApplicants": "عرض المتقدمين",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "status": {
+      "active": "نشطة",
+      "closed": "مغلقة"
+    }
+  },
+  "employerJobDetail": {
+    "backToJobs": "العودة إلى الوظائف",
+    "notFound": "لم يتم العثور على الوظيفة",
+    "applicants": "المتقدمون",
+    "noApplicants": "لا توجد طلبات بعد",
+    "unknownApplicant": "مرشح",
+    "applicantInfo": {
+      "country": "البلد",
+      "experience": "الخبرة",
+      "languages": "اللغات",
+      "downloadCv": "تنزيل السيرة الذاتية",
+      "viewProfile": "عرض الملف"
+    },
+    "status": {
+      "pending": "قيد الانتظار",
+      "reviewing": "قيد المراجعة",
+      "viewed": "تمت المشاهدة",
+      "interview": "مقابلة",
+      "accepted": "مقبول",
+      "rejected": "مرفوض"
+    }
+  },
+  "applicantReview": {
+    "title": "مراجعة المرشح",
+    "profile": "الملف",
+    "files": "الملفات",
+    "backToJob": "العودة إلى الوظيفة",
+    "loading": "جاري التحميل...",
+    "notFound": "لم يتم العثور على الطلب",
+    "downloadCv": "تنزيل السيرة الذاتية",
+    "downloadCertificates": "تنزيل الشهادات",
+    "changeStatus": "تحديث الحالة",
+    "internalNotes": "ملاحظات داخلية",
+    "notesPlaceholder": "أضف ملاحظات...",
+    "saving": "جاري الحفظ...",
+    "saveNotes": "حفظ الملاحظات",
+    "statusUpdated": "تم التحديث",
+    "fields": {
+      "fullName": "الاسم الكامل",
+      "email": "البريد الإلكتروني",
+      "phone": "الهاتف",
+      "country": "البلد",
+      "languages": "اللغات",
+      "experience": "الخبرة"
+    },
+    "errors": {
+      "updateStatus": "فشل تحديث الحالة",
+      "saveNotes": "فشل حفظ الملاحظات"
+    },
+    "status": {
+      "pending": "قيد الانتظار",
+      "viewed": "تمت المشاهدة",
+      "interview": "مقابلة",
+      "accepted": "مقبول",
+      "rejected": "مرفوض"
+    }
+  },
+  "employerNotifications": {
+    "title": "الإشعارات",
+    "subtitle": "عرض إشعارات صاحب العمل",
+    "markAllRead": "تعيين الكل كمقروء",
+    "unreadBanner": "{{count}} إشعار غير مقروء",
+    "noNotifications": "لا توجد إشعارات جديدة"
+  },
+  "employerProfile": {
+    "title": "ملف الشركة",
+    "subtitle": "تعديل معلومات الشركة",
+    "incompleteWarning": "أكمل ملفك لبناء الثقة مع المرشحين.",
+    "saved": "تم حفظ الملف",
+    "error": "فشل حفظ الملف",
+    "save": "حفظ",
+    "fields": {
+      "companyName": "اسم الشركة",
+      "companyDescription": "وصف الشركة",
+      "industry": "المجال",
+      "country": "البلد",
+      "city": "المدينة",
+      "contactEmail": "بريد التواصل",
+      "contactPhone": "هاتف التواصل",
+      "companyLogo": "شعار الشركة"
+    }
+  },
+  "createJob": {
+    "title": "وظيفة جديدة",
+    "subtitle": "أدخل تفاصيل الوظيفة ثم انشرها",
+    "success": "تم نشر الوظيفة",
+    "error": "فشل نشر الوظيفة",
+    "publishing": "جارٍ النشر...",
+    "published": "تم النشر",
+    "publish": "نشر",
+    "cancel": "إلغاء",
+    "fields": {
+      "jobTitle": "مسمى الوظيفة",
+      "jobDescription": "وصف الوظيفة",
+      "location": "الموقع",
+      "salaryRange": "نطاق الراتب",
+      "requiredExperience": "الخبرة المطلوبة",
+      "requiredLanguages": "اللغات المطلوبة",
+      "workType": "نوع العمل"
+    },
+    "placeholders": {
+      "jobDescription": "اكتب تفاصيل الدور...",
+      "location": "المدينة، البلد...",
+      "salaryRange": "مثال: €2000-€3000",
+      "requiredExperience": "مثال: +2 سنوات",
+      "requiredLanguages": "مثال: الإنجليزية، الفرنسية"
+    },
+    "workTypes": {
+      "fullTime": "دوام كامل",
+      "partTime": "دوام جزئي",
+      "seasonal": "موسمي"
+    }
   }
 }
 

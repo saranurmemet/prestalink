@@ -76,7 +76,7 @@ const ApplicantReviewPage = () => {
       setTimeout(() => setSaved(false), 3000);
     } catch (error) {
       console.error('Error updating status:', error);
-      alert('Durum güncellenirken hata oluştu');
+      alert(t('applicantReview.errors.updateStatus'));
     } finally {
       setSaving(false);
     }
@@ -96,7 +96,7 @@ const ApplicantReviewPage = () => {
       setTimeout(() => setSaved(false), 3000);
     } catch (error) {
       console.error('Error saving notes:', error);
-      alert('Notlar kaydedilirken hata oluştu');
+      alert(t('applicantReview.errors.saveNotes'));
     } finally {
       setSaving(false);
     }
@@ -146,32 +146,32 @@ const ApplicantReviewPage = () => {
                     </h2>
                     <div className="space-y-3">
                       <div>
-                        <p className="text-sm text-slate-500 dark:text-slate-400 mb-1">Ad Soyad</p>
+                        <p className="text-sm text-slate-500 dark:text-slate-400 mb-1">{t('applicantReview.fields.fullName')}</p>
                         <p className="text-slate-800 dark:text-slate-200 font-medium">{applicant.name}</p>
                       </div>
                       <div>
-                        <p className="text-sm text-slate-500 dark:text-slate-400 mb-1">E-posta</p>
+                        <p className="text-sm text-slate-500 dark:text-slate-400 mb-1">{t('applicantReview.fields.email')}</p>
                         <p className="text-slate-800 dark:text-slate-200">{applicant.email}</p>
                       </div>
                       <div>
-                        <p className="text-sm text-slate-500 dark:text-slate-400 mb-1">Telefon</p>
+                        <p className="text-sm text-slate-500 dark:text-slate-400 mb-1">{t('applicantReview.fields.phone')}</p>
                         <p className="text-slate-800 dark:text-slate-200">{applicant.phone}</p>
                       </div>
                       {(applicant as any)?.country && (
                         <div>
-                          <p className="text-sm text-slate-500 dark:text-slate-400 mb-1">Ülke</p>
+                          <p className="text-sm text-slate-500 dark:text-slate-400 mb-1">{t('applicantReview.fields.country')}</p>
                           <p className="text-slate-800 dark:text-slate-200">{(applicant as any).country}</p>
                         </div>
                       )}
                       {applicant.languages && applicant.languages.length > 0 && (
                         <div>
-                          <p className="text-sm text-slate-500 dark:text-slate-400 mb-1">Diller</p>
+                          <p className="text-sm text-slate-500 dark:text-slate-400 mb-1">{t('applicantReview.fields.languages')}</p>
                           <p className="text-slate-800 dark:text-slate-200">{applicant.languages.join(', ')}</p>
                         </div>
                       )}
                       {(applicant as any)?.experienceLevel && (
                         <div>
-                          <p className="text-sm text-slate-500 dark:text-slate-400 mb-1">Deneyim</p>
+                          <p className="text-sm text-slate-500 dark:text-slate-400 mb-1">{t('applicantReview.fields.experience')}</p>
                           <p className="text-slate-800 dark:text-slate-200">{(applicant as any).experienceLevel}</p>
                         </div>
                       )}

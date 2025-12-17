@@ -951,6 +951,168 @@
       "deleteAccount": "Hesabı Sil"
     }
   },
+  "relativeTime": {
+    "justNow": "Az önce",
+    "minutesAgo": "{{minutes}} dk önce",
+    "hoursAgo": "{{hours}} saat önce",
+    "daysAgo": "{{days}} gün önce"
+  },
+  "employerNav": {
+    "dashboard": "Panel",
+    "profile": "Şirket Profili",
+    "createJob": "İlan Oluştur",
+    "jobListings": "İlanlar",
+    "notifications": "Bildirimler"
+  },
+  "employerDashboard": {
+    "welcome": "Hoş geldiniz, {{name}}",
+    "subtitle": "İlanlarınızı yönetin, adayları takip edin ve işe alım sürecini hızlandırın.",
+    "profileCompletion": "Profil Tamamlanma",
+    "totalActiveJobs": "Aktif İlan",
+    "totalApplicants": "Toplam Başvuru",
+    "unreadNotifications": "Okunmamış Bildirim",
+    "countriesHiring": "İşe Alım Ülkeleri",
+    "quickActions": "Hızlı İşlemler",
+    "createNewJob": "Yeni İlan Oluştur",
+    "createJobDesc": "Yeni bir pozisyon yayınlayın",
+    "viewJobListings": "İlanları Görüntüle",
+    "completeProfile": "Profilini Tamamla",
+    "completeProfileDesc": "Şirket bilgilerinizi güncelleyin",
+    "recentApplicants": "Son Başvurular",
+    "viewAll": "Tümünü Gör",
+    "unknownApplicant": "Aday",
+    "recentJobs": "Son İlanlar",
+    "applicantsCount": "{{count}} başvuru"
+  },
+  "employerJobs": {
+    "title": "İlanlarım",
+    "subtitle": "Yayınladığınız ilanları yönetin",
+    "loading": "Yükleniyor...",
+    "noJobs": "Henüz ilan oluşturmadınız",
+    "confirmDelete": "Bu ilanı silmek istediğinize emin misiniz?",
+    "error": "İlan işlemi sırasında hata oluştu",
+    "totalApplicants": "başvuru",
+    "viewApplicants": "Adayları Gör",
+    "edit": "Düzenle",
+    "delete": "Sil",
+    "status": {
+      "active": "Aktif",
+      "closed": "Kapalı"
+    }
+  },
+  "employerJobDetail": {
+    "backToJobs": "İlanlara Dön",
+    "notFound": "İlan bulunamadı",
+    "applicants": "Başvurular",
+    "noApplicants": "Henüz başvuru yok",
+    "unknownApplicant": "Aday",
+    "applicantInfo": {
+      "country": "Ülke",
+      "experience": "Deneyim",
+      "languages": "Diller",
+      "downloadCv": "CV İndir",
+      "viewProfile": "Profili Gör"
+    },
+    "status": {
+      "pending": "Beklemede",
+      "reviewing": "İnceleniyor",
+      "viewed": "Görüldü",
+      "interview": "Mülakat",
+      "accepted": "Kabul",
+      "rejected": "Reddedildi"
+    }
+  },
+  "applicantReview": {
+    "title": "Aday İncelemesi",
+    "profile": "Profil",
+    "files": "Dosyalar",
+    "backToJob": "İlana Dön",
+    "loading": "Yükleniyor...",
+    "notFound": "Başvuru bulunamadı",
+    "downloadCv": "CV'yi İndir",
+    "downloadCertificates": "Sertifikaları indir",
+    "changeStatus": "Durumu Güncelle",
+    "internalNotes": "İç Notlar",
+    "notesPlaceholder": "Not ekleyin...",
+    "saving": "Kaydediliyor...",
+    "saveNotes": "Notları Kaydet",
+    "statusUpdated": "Güncellendi",
+    "fields": {
+      "fullName": "Ad Soyad",
+      "email": "E-posta",
+      "phone": "Telefon",
+      "country": "Ülke",
+      "languages": "Diller",
+      "experience": "Deneyim"
+    },
+    "errors": {
+      "updateStatus": "Durum güncellenirken hata oluştu",
+      "saveNotes": "Notlar kaydedilirken hata oluştu"
+    },
+    "status": {
+      "pending": "Beklemede",
+      "viewed": "Görüldü",
+      "interview": "Mülakat",
+      "accepted": "Kabul",
+      "rejected": "Reddedildi"
+    }
+  },
+  "employerNotifications": {
+    "title": "Bildirimler",
+    "subtitle": "İşveren bildirimlerinizi görüntüleyin",
+    "markAllRead": "Tümünü Okundu Yap",
+    "unreadBanner": "{{count}} okunmamış bildirim",
+    "noNotifications": "Yeni bildiriminiz yok"
+  },
+  "employerProfile": {
+    "title": "Şirket Profili",
+    "subtitle": "Şirket bilgilerinizi düzenleyin",
+    "incompleteWarning": "Profilinizi tamamlayarak adayların güvenini artırın.",
+    "saved": "Profil kaydedildi",
+    "error": "Profil kaydedilemedi",
+    "save": "Kaydet",
+    "fields": {
+      "companyName": "Şirket Adı",
+      "companyDescription": "Şirket Açıklaması",
+      "industry": "Sektör",
+      "country": "Ülke",
+      "city": "Şehir",
+      "contactEmail": "İletişim E-postası",
+      "contactPhone": "İletişim Telefonu",
+      "companyLogo": "Şirket Logosu"
+    }
+  },
+  "createJob": {
+    "title": "Yeni İlan",
+    "subtitle": "İlan detaylarını girin ve yayınlayın",
+    "success": "İlan yayınlandı",
+    "error": "İlan yayınlanamadı",
+    "publishing": "Yayınlanıyor...",
+    "published": "Yayınlandı",
+    "publish": "Yayınla",
+    "cancel": "İptal",
+    "fields": {
+      "jobTitle": "İş Başlığı",
+      "jobDescription": "İş Tanımı",
+      "location": "Lokasyon",
+      "salaryRange": "Maaş Aralığı",
+      "requiredExperience": "Gerekli Deneyim",
+      "requiredLanguages": "Gerekli Diller",
+      "workType": "Çalışma Şekli"
+    },
+    "placeholders": {
+      "jobDescription": "Pozisyon detaylarını yazın...",
+      "location": "Şehir, ülke...",
+      "salaryRange": "Örn: 2000-3000€",
+      "requiredExperience": "Örn: 2+ yıl",
+      "requiredLanguages": "Örn: İngilizce, Fransızca"
+    },
+    "workTypes": {
+      "fullTime": "Tam zamanlı",
+      "partTime": "Yarı zamanlı",
+      "seasonal": "Sezonluk"
+    }
+  },
   "common": {
     "loading": "Yükleniyor...",
     "saving": "Kaydediliyor...",

@@ -964,6 +964,168 @@
       "changePassword": "Change Password",
       "deleteAccount": "Delete Account"
     }
+  },
+  "relativeTime": {
+    "justNow": "Just now",
+    "minutesAgo": "{{minutes}}m ago",
+    "hoursAgo": "{{hours}}h ago",
+    "daysAgo": "{{days}}d ago"
+  },
+  "employerNav": {
+    "dashboard": "Dashboard",
+    "profile": "Company Profile",
+    "createJob": "Create Job",
+    "jobListings": "Jobs",
+    "notifications": "Notifications"
+  },
+  "employerDashboard": {
+    "welcome": "Welcome, {{name}}",
+    "subtitle": "Manage your job posts, track applicants, and speed up hiring.",
+    "profileCompletion": "Profile completion",
+    "totalActiveJobs": "Active jobs",
+    "totalApplicants": "Total applicants",
+    "unreadNotifications": "Unread notifications",
+    "countriesHiring": "Hiring countries",
+    "quickActions": "Quick actions",
+    "createNewJob": "Create new job",
+    "createJobDesc": "Publish a new position",
+    "viewJobListings": "View jobs",
+    "completeProfile": "Complete your profile",
+    "completeProfileDesc": "Update your company information",
+    "recentApplicants": "Recent applications",
+    "viewAll": "View all",
+    "unknownApplicant": "Applicant",
+    "recentJobs": "Recent jobs",
+    "applicantsCount": "{{count}} applicants"
+  },
+  "employerJobs": {
+    "title": "My Jobs",
+    "subtitle": "Manage your published job posts",
+    "loading": "Loading...",
+    "noJobs": "You haven't created any jobs yet",
+    "confirmDelete": "Are you sure you want to delete this job?",
+    "error": "An error occurred while processing the job",
+    "totalApplicants": "applicants",
+    "viewApplicants": "View applicants",
+    "edit": "Edit",
+    "delete": "Delete",
+    "status": {
+      "active": "Active",
+      "closed": "Closed"
+    }
+  },
+  "employerJobDetail": {
+    "backToJobs": "Back to jobs",
+    "notFound": "Job not found",
+    "applicants": "Applicants",
+    "noApplicants": "No applications yet",
+    "unknownApplicant": "Applicant",
+    "applicantInfo": {
+      "country": "Country",
+      "experience": "Experience",
+      "languages": "Languages",
+      "downloadCv": "Download CV",
+      "viewProfile": "View profile"
+    },
+    "status": {
+      "pending": "Pending",
+      "reviewing": "Reviewing",
+      "viewed": "Viewed",
+      "interview": "Interview",
+      "accepted": "Accepted",
+      "rejected": "Rejected"
+    }
+  },
+  "applicantReview": {
+    "title": "Applicant review",
+    "profile": "Profile",
+    "files": "Files",
+    "backToJob": "Back to job",
+    "loading": "Loading...",
+    "notFound": "Application not found",
+    "downloadCv": "Download CV",
+    "downloadCertificates": "Download certificates",
+    "changeStatus": "Update status",
+    "internalNotes": "Internal notes",
+    "notesPlaceholder": "Add notes...",
+    "saving": "Saving...",
+    "saveNotes": "Save notes",
+    "statusUpdated": "Updated",
+    "fields": {
+      "fullName": "Full name",
+      "email": "Email",
+      "phone": "Phone",
+      "country": "Country",
+      "languages": "Languages",
+      "experience": "Experience"
+    },
+    "errors": {
+      "updateStatus": "Failed to update status",
+      "saveNotes": "Failed to save notes"
+    },
+    "status": {
+      "pending": "Pending",
+      "viewed": "Viewed",
+      "interview": "Interview",
+      "accepted": "Accepted",
+      "rejected": "Rejected"
+    }
+  },
+  "employerNotifications": {
+    "title": "Notifications",
+    "subtitle": "View your employer notifications",
+    "markAllRead": "Mark all as read",
+    "unreadBanner": "{{count}} unread notifications",
+    "noNotifications": "No new notifications"
+  },
+  "employerProfile": {
+    "title": "Company profile",
+    "subtitle": "Edit your company information",
+    "incompleteWarning": "Complete your profile to build trust with candidates.",
+    "saved": "Profile saved",
+    "error": "Failed to save profile",
+    "save": "Save",
+    "fields": {
+      "companyName": "Company name",
+      "companyDescription": "Company description",
+      "industry": "Industry",
+      "country": "Country",
+      "city": "City",
+      "contactEmail": "Contact email",
+      "contactPhone": "Contact phone",
+      "companyLogo": "Company logo"
+    }
+  },
+  "createJob": {
+    "title": "New job",
+    "subtitle": "Enter job details and publish",
+    "success": "Job published",
+    "error": "Failed to publish job",
+    "publishing": "Publishing...",
+    "published": "Published",
+    "publish": "Publish",
+    "cancel": "Cancel",
+    "fields": {
+      "jobTitle": "Job title",
+      "jobDescription": "Job description",
+      "location": "Location",
+      "salaryRange": "Salary range",
+      "requiredExperience": "Required experience",
+      "requiredLanguages": "Required languages",
+      "workType": "Work type"
+    },
+    "placeholders": {
+      "jobDescription": "Write the role details...",
+      "location": "City, country...",
+      "salaryRange": "e.g. €2000-€3000",
+      "requiredExperience": "e.g. 2+ years",
+      "requiredLanguages": "e.g. English, French"
+    },
+    "workTypes": {
+      "fullTime": "Full-time",
+      "partTime": "Part-time",
+      "seasonal": "Seasonal"
+    }
   }
 }
 
