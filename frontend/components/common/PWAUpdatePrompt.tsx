@@ -1,112 +1,81 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useLanguage } from '@/components/providers/LanguageProvider';
-import { RefreshCw, X } from 'lucide-react';
+import { useEffect, useRef } from 'react';
 
 export default function PWAUpdatePrompt() {
-  const { t } = useLanguage();
-  const [updateAvailable, setUpdateAvailable] = useState(false);
-  const [registration, setRegistration] = useState<ServiceWorkerRegistration | null>(null);
-  const [isUpdating, setIsUpdating] = useState(false);
+  const registrationRef = useRef<ServiceWorkerRegistration | null>(null);
+  const refreshingRef = useRef(false);
 
   useEffect(() => {
     if (typeof window === 'undefined' || !('serviceWorker' in navigator)) {
       return;
     }
 
-    // Service worker registration kontrolü
-    navigator.serviceWorker.ready.then((reg) => {
-      setRegistration(reg);
+    const checkForUpdates = () => {
+      registrationRef.current?.update().catch(() => {});
+    };
 
-      // Güncelleme kontrolü
-      const checkForUpdates = () => {
-        reg.update();
-      };
+    const onControllerChange = () => {
+      // Avoid reload loops
+      if (refreshingRef.current) return;
+      refreshingRef.current = true;
+      window.location.reload();
+    };
 
-      // Her 60 saniyede bir güncelleme kontrol et
-      const interval = setInterval(checkForUpdates, 60000);
+    const onVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        checkForUpdates();
+      }
+    };
 
-      // Service worker güncelleme eventi
-      reg.addEventListener('updatefound', () => {
-        const newWorker = reg.installing;
-        if (newWorker) {
+    navigator.serviceWorker.addEventListener('controllerchange', onControllerChange);
+    window.addEventListener('focus', checkForUpdates);
+    window.addEventListener('online', checkForUpdates);
+    document.addEventListener('visibilitychange', onVisibilityChange);
+
+    let interval: number | undefined;
+    let updateFoundHandler: (() => void) | undefined;
+
+    navigator.serviceWorker.ready
+      .then((reg) => {
+        registrationRef.current = reg;
+
+        // Check on load + periodically
+        checkForUpdates();
+        interval = window.setInterval(checkForUpdates, 60_000);
+
+        // When a new SW is installed, force activation (for configs that support waiting)
+        updateFoundHandler = () => {
+          const newWorker = reg.installing;
+          if (!newWorker) return;
+
           newWorker.addEventListener('statechange', () => {
             if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-              // Yeni service worker yüklendi, kullanıcıya bildir
-              setUpdateAvailable(true);
+              // If there is a waiting worker, ask it to activate immediately.
+              // (With skipWaiting:true this is usually unnecessary, but harmless.)
+              if (reg.waiting) {
+                reg.waiting.postMessage({ type: 'SKIP_WAITING' });
+              }
             }
           });
-        }
-      });
+        };
 
-      // Sayfa yüklendiğinde kontrol et
-      checkForUpdates();
+        reg.addEventListener('updatefound', updateFoundHandler);
+      })
+      .catch(() => {});
 
-      return () => clearInterval(interval);
-    });
+    return () => {
+      navigator.serviceWorker.removeEventListener('controllerchange', onControllerChange);
+      window.removeEventListener('focus', checkForUpdates);
+      window.removeEventListener('online', checkForUpdates);
+      document.removeEventListener('visibilitychange', onVisibilityChange);
 
-    // Service worker controller değişikliği
-    navigator.serviceWorker.addEventListener('controllerchange', () => {
-      // Yeni service worker aktif oldu, sayfayı yenile
-      window.location.reload();
-    });
+      if (interval) window.clearInterval(interval);
+      if (updateFoundHandler && registrationRef.current) {
+        registrationRef.current.removeEventListener('updatefound', updateFoundHandler);
+      }
+    };
   }, []);
 
-  const handleUpdate = async () => {
-    if (!registration || !registration.waiting) return;
-
-    setIsUpdating(true);
-
-    // Service worker'a skipWaiting mesajı gönder
-    registration.waiting.postMessage({ type: 'SKIP_WAITING' });
-
-    // Sayfayı yenile
-    setTimeout(() => {
-      window.location.reload();
-    }, 500);
-  };
-
-  const handleDismiss = () => {
-    setUpdateAvailable(false);
-  };
-
-  if (!updateAvailable) return null;
-
-  return (
-    <div className="fixed bottom-4 left-4 right-4 md:left-auto md:right-4 md:w-96 z-50 animate-slide-up">
-      <div className="bg-white dark:bg-slate-800 rounded-xl shadow-2xl border border-slate-200 dark:border-slate-700 p-4 flex items-center gap-3">
-        <div className="flex-shrink-0">
-          <RefreshCw className={`w-5 h-5 text-brandBlue ${isUpdating ? 'animate-spin' : ''}`} />
-        </div>
-        <div className="flex-1 min-w-0">
-          <p className="text-sm font-semibold text-slate-800 dark:text-slate-100">
-            {t('pwa.updateAvailable') || 'Yeni güncelleme mevcut!'}
-          </p>
-          <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">
-            {t('pwa.updateDescription') || 'Uygulamayı güncellemek için yenileyin.'}
-          </p>
-        </div>
-        <div className="flex items-center gap-2">
-          <button
-            onClick={handleUpdate}
-            disabled={isUpdating}
-            className="px-3 py-1.5 bg-brandBlue text-white text-sm font-medium rounded-lg hover:bg-brandBlue/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {isUpdating 
-              ? (t('pwa.updating') || 'Güncelleniyor...') 
-              : (t('pwa.update') || 'Güncelle')
-            }
-          </button>
-          <button
-            onClick={handleDismiss}
-            className="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors"
-            aria-label="Kapat"
-          >
-            <X className="w-4 h-4" />
-          </button>
-        </div>
-      </div>
-    </div>
-  );
+  return null;
 }
