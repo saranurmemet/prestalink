@@ -19,6 +19,18 @@ function urlBase64ToUint8Array(base64String: string) {
   return outputArray;
 }
 
+function withTimeout<T>(promise: Promise<T>, ms: number, label = 'timeout') {
+  return Promise.race([
+    promise,
+    new Promise<T>((_, reject) => {
+      const id = setTimeout(() => {
+        clearTimeout(id);
+        reject(new Error(label));
+      }, ms);
+    }),
+  ]);
+}
+
 const SettingsPage = () => {
   const { t } = useLanguage();
   const { user } = useAuthStore();
@@ -43,8 +55,26 @@ const SettingsPage = () => {
 
   const pushSupported = useMemo(() => {
     if (typeof window === 'undefined') return false;
-    return 'serviceWorker' in navigator && 'PushManager' in window && 'Notification' in window;
+    return (
+      window.isSecureContext &&
+      'serviceWorker' in navigator &&
+      'PushManager' in window &&
+      'Notification' in window
+    );
   }, []);
+
+  const getSWRegistration = async () => {
+    // Avoid waiting forever for navigator.serviceWorker.ready (it only resolves when controlled)
+    const existing = await navigator.serviceWorker.getRegistration();
+    if (existing) return existing;
+
+    try {
+      return await withTimeout(navigator.serviceWorker.ready, 4000, 'serviceWorker.ready timeout');
+    } catch (_) {
+      // Best-effort register (works even if not yet controlled)
+      return await navigator.serviceWorker.register('/sw.js');
+    }
+  };
 
   const refreshPushStatus = async () => {
     if (!pushSupported) {
@@ -52,10 +82,12 @@ const SettingsPage = () => {
       return;
     }
 
+    setPushStatus((s) => ({ ...s, supported: true, loading: true, error: undefined }));
+
     try {
       const permission = Notification.permission;
-      const reg = await navigator.serviceWorker.ready;
-      const sub = await reg.pushManager.getSubscription();
+      const reg = await getSWRegistration();
+      const sub = await withTimeout(reg.pushManager.getSubscription(), 4000, 'getSubscription timeout');
 
       setPushStatus({
         supported: true,
@@ -66,7 +98,7 @@ const SettingsPage = () => {
     } catch (e: any) {
       setPushStatus({
         supported: true,
-        permission: 'unknown',
+        permission: (typeof Notification !== 'undefined' ? Notification.permission : 'unknown') as any,
         subscribed: false,
         loading: false,
         error: e?.message || 'Push status error',
@@ -95,8 +127,8 @@ const SettingsPage = () => {
       const publicKey = keyRes.data?.key;
       if (!publicKey) throw new Error('Missing VAPID public key');
 
-      const reg = await navigator.serviceWorker.ready;
-      const existing = await reg.pushManager.getSubscription();
+      const reg = await getSWRegistration();
+      const existing = await withTimeout(reg.pushManager.getSubscription(), 4000, 'getSubscription timeout');
 
       const subscription =
         existing ||
@@ -121,8 +153,8 @@ const SettingsPage = () => {
     setPushStatus((s) => ({ ...s, loading: true, error: undefined }));
 
     try {
-      const reg = await navigator.serviceWorker.ready;
-      const sub = await reg.pushManager.getSubscription();
+      const reg = await getSWRegistration();
+      const sub = await withTimeout(reg.pushManager.getSubscription(), 4000, 'getSubscription timeout');
       if (sub) {
         await api.post('/notifications/push/unsubscribe', { endpoint: sub.endpoint });
         await sub.unsubscribe();
@@ -276,7 +308,6 @@ const SettingsPage = () => {
                   </button>
                   <button
                     onClick={refreshPushStatus}
-                    disabled={pushStatus.loading}
                     className="px-4 py-2 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-sm font-medium hover:bg-slate-200 dark:hover:bg-slate-600 disabled:opacity-50"
                   >
                     Yenile
