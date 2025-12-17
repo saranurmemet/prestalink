@@ -8,18 +8,22 @@ import type { User, Job, Application, Notification } from './types';
 // Local Mobile/PWA: http://<LAN-IP>:5000/api (from .env.local)
 // Deployment: https://<backend-domain>/api (from environment)
 const getApiBaseURL = () => {
-  // Development fallback for stability
+  // Browser-side:
+  // - If NEXT_PUBLIC_API_URL is set, use it (allows local frontend -> deployed backend).
+  // - Otherwise, fall back to local/LAN backend for development convenience.
   if (typeof window !== 'undefined') {
+    const host = window.location.hostname;
+    const isLocalHost = host === 'localhost' || host === '127.0.0.1';
+    const isLanHost =
+      /^192\.168\.\d{1,3}\.\d{1,3}$/.test(host) ||
+      /^10\.\d{1,3}\.\d{1,3}\.\d{1,3}$/.test(host) ||
+      /^172\.(1[6-9]|2[0-9]|3[01])\.\d{1,3}\.\d{1,3}$/.test(host);
+
     const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-    
-    if (apiUrl) {
-      return apiUrl;
-    }
-    
-    // Development fallback - only in browser
-    if (process.env.NODE_ENV === 'development' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-      console.warn('⚠️ NEXT_PUBLIC_API_URL not set, using development fallback: http://localhost:5000/api');
-      return 'http://localhost:5000/api';
+    if (apiUrl) return apiUrl;
+
+    if (process.env.NODE_ENV === 'development' && (isLocalHost || isLanHost)) {
+      return `http://${host}:5000/api`;
     }
   }
   

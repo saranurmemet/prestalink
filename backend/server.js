@@ -66,6 +66,16 @@ const corsOptions = {
     if (!origin) {
       return callback(null, true);
     }
+
+    // Always allow local dev origins (useful when frontend runs locally against a deployed API)
+    if (
+      origin.startsWith('http://localhost:') ||
+      origin.startsWith('https://localhost:') ||
+      origin.startsWith('http://127.0.0.1:') ||
+      origin.startsWith('https://127.0.0.1:')
+    ) {
+      return callback(null, true);
+    }
     
     // Development: Allow all localhost and local network origins
     if (process.env.NODE_ENV !== 'production') {
