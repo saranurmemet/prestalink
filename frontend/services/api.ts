@@ -149,6 +149,9 @@ export const loginUser = (payload: { email: string; password: string }, role?: '
   return api.post<{ user: User; token: string }>(API_ROUTES.auth.login, payload);
 };
 
+export const googleAuth = (idToken: string, role?: 'user' | 'recruiter' | 'admin' | 'superadmin') =>
+  api.post<{ user: User; token: string; availableRoles?: string[] }>(API_ROUTES.auth.google, { idToken, role });
+
 export const fetchProfile = () =>
   api.get<{ user: User }>(API_ROUTES.auth.me);
 

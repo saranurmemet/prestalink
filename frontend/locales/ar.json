@@ -501,6 +501,10 @@
     "registerPrompt": "ليس لديك حساب؟",
     "loginPrompt": "لديك حساب بالفعل؟",
     "rememberMe": "تذكرني",
+    "or": "أو",
+    "googleSignIn": "المتابعة مع Google",
+    "googleError": "حدث خطأ أثناء تسجيل الدخول باستخدام Google.",
+    "locale": "ar",
     "roles": {
       "user": {
         "title": "باحث عن عمل (مرشح)",

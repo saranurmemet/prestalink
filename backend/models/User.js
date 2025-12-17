@@ -16,12 +16,21 @@ const userSchema = new mongoose.Schema(
     },
     phone: {
       type: String,
-      required: true,
+      required: function() {
+        return !this.googleId; // Phone not required if Google user
+      },
     },
     password: {
       type: String,
-      required: true,
+      required: function() {
+        return !this.googleId; // Password not required if Google user
+      },
       minlength: 4,
+    },
+    googleId: {
+      type: String,
+      unique: true,
+      sparse: true, // Allow multiple nulls
     },
     role: {
       type: String,
@@ -101,6 +110,9 @@ userSchema.pre('save', async function () {
 });
 
 userSchema.methods.matchPassword = async function (enteredPassword) {
+  if (!this.password) {
+    return false; // Google users don't have passwords
+  }
   return bcrypt.compare(enteredPassword, this.password);
 };
 

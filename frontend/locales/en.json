@@ -501,6 +501,10 @@
     "registerPrompt": "Don't have an account?",
     "loginPrompt": "Already have an account?",
     "rememberMe": "Remember me",
+    "or": "or",
+    "googleSignIn": "Continue with Google",
+    "googleError": "An error occurred while signing in with Google.",
+    "locale": "en",
     "roles": {
       "user": {
         "title": "Job Seeker (Candidate)",

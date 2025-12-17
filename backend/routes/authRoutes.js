@@ -1,5 +1,5 @@
 const express = require('express');
-const { register, login, me, loginForRole, updateProfile } = require('../controllers/authController');
+const { register, login, me, loginForRole, updateProfile, googleAuth } = require('../controllers/authController');
 const { authMiddleware } = require('../middleware/authMiddleware');
 const upload = require('../utils/upload');
 
@@ -7,6 +7,9 @@ const router = express.Router();
 
 // REGISTER
 router.post('/register', register);
+
+// GOOGLE OAUTH
+router.post('/google', googleAuth);
 
 // UNIVERSAL LOGIN (default)
 router.post('/login', login);

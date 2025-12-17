@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { OAuth2Client } = require('google-auth-library');
 const User = require('../models/User');
 const generateToken = require('../utils/generateToken');
 const asyncHandler = require('../utils/asyncHandler');
@@ -192,5 +193,109 @@ exports.updateProfile = asyncHandler(async (req, res) => {
     user: sanitizeUser(user),
     message: 'Profile updated successfully',
   });
+});
+
+// Google OAuth Login/Register
+exports.googleAuth = asyncHandler(async (req, res) => {
+  const { idToken, role: selectedRole } = req.body;
+
+  if (!idToken) {
+    return res.status(400).json({ message: 'Google ID token is required' });
+  }
+
+  // Initialize Google OAuth client
+  const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+
+  try {
+    // Verify the token
+    const ticket = await client.verifyIdToken({
+      idToken,
+      audience: process.env.GOOGLE_CLIENT_ID,
+    });
+
+    const payload = ticket.getPayload();
+    const { sub: googleId, email, name, picture } = payload;
+
+    if (!email) {
+      return res.status(400).json({ message: 'Google account email not found' });
+    }
+
+    // Check if user exists by Google ID or email
+    let user = await User.findOne({
+      $or: [{ googleId }, { email: email.toLowerCase() }],
+    });
+
+    if (user) {
+      // Existing user - login
+      if (!user.googleId) {
+        // Link Google account to existing email-based account
+        user.googleId = googleId;
+      }
+      
+      // Update profile photo if available
+      if (picture && !user.profilePhoto) {
+        user.profilePhoto = picture;
+      }
+    } else {
+      // New user - register
+      const defaultRole = selectedRole || 'user';
+      
+      // Create user without phone (Google users may not have phone)
+      // Schema allows phone to be optional for Google users (conditional required)
+      const newUserData = {
+        googleId,
+        email: email.toLowerCase(),
+        name: name || email.split('@')[0],
+        password: 'google-oauth-placeholder', // Placeholder - will be hashed but never used
+        role: defaultRole,
+        roles: [defaultRole],
+        activeRole: defaultRole,
+      };
+      
+      // Phone is optional for Google users (schema checks googleId)
+      // We don't set phone field, letting schema validation handle it
+      
+      if (picture) {
+        newUserData.profilePhoto = picture;
+      }
+      
+      user = await User.create(newUserData);
+    }
+
+    // Handle role selection (similar to baseLogin)
+    if (user.roles && user.roles.length > 0) {
+      if (selectedRole) {
+        if (!user.roles.includes(selectedRole)) {
+          return res.status(403).json({
+            message: 'You do not have permission for this role',
+            availableRoles: user.roles,
+          });
+        }
+        user.activeRole = selectedRole;
+        user.role = selectedRole;
+      } else {
+        user.activeRole = user.activeRole || user.roles[0];
+        user.role = user.activeRole;
+      }
+    }
+
+    // Update last login
+    user.lastLogin = new Date();
+    await user.save();
+
+    const token = generateToken({ id: user._id, role: user.role });
+    
+    res.json({
+      user: sanitizeUser(user),
+      token,
+      availableRoles: user.roles || [user.role],
+    });
+  } catch (error) {
+    console.error('❌ [GOOGLE_AUTH] Error:', error);
+    if (error.message && error.message.includes('Token used too early')) {
+      return res.status(400).json({ message: 'Invalid Google token' });
+    }
+    return res.status(401).json({ message: 'Google authentication failed' });
+  }
 });
 

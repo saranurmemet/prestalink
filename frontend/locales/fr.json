@@ -499,6 +499,10 @@
     "forbidden": "Vous n'avez pas la permission d'acc\u00e9der \u00e0 ce r\u00f4le.",    "registerPrompt": "Pas encore de compte ?",
     "loginPrompt": "Vous avez déjà un compte ?",
     "rememberMe": "Se souvenir de moi",
+    "or": "ou",
+    "googleSignIn": "Continuer avec Google",
+    "googleError": "Une erreur s'est produite lors de la connexion avec Google.",
+    "locale": "fr",
     "roles": {
       "user": {
         "title": "Chercheur d'emploi (Candidat)",

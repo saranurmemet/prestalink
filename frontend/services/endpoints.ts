@@ -2,6 +2,7 @@ export const API_ROUTES = {
   auth: {
     register: '/auth/register',
     login: '/auth/login',
+    google: '/auth/google',
     me: '/auth/me',
   },
   jobs: {
