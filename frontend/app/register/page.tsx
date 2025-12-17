@@ -5,7 +5,8 @@ import Link from 'next/link';
 import { FormEvent, useState } from 'react';
 import type { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
-import { registerUser } from '@/services/api';
+import { GoogleLogin } from '@react-oauth/google';
+import { registerUser, googleAuth } from '@/services/api';
 import { useAuthStore } from '@/store/useAuthStore';
 import { useLanguage } from '@/components/providers/LanguageProvider';
 import { getDashboardRoute } from '@/utils/routing';
@@ -36,6 +37,43 @@ const RegisterPage = () => {
       gradient: 'from-brandOrange to-orange-600',
     },
   ];
+
+  const handleGoogleSuccess = async (credentialResponse: any) => {
+    try {
+      setError(null);
+      setLoading(true);
+      
+      if (!selectedRole) {
+        setError(t('auth.selectRole') || 'Please select a role');
+        setLoading(false);
+        return;
+      }
+
+      if (!credentialResponse.credential) {
+        setError(t('auth.googleError') || 'Google token alınamadı.');
+        setLoading(false);
+        return;
+      }
+
+      const response = await googleAuth(credentialResponse.credential, selectedRole);
+      setAuth({ ...response.data, rememberMe: true });
+      const dashboardRoute = getDashboardRoute(response.data.user.role);
+      router.push(dashboardRoute);
+    } catch (error) {
+      const axiosError = error as AxiosError<{ message?: string }>;
+      setError(
+        axiosError.response?.data?.message || 
+        t('auth.googleError') || 
+        'Google ile kayıt yapılırken bir hata oluştu.'
+      );
+      setLoading(false);
+    }
+  };
+
+  const handleGoogleError = () => {
+    setError(t('auth.googleError') || 'Google ile kayıt yapılırken bir hata oluştu.');
+    setLoading(false);
+  };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -190,6 +228,32 @@ const RegisterPage = () => {
                   t('auth.register')
                 )}
               </button>
+              {process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID && (
+                <>
+                  <div className="relative my-4">
+                    <div className="absolute inset-0 flex items-center">
+                      <div className="w-full border-t border-slate-300 dark:border-slate-600"></div>
+                    </div>
+                    <div className="relative flex justify-center text-sm">
+                      <span className="px-2 bg-white dark:bg-slate-800 text-brandGray dark:text-slate-300">
+                        {t('auth.or') || 'veya'}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="flex justify-center">
+                    <GoogleLogin
+                      onSuccess={handleGoogleSuccess}
+                      onError={handleGoogleError}
+                      useOneTap={false}
+                      text="signup_with"
+                      shape="rectangular"
+                      theme="outline"
+                      size="large"
+                      locale={t('auth.locale') || 'tr'}
+                    />
+                  </div>
+                </>
+              )}
               <p className="mt-3 text-center text-sm text-brandGray dark:text-slate-300">
                 {t('auth.loginPrompt')}{' '}
                 <Link href="/login" className="font-semibold text-brandBlue hover:underline">

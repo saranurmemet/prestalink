@@ -352,7 +352,7 @@ const LoginPage = () => {
                 t('auth.login')
               )}
             </button>
-            {process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID && (
+            {process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID && (selectedRole === 'user' || selectedRole === 'recruiter') && (
               <>
                 <div className="relative my-4">
                   <div className="absolute inset-0 flex items-center">
