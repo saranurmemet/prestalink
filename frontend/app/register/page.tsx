@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useState, useEffect } from 'react';
 import type { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
 import { GoogleLogin } from '@react-oauth/google';
@@ -20,6 +20,7 @@ const RegisterPage = () => {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [selectedRole, setSelectedRole] = useState<UserRole | null>(null);
+  const [selectedLanguages, setSelectedLanguages] = useState<string[]>([]);
 
   const roles = [
     {
@@ -37,6 +38,13 @@ const RegisterPage = () => {
       gradient: 'from-brandOrange to-orange-600',
     },
   ];
+
+  // Reset selected languages when role changes
+  useEffect(() => {
+    if (selectedRole !== 'user') {
+      setSelectedLanguages([]);
+    }
+  }, [selectedRole]);
 
   const handleGoogleSuccess = async (credentialResponse: any) => {
     try {
@@ -63,7 +71,7 @@ const RegisterPage = () => {
       const axiosError = error as AxiosError<{ message?: string }>;
       setError(
         axiosError.response?.data?.message || 
-        t('auth.googleError') || 
+        t('auth.googleRegisterError') || 
         'Google ile kayıt yapılırken bir hata oluştu.'
       );
       setLoading(false);
@@ -71,7 +79,7 @@ const RegisterPage = () => {
   };
 
   const handleGoogleError = () => {
-    setError(t('auth.googleError') || 'Google ile kayıt yapılırken bir hata oluştu.');
+    setError(t('auth.googleRegisterError') || 'Google ile kayıt yapılırken bir hata oluştu.');
     setLoading(false);
   };
 
@@ -88,7 +96,7 @@ const RegisterPage = () => {
       email: formData.get('email') as string,
       phone: formData.get('phone') as string,
       password: formData.get('password') as string,
-      languages: selectedRole === 'user' ? (formData.get('languages') as string)?.split(',').map((lang) => lang.trim()).filter(Boolean) || [] : [],
+      languages: selectedRole === 'user' ? selectedLanguages : [],
       role: selectedRole,
     };
 
@@ -203,9 +211,38 @@ const RegisterPage = () => {
             </div>
             {selectedRole === 'user' && (
               <div className="sm:col-span-2">
-                <label className="text-sm font-semibold text-brandGray dark:text-slate-300">{t('auth.languages')}</label>
-                <input name="languages" type="text" placeholder="EN, TR, FR, AR" className="input mt-1" />
-                <p className="text-xs text-brandGray dark:text-slate-400 mt-1">{t('auth.languagesHint')}</p>
+                <label className="text-sm font-semibold text-brandGray dark:text-slate-300 mb-2 block">
+                  {t('auth.languages')?.replace('(virgülle ayırın)', '') || 'Diller'}
+                </label>
+                <div className="flex flex-wrap gap-3 mt-2">
+                  {[
+                    { code: 'EN', label: 'English' },
+                    { code: 'TR', label: 'Türkçe' },
+                    { code: 'FR', label: 'Français' },
+                    { code: 'AR', label: 'العربية' },
+                  ].map((lang) => (
+                    <label
+                      key={lang.code}
+                      className="flex items-center gap-2 cursor-pointer group"
+                    >
+                      <input
+                        type="checkbox"
+                        checked={selectedLanguages.includes(lang.code)}
+                        onChange={(e) => {
+                          if (e.target.checked) {
+                            setSelectedLanguages([...selectedLanguages, lang.code]);
+                          } else {
+                            setSelectedLanguages(selectedLanguages.filter((l) => l !== lang.code));
+                          }
+                        }}
+                        className="w-4 h-4 text-brandBlue border-slate-300 rounded focus:ring-brandBlue focus:ring-2 cursor-pointer"
+                      />
+                      <span className="text-sm text-brandGray dark:text-slate-300 group-hover:text-brandBlue dark:group-hover:text-brandBlue transition-colors">
+                        {lang.code} - {lang.label}
+                      </span>
+                    </label>
+                  ))}
+                </div>
               </div>
             )}
             {error && (

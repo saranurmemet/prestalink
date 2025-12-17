@@ -502,6 +502,7 @@
     "or": "ou",
     "googleSignIn": "Continuer avec Google",
     "googleError": "Une erreur s'est produite lors de la connexion avec Google.",
+    "googleRegisterError": "Une erreur s'est produite lors de l'inscription avec Google.",
     "locale": "fr",
     "roles": {
       "user": {

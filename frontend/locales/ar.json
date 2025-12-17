@@ -504,6 +504,7 @@
     "or": "أو",
     "googleSignIn": "المتابعة مع Google",
     "googleError": "حدث خطأ أثناء تسجيل الدخول باستخدام Google.",
+    "googleRegisterError": "حدث خطأ أثناء التسجيل باستخدام Google.",
     "locale": "ar",
     "roles": {
       "user": {

@@ -505,6 +505,7 @@
     "or": "veya",
     "googleSignIn": "Google ile devam et",
     "googleError": "Google ile giriş yapılırken bir hata oluştu.",
+    "googleRegisterError": "Google ile kayıt yapılırken bir hata oluştu.",
     "locale": "tr",
     "roles": {
       "user": {

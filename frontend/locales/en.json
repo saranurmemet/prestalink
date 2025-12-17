@@ -504,6 +504,7 @@
     "or": "or",
     "googleSignIn": "Continue with Google",
     "googleError": "An error occurred while signing in with Google.",
+    "googleRegisterError": "An error occurred while registering with Google.",
     "locale": "en",
     "roles": {
       "user": {
