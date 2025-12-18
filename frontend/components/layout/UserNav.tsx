@@ -15,7 +15,9 @@ import {
   BarChart3,
   Settings,
   MessageSquare,
-  Headphones
+  Headphones,
+  MoreHorizontal,
+  X
 } from 'lucide-react';
 import { useLanguage } from '@/components/providers/LanguageProvider';
 import { fetchNotifications } from '@/services/api';
@@ -35,6 +37,7 @@ const UserNav = () => {
   const { t } = useLanguage();
   const { user } = useAuthStore();
   const [unreadCount, setUnreadCount] = useState(0);
+  const [isMoreMenuOpen, setIsMoreMenuOpen] = useState(false);
   const toggleContact = useFloatingContactStore((s) => s.toggle);
 
   useEffect(() => {
@@ -73,7 +76,7 @@ const UserNav = () => {
     { href: '/user/settings', icon: Settings, label: String(t('userNav.settings')) },
   ];
 
-  // Mobile bottom bar: show the core items + a "Contact" action that opens the support panel
+  // Mobile bottom bar: show the core items + "More" button
   const mobileItems: NavItem[] = [
     navItems[0], // dashboard
     navItems[1], // profile
@@ -81,7 +84,16 @@ const UserNav = () => {
     navItems[3], // jobs
     navItems[4], // favorites
     navItems[9], // settings
-    { href: '#contact', icon: Headphones, label: String(t('nav.contactSupport')), onClick: toggleContact },
+    { href: '#more', icon: MoreHorizontal, label: String(t('userNav.more')), onClick: () => setIsMoreMenuOpen(true) },
+  ];
+
+  // Items that appear in the "More" menu
+  const moreMenuItems: NavItem[] = [
+    navItems[5], // applications
+    navItems[6], // messages
+    navItems[7], // statistics
+    navItems[8], // notifications
+    { href: '#contact', icon: Headphones, label: String(t('nav.contactSupport')), onClick: () => { setIsMoreMenuOpen(false); toggleContact(); } },
   ];
 
   return (
@@ -191,7 +203,104 @@ const UserNav = () => {
             );
           })}
         </div>
+        {/* ME&RA Footer on Mobile */}
+        <div className="pt-2 pb-1 border-t border-slate-200 dark:border-slate-800">
+          <p className="text-[10px] text-center text-slate-500 dark:text-slate-400">
+            © 2026 ME&RA®
+          </p>
+        </div>
       </nav>
+
+      {/* More Menu Modal */}
+      {isMoreMenuOpen && (
+        <>
+          {/* Backdrop */}
+          <div 
+            className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 md:hidden"
+            onClick={() => setIsMoreMenuOpen(false)}
+          />
+          {/* Modal */}
+          <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-white dark:bg-slate-900 rounded-t-3xl border-t border-slate-200 dark:border-slate-800 shadow-2xl animate-slide-up-from-bottom">
+            <div className="p-4">
+              {/* Header */}
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
+                  {t('userNav.more')}
+                </h3>
+                <button
+                  onClick={() => setIsMoreMenuOpen(false)}
+                  className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                  aria-label="Close"
+                >
+                  <X className="w-5 h-5 text-slate-600 dark:text-slate-400" />
+                </button>
+              </div>
+              {/* Menu Items */}
+              <div className="space-y-2">
+                {moreMenuItems.map((item) => {
+                  const Icon = item.icon;
+                  const isActive = pathname === item.href || 
+                    (item.href !== '/user/dashboard' && pathname?.startsWith(item.href));
+                  
+                  const showBadge = item.showBadge && unreadCount > 0;
+                  
+                  return item.onClick ? (
+                    <button
+                      key={item.href}
+                      type="button"
+                      onClick={item.onClick}
+                      className={`
+                        w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 relative
+                        text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800
+                      `}
+                    >
+                      <div className="relative flex-shrink-0">
+                        <Icon className="w-5 h-5" />
+                        {showBadge && (
+                          <span className="absolute -top-1.5 -right-1.5 flex items-center justify-center min-w-[20px] h-[20px] px-1.5 rounded-full text-[11px] font-bold bg-red-500 text-white border-2 border-white dark:border-slate-900 animate-pulse">
+                            {unreadCount > 99 ? '99+' : unreadCount}
+                          </span>
+                        )}
+                      </div>
+                      <span className="font-medium flex-1 text-left">{item.label}</span>
+                    </button>
+                  ) : (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={() => setIsMoreMenuOpen(false)}
+                      className={`
+                        w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 relative
+                        ${isActive 
+                          ? 'bg-brandBlue text-white shadow-md' 
+                          : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
+                        }
+                      `}
+                    >
+                      <div className="relative flex-shrink-0">
+                        <Icon className="w-5 h-5" />
+                        {showBadge && (
+                          <span className={`
+                            absolute -top-1.5 -right-1.5 flex items-center justify-center min-w-[20px] h-[20px] px-1.5 rounded-full text-[11px] font-bold shadow-lg
+                            ${isActive 
+                              ? 'bg-red-500 text-white border-2 border-white' 
+                              : 'bg-red-500 text-white border-2 border-white dark:border-slate-900'
+                            }
+                            animate-pulse
+                          `}>
+                            {unreadCount > 99 ? '99+' : unreadCount}
+                          </span>
+                        )}
+                      </div>
+                      <span className="font-medium flex-1 text-left">{item.label}</span>
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </>
+      )}
     </>
   );
 };

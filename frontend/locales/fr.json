@@ -762,7 +762,8 @@
     "messages": "Messages",
     "statistics": "Statistiques",
     "notifications": "Notifications",
-    "settings": "Paramètres"
+    "settings": "Paramètres",
+    "more": "Plus"
   },
   "userProfile": {
     "title": "Modifier le Profil",

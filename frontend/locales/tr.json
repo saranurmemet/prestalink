@@ -765,7 +765,8 @@
     "messages": "Mesajlar",
     "statistics": "İstatistikler",
     "notifications": "Bildirimler",
-    "settings": "Ayarlar"
+    "settings": "Ayarlar",
+    "more": "Daha Fazla"
   },
   "userProfile": {
     "title": "Profil Düzenle",

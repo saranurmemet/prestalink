@@ -764,7 +764,8 @@
     "messages": "الرسائل",
     "statistics": "الإحصائيات",
     "notifications": "الإشعارات",
-    "settings": "الإعدادات"
+    "settings": "الإعدادات",
+    "more": "المزيد"
   },
   "userProfile": {
     "title": "تعديل الملف الشخصي",

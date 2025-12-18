@@ -764,7 +764,8 @@
     "messages": "Messages",
     "statistics": "Statistics",
     "notifications": "Notifications",
-    "settings": "Settings"
+    "settings": "Settings",
+    "more": "More"
   },
   "userProfile": {
     "title": "Edit Profile",
