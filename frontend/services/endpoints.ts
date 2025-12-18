@@ -20,5 +20,8 @@ export const API_ROUTES = {
     base: '/notifications',
     markRead: '/notifications/mark-read',
   },
+  contact: {
+    base: '/contact',
+  },
 };
 

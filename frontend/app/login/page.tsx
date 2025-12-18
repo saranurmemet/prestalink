@@ -23,6 +23,7 @@ const LoginPage = () => {
   const [rememberMe, setRememberMe] = useState(true); // Default to true (beni hatırla)
   const formRef = useRef<HTMLFormElement>(null);
   const autoLoginAttempted = useRef(false);
+  const googleLoginRef = useRef<HTMLDivElement>(null);
   const [retryCount, setRetryCount] = useState(0);
 
   const roles = [
@@ -365,9 +366,9 @@ const LoginPage = () => {
                     </div>
                   </div>
                   <div className="flex justify-center">
-                    <div className="relative group">
+                    <div className="relative group w-full">
                       {/* Hidden GoogleLogin for OAuth flow */}
-                      <div className="absolute opacity-0 pointer-events-none overflow-hidden" style={{ width: '1px', height: '1px' }}>
+                      <div ref={googleLoginRef} className="absolute opacity-0 pointer-events-none overflow-hidden" style={{ width: '1px', height: '1px', position: 'absolute', top: 0, left: 0 }}>
                         <GoogleLogin
                           onSuccess={handleGoogleSuccess}
                           onError={handleGoogleError}
@@ -381,15 +382,17 @@ const LoginPage = () => {
                         type="button"
                         onClick={(e) => {
                           e.preventDefault();
+                          e.stopPropagation();
                           // Trigger the hidden GoogleLogin button
-                          const googleButton = document.querySelector('[role="button"][aria-labelledby*="google"]') as HTMLElement;
-                          if (googleButton) {
-                            googleButton.click();
-                          } else {
-                            // Fallback: try to find any button in the hidden container
-                            const hiddenContainer = e.currentTarget.previousElementSibling as HTMLElement;
-                            const button = hiddenContainer?.querySelector('button, [role="button"]') as HTMLElement;
-                            button?.click();
+                          if (googleLoginRef.current) {
+                            const googleButton = googleLoginRef.current.querySelector('button, [role="button"], div[role="button"]') as HTMLElement;
+                            if (googleButton) {
+                              googleButton.click();
+                            } else {
+                              // Alternative: find by data-testid or any clickable element
+                              const clickable = googleLoginRef.current.querySelector('[onclick], button, [role="button"]') as HTMLElement;
+                              clickable?.click();
+                            }
                           }
                         }}
                         className="group relative w-full flex items-center justify-center gap-3 px-6 py-4 bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-600 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] hover:border-slate-300 dark:hover:border-slate-500 active:scale-[0.98] overflow-hidden"

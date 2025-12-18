@@ -12,6 +12,7 @@ export interface User {
   certifications?: string[];
   cvUrl?: string;
   createdAt?: string;
+  googleId?: string;
 }
 
 export interface Job {

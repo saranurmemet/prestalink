@@ -219,6 +219,15 @@ try {
   console.error('❌ [ROUTE] Failed to load admin routes:', err.message);
 }
 
+try {
+  const contactRoutes = require('./routes/contactRoutes');
+  console.log('📍 [ROUTE] Loading contactRoutes...');
+  app.use('/api/contact', contactRoutes);
+  console.log('✅ [ROUTE] Contact routes mounted at /api/contact');
+} catch (err) {
+  console.error('❌ [ROUTE] Failed to load contact routes:', err.message);
+}
+
 console.log('📍 [ROUTE] All routes mounting complete');
 
 // Health check endpoint

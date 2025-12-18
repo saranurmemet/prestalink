@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { FormEvent, useState, useEffect } from 'react';
+import { FormEvent, useState, useEffect, useRef } from 'react';
 import type { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
 import { GoogleLogin } from '@react-oauth/google';
@@ -21,6 +21,7 @@ const RegisterPage = () => {
   const [loading, setLoading] = useState(false);
   const [selectedRole, setSelectedRole] = useState<UserRole | null>(null);
   const [selectedLanguages, setSelectedLanguages] = useState<string[]>([]);
+  const googleLoginRef = useRef<HTMLDivElement>(null);
 
   const roles = [
     {
@@ -282,9 +283,9 @@ const RegisterPage = () => {
                     </div>
                   </div>
                   <div className="flex justify-center">
-                    <div className="relative group">
+                    <div className="relative group w-full">
                       {/* Hidden GoogleLogin for OAuth flow */}
-                      <div className="absolute opacity-0 pointer-events-none overflow-hidden" style={{ width: '1px', height: '1px' }}>
+                      <div ref={googleLoginRef} className="absolute opacity-0 pointer-events-none overflow-hidden" style={{ width: '1px', height: '1px', position: 'absolute', top: 0, left: 0 }}>
                         <GoogleLogin
                           onSuccess={handleGoogleSuccess}
                           onError={handleGoogleError}
@@ -298,15 +299,17 @@ const RegisterPage = () => {
                         type="button"
                         onClick={(e) => {
                           e.preventDefault();
+                          e.stopPropagation();
                           // Trigger the hidden GoogleLogin button
-                          const googleButton = document.querySelector('[role="button"][aria-labelledby*="google"]') as HTMLElement;
-                          if (googleButton) {
-                            googleButton.click();
-                          } else {
-                            // Fallback: try to find any button in the hidden container
-                            const hiddenContainer = e.currentTarget.previousElementSibling as HTMLElement;
-                            const button = hiddenContainer?.querySelector('button, [role="button"]') as HTMLElement;
-                            button?.click();
+                          if (googleLoginRef.current) {
+                            const googleButton = googleLoginRef.current.querySelector('button, [role="button"], div[role="button"]') as HTMLElement;
+                            if (googleButton) {
+                              googleButton.click();
+                            } else {
+                              // Alternative: find by data-testid or any clickable element
+                              const clickable = googleLoginRef.current.querySelector('[onclick], button, [role="button"]') as HTMLElement;
+                              clickable?.click();
+                            }
                           }
                         }}
                         className="group relative w-full flex items-center justify-center gap-3 px-6 py-4 bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-600 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] hover:border-slate-300 dark:hover:border-slate-500 active:scale-[0.98] overflow-hidden"
@@ -338,9 +341,6 @@ const RegisterPage = () => {
                         
                         {/* Shine effect on hover */}
                         <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-                        
-                        {/* Shine effect on hover */}
-                        <div className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 ease-in-out bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
                       </button>
                     </div>
                   </div>

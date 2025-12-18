@@ -3,15 +3,34 @@
 import { FormEvent, useState } from 'react';
 import { useLanguage } from '@/components/providers/LanguageProvider';
 import { Mail, Phone, MessageCircle, MapPin } from 'lucide-react';
+import { submitContact } from '@/services/api';
 
 const ContactPage = () => {
   const { t } = useLanguage();
-  const [status, setStatus] = useState<string | null>(null);
+  const [status, setStatus] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setStatus(t('contact.success'));
-    event.currentTarget.reset();
+    setStatus(null);
+    setLoading(true);
+
+    const formData = new FormData(event.currentTarget);
+    const name = formData.get('name') as string;
+    const email = formData.get('email') as string;
+    const message = formData.get('message') as string;
+
+    try {
+      await submitContact({ name, email, message });
+      setStatus({ type: 'success', message: t('contact.success') });
+      event.currentTarget.reset();
+    } catch (error: any) {
+      console.error('Contact form error:', error);
+      const errorMessage = error.response?.data?.message || error.userMessage || error.message || 'Bir hata oluştu. Lütfen tekrar deneyin.';
+      setStatus({ type: 'error', message: errorMessage });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -120,10 +139,22 @@ const ContactPage = () => {
             <label className="text-sm font-semibold text-brandGray dark:text-slate-300">{t('contact.message')}</label>
             <textarea name="message" required rows={5} className="input mt-1 resize-none" />
           </div>
-          <button type="submit" className="w-full rounded-full bg-brandBlue py-3 font-semibold text-white shadow-soft transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-brandBlue/30 active:scale-100">
-            {t('contact.submit')}
+          <button 
+            type="submit" 
+            disabled={loading}
+            className="w-full rounded-full bg-brandBlue py-3 font-semibold text-white shadow-soft transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-brandBlue/30 active:scale-100 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {loading ? t('common.loading') || 'Gönderiliyor...' : t('contact.submit')}
           </button>
-          {status && <p className="text-sm text-green-600 animate-fade-in">{status}</p>}
+          {status && (
+            <p className={`text-sm animate-fade-in ${
+              status.type === 'success' 
+                ? 'text-green-600 dark:text-green-400' 
+                : 'text-red-600 dark:text-red-400'
+            }`}>
+              {status.message}
+            </p>
+          )}
         </form>
       </div>
     </div>

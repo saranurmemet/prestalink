@@ -230,5 +230,11 @@ export const updateUserRole = (userId: string, role: string) =>
 export const markPWAInstalled = () =>
   api.post<{ message: string; pwaInstalled: boolean }>('/admin/pwa-install');
 
+export const submitContact = (payload: { name: string; email: string; message: string }) =>
+  api.post<{ message: string; contact: { id: string; name: string; email: string; status: string; createdAt: string } }>(
+    API_ROUTES.contact.base,
+    payload
+  );
+
 export default api;
 

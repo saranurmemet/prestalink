@@ -228,7 +228,7 @@ const SettingsPage = () => {
     }
   };
 
-  const isGoogleUser = (user as any)?.googleId;
+  const isGoogleUser = user?.googleId;
 
   const content = (
     <UserLayout>
@@ -558,6 +558,7 @@ const SettingsPage = () => {
 };
 
 export default SettingsPage;
+
 
 
 
