@@ -80,6 +80,7 @@ const UserNav = () => {
     navItems[2], // cv
     navItems[3], // jobs
     navItems[4], // favorites
+    navItems[9], // settings
     { href: '#contact', icon: Headphones, label: String(t('nav.contactSupport')), onClick: toggleContact },
   ];
 
