@@ -352,32 +352,103 @@ const LoginPage = () => {
                 t('auth.login')
               )}
             </button>
-            {process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID && (selectedRole === 'user' || selectedRole === 'recruiter') && (
-              <>
-                <div className="relative my-4">
-                  <div className="absolute inset-0 flex items-center">
-                    <div className="w-full border-t border-slate-300 dark:border-slate-600"></div>
+              {process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID && (selectedRole === 'user' || selectedRole === 'recruiter') && (
+                <>
+                  <div className="relative my-6">
+                    <div className="absolute inset-0 flex items-center">
+                      <div className="w-full border-t border-slate-300 dark:border-slate-600"></div>
+                    </div>
+                    <div className="relative flex justify-center text-sm">
+                      <span className="px-3 bg-white dark:bg-slate-800 text-brandGray dark:text-slate-300 font-medium">
+                        {t('auth.or') || 'veya'}
+                      </span>
+                    </div>
                   </div>
-                  <div className="relative flex justify-center text-sm">
-                    <span className="px-2 bg-white dark:bg-slate-800 text-brandGray dark:text-slate-300">
-                      {t('auth.or') || 'veya'}
-                    </span>
+                  <div className="flex justify-center">
+                    <div className="relative group">
+                      {/* Hidden GoogleLogin for OAuth flow */}
+                      <div className="absolute opacity-0 pointer-events-none overflow-hidden" style={{ width: '1px', height: '1px' }}>
+                        <GoogleLogin
+                          onSuccess={handleGoogleSuccess}
+                          onError={handleGoogleError}
+                          useOneTap={false}
+                          locale={t('auth.locale') || 'tr'}
+                        />
+                      </div>
+                      
+                      {/* Custom Modern Google Button */}
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          // Trigger the hidden GoogleLogin button
+                          const googleButton = document.querySelector('[role="button"][aria-labelledby*="google"]') as HTMLElement;
+                          if (googleButton) {
+                            googleButton.click();
+                          } else {
+                            // Fallback: try to find any button in the hidden container
+                            const hiddenContainer = e.currentTarget.previousElementSibling as HTMLElement;
+                            const button = hiddenContainer?.querySelector('button, [role="button"]') as HTMLElement;
+                            button?.click();
+                          }
+                        }}
+                        className="group relative w-full flex items-center justify-center gap-3 px-6 py-4 bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-600 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] hover:border-slate-300 dark:hover:border-slate-500 active:scale-[0.98] overflow-hidden"
+                      >
+                        {/* Animated background gradient */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-blue-50 via-red-50 to-yellow-50 dark:from-blue-950/20 dark:via-red-950/20 dark:to-yellow-950/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        
+                        {/* Google Logo/Icon */}
+                        <div className="relative flex-shrink-0 w-8 h-8 flex items-center justify-center">
+                          <svg className="w-6 h-6 transition-transform duration-300 group-hover:scale-110" viewBox="0 0 24 24">
+                            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                          </svg>
+                        </div>
+                        
+                        {/* Text */}
+                        <span className="relative text-base font-semibold text-slate-700 dark:text-slate-200 group-hover:text-slate-900 dark:group-hover:text-white transition-colors duration-300">
+                          {t('auth.googleSignIn') || 'Google ile devam et'}
+                        </span>
+                        
+                        {/* Hover effect arrow */}
+                        <div className="relative flex-shrink-0 w-5 h-5 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-[-10px] group-hover:translate-x-0">
+                          <svg className="w-5 h-5 text-slate-600 dark:text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                          </svg>
+                        </div>
+                        
+                        {/* Shine effect on hover */}
+                        <div className="absolute inset-0 -left-full group-hover:left-full transition-left duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+                      </button>
+                        className="relative flex items-center justify-center gap-4 px-8 py-4 bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:-translate-y-1 active:scale-100 active:translate-y-0 group/btn min-w-[280px] overflow-hidden"
+                      >
+                        {/* Animated background gradient */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-blue-50 via-red-50 to-yellow-50 dark:from-blue-900/20 dark:via-red-900/20 dark:to-yellow-900/20 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
+                        
+                        {/* Google Logo SVG */}
+                        <div className="relative z-10 flex-shrink-0">
+                          <svg className="w-8 h-8 group-hover/btn:scale-110 transition-transform duration-300" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                          </svg>
+                        </div>
+                        
+                        {/* Button Text */}
+                        <span className="relative z-10 text-base font-semibold text-slate-700 dark:text-slate-200 group-hover/btn:text-slate-900 dark:group-hover/btn:text-white transition-colors duration-300">
+                          {t('auth.googleSignIn') || 'Google ile devam et'}
+                        </span>
+                        
+                        {/* Shine effect on hover */}
+                        <div className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 ease-in-out bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+                      </button>
+                    </div>
                   </div>
-                </div>
-                <div className="flex justify-center">
-                  <GoogleLogin
-                    onSuccess={handleGoogleSuccess}
-                    onError={handleGoogleError}
-                    useOneTap={false}
-                    text="signin_with"
-                    shape="rectangular"
-                    theme="outline"
-                    size="large"
-                    locale={t('auth.locale') || 'tr'}
-                  />
-                </div>
-              </>
-            )}
+                </>
+              )}
             <p className="text-center text-sm text-brandGray dark:text-slate-300">
               {t('auth.registerPrompt')}{' '}
               <Link href="/register" className="font-semibold text-brandBlue hover:underline">
