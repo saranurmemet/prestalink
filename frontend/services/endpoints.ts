@@ -4,6 +4,7 @@ export const API_ROUTES = {
     login: '/auth/login',
     google: '/auth/google',
     me: '/auth/me',
+    changePassword: '/auth/change-password',
   },
   jobs: {
     base: '/jobs',

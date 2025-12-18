@@ -966,7 +966,16 @@
     "account": {
       "title": "Actions du Compte",
       "changePassword": "Changer le Mot de Passe",
-      "deleteAccount": "Supprimer le Compte"
+      "deleteAccount": "Supprimer le Compte",
+      "currentPassword": "Mot de passe actuel",
+      "newPassword": "Nouveau mot de passe",
+      "confirmPassword": "Confirmer le nouveau mot de passe",
+      "passwordChanged": "Mot de passe changé avec succès",
+      "passwordError": "Échec du changement de mot de passe",
+      "passwordMismatch": "Les nouveaux mots de passe ne correspondent pas",
+      "passwordTooShort": "Le mot de passe doit contenir au moins 6 caractères",
+      "invalidCurrentPassword": "Le mot de passe actuel est incorrect",
+      "googleAccountNote": "Le changement de mot de passe n'est pas disponible pour les comptes authentifiés via Google"
     }
   },
   "relativeTime": {

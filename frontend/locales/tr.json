@@ -954,7 +954,16 @@
     "account": {
       "title": "Hesap İşlemleri",
       "changePassword": "Şifre Değiştir",
-      "deleteAccount": "Hesabı Sil"
+      "deleteAccount": "Hesabı Sil",
+      "currentPassword": "Mevcut Şifre",
+      "newPassword": "Yeni Şifre",
+      "confirmPassword": "Yeni Şifre (Tekrar)",
+      "passwordChanged": "Şifre başarıyla değiştirildi",
+      "passwordError": "Şifre değiştirilemedi",
+      "passwordMismatch": "Yeni şifreler eşleşmiyor",
+      "passwordTooShort": "Şifre en az 6 karakter olmalıdır",
+      "invalidCurrentPassword": "Mevcut şifre yanlış",
+      "googleAccountNote": "Google ile giriş yapan hesaplar için şifre değiştirme mevcut değildir"
     }
   },
   "relativeTime": {

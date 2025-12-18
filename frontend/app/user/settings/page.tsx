@@ -6,7 +6,8 @@ import ProtectedPage from '@/components/layout/ProtectedPage';
 import { useLanguage } from '@/components/providers/LanguageProvider';
 import { useAuthStore } from '@/store/useAuthStore';
 import api from '@/services/api';
-import { Settings, Bell, Globe, Moon, Sun, Shield, Trash2, Smartphone } from 'lucide-react';
+import { changePassword } from '@/services/api';
+import { Settings, Bell, Globe, Moon, Sun, Shield, Trash2, Smartphone, Lock, Eye, EyeOff } from 'lucide-react';
 
 function urlBase64ToUint8Array(base64String: string) {
   const padding = '='.repeat((4 - (base64String.length % 4)) % 4);
@@ -39,6 +40,20 @@ const SettingsPage = () => {
     push: true,
     sms: false,
   });
+
+  const [passwordForm, setPasswordForm] = useState({
+    currentPassword: '',
+    newPassword: '',
+    confirmPassword: '',
+  });
+  const [showPasswordForm, setShowPasswordForm] = useState(false);
+  const [showPasswords, setShowPasswords] = useState({
+    current: false,
+    new: false,
+    confirm: false,
+  });
+  const [passwordMessage, setPasswordMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const [passwordLoading, setPasswordLoading] = useState(false);
 
   const [pushStatus, setPushStatus] = useState<{
     supported: boolean;
@@ -179,6 +194,41 @@ const SettingsPage = () => {
       setPushStatus((s) => ({ ...s, loading: false, error: e?.message || 'Test push failed' }));
     }
   };
+
+  const handlePasswordChange = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setPasswordMessage(null);
+
+    // Validation
+    if (passwordForm.newPassword.length < 6) {
+      setPasswordMessage({ type: 'error', text: t('userSettings.account.passwordTooShort') });
+      return;
+    }
+
+    if (passwordForm.newPassword !== passwordForm.confirmPassword) {
+      setPasswordMessage({ type: 'error', text: t('userSettings.account.passwordMismatch') });
+      return;
+    }
+
+    setPasswordLoading(true);
+    try {
+      await changePassword(passwordForm.currentPassword, passwordForm.newPassword);
+      setPasswordMessage({ type: 'success', text: t('userSettings.account.passwordChanged') });
+      setPasswordForm({ currentPassword: '', newPassword: '', confirmPassword: '' });
+      setShowPasswordForm(false);
+    } catch (error: any) {
+      const errorMessage = error.response?.data?.message || t('userSettings.account.passwordError');
+      if (errorMessage.includes('incorrect') || errorMessage.includes('yanlış')) {
+        setPasswordMessage({ type: 'error', text: t('userSettings.account.invalidCurrentPassword') });
+      } else {
+        setPasswordMessage({ type: 'error', text: errorMessage });
+      }
+    } finally {
+      setPasswordLoading(false);
+    }
+  };
+
+  const isGoogleUser = user?.googleId;
 
   const content = (
     <UserLayout>
@@ -373,9 +423,126 @@ const SettingsPage = () => {
               </h2>
             </div>
             <div className="space-y-4">
-              <button className="w-full px-4 py-3 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors text-left">
-                {t('userSettings.account.changePassword')}
-              </button>
+              {!isGoogleUser ? (
+                <>
+                  <button
+                    onClick={() => setShowPasswordForm(!showPasswordForm)}
+                    className="w-full px-4 py-3 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors text-left flex items-center justify-between"
+                  >
+                    <span className="flex items-center gap-2">
+                      <Lock className="w-4 h-4" />
+                      {t('userSettings.account.changePassword')}
+                    </span>
+                  </button>
+
+                  {showPasswordForm && (
+                    <form onSubmit={handlePasswordChange} className="bg-slate-50 dark:bg-slate-900 p-4 rounded-lg space-y-4">
+                      {passwordMessage && (
+                        <div className={`p-3 rounded-lg ${
+                          passwordMessage.type === 'success'
+                            ? 'bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400'
+                            : 'bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-400'
+                        }`}>
+                          {passwordMessage.text}
+                        </div>
+                      )}
+
+                      <div>
+                        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                          {t('userSettings.account.currentPassword')}
+                        </label>
+                        <div className="relative">
+                          <input
+                            type={showPasswords.current ? 'text' : 'password'}
+                            value={passwordForm.currentPassword}
+                            onChange={(e) => setPasswordForm({ ...passwordForm, currentPassword: e.target.value })}
+                            className="input w-full pr-10"
+                            required
+                          />
+                          <button
+                            type="button"
+                            onClick={() => setShowPasswords({ ...showPasswords, current: !showPasswords.current })}
+                            className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200"
+                          >
+                            {showPasswords.current ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                          </button>
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                          {t('userSettings.account.newPassword')}
+                        </label>
+                        <div className="relative">
+                          <input
+                            type={showPasswords.new ? 'text' : 'password'}
+                            value={passwordForm.newPassword}
+                            onChange={(e) => setPasswordForm({ ...passwordForm, newPassword: e.target.value })}
+                            className="input w-full pr-10"
+                            required
+                            minLength={6}
+                          />
+                          <button
+                            type="button"
+                            onClick={() => setShowPasswords({ ...showPasswords, new: !showPasswords.new })}
+                            className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200"
+                          >
+                            {showPasswords.new ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                          </button>
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                          {t('userSettings.account.confirmPassword')}
+                        </label>
+                        <div className="relative">
+                          <input
+                            type={showPasswords.confirm ? 'text' : 'password'}
+                            value={passwordForm.confirmPassword}
+                            onChange={(e) => setPasswordForm({ ...passwordForm, confirmPassword: e.target.value })}
+                            className="input w-full pr-10"
+                            required
+                            minLength={6}
+                          />
+                          <button
+                            type="button"
+                            onClick={() => setShowPasswords({ ...showPasswords, confirm: !showPasswords.confirm })}
+                            className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200"
+                          >
+                            {showPasswords.confirm ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                          </button>
+                        </div>
+                      </div>
+
+                      <div className="flex gap-2">
+                        <button
+                          type="submit"
+                          disabled={passwordLoading}
+                          className="flex-1 px-4 py-2 bg-brandBlue text-white rounded-lg hover:bg-brandBlue/90 disabled:opacity-50 font-semibold"
+                        >
+                          {passwordLoading ? 'Değiştiriliyor...' : t('userSettings.account.changePassword')}
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setShowPasswordForm(false);
+                            setPasswordForm({ currentPassword: '', newPassword: '', confirmPassword: '' });
+                            setPasswordMessage(null);
+                          }}
+                          className="px-4 py-2 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-300 dark:hover:bg-slate-600"
+                        >
+                          İptal
+                        </button>
+                      </div>
+                    </form>
+                  )}
+                </>
+              ) : (
+                <div className="w-full px-4 py-3 bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400 rounded-lg text-left text-sm">
+                  {t('userSettings.account.googleAccountNote')}
+                </div>
+              )}
               <button className="w-full px-4 py-3 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 rounded-lg hover:bg-red-100 dark:hover:bg-red-900/30 transition-colors text-left flex items-center gap-2">
                 <Trash2 className="w-4 h-4" />
                 {t('userSettings.account.deleteAccount')}

@@ -968,7 +968,16 @@
     "account": {
       "title": "إجراءات الحساب",
       "changePassword": "تغيير كلمة المرور",
-      "deleteAccount": "حذف الحساب"
+      "deleteAccount": "حذف الحساب",
+      "currentPassword": "كلمة المرور الحالية",
+      "newPassword": "كلمة المرور الجديدة",
+      "confirmPassword": "تأكيد كلمة المرور الجديدة",
+      "passwordChanged": "تم تغيير كلمة المرور بنجاح",
+      "passwordError": "فشل تغيير كلمة المرور",
+      "passwordMismatch": "كلمات المرور الجديدة غير متطابقة",
+      "passwordTooShort": "يجب أن تكون كلمة المرور 6 أحرف على الأقل",
+      "invalidCurrentPassword": "كلمة المرور الحالية غير صحيحة",
+      "googleAccountNote": "تغيير كلمة المرور غير متاح للحسابات المصادق عليها عبر Google"
     }
   },
   "relativeTime": {

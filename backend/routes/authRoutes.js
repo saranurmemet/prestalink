@@ -1,5 +1,5 @@
 const express = require('express');
-const { register, login, me, loginForRole, updateProfile, googleAuth } = require('../controllers/authController');
+const { register, login, me, loginForRole, updateProfile, changePassword, googleAuth } = require('../controllers/authController');
 const { authMiddleware } = require('../middleware/authMiddleware');
 const upload = require('../utils/upload');
 
@@ -33,5 +33,8 @@ router.put('/me',
   ]),
   updateProfile
 );
+
+// CHANGE PASSWORD (auth required)
+router.post('/change-password', authMiddleware, changePassword);
 
 module.exports = router;

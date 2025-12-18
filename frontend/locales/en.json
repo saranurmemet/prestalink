@@ -968,6 +968,15 @@
     "account": {
       "title": "Account Actions",
       "changePassword": "Change Password",
+      "currentPassword": "Current Password",
+      "newPassword": "New Password",
+      "confirmPassword": "Confirm New Password",
+      "passwordChanged": "Password changed successfully",
+      "passwordError": "Failed to change password",
+      "passwordMismatch": "New passwords do not match",
+      "passwordTooShort": "Password must be at least 6 characters",
+      "invalidCurrentPassword": "Current password is incorrect",
+      "googleAccountNote": "Password change is not available for Google-authenticated accounts",
       "deleteAccount": "Delete Account"
     }
   },

@@ -155,6 +155,9 @@ export const googleAuth = (idToken: string, role?: 'user' | 'recruiter' | 'admin
 export const fetchProfile = () =>
   api.get<{ user: User }>(API_ROUTES.auth.me);
 
+export const changePassword = (currentPassword: string, newPassword: string) =>
+  api.post<{ message: string }>(API_ROUTES.auth.changePassword, { currentPassword, newPassword });
+
 export const updateProfile = (data: FormData) =>
   api.put<{ user: User }>(API_ROUTES.auth.me, data, {
     headers: { 'Content-Type': 'multipart/form-data' },
