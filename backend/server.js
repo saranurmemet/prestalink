@@ -265,6 +265,7 @@ try {
     console.log('   ✅ GET  /api/debug/routes');
     console.log('   ✅ POST /api/auth/register');
     console.log('   ✅ POST /api/auth/login');
+    console.log('   ✅ POST /api/auth/google');
     console.log('   ✅ GET  /api/auth/me');
     console.log('   ✅ GET  /api/jobs');
     console.log('   ✅ POST /api/applications');
