@@ -337,7 +337,7 @@ const RegisterPage = () => {
                         </div>
                         
                         {/* Shine effect on hover */}
-                        <div className="absolute inset-0 -left-full group-hover:left-full transition-left duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+                        <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out bg-gradient-to-r from-transparent via-white/20 to-transparent" />
                         
                         {/* Shine effect on hover */}
                         <div className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 ease-in-out bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
