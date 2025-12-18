@@ -284,8 +284,8 @@ const RegisterPage = () => {
                   </div>
                   <div className="flex justify-center">
                     <div className="relative group w-full">
-                      {/* Hidden GoogleLogin for OAuth flow */}
-                      <div ref={googleLoginRef} className="absolute opacity-0 pointer-events-none overflow-hidden" style={{ width: '1px', height: '1px', position: 'absolute', top: 0, left: 0 }}>
+                      {/* Hidden GoogleLogin for OAuth flow - Must be rendered for OAuth to work */}
+                      <div ref={googleLoginRef} className="absolute opacity-0 pointer-events-none overflow-hidden" style={{ width: '1px', height: '1px', position: 'absolute', top: 0, left: 0, zIndex: -1 }}>
                         <GoogleLogin
                           onSuccess={handleGoogleSuccess}
                           onError={handleGoogleError}
@@ -300,17 +300,18 @@ const RegisterPage = () => {
                         onClick={(e) => {
                           e.preventDefault();
                           e.stopPropagation();
-                          // Trigger the hidden GoogleLogin button
-                          if (googleLoginRef.current) {
-                            const googleButton = googleLoginRef.current.querySelector('button, [role="button"], div[role="button"]') as HTMLElement;
-                            if (googleButton) {
-                              googleButton.click();
-                            } else {
-                              // Alternative: find by data-testid or any clickable element
-                              const clickable = googleLoginRef.current.querySelector('[onclick], button, [role="button"]') as HTMLElement;
-                              clickable?.click();
-                            }
-                          }
+                          
+                          // Try immediately with all methods
+                          if (triggerGoogleLogin()) return;
+                          
+                          // Wait a bit and try again (GoogleLogin might be async)
+                          setTimeout(() => {
+                            if (triggerGoogleLogin()) return;
+                            
+                            // If still not found, show error
+                            setError('Google login could not be triggered. Please ensure Google Client ID is configured.');
+                            console.error('Google login button not found after multiple attempts');
+                          }, 300);
                         }}
                         className="group relative w-full flex items-center justify-center gap-3 px-6 py-4 bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-600 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] hover:border-slate-300 dark:hover:border-slate-500 active:scale-[0.98] overflow-hidden"
                       >

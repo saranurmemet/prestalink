@@ -138,6 +138,79 @@ const LoginPage = () => {
     setLoading(false);
   };
 
+  // Function to trigger Google login programmatically
+  const triggerGoogleLogin = () => {
+    // Try multiple methods to find and click the Google button
+    const methods = [
+      // Method 1: Find in ref
+      () => {
+        if (!googleLoginRef.current) return false;
+        const button = googleLoginRef.current.querySelector('button, [role="button"], div[role="button"]') as HTMLElement;
+        if (button) {
+          button.click();
+          return true;
+        }
+        return false;
+      },
+      // Method 2: Find by iframe (GoogleLogin might use iframe)
+      () => {
+        const iframes = document.querySelectorAll('iframe');
+        for (const iframe of Array.from(iframes)) {
+          try {
+            const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
+            if (iframeDoc) {
+              const button = iframeDoc.querySelector('button, [role="button"]') as HTMLElement;
+              if (button) {
+                button.click();
+                return true;
+              }
+            }
+          } catch (e) {
+            // Cross-origin iframe, skip
+          }
+        }
+        return false;
+      },
+      // Method 3: Search entire document
+      () => {
+        const allButtons = document.querySelectorAll('button, [role="button"]');
+        for (const btn of Array.from(allButtons)) {
+          const btnElement = btn as HTMLElement;
+          const parent = btnElement.parentElement;
+          if (
+            btnElement.getAttribute('aria-labelledby')?.includes('google') ||
+            parent?.id?.includes('google') ||
+            parent?.className?.includes('google') ||
+            btnElement.closest('[id*="google"], [class*="google"]')
+          ) {
+            btnElement.click();
+            return true;
+          }
+        }
+        return false;
+      },
+      // Method 4: Try to find by data attributes
+      () => {
+        const googleElements = document.querySelectorAll('[data-google], [id*="google"], [class*="google"]');
+        for (const el of Array.from(googleElements)) {
+          const button = el.querySelector('button, [role="button"]') as HTMLElement;
+          if (button) {
+            button.click();
+            return true;
+          }
+        }
+        return false;
+      }
+    ];
+
+    // Try each method
+    for (const method of methods) {
+      if (method()) return true;
+    }
+
+    return false;
+  };
+
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -367,8 +440,8 @@ const LoginPage = () => {
                   </div>
                   <div className="flex justify-center">
                     <div className="relative group w-full">
-                      {/* Hidden GoogleLogin for OAuth flow */}
-                      <div ref={googleLoginRef} className="absolute opacity-0 pointer-events-none overflow-hidden" style={{ width: '1px', height: '1px', position: 'absolute', top: 0, left: 0 }}>
+                      {/* Hidden GoogleLogin for OAuth flow - Must be rendered for OAuth to work */}
+                      <div ref={googleLoginRef} className="absolute opacity-0 pointer-events-none overflow-hidden" style={{ width: '1px', height: '1px', position: 'absolute', top: 0, left: 0, zIndex: -1 }}>
                         <GoogleLogin
                           onSuccess={handleGoogleSuccess}
                           onError={handleGoogleError}
@@ -383,17 +456,75 @@ const LoginPage = () => {
                         onClick={(e) => {
                           e.preventDefault();
                           e.stopPropagation();
-                          // Trigger the hidden GoogleLogin button
-                          if (googleLoginRef.current) {
-                            const googleButton = googleLoginRef.current.querySelector('button, [role="button"], div[role="button"]') as HTMLElement;
-                            if (googleButton) {
-                              googleButton.click();
-                            } else {
-                              // Alternative: find by data-testid or any clickable element
-                              const clickable = googleLoginRef.current.querySelector('[onclick], button, [role="button"]') as HTMLElement;
-                              clickable?.click();
+                          
+                          // Method 1: Try to find and click GoogleLogin button in ref
+                          const tryClickGoogleButton = () => {
+                            if (!googleLoginRef.current) return false;
+                            
+                            // Try various selectors
+                            const selectors = [
+                              'button',
+                              '[role="button"]',
+                              'div[role="button"]',
+                              'div > button',
+                              'div > div > button',
+                              '[id*="google"] button',
+                              '[class*="google"] button'
+                            ];
+                            
+                            for (const selector of selectors) {
+                              const button = googleLoginRef.current.querySelector(selector) as HTMLElement;
+                              if (button && button.offsetParent !== null) {
+                                button.click();
+                                return true;
+                              }
                             }
-                          }
+                            
+                            // Try to find by traversing all children
+                            const allButtons = googleLoginRef.current.querySelectorAll('button, [role="button"]');
+                            for (const btn of Array.from(allButtons)) {
+                              const btnElement = btn as HTMLElement;
+                              if (btnElement.offsetParent !== null || btnElement.style.display !== 'none') {
+                                btnElement.click();
+                                return true;
+                              }
+                            }
+                            
+                            return false;
+                          };
+                          
+                          // Method 2: Search entire document for Google OAuth button
+                          const searchDocument = () => {
+                            const allButtons = document.querySelectorAll('button, [role="button"]');
+                            for (const btn of Array.from(allButtons)) {
+                              const btnElement = btn as HTMLElement;
+                              const parent = btnElement.closest('div');
+                              
+                              // Check if it's likely a Google OAuth button
+                              if (
+                                btnElement.getAttribute('aria-labelledby')?.includes('google') ||
+                                parent?.id?.includes('google') ||
+                                parent?.className?.includes('google') ||
+                                btnElement.closest('[id*="google"], [class*="google"]')
+                              ) {
+                                btnElement.click();
+                                return true;
+                              }
+                            }
+                            return false;
+                          };
+                          
+                          // Try immediately with all methods
+                          if (triggerGoogleLogin()) return;
+                          
+                          // Wait a bit and try again (GoogleLogin might be async)
+                          setTimeout(() => {
+                            if (triggerGoogleLogin()) return;
+                            
+                            // If still not found, show error
+                            setError('Google login could not be triggered. Please ensure Google Client ID is configured.');
+                            console.error('Google login button not found after multiple attempts');
+                          }, 300);
                         }}
                         className="group relative w-full flex items-center justify-center gap-3 px-6 py-4 bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-600 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] hover:border-slate-300 dark:hover:border-slate-500 active:scale-[0.98] overflow-hidden"
                       >
