@@ -88,6 +88,79 @@ const RegisterPage = () => {
     setLoading(false);
   };
 
+  // Function to trigger Google login programmatically
+  const triggerGoogleLogin = () => {
+    // Try multiple methods to find and click the Google button
+    const methods = [
+      // Method 1: Find in ref
+      () => {
+        if (!googleLoginRef.current) return false;
+        const button = googleLoginRef.current.querySelector('button, [role="button"], div[role="button"]') as HTMLElement;
+        if (button) {
+          button.click();
+          return true;
+        }
+        return false;
+      },
+      // Method 2: Find by iframe (GoogleLogin might use iframe)
+      () => {
+        const iframes = document.querySelectorAll('iframe');
+        for (const iframe of Array.from(iframes)) {
+          try {
+            const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
+            if (iframeDoc) {
+              const button = iframeDoc.querySelector('button, [role="button"]') as HTMLElement;
+              if (button) {
+                button.click();
+                return true;
+              }
+            }
+          } catch (e) {
+            // Cross-origin iframe, skip
+          }
+        }
+        return false;
+      },
+      // Method 3: Search entire document
+      () => {
+        const allButtons = document.querySelectorAll('button, [role="button"]');
+        for (const btn of Array.from(allButtons)) {
+          const btnElement = btn as HTMLElement;
+          const parent = btnElement.parentElement;
+          if (
+            btnElement.getAttribute('aria-labelledby')?.includes('google') ||
+            parent?.id?.includes('google') ||
+            parent?.className?.includes('google') ||
+            btnElement.closest('[id*="google"], [class*="google"]')
+          ) {
+            btnElement.click();
+            return true;
+          }
+        }
+        return false;
+      },
+      // Method 4: Try to find by data attributes
+      () => {
+        const googleElements = document.querySelectorAll('[data-google], [id*="google"], [class*="google"]');
+        for (const el of Array.from(googleElements)) {
+          const button = el.querySelector('button, [role="button"]') as HTMLElement;
+          if (button) {
+            button.click();
+            return true;
+          }
+        }
+        return false;
+      }
+    ];
+
+    // Try each method
+    for (const method of methods) {
+      if (method()) return true;
+    }
+
+    return false;
+  };
+
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!selectedRole) {
