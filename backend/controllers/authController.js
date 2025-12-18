@@ -203,6 +203,14 @@ exports.googleAuth = asyncHandler(async (req, res) => {
     return res.status(400).json({ message: 'Google ID token is required' });
   }
 
+  // Check if GOOGLE_CLIENT_ID is configured
+  if (!process.env.GOOGLE_CLIENT_ID) {
+    console.error('❌ [GOOGLE_AUTH] GOOGLE_CLIENT_ID environment variable is not set');
+    return res.status(500).json({ 
+      message: 'Google authentication is not configured on the server. Please contact support.' 
+    });
+  }
+
   // Initialize Google OAuth client
   const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
@@ -292,10 +300,26 @@ exports.googleAuth = asyncHandler(async (req, res) => {
     });
   } catch (error) {
     console.error('❌ [GOOGLE_AUTH] Error:', error);
+    console.error('❌ [GOOGLE_AUTH] Error message:', error.message);
+    console.error('❌ [GOOGLE_AUTH] Error stack:', error.stack);
+    
+    // More specific error messages
     if (error.message && error.message.includes('Token used too early')) {
-      return res.status(400).json({ message: 'Invalid Google token' });
+      return res.status(400).json({ message: 'Invalid Google token: Token used too early' });
     }
-    return res.status(401).json({ message: 'Google authentication failed' });
+    if (error.message && error.message.includes('invalid_token')) {
+      return res.status(400).json({ message: 'Invalid Google token: Token verification failed' });
+    }
+    if (error.message && error.message.includes('audience')) {
+      return res.status(400).json({ message: 'Invalid Google token: Token audience mismatch' });
+    }
+    
+    // Return detailed error message for debugging (in development)
+    const errorMessage = process.env.NODE_ENV === 'production' 
+      ? 'Google authentication failed. Please try again.' 
+      : `Google authentication failed: ${error.message || 'Unknown error'}`;
+    
+    return res.status(401).json({ message: errorMessage });
   }
 });
 

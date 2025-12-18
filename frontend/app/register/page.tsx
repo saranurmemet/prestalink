@@ -63,17 +63,21 @@ const RegisterPage = () => {
         return;
       }
 
+      console.log('🔄 [GOOGLE_AUTH] Attempting Google authentication with role:', selectedRole);
       const response = await googleAuth(credentialResponse.credential, selectedRole);
+      console.log('✅ [GOOGLE_AUTH] Success:', response.data);
       setAuth({ ...response.data, rememberMe: true });
       const dashboardRoute = getDashboardRoute(response.data.user.role);
       router.push(dashboardRoute);
     } catch (error) {
       const axiosError = error as AxiosError<{ message?: string }>;
-      setError(
-        axiosError.response?.data?.message || 
+      const errorMessage = axiosError.response?.data?.message || 
+        axiosError.message || 
         t('auth.googleRegisterError') || 
-        'Google ile kayıt yapılırken bir hata oluştu.'
-      );
+        'Google ile kayıt yapılırken bir hata oluştu.';
+      console.error('❌ [GOOGLE_AUTH] Error:', error);
+      console.error('❌ [GOOGLE_AUTH] Error response:', axiosError.response?.data);
+      setError(errorMessage);
       setLoading(false);
     }
   };
