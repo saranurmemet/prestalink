@@ -118,7 +118,7 @@ const ContactPage = () => {
             </a>
 
             <a
-              href="https://vb.me/213555555667"
+              href={`https://vb.me/213555555667?text=${encodeURIComponent(whatsappMessage)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-3 p-4 rounded-2xl border border-white/60 dark:border-slate-700/60 bg-[#665CAC]/10 hover:bg-[#665CAC]/20 hover:border-[#665CAC]/50 transition-all group"
