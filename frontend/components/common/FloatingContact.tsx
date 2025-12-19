@@ -140,6 +140,17 @@ const FloatingContact = ({
           </button>
 
           <button
+            onClick={handleViber}
+            className="group flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#665CAC] to-[#7B6FB8] text-white shadow-lg border border-[#665CAC]/30 transition-all duration-300 hover:scale-110 hover:shadow-xl hover:from-[#7B6FB8] hover:to-[#8B7FC8]"
+            title="Viber ile iletişime geç"
+            aria-label="Viber"
+          >
+            <svg className="h-4 w-4 sm:h-5 sm:w-5 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M13.066 0C7.26 0 2.506 4.645 2.506 10.351c0 3.177 1.707 5.965 4.264 7.495l-1.751 3.782c-.15.326.02.709.354.809l4.209 1.393c.144-.322.308-.63.485-.924.805-.792 1.88-1.31 3.093-1.455.484-.058 1.53-.018 2.276.27.948.37 1.89 1.004 2.606 1.869a9.803 9.803 0 002.674-.663l.084-.03-1.75-3.782c2.521-1.53 4.22-4.298 4.22-7.495C23.494 4.645 18.86 0 13.066 0zm5.975 13.526c-.163.4-.807.684-1.238.788-.43.104-2.71.527-3.133.557-.424.028-.746.04-1.076-.115-.33-.155-.76-.477-1.082-.82-.348-.366-.738-.775-1.03-1.16-.348-.447-.028-.691.256-.92.284-.23.765-.598 1.148-.898.385-.3.514-.497.78-.822.27-.325.15-.616-.075-.896-.225-.28-1.99-1.93-2.724-2.638-.927-.91-.194-1.41.145-1.857.282-.376.634-.98.847-1.31.213-.33.046-.62-.112-.896-.157-.276-.443-.652-.595-.887-.155-.235-.32-.195-.443-.12-.125.075-.267.195-.368.3-.15.157-.32.323-.453.544-.134.22-.267.475-.053.793.214.32.955 1.848 2.065 2.966 1.402 1.37 2.588 1.794 2.905 2.008.32.214.507.172.69-.08.184-.253.785-1.004.995-1.348.213-.344.428-.287.726-.175.3.11 1.903 1.072 2.227 1.265.326.195.55.293.632.457.083.163.083.947-.075 1.348z"/>
+            </svg>
+          </button>
+
+          <button
             onClick={() => window.location.href = 'mailto:info@prestalink.com'}
             className="group flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-gradient-to-br from-slate-700 to-slate-800 text-white shadow-lg border border-slate-500/30 transition-all duration-300 hover:scale-110 hover:shadow-xl hover:from-slate-600 hover:to-slate-700"
             title="E-posta gönder"
