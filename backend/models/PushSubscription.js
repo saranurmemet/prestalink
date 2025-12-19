@@ -16,3 +16,4 @@ const pushSubscriptionSchema = new mongoose.Schema(
 
 module.exports = mongoose.model('PushSubscription', pushSubscriptionSchema);
 
+

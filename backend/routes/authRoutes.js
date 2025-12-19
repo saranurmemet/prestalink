@@ -2,23 +2,24 @@ const express = require('express');
 const { register, login, me, loginForRole, updateProfile, changePassword, googleAuth } = require('../controllers/authController');
 const { authMiddleware } = require('../middleware/authMiddleware');
 const upload = require('../utils/upload');
+const { registerLimiter, loginLimiter, googleAuthLimiter, changePasswordLimiter } = require('../middleware/rateLimiter');
 
 const router = express.Router();
 
-// REGISTER
-router.post('/register', register);
+// REGISTER - Rate limited: 5 kayıt/saat/IP
+router.post('/register', registerLimiter, register);
 
-// GOOGLE OAUTH
-router.post('/google', googleAuth);
+// GOOGLE OAUTH - Rate limited: 20 deneme/15 dakika/IP
+router.post('/google', googleAuthLimiter, googleAuth);
 
-// UNIVERSAL LOGIN (default)
-router.post('/login', login);
+// UNIVERSAL LOGIN (default) - Rate limited: 10 deneme/15 dakika/IP
+router.post('/login', loginLimiter, login);
 
-// ROLE BASED LOGIN
-router.post('/user/login', loginForRole('user'));
-router.post('/recruiter/login', loginForRole('recruiter'));
-router.post('/admin/login', loginForRole('admin'));
-router.post('/superadmin/login', loginForRole('superadmin'));
+// ROLE BASED LOGIN - Rate limited: 10 deneme/15 dakika/IP
+router.post('/user/login', loginLimiter, loginForRole('user'));
+router.post('/recruiter/login', loginLimiter, loginForRole('recruiter'));
+router.post('/admin/login', loginLimiter, loginForRole('admin'));
+router.post('/superadmin/login', loginLimiter, loginForRole('superadmin'));
 
 // ME (auth required)
 router.get('/me', authMiddleware, me);
@@ -34,7 +35,7 @@ router.put('/me',
   updateProfile
 );
 
-// CHANGE PASSWORD (auth required)
-router.post('/change-password', authMiddleware, changePassword);
+// CHANGE PASSWORD (auth required) - Rate limited: 5 deneme/saat/IP
+router.post('/change-password', authMiddleware, changePasswordLimiter, changePassword);
 
 module.exports = router;

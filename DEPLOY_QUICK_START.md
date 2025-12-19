@@ -40,3 +40,4 @@ Vercel Dashboard → Settings → Environment Variables:
 - Her ikisinde de Redeploy
 
 **Detaylı rehber için:** `DEPLOY_VERCEL_RENDER.md`
+

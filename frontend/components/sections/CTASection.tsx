@@ -21,7 +21,7 @@ const CTASection = () => {
               {t('cta.primary')}
             </Link>
             <Link
-              href="/recruiter/dashboard"
+              href="/employer/dashboard"
               className="rounded-full border border-white/70 px-6 py-3 font-semibold text-white transition-all duration-300 hover:bg-white/10 hover:scale-105 hover:border-white active:scale-100"
             >
               {t('cta.secondary')}

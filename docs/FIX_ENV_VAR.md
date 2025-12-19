@@ -26,3 +26,4 @@ Environment variable'ın **Production, Preview, ve Development** için hepsinde 
 Environment variable'ı yeniden ekledikten sonra mutlaka yeni bir deployment başlatın:
 - Boş commit push edin
 - Veya Vercel Dashboard → Deployments → Redeploy
+

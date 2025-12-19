@@ -16,3 +16,4 @@ export const useFloatingContactStore = create<FloatingContactState>((set) => ({
   toggle: () => set((s) => ({ isOpen: !s.isOpen })),
 }));
 
+

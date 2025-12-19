@@ -34,3 +34,4 @@ F12 → Network → Google Login butonu render edilirken bir hata var mı kontro
 - Line 9: `const GOOGLE_CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || '';`
 - Line 14: `{GOOGLE_CLIENT_ID ? (`
 - Eğer boş string ise, GoogleOAuthProvider render edilmeyecek.
+

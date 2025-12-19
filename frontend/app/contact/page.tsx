@@ -9,6 +9,25 @@ const ContactPage = () => {
   const { t } = useLanguage();
   const [status, setStatus] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
   const [loading, setLoading] = useState(false);
+  
+  // Telefon diline göre WhatsApp mesajı seç
+  const getWhatsAppMessage = () => {
+    if (typeof window === 'undefined') return t('contact.whatsappMessage') || 'Hello, I would like to get information about PrestaLink.';
+    
+    const browserLang = (navigator.language || navigator.languages?.[0] || 'en').toLowerCase();
+    
+    if (browserLang.startsWith('ar')) {
+      return t('contact.whatsappMessage') || 'مرحباً، أود الحصول على معلومات حول PrestaLink.';
+    } else if (browserLang.startsWith('fr')) {
+      return t('contact.whatsappMessage') || 'Bonjour, je souhaite obtenir des informations sur PrestaLink.';
+    } else if (browserLang.startsWith('tr')) {
+      return t('contact.whatsappMessage') || 'Merhaba, PrestaLink hakkında bilgi almak istiyorum.';
+    } else {
+      return t('contact.whatsappMessage') || 'Hello, I would like to get information about PrestaLink.';
+    }
+  };
+  
+  const whatsappMessage = getWhatsAppMessage();
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -54,7 +73,7 @@ const ContactPage = () => {
             </a>
             
             <a
-              href="tel:+905551234567"
+              href="tel:+213555555667"
               className="flex items-center gap-3 p-4 rounded-2xl border border-white/60 dark:border-slate-700/60 bg-white/90 dark:bg-slate-800/90 hover:bg-brandBlue/5 dark:hover:bg-brandBlue/10 hover:border-brandBlue/30 transition-all group"
             >
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brandBlue/10 dark:bg-brandBlue/20 group-hover:bg-brandBlue group-hover:scale-110 transition-all">
@@ -62,12 +81,12 @@ const ContactPage = () => {
               </div>
               <div>
                 <p className="text-sm text-brandGray dark:text-slate-400">Telefon</p>
-                <p className="font-semibold text-brandNavy dark:text-slate-100 group-hover:text-brandBlue transition-colors">+90 555 123 45 67</p>
+                <p className="font-semibold text-brandNavy dark:text-slate-100 group-hover:text-brandBlue transition-colors">+213 555 55 56 67</p>
               </div>
             </a>
 
             <a
-              href="https://wa.me/905551234567?text=Merhaba, PrestaLink hakkında bilgi almak istiyorum."
+              href={`https://wa.me/213555555667?text=${encodeURIComponent(whatsappMessage)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-3 p-4 rounded-2xl border border-white/60 dark:border-slate-700/60 bg-[#25D366]/10 hover:bg-[#25D366]/20 hover:border-[#25D366]/50 transition-all group"
@@ -82,7 +101,7 @@ const ContactPage = () => {
             </a>
 
             <a
-              href="https://t.me/prestalink"
+              href="https://t.me/+213555555667"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-3 p-4 rounded-2xl border border-white/60 dark:border-slate-700/60 bg-[#0088cc]/10 hover:bg-[#0088cc]/20 hover:border-[#0088cc]/50 transition-all group"
@@ -99,7 +118,7 @@ const ContactPage = () => {
             </a>
 
             <a
-              href="https://vb.me/905551234567"
+              href="https://vb.me/213555555667"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-3 p-4 rounded-2xl border border-white/60 dark:border-slate-700/60 bg-[#665CAC]/10 hover:bg-[#665CAC]/20 hover:border-[#665CAC]/50 transition-all group"

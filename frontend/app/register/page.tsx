@@ -204,7 +204,7 @@ const RegisterPage = () => {
             </div>
             <div>
               <label className="text-sm font-semibold text-brandGray dark:text-slate-300">{t('auth.phone')}</label>
-              <input name="phone" type="tel" required className="input mt-1" placeholder="+90 555 123 45 67" />
+              <input name="phone" type="tel" required className="input mt-1" placeholder="+213 555 55 56 67" />
             </div>
             <div>
               <label className="text-sm font-semibold text-brandGray dark:text-slate-300">{t('auth.email')}</label>

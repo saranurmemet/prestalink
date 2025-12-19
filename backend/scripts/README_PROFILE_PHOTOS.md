@@ -69,3 +69,4 @@ node scripts/lock-profile-photos.js
 - Profil fotoğrafları demo kullanıcıları için kritik öneme sahiptir
 - Fotoğraflar **YEREL DOSYALAR** olarak saklanır, harici URL'ler kullanılmaz
 - Bu bir **KURALDIR** ve **HİÇ DEĞİŞMEZ**
+

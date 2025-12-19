@@ -74,3 +74,4 @@
 ---
 
 **Connection string'i aldıktan sonra bana verin, Vercel deployment'a geçeceğiz!** 🚀
+

@@ -76,3 +76,4 @@ Render ve Vercel otomatik olarak yeni environment variable'lar ile deploy edecek
 - **Client Secret** gerekmez (Google Sign-In için)
 - Local development için `http://localhost:3000` mutlaka eklenmelidir
 - Production domain'inizi de eklemeyi unutmayın
+

@@ -16,10 +16,10 @@ interface FloatingContactProps {
 }
 
 const FloatingContact = ({ 
-  phoneNumber = '+905551234567',
-  telegramUsername = 'prestalink',
-  viberNumber = '+905551234567',
-  message = 'Merhaba, PrestaLink hakkında bilgi almak istiyorum.',
+  phoneNumber = '+213555555667',
+  telegramUsername = '+213555555667',
+  viberNumber = '+213555555667',
+  message,
   showSettingsHint = true
 }: FloatingContactProps) => {
   const { isOpen, toggle, close } = useFloatingContactStore();
@@ -27,6 +27,29 @@ const FloatingContact = ({
   const router = useRouter();
   const pathname = usePathname();
   const { t } = useLanguage();
+  
+  // Telefon diline göre mesaj seç
+  const getDefaultMessage = () => {
+    if (message) return message;
+    
+    // Telefon dilini tespit et
+    const browserLang = typeof window !== 'undefined' 
+      ? (navigator.language || navigator.languages?.[0] || 'en').toLowerCase()
+      : 'en';
+    
+    // Dil koduna göre mesaj seç
+    if (browserLang.startsWith('ar')) {
+      return t('contact.whatsappMessage') || 'مرحباً، أود الحصول على معلومات حول PrestaLink.';
+    } else if (browserLang.startsWith('fr')) {
+      return t('contact.whatsappMessage') || 'Bonjour, je souhaite obtenir des informations sur PrestaLink.';
+    } else if (browserLang.startsWith('tr')) {
+      return t('contact.whatsappMessage') || 'Merhaba, PrestaLink hakkında bilgi almak istiyorum.';
+    } else {
+      return t('contact.whatsappMessage') || 'Hello, I would like to get information about PrestaLink.';
+    }
+  };
+  
+  const defaultMessage = getDefaultMessage();
 
   // User dashboard pages already have a bottom nav.
   // Hide the floating launcher there and let the bottom nav trigger the panel.
@@ -34,29 +57,27 @@ const FloatingContact = ({
   const containerBottomClass = hideLauncher ? 'bottom-20' : 'bottom-4';
   
   const handleWhatsApp = () => {
-    const encodedMessage = encodeURIComponent(message);
+    const msg = message || defaultMessage;
+    const encodedMessage = encodeURIComponent(msg);
     const whatsappUrl = `https://wa.me/${phoneNumber.replace(/[^0-9]/g, '')}?text=${encodedMessage}`;
     window.open(whatsappUrl, '_blank');
   };
 
   const handleTelegram = () => {
-    const encodedMessage = encodeURIComponent(message);
-    // Telegram username kullanılıyorsa
-    if (telegramUsername && !telegramUsername.startsWith('+')) {
-      const telegramUrl = `https://t.me/${telegramUsername.replace('@', '')}?text=${encodedMessage}`;
-      window.open(telegramUrl, '_blank');
-    } else {
-      // Telefon numarası ile
-      const tel = telegramUsername.replace(/[^0-9]/g, '') || phoneNumber.replace(/[^0-9]/g, '');
-      const telegramUrl = `https://t.me/+${tel}`;
-      window.open(telegramUrl, '_blank');
-    }
+    const msg = message || defaultMessage;
+    const encodedMessage = encodeURIComponent(msg);
+    // Telefon numarası ile
+    const tel = phoneNumber.replace(/[^0-9]/g, '');
+    const telegramUrl = `https://t.me/+${tel}?text=${encodedMessage}`;
+    window.open(telegramUrl, '_blank');
   };
 
   const handleViber = () => {
+    const msg = message || defaultMessage;
+    const encodedMessage = encodeURIComponent(msg);
     const tel = viberNumber.replace(/[^0-9]/g, '') || phoneNumber.replace(/[^0-9]/g, '');
-    // Viber desktop/web için
-    const viberWebUrl = `https://vb.me/${tel}`;
+    // Viber desktop/web için - mesaj parametresi ekle
+    const viberWebUrl = `https://vb.me/${tel}?text=${encodedMessage}`;
     // Önce web versiyonunu dene, mobil cihazlarda otomatik uygulamaya yönlendirir
     window.open(viberWebUrl, '_blank');
   };

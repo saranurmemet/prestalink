@@ -47,6 +47,7 @@ try {
 
 const connectDB = require('./config/db');
 const errorHandler = require('./middleware/errorMiddleware');
+const { generalLimiter } = require('./middleware/rateLimiter');
 
 console.log('🗄️  [STARTUP] Connecting to MongoDB...');
 // MongoDB connection is async - don't block server startup
@@ -146,7 +147,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // Serve profile photos from public directory
 app.use('/uploads/profile-photos', express.static(path.join(__dirname, 'public', 'profile-photos')));
 
-// Health check endpoint
+// Health check endpoint - Rate limiting yok (monitoring için, önce tanımlanmalı)
 app.get('/api/health', (req, res) => {
   res.json({ 
     status: 'ok', 
@@ -155,6 +156,9 @@ app.get('/api/health', (req, res) => {
     environment: process.env.NODE_ENV || 'development'
   });
 });
+
+// Genel rate limiting - Tüm API endpoint'leri için (health check hariç, çünkü yukarıda tanımlandı)
+app.use('/api', generalLimiter);
 
 // Test endpoint to verify API is working
 app.get('/api/test', (req, res) => {

@@ -123,3 +123,4 @@ Push başarılı olduktan sonra:
 3. "Initial commit" mesajı görünüyor mu? ✅
 
 **BAŞARILAR!** 🎉
+

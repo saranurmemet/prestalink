@@ -343,3 +343,4 @@ Sorun yaşarsanız:
 3. Network tab'inde API isteklerini kontrol edin
 
 **BAŞARILAR!** 🚀
+

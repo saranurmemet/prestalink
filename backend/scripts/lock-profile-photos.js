@@ -145,3 +145,4 @@ async function lockProfilePhotos() {
 }
 
 lockProfilePhotos();
+
