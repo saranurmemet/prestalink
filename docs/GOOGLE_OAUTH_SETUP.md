@@ -77,3 +77,4 @@ Render ve Vercel otomatik olarak yeni environment variable'lar ile deploy edecek
 - Local development için `http://localhost:3000` mutlaka eklenmelidir
 - Production domain'inizi de eklemeyi unutmayın
 
+

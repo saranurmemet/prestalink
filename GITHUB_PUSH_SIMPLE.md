@@ -43,3 +43,4 @@ Cursor'da Git panelini kullanabilirsiniz:
 ## ✅ Hızlı Test
 Token oluşturduktan sonra push deneyin!
 
+

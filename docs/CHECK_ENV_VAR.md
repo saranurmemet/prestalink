@@ -25,3 +25,4 @@ Build loglarında şunları arayın:
 2. "Add New" ile ekleyin
 3. **Yeniden deploy** yapın (boş commit push edin)
 
+

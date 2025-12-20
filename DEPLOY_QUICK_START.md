@@ -41,3 +41,4 @@ Vercel Dashboard → Settings → Environment Variables:
 
 **Detaylı rehber için:** `DEPLOY_VERCEL_RENDER.md`
 
+

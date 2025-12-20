@@ -58,3 +58,4 @@ Tüm değişiklikler geri alınacak ve orijinal haline dönecektir.
 
 Eğer beğenirseniz, yedek dosyaları (.backup) manuel olarak silebilirsiniz.
 
+

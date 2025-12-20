@@ -27,3 +27,4 @@ Environment variable'ı yeniden ekledikten sonra mutlaka yeni bir deployment ba�
 - Boş commit push edin
 - Veya Vercel Dashboard → Deployments → Redeploy
 
+

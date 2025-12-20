@@ -9,3 +9,4 @@ console.log('VAPID_PRIVATE_KEY=' + keys.privateKey);
 console.log('VAPID_SUBJECT=mailto:hello@prestalink.app');
 
 
+

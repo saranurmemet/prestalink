@@ -70,3 +70,4 @@ node scripts/lock-profile-photos.js
 - Fotoğraflar **YEREL DOSYALAR** olarak saklanır, harici URL'ler kullanılmaz
 - Bu bir **KURALDIR** ve **HİÇ DEĞİŞMEZ**
 
+
