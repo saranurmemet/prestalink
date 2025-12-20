@@ -1,6 +1,8 @@
-import axios from 'axios';
+import axios, { AxiosError, AxiosRequestConfig } from 'axios';
+import axiosRetry from 'axios-retry';
 import { API_ROUTES } from './endpoints';
 import type { User, Job, Application, Notification } from './types';
+import '@/utils/envValidation'; // Validate environment variables on load
 
 // API Base URL Configuration
 // CRITICAL: Must ONLY use NEXT_PUBLIC_API_URL from environment
@@ -36,10 +38,44 @@ const getApiBaseURL = () => {
   return apiUrl;
 };
 
+// Determine timeout based on environment
+// Free tier: 60s (cold start), Paid tier: 10s (always on)
+const getTimeout = () => {
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
+  // If using Render free tier (detect by URL pattern or env var)
+  const isFreeTier = apiUrl.includes('onrender.com') && !process.env.RENDER_PAID_TIER;
+  return isFreeTier ? 60000 : 10000; // 60s for free, 10s for paid
+};
+
 const api = axios.create({
   baseURL: getApiBaseURL(),
   withCredentials: true,
-  timeout: 60000, // 60 saniye timeout (Render free tier cold start için)
+  timeout: getTimeout(),
+  // Connection pooling settings
+  httpAgent: typeof window === 'undefined' ? undefined : undefined, // Browser handles this
+  httpsAgent: typeof window === 'undefined' ? undefined : undefined,
+  // Keep-alive headers
+  headers: {
+    'Connection': 'keep-alive',
+  },
+});
+
+// Configure retry mechanism
+axiosRetry(api, {
+  retries: 3, // Retry 3 times
+  retryDelay: axiosRetry.exponentialDelay, // Exponential backoff: 100ms, 200ms, 400ms
+  retryCondition: (error: AxiosError) => {
+    // Retry on network errors or 5xx server errors
+    return (
+      !error.response || // Network error
+      (error.response.status >= 500 && error.response.status < 600) || // Server error
+      error.code === 'ECONNABORTED' || // Timeout
+      error.code === 'ERR_NETWORK' // Network error
+    );
+  },
+  onRetry: (retryCount, error) => {
+    console.log(`🔄 Retrying request (${retryCount}/3):`, error.message);
+  },
 });
 
 api.interceptors.request.use(
@@ -89,11 +125,11 @@ api.interceptors.response.use(
           // Render free tier cold start can take 50+ seconds
           // Show user-friendly message for timeout errors
           if (error.code === 'ECONNABORTED' || error.message.includes('timeout')) {
-            error.userMessage = 'Server is starting up. This may take up to 60 seconds. Please wait and try again.';
+            error.userMessage = 'Sunucu yanıt vermiyor. Lütfen birkaç saniye bekleyip tekrar deneyin. (Otomatik yeniden deneme yapılıyor...)';
           } else if (error.code === 'ERR_NETWORK' || error.message.includes('Network Error')) {
-            error.userMessage = 'Cannot connect to server. The server may be starting up. Please wait a moment and try again.';
+            error.userMessage = 'Sunucuya bağlanılamıyor. İnternet bağlantınızı kontrol edin veya birkaç saniye bekleyip tekrar deneyin. (Otomatik yeniden deneme yapılıyor...)';
           } else {
-            error.userMessage = 'Cannot connect to server. Please check your internet connection and try again.';
+            error.userMessage = 'Sunucuya bağlanılamıyor. Lütfen internet bağlantınızı kontrol edin ve tekrar deneyin. (Otomatik yeniden deneme yapılıyor...)';
           }
           // Don't redirect on network errors - let components handle it
           return Promise.reject(error);
@@ -235,6 +271,64 @@ export const submitContact = (payload: { name: string; email: string; message: s
     API_ROUTES.contact.base,
     payload
   );
+
+// Health check function
+export const checkBackendHealth = async (): Promise<boolean> => {
+  try {
+    const baseURL = getApiBaseURL();
+    const healthUrl = baseURL.replace('/api', '') + '/api/health';
+    const response = await axios.get(healthUrl, {
+      timeout: 5000, // 5 second timeout for health check
+      validateStatus: (status) => status < 500, // Accept 2xx, 3xx, 4xx
+    });
+    return response.status === 200 && response.data?.status === 'ok';
+  } catch (error) {
+    console.warn('Backend health check failed:', error);
+    return false;
+  }
+};
+
+// Connection status checker
+let connectionStatus: 'online' | 'offline' | 'checking' = 'checking';
+let lastHealthCheck: number = 0;
+const HEALTH_CHECK_INTERVAL = 30000; // Check every 30 seconds
+
+export const getConnectionStatus = async (): Promise<'online' | 'offline'> => {
+  const now = Date.now();
+  
+  // Cache health check for 30 seconds
+  if (now - lastHealthCheck < HEALTH_CHECK_INTERVAL && connectionStatus !== 'checking') {
+    return connectionStatus;
+  }
+  
+  connectionStatus = 'checking';
+  lastHealthCheck = now;
+  
+  const isHealthy = await checkBackendHealth();
+  connectionStatus = isHealthy ? 'online' : 'offline';
+  
+  return connectionStatus;
+};
+
+// Initialize connection status on load
+if (typeof window !== 'undefined') {
+  // Check immediately
+  getConnectionStatus();
+  
+  // Check periodically
+  setInterval(() => {
+    getConnectionStatus();
+  }, HEALTH_CHECK_INTERVAL);
+  
+  // Check on online/offline events
+  window.addEventListener('online', () => {
+    getConnectionStatus();
+  });
+  
+  window.addEventListener('offline', () => {
+    connectionStatus = 'offline';
+  });
+}
 
 export default api;
 

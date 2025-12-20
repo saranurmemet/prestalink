@@ -6,6 +6,7 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import FloatingContact from '@/components/common/FloatingContact';
 import SplashScreen from '@/components/common/SplashScreen';
+import ConnectionStatus from '@/components/common/ConnectionStatus';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -88,6 +89,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main className="pt-20 pb-16">{children}</main>
           <Footer />
           <FloatingContact />
+          <ConnectionStatus />
         </AppProviders>
       </body>
     </html>
