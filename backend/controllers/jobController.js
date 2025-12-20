@@ -14,7 +14,10 @@ exports.getJobs = asyncHandler(async (req, res) => {
   if (req.query.language) {
     filters.requiredLanguage = req.query.language;
   }
-  const allJobs = await Job.find(filters).sort({ createdAt: -1 });
+  // Sadece açık (closed: false) iş ilanlarını göster
+  filters.closed = { $ne: true };
+  
+  const allJobs = await Job.find(filters).sort({ createdAt: -1 }).populate('employerId', 'name companyName');
   
   // Remove duplicates based on title + location + salary
   // Keep the most recent one
@@ -33,6 +36,7 @@ exports.getJobs = asyncHandler(async (req, res) => {
   });
   
   const uniqueJobs = Array.from(uniqueJobsMap.values());
+  console.log(`📊 [JOBS API] Returning ${uniqueJobs.length} jobs (from ${allJobs.length} total)`);
   res.json(uniqueJobs);
 });
 
