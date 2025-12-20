@@ -126,6 +126,103 @@ Arabic (Native), French (Fluent), English (Intermediate)`,
   }
 });
 
+// Bootstrap endpoint - ZER Company deployment
+router.post('/bootstrap/create-zer-company', async (req, res) => {
+  try {
+    // Secret key kontrolü
+    const secretKey = req.headers['x-bootstrap-secret'] || req.body.secretKey;
+    const expectedSecret = process.env.BOOTSTRAP_SECRET || 'prestalink-bootstrap-2024';
+    
+    if (secretKey !== expectedSecret) {
+      return res.status(403).json({ message: 'Unauthorized - Invalid secret key' });
+    }
+
+    // Check if database is connected
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(500).json({ 
+        message: 'Database not connected',
+        readyState: mongoose.connection.readyState
+      });
+    }
+
+    // Kullanıcı zaten var mı kontrol et
+    const existingUser = await User.findOne({ email: 'zer.company@prestalink.app' });
+    
+    const userData = {
+      name: 'ZER company',
+      email: 'zer.company@prestalink.app',
+      password: 'zer2024',
+      phone: '+33123456789',
+      role: 'recruiter',
+      roles: ['recruiter'],
+      activeRole: 'recruiter',
+      companyName: 'ZER company',
+      companyDescription: 'ZER company is a leading international recruitment and talent acquisition firm specializing in connecting skilled professionals with top-tier employers across Europe. With over 15 years of experience in the industry, we have successfully placed thousands of candidates in various sectors including manufacturing, technology, healthcare, and hospitality. Our mission is to bridge the gap between talented individuals seeking career opportunities and companies looking for exceptional talent. We pride ourselves on our comprehensive understanding of international labor markets, cultural integration support, and personalized approach to both candidates and employers. Our team of experienced recruiters works tirelessly to ensure the best match between candidates and positions, providing ongoing support throughout the recruitment process and beyond.',
+      industry: 'Human Resources & Recruitment Services',
+      country: 'France',
+      city: 'Paris',
+      profilePhoto: 'https://i.pravatar.cc/400?img=68',
+      bio: 'Leading international recruitment firm with 15+ years of experience in talent acquisition and placement services across Europe. Specialized in connecting skilled professionals with top-tier employers in manufacturing, technology, healthcare, and hospitality sectors.',
+      languages: ['FR', 'EN', 'AR', 'TR', 'DE'],
+    };
+
+    let user;
+    if (existingUser) {
+      // Update existing user
+      Object.assign(existingUser, userData);
+      await existingUser.save();
+      user = existingUser;
+    } else {
+      // Create new user
+      user = await User.create(userData);
+    }
+
+    // Profil tamamlanma kontrolü
+    const isComplete = user && 
+      user.companyName && 
+      user.companyDescription && 
+      user.industry && 
+      user.country && 
+      user.city && 
+      user.email && 
+      user.phone;
+
+    res.json({
+      success: true,
+      message: existingUser ? 'ZER Company profile updated successfully' : 'ZER Company profile created successfully',
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        companyName: user.companyName,
+        country: user.country,
+        city: user.city,
+        industry: user.industry,
+        role: user.role,
+      },
+      profileComplete: isComplete,
+      profileFields: {
+        companyName: !!user.companyName,
+        companyDescription: !!user.companyDescription,
+        industry: !!user.industry,
+        country: !!user.country,
+        city: !!user.city,
+        email: !!user.email,
+        phone: !!user.phone,
+        profilePhoto: !!user.profilePhoto,
+        bio: !!user.bio,
+        languages: user.languages?.length > 0,
+      },
+    });
+  } catch (error) {
+    console.error('Error creating ZER Company profile:', error);
+    res.status(500).json({
+      message: 'Failed to create ZER Company profile',
+      error: error.message,
+    });
+  }
+});
+
 // All admin routes require authentication
 router.use(authMiddleware);
 
