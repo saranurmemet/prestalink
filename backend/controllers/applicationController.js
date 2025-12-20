@@ -1,22 +1,43 @@
 const Application = require('../models/Application');
 const asyncHandler = require('../utils/asyncHandler');
 
+const User = require('../models/User');
+
 exports.createApplication = asyncHandler(async (req, res) => {
   const cvFile = req.files?.cv?.[0];
   const certificateFiles = req.files?.certificates || [];
-
-  if (!cvFile) {
-    return res.status(400).json({ message: 'CV is required' });
-  }
 
   if (!req.body.jobId) {
     return res.status(400).json({ message: 'Job is required' });
   }
 
+  // CV handling: Use uploaded file or fallback to user's profile CV
+  let cvUrl;
+  if (cvFile) {
+    // New CV file uploaded
+    cvUrl = cvFile.path.replace(/\\/g, '/');
+  } else if (req.body.useProfileCV === 'true') {
+    // Frontend requested to use profile CV (when fetch fails)
+    const user = await User.findById(req.user._id);
+    if (user && user.cvUrl) {
+      cvUrl = user.cvUrl;
+    } else {
+      return res.status(400).json({ message: 'CV is required. Please upload a CV file or ensure your profile has a CV.' });
+    }
+  } else {
+    // No CV file and no useProfileCV flag - try to use profile CV as fallback
+    const user = await User.findById(req.user._id);
+    if (user && user.cvUrl) {
+      cvUrl = user.cvUrl;
+    } else {
+      return res.status(400).json({ message: 'CV is required. Please upload a CV file or ensure your profile has a CV.' });
+    }
+  }
+
   const application = await Application.create({
     userId: req.user._id,
     jobId: req.body.jobId,
-    cvUrl: cvFile.path.replace(/\\/g, '/'),
+    cvUrl: cvUrl,
     certificates: certificateFiles.map((file) => file.path.replace(/\\/g, '/')),
   });
 

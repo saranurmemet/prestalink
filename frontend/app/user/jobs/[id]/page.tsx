@@ -108,16 +108,17 @@ const JobDetail = () => {
             const cvFile = new File([cvBlob], fileName, { type: mimeType });
             formData.append('cv', cvFile);
           } else {
-            // If CV fetch fails, provide helpful error message
-            console.error('CV fetch failed:', cvResponse.status, cvResponse.statusText);
-            throw new Error(`CV dosyası yüklenemedi (Status: ${cvResponse.status}). Lütfen profil sayfanızdan CV'nizi kontrol edin veya yeniden yükleyin.`);
+            // If CV fetch fails, try to send application with CV URL instead
+            // Backend will use the user's profile CV URL if file upload fails
+            console.warn('CV fetch failed, attempting to use profile CV URL:', cvResponse.status);
+            // Continue without file - backend will use user.cvUrl
+            formData.append('useProfileCV', 'true');
           }
         } catch (cvError: any) {
-          console.error('Error fetching CV:', cvError);
-          const errorMsg = cvError.message || t('jobDetail.cvFetchError') || 'CV dosyası yüklenemedi. Lütfen profil sayfanızdan CV\'nizi kontrol edin.';
-          alert(errorMsg);
-          setApplying(false);
-          return;
+          // If fetch completely fails, try to use profile CV URL
+          console.warn('CV fetch error, attempting to use profile CV URL:', cvError);
+          // Continue without file - backend will use user.cvUrl
+          formData.append('useProfileCV', 'true');
         }
       } else {
         // If no CV in profile, show warning
