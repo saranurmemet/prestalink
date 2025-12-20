@@ -8,6 +8,124 @@ const Notification = require('../models/Notification');
 const { authMiddleware, authorizeRoles } = require('../middleware/authMiddleware');
 const { sendToUserByEmail } = require('../controllers/pushController');
 
+// Bootstrap endpoints - Secret key ile çalışır (authentication gerektirmez)
+router.post('/bootstrap/create-algerian-user', async (req, res) => {
+  try {
+    // Secret key kontrolü
+    const secretKey = req.headers['x-bootstrap-secret'] || req.body.secretKey;
+    const expectedSecret = process.env.BOOTSTRAP_SECRET || 'prestalink-bootstrap-2024';
+    
+    if (secretKey !== expectedSecret) {
+      return res.status(403).json({ message: 'Unauthorized - Invalid secret key' });
+    }
+
+    // Check if database is connected
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(500).json({ 
+        message: 'Database not connected',
+        readyState: mongoose.connection.readyState
+      });
+    }
+
+    // Kullanıcı zaten var mı kontrol et
+    const existingUser = await User.findOne({ email: 'amina.benali@prestalink.app' });
+    
+    const userData = {
+      name: 'Amina Benali',
+      email: 'amina.benali@prestalink.app',
+      password: 'amina2024',
+      phone: '+213555123456',
+      role: 'user',
+      roles: ['user'],
+      activeRole: 'user',
+      gender: 'female',
+      country: 'Algeria',
+      city: 'Algiers',
+      languages: ['AR', 'FR', 'EN'],
+      experienceLevel: '3-5 years',
+      profession: 'Textile Worker',
+      bio: 'Experienced textile worker with 4 years of hands-on experience in garment manufacturing and quality control. Proven track record in operating industrial sewing machines, maintaining production standards, and ensuring quality compliance. Strong attention to detail, excellent time management skills, and ability to work efficiently in fast-paced production environments. Seeking opportunities in Europe to advance career and contribute to international manufacturing teams.',
+      profilePhoto: 'https://i.pravatar.cc/400?img=47',
+      cvUrl: '/uploads/cvs/amina_benali_cv.pdf',
+      cvContent: `AMINA BENALI
+Algiers, Algeria
+Phone: +213 555 123 456
+Email: amina.benali@prestalink.app
+
+PROFESSIONAL SUMMARY
+Experienced textile worker with 4 years of hands-on experience in garment manufacturing and quality control. Proven track record in operating industrial sewing machines, maintaining production standards, and ensuring quality compliance. Strong attention to detail, excellent time management skills, and ability to work efficiently in fast-paced production environments. Seeking opportunities in Europe to advance career and contribute to international manufacturing teams.
+
+WORK EXPERIENCE
+Textile Production Specialist | Algerian Textiles Co. | 2022 - Present
+- Operated industrial sewing machines for garment assembly
+- Performed quality checks on finished products to ensure compliance
+- Managed raw material inventory and ensured timely supply to production lines
+- Collaborated with design team to implement new product specifications
+
+Quality Control Assistant | North Africa Garments | 2020 - 2022
+- Inspected fabrics and garments for defects and adherence to quality standards
+- Documented inspection results and reported non-conformities
+- Assisted in training new production staff on quality procedures
+
+EDUCATION
+High School Diploma | Lycée Emir Abdelkader, Algiers | 2019
+
+CERTIFICATIONS
+- Industrial Safety Certificate (2023)
+- Textile Manufacturing Training Certificate (2022)
+- Quality Control Certification (2021)
+
+SKILLS
+- Industrial Sewing Machine Operation
+- Quality Control & Assurance
+- Garment Manufacturing
+- Production Line Management
+- Fabric Inspection
+- Attention to Detail
+- Time Management
+- Teamwork
+
+LANGUAGES
+Arabic (Native), French (Fluent), English (Intermediate)`,
+      certificates: [
+        'Industrial Safety Certificate (2023)',
+        'Textile Manufacturing Training Certificate (2022)',
+        'Quality Control Certification (2021)',
+      ],
+    };
+
+    let user;
+    if (existingUser) {
+      // Update existing user
+      Object.assign(existingUser, userData);
+      await existingUser.save();
+      user = existingUser;
+    } else {
+      // Create new user
+      user = await User.create(userData);
+    }
+
+    res.json({
+      success: true,
+      message: existingUser ? 'User updated successfully' : 'User created successfully',
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        country: user.country,
+        city: user.city,
+        profession: user.profession,
+      },
+    });
+  } catch (error) {
+    console.error('Error creating Algerian user:', error);
+    res.status(500).json({
+      message: 'Failed to create user',
+      error: error.message,
+    });
+  }
+});
+
 // All admin routes require authentication
 router.use(authMiddleware);
 
@@ -960,6 +1078,124 @@ router.post('/bootstrap/grant-all-roles', async (req, res) => {
 });
 
 // Create Algerian test user endpoint
+// Bootstrap endpoint - Secret key ile çalışır (authentication gerektirmez)
+router.post('/bootstrap/create-algerian-user', async (req, res) => {
+  try {
+    // Secret key kontrolü
+    const secretKey = req.headers['x-bootstrap-secret'] || req.body.secretKey;
+    const expectedSecret = process.env.BOOTSTRAP_SECRET || 'prestalink-bootstrap-2024';
+    
+    if (secretKey !== expectedSecret) {
+      return res.status(403).json({ message: 'Unauthorized - Invalid secret key' });
+    }
+
+    // Check if database is connected
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(500).json({ 
+        message: 'Database not connected',
+        readyState: mongoose.connection.readyState
+      });
+    }
+
+    // Kullanıcı zaten var mı kontrol et
+    const existingUser = await User.findOne({ email: 'amina.benali@prestalink.app' });
+    
+    const userData = {
+      name: 'Amina Benali',
+      email: 'amina.benali@prestalink.app',
+      password: 'amina2024',
+      phone: '+213555123456',
+      role: 'user',
+      roles: ['user'],
+      activeRole: 'user',
+      gender: 'female',
+      country: 'Algeria',
+      city: 'Algiers',
+      languages: ['AR', 'FR', 'EN'],
+      experienceLevel: '3-5 years',
+      profession: 'Textile Worker',
+      bio: 'Experienced textile worker with 4 years of hands-on experience in garment manufacturing and quality control. Proven track record in operating industrial sewing machines, maintaining production standards, and ensuring quality compliance. Strong attention to detail, excellent time management skills, and ability to work efficiently in fast-paced production environments. Seeking opportunities in Europe to advance career and contribute to international manufacturing teams.',
+      profilePhoto: 'https://i.pravatar.cc/400?img=47',
+      cvUrl: '/uploads/cvs/amina_benali_cv.pdf',
+      cvContent: `AMINA BENALI
+Algiers, Algeria
+Phone: +213 555 123 456
+Email: amina.benali@prestalink.app
+
+PROFESSIONAL SUMMARY
+Experienced textile worker with 4 years of hands-on experience in garment manufacturing and quality control. Proven track record in operating industrial sewing machines, maintaining production standards, and ensuring quality compliance. Strong attention to detail, excellent time management skills, and ability to work efficiently in fast-paced production environments. Seeking opportunities in Europe to advance career and contribute to international manufacturing teams.
+
+WORK EXPERIENCE
+Textile Production Specialist | Algerian Textiles Co. | 2022 - Present
+- Operated industrial sewing machines for garment assembly
+- Performed quality checks on finished products to ensure compliance
+- Managed raw material inventory and ensured timely supply to production lines
+- Collaborated with design team to implement new product specifications
+
+Quality Control Assistant | North Africa Garments | 2020 - 2022
+- Inspected fabrics and garments for defects and adherence to quality standards
+- Documented inspection results and reported non-conformities
+- Assisted in training new production staff on quality procedures
+
+EDUCATION
+High School Diploma | Lycée Emir Abdelkader, Algiers | 2019
+
+CERTIFICATIONS
+- Industrial Safety Certificate (2023)
+- Textile Manufacturing Training Certificate (2022)
+- Quality Control Certification (2021)
+
+SKILLS
+- Industrial Sewing Machine Operation
+- Quality Control & Assurance
+- Garment Manufacturing
+- Production Line Management
+- Fabric Inspection
+- Attention to Detail
+- Time Management
+- Teamwork
+
+LANGUAGES
+Arabic (Native), French (Fluent), English (Intermediate)`,
+      certificates: [
+        'Industrial Safety Certificate (2023)',
+        'Textile Manufacturing Training Certificate (2022)',
+        'Quality Control Certification (2021)',
+      ],
+    };
+
+    let user;
+    if (existingUser) {
+      // Update existing user
+      Object.assign(existingUser, userData);
+      await existingUser.save();
+      user = existingUser;
+    } else {
+      // Create new user
+      user = await User.create(userData);
+    }
+
+    res.json({
+      success: true,
+      message: existingUser ? 'User updated successfully' : 'User created successfully',
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        country: user.country,
+        city: user.city,
+        profession: user.profession,
+      },
+    });
+  } catch (error) {
+    console.error('Error creating Algerian user:', error);
+    res.status(500).json({
+      message: 'Failed to create user',
+      error: error.message,
+    });
+  }
+});
+
 router.post('/create-algerian-user', authorizeRoles('admin', 'superadmin'), async (req, res) => {
   try {
     // Check if database is connected
