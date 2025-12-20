@@ -80,19 +80,42 @@ const JobDetail = () => {
           // Fetch CV file from URL using getStaticFileUrl helper
           const cvUrl = getStaticFileUrl(user.cvUrl);
           
-          const cvResponse = await fetch(cvUrl);
+          // Add credentials and proper headers for fetch
+          const cvResponse = await fetch(cvUrl, {
+            method: 'GET',
+            credentials: 'include',
+            headers: {
+              'Accept': 'application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,*/*',
+            },
+          });
+          
           if (cvResponse.ok) {
             const cvBlob = await cvResponse.blob();
             // Get file extension from URL or default to pdf
             const fileName = user.cvUrl.split('/').pop() || `cv_${user._id}.pdf`;
-            const cvFile = new File([cvBlob], fileName, { type: cvBlob.type || 'application/pdf' });
+            // Determine MIME type from blob or file extension
+            let mimeType = cvBlob.type || 'application/pdf';
+            if (!mimeType || mimeType === 'application/octet-stream') {
+              const ext = fileName.split('.').pop()?.toLowerCase();
+              if (ext === 'docx') {
+                mimeType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+              } else if (ext === 'doc') {
+                mimeType = 'application/msword';
+              } else {
+                mimeType = 'application/pdf';
+              }
+            }
+            const cvFile = new File([cvBlob], fileName, { type: mimeType });
             formData.append('cv', cvFile);
           } else {
-            throw new Error('CV dosyası yüklenemedi');
+            // If CV fetch fails, provide helpful error message
+            console.error('CV fetch failed:', cvResponse.status, cvResponse.statusText);
+            throw new Error(`CV dosyası yüklenemedi (Status: ${cvResponse.status}). Lütfen profil sayfanızdan CV'nizi kontrol edin veya yeniden yükleyin.`);
           }
-        } catch (cvError) {
+        } catch (cvError: any) {
           console.error('Error fetching CV:', cvError);
-          alert(t('jobDetail.cvFetchError') || 'CV dosyası yüklenemedi. Lütfen profil sayfanızdan CV\'nizi kontrol edin.');
+          const errorMsg = cvError.message || t('jobDetail.cvFetchError') || 'CV dosyası yüklenemedi. Lütfen profil sayfanızdan CV\'nizi kontrol edin.';
+          alert(errorMsg);
           setApplying(false);
           return;
         }
