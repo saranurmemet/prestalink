@@ -13,17 +13,18 @@ const getIP = (req) => {
 };
 
 // Genel API rate limiter (tüm endpoint'ler için)
-// Development modunda limit'leri gevşet
+// Development modunda rate limiting devre dışı
 const isDevelopment = process.env.NODE_ENV === 'development';
 const generalLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 dakika
-  max: isDevelopment ? 1000 : 100, // Development: 1000, Production: 100
+  max: isDevelopment ? 10000 : 100, // Development: 10000 (pratikte sınırsız), Production: 100
   message: {
     error: 'Too many requests from this IP, please try again later.',
     retryAfter: '15 minutes'
   },
   standardHeaders: true, // Rate limit bilgilerini header'larda döndür
   legacyHeaders: false,
+  skip: (req) => isDevelopment, // Development modunda tamamen atla
   handler: (req, res) => {
     const ip = getIP(req);
     console.warn(`⚠️  [RATE_LIMIT] Too many requests from IP: ${ip}`);
@@ -56,16 +57,17 @@ const registerLimiter = rateLimit({
 });
 
 // Giriş (Login) için rate limiter (brute force koruması)
-// Development modunda limit'leri gevşet
+// Development modunda rate limiting devre dışı
 const loginLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 dakika
-  max: isDevelopment ? 100 : 10, // Development: 100, Production: 10
+  max: isDevelopment ? 10000 : 10, // Development: 10000 (pratikte sınırsız), Production: 10
   message: {
     error: 'Too many login attempts from this IP, please try again after 15 minutes.',
     retryAfter: '15 minutes'
   },
   standardHeaders: true,
   legacyHeaders: false,
+  skip: (req) => isDevelopment, // Development modunda tamamen atla
   skipSuccessfulRequests: true, // Başarılı girişleri sayma
   handler: (req, res) => {
     const ip = getIP(req);
