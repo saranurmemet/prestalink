@@ -123,15 +123,19 @@ const corsOptions = {
       }
     }
     
-    console.warn(`CORS blocked origin: ${origin}`);
+    // Log blocked origins only in development
+    if (process.env.NODE_ENV !== 'production') {
+      console.warn(`⚠️ [CORS] Blocked origin: ${origin}`);
+    }
     callback(new Error('Not allowed by CORS policy'));
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'Accept-Language', 'X-Requested-With'],
-  exposedHeaders: ['Content-Type', 'Authorization'],
-  maxAge: 86400,
+  allowedHeaders: ['Content-Type', 'Authorization', 'Accept-Language', 'X-Requested-With', 'X-Bootstrap-Secret'],
+  exposedHeaders: ['Content-Type', 'Authorization', 'X-Request-Id'],
+  maxAge: 86400, // 24 hours
   optionsSuccessStatus: 204,
+  preflightContinue: false,
 };
 
 app.use(cors(corsOptions));
