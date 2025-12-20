@@ -13,9 +13,11 @@ const getIP = (req) => {
 };
 
 // Genel API rate limiter (tüm endpoint'ler için)
+// Development modunda limit'leri gevşet
+const isDevelopment = process.env.NODE_ENV === 'development';
 const generalLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 dakika
-  max: 100, // Her IP'den 15 dakikada maksimum 100 istek
+  max: isDevelopment ? 1000 : 100, // Development: 1000, Production: 100
   message: {
     error: 'Too many requests from this IP, please try again later.',
     retryAfter: '15 minutes'
@@ -54,9 +56,10 @@ const registerLimiter = rateLimit({
 });
 
 // Giriş (Login) için rate limiter (brute force koruması)
+// Development modunda limit'leri gevşet
 const loginLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 dakika
-  max: 10, // Her IP'den 15 dakikada maksimum 10 giriş denemesi
+  max: isDevelopment ? 100 : 10, // Development: 100, Production: 10
   message: {
     error: 'Too many login attempts from this IP, please try again after 15 minutes.',
     retryAfter: '15 minutes'
