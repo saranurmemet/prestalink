@@ -39,9 +39,14 @@ const EmployerDashboard = () => {
           fetchNotifications().catch(() => ({ data: [] })),
         ]);
 
-        const userJobs = (jobsRes.data || []).filter(
-          (job: any) => job.employerId === user?._id || job.employerId?._id === user?._id
-        );
+        const userJobs = (jobsRes.data || []).filter((job: any) => {
+          // Handle both populated (object) and non-populated (string) employerId
+          const jobEmployerId = typeof job.employerId === 'object' && job.employerId !== null
+            ? job.employerId._id || job.employerId
+            : job.employerId;
+          const userId = user?._id;
+          return jobEmployerId?.toString() === userId?.toString();
+        });
         setJobs(userJobs);
 
         const notifications = notifRes.data || [];
