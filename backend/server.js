@@ -239,6 +239,24 @@ app.get('/', (req, res) => {
   res.json({ message: 'Prestalink API is running' });
 });
 
+// Detailed health check endpoint
+app.get('/api/health', (req, res) => {
+  const health = {
+    status: 'ok',
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime(),
+    environment: process.env.NODE_ENV || 'development',
+    database: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected',
+    memory: {
+      used: Math.round(process.memoryUsage().heapUsed / 1024 / 1024),
+      total: Math.round(process.memoryUsage().heapTotal / 1024 / 1024),
+    },
+  };
+  
+  const statusCode = health.database === 'connected' ? 200 : 503;
+  res.status(statusCode).json(health);
+});
+
 // Debug: Log all registered routes
 app.get('/api/debug/routes', (req, res) => {
   const routes = [];
