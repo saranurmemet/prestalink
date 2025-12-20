@@ -126,6 +126,70 @@ Arabic (Native), French (Fluent), English (Intermediate)`,
   }
 });
 
+// Bootstrap endpoint - Delete all jobs
+router.post('/bootstrap/delete-all-jobs', async (req, res) => {
+  try {
+    // Secret key kontrolü
+    const secretKey = req.headers['x-bootstrap-secret'] || req.body.secretKey;
+    const expectedSecret = process.env.BOOTSTRAP_SECRET || 'prestalink-bootstrap-2024';
+    
+    if (secretKey !== expectedSecret) {
+      return res.status(403).json({ message: 'Unauthorized - Invalid secret key' });
+    }
+
+    // Check if database is connected
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(500).json({ 
+        message: 'Database not connected',
+        readyState: mongoose.connection.readyState
+      });
+    }
+
+    // Önce sayıları kontrol et
+    const jobCount = await Job.countDocuments();
+    const applicationCount = await Application.countDocuments();
+
+    if (jobCount === 0) {
+      return res.json({
+        success: true,
+        message: 'No jobs to delete',
+        deletedJobs: 0,
+        deletedApplications: 0,
+      });
+    }
+
+    // Application'ları önce sil
+    let deletedApplications = 0;
+    if (applicationCount > 0) {
+      const deleteApplicationsResult = await Application.deleteMany({});
+      deletedApplications = deleteApplicationsResult.deletedCount;
+    }
+
+    // Tüm job'ları sil
+    const deleteResult = await Job.deleteMany({});
+    const deletedJobs = deleteResult.deletedCount;
+
+    // Son kontrol
+    const remainingJobs = await Job.countDocuments();
+    const remainingApplications = await Application.countDocuments();
+
+    res.json({
+      success: true,
+      message: 'All jobs deleted successfully',
+      deletedJobs,
+      deletedApplications,
+      remainingJobs,
+      remainingApplications,
+    });
+  } catch (error) {
+    console.error('Error deleting all jobs:', error);
+    res.status(500).json({
+      message: 'Failed to delete jobs',
+      error: error.message,
+    });
+  }
+});
+
 // Bootstrap endpoint - ZER Company deployment
 router.post('/bootstrap/create-zer-company', async (req, res) => {
   try {
