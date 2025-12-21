@@ -153,12 +153,21 @@ exports.updateProfile = asyncHandler(async (req, res) => {
     return res.status(404).json({ message: 'User not found' });
   }
 
-  // String alanları güncelle
-  if (name) user.name = name;
-  if (phone) user.phone = phone;
-  if (country) user.country = country;
+  // Validate and sanitize profile data
+  const validation = validateProfileData(req.body);
+  if (!validation.valid) {
+    return res.status(400).json({ 
+      message: 'Validation failed', 
+      errors: validation.errors 
+    });
+  }
+
+  // Update fields with sanitized data
+  if (validation.sanitized.name) user.name = validation.sanitized.name;
+  if (validation.sanitized.phone) user.phone = validation.sanitized.phone;
+  if (country) user.country = country; // Country doesn't need sanitization
   if (experienceLevel) user.experienceLevel = experienceLevel;
-  if (bio) user.bio = bio;
+  if (validation.sanitized.bio) user.bio = validation.sanitized.bio;
   
   // Languages - array
   if (languages) {
