@@ -2,9 +2,13 @@ const User = require('../models/User');
 const Job = require('../models/Job');
 const Application = require('../models/Application');
 const asyncHandler = require('../utils/asyncHandler');
+const { ensureDatabaseConnected } = require('../utils/dbCheck');
 
 // Get admin statistics
 exports.getStats = asyncHandler(async (req, res) => {
+  // Ensure database is connected
+  ensureDatabaseConnected();
+
   // Total users count
   const totalUsers = await User.countDocuments();
   

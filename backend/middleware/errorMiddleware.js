@@ -2,9 +2,10 @@ const errorHandler = (err, req, res, next) => {
   // Log error for debugging
   console.error('❌ [ERROR]', {
     message: err.message,
-    stack: err.stack,
+    stack: process.env.NODE_ENV === 'development' ? err.stack : undefined,
     url: req.originalUrl,
     method: req.method,
+    timestamp: new Date().toISOString(),
   });
   
   // Mongoose validation error

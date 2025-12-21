@@ -123,7 +123,12 @@ exports.me = asyncHandler(async (req, res) => {
   res.json({ user: req.user });
 });
 
+const { ensureDatabaseConnected } = require('../utils/dbCheck');
+
 exports.updateProfile = asyncHandler(async (req, res) => {
+  // Ensure database is connected
+  ensureDatabaseConnected();
+
   const userId = req.user._id;
   const {
     name,

@@ -31,18 +31,36 @@ const UserDashboard = () => {
       setLoading(true);
       try {
         const [jobsRes, appsRes, notifRes] = await Promise.all([
-          fetchJobs().catch(() => ({ data: [] })),
-          user ? fetchApplicationsByUser(user._id).catch(() => ({ data: [] })) : Promise.resolve({ data: [] }),
-          fetchNotifications().catch(() => ({ data: [] })),
+          fetchJobs().catch((err) => {
+            console.error('Error fetching jobs:', err);
+            return { data: [] };
+          }),
+          user ? fetchApplicationsByUser(user._id).catch((err) => {
+            console.error('Error fetching applications:', err);
+            return { data: [] };
+          }) : Promise.resolve({ data: [] }),
+          fetchNotifications().catch((err) => {
+            console.error('Error fetching notifications:', err);
+            return { data: [] };
+          }),
         ]);
-        // Remove duplicates based on title + location + salary
-        const uniqueJobs = jobsRes.data.filter((job, index, self) =>
-          index === self.findIndex((j) =>
-            j.title === job.title &&
-            j.location === job.location &&
-            j.salary === job.salary
-          )
-        );
+        
+        // Remove duplicates based on title + location + salary + employerId
+        // Only remove if same employer (not different employers with same job details)
+        const uniqueJobs = jobsRes.data.filter((job, index, self) => {
+          const employerId1 = typeof job.employerId === 'object' && job.employerId !== null
+            ? job.employerId._id?.toString() || job.employerId.toString()
+            : job.employerId?.toString() || '';
+          return index === self.findIndex((j) => {
+            const employerId2 = typeof j.employerId === 'object' && j.employerId !== null
+              ? j.employerId._id?.toString() || j.employerId.toString()
+              : j.employerId?.toString() || '';
+            return j.title === job.title &&
+              j.location === job.location &&
+              j.salary === job.salary &&
+              employerId1 === employerId2;
+          });
+        });
         setJobs(uniqueJobs);
         setApplications(appsRes.data);
         setNotifications(notifRes.data);

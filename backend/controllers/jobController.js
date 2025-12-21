@@ -1,7 +1,11 @@
 const Job = require('../models/Job');
 const asyncHandler = require('../utils/asyncHandler');
+const { ensureDatabaseConnected } = require('../utils/dbCheck');
 
 exports.createJob = asyncHandler(async (req, res) => {
+  // Ensure database is connected
+  ensureDatabaseConnected();
+
   const job = await Job.create({
     ...req.body,
     employerId: req.user._id,
@@ -10,6 +14,9 @@ exports.createJob = asyncHandler(async (req, res) => {
 });
 
 exports.getJobs = asyncHandler(async (req, res) => {
+  // Ensure database is connected
+  ensureDatabaseConnected();
+
   const filters = {};
   if (req.query.language) {
     filters.requiredLanguage = req.query.language;
@@ -19,15 +26,18 @@ exports.getJobs = asyncHandler(async (req, res) => {
   
   const allJobs = await Job.find(filters).sort({ createdAt: -1 }).populate('employerId', 'name companyName');
   
-  // Remove duplicates based on title + location + salary
-  // Keep the most recent one
+  // Remove duplicates based on title + location + salary + employerId
+  // Only remove if same employer created duplicate (not different employers with same job details)
   const uniqueJobsMap = new Map();
   allJobs.forEach((job) => {
-    const key = `${job.title}|${job.location}|${job.salary}`;
+    // Include employerId in key to avoid removing legitimate duplicates from different employers
+    const employerId = job.employerId?._id?.toString() || job.employerId?.toString() || '';
+    const key = `${job.title}|${job.location}|${job.salary}|${employerId}`;
+    
     if (!uniqueJobsMap.has(key)) {
       uniqueJobsMap.set(key, job);
     } else {
-      // Keep the more recent one
+      // Keep the more recent one (only if same employer)
       const existing = uniqueJobsMap.get(key);
       if (new Date(job.createdAt) > new Date(existing.createdAt)) {
         uniqueJobsMap.set(key, job);
@@ -41,6 +51,9 @@ exports.getJobs = asyncHandler(async (req, res) => {
 });
 
 exports.getJobById = asyncHandler(async (req, res) => {
+  // Ensure database is connected
+  ensureDatabaseConnected();
+
   const job = await Job.findById(req.params.id);
   if (!job) {
     return res.status(404).json({ message: 'Job not found' });
@@ -49,6 +62,9 @@ exports.getJobById = asyncHandler(async (req, res) => {
 });
 
 exports.updateJob = asyncHandler(async (req, res) => {
+  // Ensure database is connected
+  ensureDatabaseConnected();
+
   const job = await Job.findById(req.params.id);
   if (!job) {
     return res.status(404).json({ message: 'Job not found' });
@@ -64,6 +80,9 @@ exports.updateJob = asyncHandler(async (req, res) => {
 });
 
 exports.deleteJob = asyncHandler(async (req, res) => {
+  // Ensure database is connected
+  ensureDatabaseConnected();
+
   const job = await Job.findById(req.params.id);
   if (!job) {
     return res.status(404).json({ message: 'Job not found' });
