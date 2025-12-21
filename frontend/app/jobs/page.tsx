@@ -5,6 +5,7 @@ import JobCard from '@/components/jobs/JobCard';
 import { useLanguage } from '@/components/providers/LanguageProvider';
 import { fetchJobs } from '@/services/api';
 import type { Job } from '@/services/types';
+import { removeDuplicateJobs } from '@/utils/jobUtils';
 
 const JobsPage = () => {
   const { t } = useLanguage();
@@ -14,19 +15,22 @@ const JobsPage = () => {
 
   useEffect(() => {
     let mounted = true;
-    fetchJobs()
-      .then((res) => {
+    const loadJobs = async () => {
+      try {
+        const res = await fetchJobs();
         if (mounted) {
           // Remove duplicates using utility function
-          const { removeDuplicateJobs } = await import('@/utils/jobUtils');
           const uniqueJobs = removeDuplicateJobs(res.data);
           setJobs(uniqueJobs);
         }
-      })
-      .catch((err) => {
+      } catch (err) {
         console.error('Error fetching jobs:', err);
-        setJobs([]);
-      });
+        if (mounted) {
+          setJobs([]);
+        }
+      }
+    };
+    loadJobs();
     return () => {
       mounted = false;
     };

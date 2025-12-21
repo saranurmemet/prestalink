@@ -9,6 +9,7 @@ import type { Job } from '@/services/types';
  * Get employer ID from job (handles both populated and unpopulated)
  */
 export const getEmployerId = (job: Job): string => {
+  if (!job.employerId) return '';
   if (typeof job.employerId === 'object' && job.employerId !== null) {
     return (job.employerId as any)._id?.toString() || (job.employerId as any).toString();
   }

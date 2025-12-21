@@ -7,6 +7,7 @@ import UserLayout from '@/components/layout/UserLayout';
 import { useLanguage } from '@/components/providers/LanguageProvider';
 import { fetchJobs } from '@/services/api';
 import type { Job } from '@/services/types';
+import { removeDuplicateJobs } from '@/utils/jobUtils';
 import { Search, MapPin, DollarSign, Briefcase, Globe } from 'lucide-react';
 
 const JobListings = () => {
@@ -29,7 +30,6 @@ const JobListings = () => {
       try {
         const response = await fetchJobs();
         // Remove duplicates using utility function
-        const { removeDuplicateJobs } = await import('@/utils/jobUtils');
         const uniqueJobs = removeDuplicateJobs(response.data);
         setJobs(uniqueJobs);
         setFilteredJobs(uniqueJobs);

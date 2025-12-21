@@ -13,6 +13,7 @@ import {
   fetchNotifications,
 } from '@/services/api';
 import type { Job, Application, Notification } from '@/services/types';
+import { removeDuplicateJobs } from '@/utils/jobUtils';
 import { Edit3, Briefcase, FileText, CheckCircle2, XCircle, TrendingUp, Award, Star } from 'lucide-react';
 import { getProfilePhotoUrl } from '@/utils/apiUrl';
 
@@ -46,7 +47,6 @@ const UserDashboard = () => {
         ]);
         
         // Remove duplicates using utility function
-        const { removeDuplicateJobs } = await import('@/utils/jobUtils');
         const uniqueJobs = removeDuplicateJobs(jobsRes.data);
         setJobs(uniqueJobs);
         setApplications(appsRes.data);

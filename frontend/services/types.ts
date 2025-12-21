@@ -25,6 +25,8 @@ export interface Job {
   requiredLanguage?: string;
   workType?: string;
   createdAt?: string;
+  employerId?: string | { _id: string; name?: string; companyName?: string };
+  closed?: boolean;
 }
 
 export interface Application {

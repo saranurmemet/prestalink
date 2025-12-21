@@ -14,6 +14,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://prestalink.app'),
   title: 'PrestaLink | Professional Europe Process Management for Algerian Citizens',
   description: 'Turn your European work dreams into reality. We professionally manage the entire process from CV preparation to visa processes, settlement to job applications. Your European career journey starts with Prestalink.',
   keywords: 'European jobs, Algerian citizens, work in Europe, Europass CV, visa support, job placement, process management, work abroad, Europe career',
