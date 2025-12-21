@@ -45,22 +45,9 @@ const UserDashboard = () => {
           }),
         ]);
         
-        // Remove duplicates based on title + location + salary + employerId
-        // Only remove if same employer (not different employers with same job details)
-        const uniqueJobs = jobsRes.data.filter((job, index, self) => {
-          const employerId1 = typeof job.employerId === 'object' && job.employerId !== null
-            ? job.employerId._id?.toString() || job.employerId.toString()
-            : job.employerId?.toString() || '';
-          return index === self.findIndex((j) => {
-            const employerId2 = typeof j.employerId === 'object' && j.employerId !== null
-              ? j.employerId._id?.toString() || j.employerId.toString()
-              : j.employerId?.toString() || '';
-            return j.title === job.title &&
-              j.location === job.location &&
-              j.salary === job.salary &&
-              employerId1 === employerId2;
-          });
-        });
+        // Remove duplicates using utility function
+        const { removeDuplicateJobs } = await import('@/utils/jobUtils');
+        const uniqueJobs = removeDuplicateJobs(jobsRes.data);
         setJobs(uniqueJobs);
         setApplications(appsRes.data);
         setNotifications(notifRes.data);

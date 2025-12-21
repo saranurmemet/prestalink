@@ -8,6 +8,7 @@ const Job = require('../models/Job');
 const Application = require('../models/Application');
 const User = require('../models/User');
 const { ensureDatabaseConnected } = require('./dbCheck');
+const logger = require('./logger');
 
 /**
  * Create a notification for a user
@@ -27,10 +28,10 @@ const createNotification = async (userId, title, message) => {
       read: false,
     });
     
-    console.log(`✅ [NOTIFICATION] Created: ${title} for user ${userId}`);
+    logger.info('Notification created', { notificationId: notification._id, userId, title });
     return notification;
   } catch (error) {
-    console.error(`❌ [NOTIFICATION] Error creating notification:`, error.message);
+    logger.error('Error creating notification', { error: error.message, userId, title });
     // Don't throw - notification failure shouldn't break the main operation
     return null;
   }
@@ -70,7 +71,7 @@ const notifyApplicationCreated = async (applicationId) => {
     
     return null;
   } catch (error) {
-    console.error(`❌ [NOTIFICATION] Error in notifyApplicationCreated:`, error.message);
+    logger.error('Error in notifyApplicationCreated', { error: error.message, applicationId });
     return null;
   }
 };
@@ -116,7 +117,11 @@ const notifyApplicationStatusUpdated = async (applicationId, newStatus, updaterR
       message
     );
   } catch (error) {
-    console.error(`❌ [NOTIFICATION] Error in notifyApplicationStatusUpdated:`, error.message);
+    logger.error('Error in notifyApplicationStatusUpdated', { 
+      error: error.message, 
+      applicationId, 
+      newStatus 
+    });
     return null;
   }
 };

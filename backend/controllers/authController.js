@@ -124,6 +124,8 @@ exports.me = asyncHandler(async (req, res) => {
 });
 
 const { ensureDatabaseConnected } = require('../utils/dbCheck');
+const { validateProfileData, isValidEmail } = require('../utils/validation');
+const logger = require('../utils/logger');
 
 exports.updateProfile = asyncHandler(async (req, res) => {
   // Ensure database is connected
@@ -165,11 +167,11 @@ exports.updateProfile = asyncHandler(async (req, res) => {
     user.languages = langs.filter(l => l); // empty values filtreleme
   }
 
-  // Recruiter/Employer fields
-  if (companyName) user.companyName = companyName;
-  if (companyDescription) user.companyDescription = companyDescription;
-  if (industry) user.industry = industry;
-  if (city) user.city = city;
+  // Recruiter/Employer fields (use sanitized values)
+  if (validation.sanitized.companyName) user.companyName = validation.sanitized.companyName;
+  if (validation.sanitized.companyDescription) user.companyDescription = validation.sanitized.companyDescription;
+  if (validation.sanitized.industry) user.industry = validation.sanitized.industry;
+  if (validation.sanitized.city) user.city = validation.sanitized.city;
 
   // File uploads - Dosya yüklüyse path'i kaydet
   if (req.files) {
@@ -193,6 +195,8 @@ exports.updateProfile = asyncHandler(async (req, res) => {
 
   // Save user
   await user.save();
+
+  logger.info('Profile updated', { userId: user._id });
 
   res.json({
     user: sanitizeUser(user),

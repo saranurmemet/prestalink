@@ -1,15 +1,29 @@
 const Job = require('../models/Job');
 const asyncHandler = require('../utils/asyncHandler');
 const { ensureDatabaseConnected } = require('../utils/dbCheck');
+const { validateJobData } = require('../utils/validation');
+const { removeDuplicateJobs, canModifyJob } = require('../utils/jobUtils');
+const logger = require('../utils/logger');
 
 exports.createJob = asyncHandler(async (req, res) => {
   // Ensure database is connected
   ensureDatabaseConnected();
 
+  // Validate and sanitize job data
+  const validation = validateJobData(req.body);
+  if (!validation.valid) {
+    return res.status(400).json({ 
+      message: 'Validation failed', 
+      errors: validation.errors 
+    });
+  }
+
   const job = await Job.create({
-    ...req.body,
+    ...validation.sanitized,
     employerId: req.user._id,
   });
+
+  logger.info('Job created', { jobId: job._id, employerId: req.user._id });
   res.status(201).json(job);
 });
 
@@ -26,27 +40,15 @@ exports.getJobs = asyncHandler(async (req, res) => {
   
   const allJobs = await Job.find(filters).sort({ createdAt: -1 }).populate('employerId', 'name companyName');
   
-  // Remove duplicates based on title + location + salary + employerId
-  // Only remove if same employer created duplicate (not different employers with same job details)
-  const uniqueJobsMap = new Map();
-  allJobs.forEach((job) => {
-    // Include employerId in key to avoid removing legitimate duplicates from different employers
-    const employerId = job.employerId?._id?.toString() || job.employerId?.toString() || '';
-    const key = `${job.title}|${job.location}|${job.salary}|${employerId}`;
-    
-    if (!uniqueJobsMap.has(key)) {
-      uniqueJobsMap.set(key, job);
-    } else {
-      // Keep the more recent one (only if same employer)
-      const existing = uniqueJobsMap.get(key);
-      if (new Date(job.createdAt) > new Date(existing.createdAt)) {
-        uniqueJobsMap.set(key, job);
-      }
-    }
+  // Remove duplicates using utility function
+  const uniqueJobs = removeDuplicateJobs(allJobs);
+  
+  logger.debug('Jobs fetched', { 
+    total: allJobs.length, 
+    unique: uniqueJobs.length,
+    filters 
   });
   
-  const uniqueJobs = Array.from(uniqueJobsMap.values());
-  console.log(`📊 [JOBS API] Returning ${uniqueJobs.length} jobs (from ${allJobs.length} total)`);
   res.json(uniqueJobs);
 });
 
@@ -70,12 +72,24 @@ exports.updateJob = asyncHandler(async (req, res) => {
     return res.status(404).json({ message: 'Job not found' });
   }
 
-  if (job.employerId.toString() !== req.user._id.toString() && !['admin', 'superadmin'].includes(req.user.role)) {
+  // Check permissions
+  if (!canModifyJob(job, req.user)) {
     return res.status(403).json({ message: 'Forbidden' });
   }
 
-  Object.assign(job, req.body);
+  // Validate and sanitize update data
+  const validation = validateJobData(req.body);
+  if (!validation.valid) {
+    return res.status(400).json({ 
+      message: 'Validation failed', 
+      errors: validation.errors 
+    });
+  }
+
+  Object.assign(job, validation.sanitized);
   await job.save();
+
+  logger.info('Job updated', { jobId: job._id, updatedBy: req.user._id });
   res.json(job);
 });
 
@@ -88,11 +102,14 @@ exports.deleteJob = asyncHandler(async (req, res) => {
     return res.status(404).json({ message: 'Job not found' });
   }
 
-  if (job.employerId.toString() !== req.user._id.toString() && !['admin', 'superadmin'].includes(req.user.role)) {
+  // Check permissions
+  if (!canModifyJob(job, req.user)) {
     return res.status(403).json({ message: 'Forbidden' });
   }
 
   await job.deleteOne();
+  
+  logger.info('Job deleted', { jobId: req.params.id, deletedBy: req.user._id });
   res.json({ message: 'Job removed' });
 });
 
