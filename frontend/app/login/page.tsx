@@ -118,7 +118,7 @@ const LoginPage = () => {
       }
 
       const response = await googleAuth(credentialResponse.credential, selectedRole);
-      setAuth({ ...response.data, rememberMe: true });
+      setAuth({ user: response.data.user, token: response.data.token });
       const dashboardRoute = getDashboardRoute(response.data.user.role);
       router.push(dashboardRoute);
     } catch (error) {
@@ -181,7 +181,7 @@ const LoginPage = () => {
         response = await loginUser({ email, password }, selectedRole);
       }
       
-      setAuth({ ...response.data, rememberMe });
+      setAuth({ user: response.data.user, token: response.data.token });
       const dashboardRoute = getDashboardRoute(response.data.user.role);
       router.push(dashboardRoute);
     } catch (error) {

@@ -66,7 +66,7 @@ const RegisterPage = () => {
       console.log('🔄 [GOOGLE_AUTH] Attempting Google authentication with role:', selectedRole);
       const response = await googleAuth(credentialResponse.credential, selectedRole);
       console.log('✅ [GOOGLE_AUTH] Success:', response.data);
-      setAuth({ ...response.data, rememberMe: true });
+      setAuth({ user: response.data.user, token: response.data.token });
       const dashboardRoute = getDashboardRoute(response.data.user.role);
       router.push(dashboardRoute);
     } catch (error) {
