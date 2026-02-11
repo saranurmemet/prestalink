@@ -773,6 +773,26 @@
     "markAllRead": "Tout marquer comme lu",
     "noNotifications": "Aucune nouvelle notification",
     "unread": "non lues"
+  },
+  "userSettings": {
+    "title": "Paramètres",
+    "subtitle": "Gérez votre compte et les paramètres de l'application",
+    "notifications": {
+      "title": "Paramètres de notification",
+      "pushLive": {
+        "title": "Notifications push (en direct)",
+        "permission": "Permission",
+        "subscription": "Abonnement",
+        "subscribedYes": "oui",
+        "subscribedNo": "non",
+        "enableBtn": "Activer les notifications",
+        "disableBtn": "Désactiver les notifications",
+        "testBtn": "Envoyer une notification test",
+        "refreshBtn": "Actualiser",
+        "iphoneNote": "Sur iPhone, l'application doit être ajoutée à l'écran d'accueil (PWA) pour les notifications push.",
+        "notSupported": "Cet appareil ou navigateur ne prend pas en charge les notifications push."
+      }
+    }
   }
 }
 
