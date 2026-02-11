@@ -848,7 +848,15 @@
     "viewDetails": "View Details",
     "noJobs": "No job listings yet",
     "noMatches": "No jobs found matching your criteria",
-    "all": "All"
+    "all": "All",
+    "clear": "Clear"
+  },
+  "userCv": {
+    "title": "My CV / Curriculum Vitae",
+    "subtitle": "Europass Format",
+    "download": "Download CV",
+    "notFound": "CV content not found.",
+    "uploadHint": "Please upload your CV from your profile page."
   },
   "jobDetail": {
     "title": "Job Details",
@@ -860,6 +868,7 @@
     "company": "Company Information",
     "applyNow": "Apply Now",
     "backToJobs": "Back to Jobs",
+    "notFound": "Job not found",
     "cvRequired": "You need to upload your CV before applying.",
     "uploadCv": "Upload CV",
     "cvFetchError": "CV file could not be loaded. Please check your CV from your profile page.",
@@ -950,6 +959,19 @@
       "push": {
         "label": "Push Notifications",
         "description": "Receive browser notifications"
+      },
+      "pushLive": {
+        "title": "Push Notifications (Live)",
+        "permission": "Permission",
+        "subscription": "Subscription",
+        "subscribedYes": "yes",
+        "subscribedNo": "none",
+        "enableBtn": "Enable Notifications",
+        "disableBtn": "Disable Notifications",
+        "testBtn": "Send Test Notification",
+        "refreshBtn": "Refresh",
+        "iphoneNote": "Note: On iPhone, the app must be added to home screen (PWA) for push notifications.",
+        "notSupported": "This device/browser does not support push notifications."
       },
       "sms": {
         "label": "SMS Notifications",

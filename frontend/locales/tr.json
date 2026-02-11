@@ -849,7 +849,15 @@
     "viewDetails": "Detayları Gör",
     "noJobs": "Henüz iş ilanı yok",
     "noMatches": "Aradığınız kriterlere uygun iş bulunamadı",
-    "all": "Tümü"
+    "all": "Tümü",
+    "clear": "Temizle"
+  },
+  "userCv": {
+    "title": "CV'm / Öz Geçmiş",
+    "subtitle": "Europass Format",
+    "download": "CV İndir",
+    "notFound": "CV içeriği bulunamadı.",
+    "uploadHint": "Lütfen profil sayfanızdan CV'nizi yükleyin."
   },
   "jobDetail": {
     "title": "İş Detayları",
@@ -861,6 +869,7 @@
     "company": "Şirket Bilgileri",
     "applyNow": "Şimdi Başvur",
     "backToJobs": "İş İlanlarına Dön",
+    "notFound": "İş bulunamadı",
     "cvRequired": "Başvuru yapmak için önce CV'nizi yüklemeniz gerekiyor.",
     "uploadCv": "CV Yükle",
     "cvFetchError": "CV dosyası yüklenemedi. Lütfen profil sayfanızdan CV'nizi kontrol edin.",
@@ -936,6 +945,19 @@
       "push": {
         "label": "Push Bildirimleri",
         "description": "Tarayıcı bildirimleri al"
+      },
+      "pushLive": {
+        "title": "Push Bildirimleri (Canlı)",
+        "permission": "İzin",
+        "subscription": "Abonelik",
+        "subscribedYes": "var",
+        "subscribedNo": "yok",
+        "enableBtn": "Bildirimleri Aç",
+        "disableBtn": "Bildirimleri Kapat",
+        "testBtn": "Test Bildirimi Gönder",
+        "refreshBtn": "Yenile",
+        "iphoneNote": "Not: iPhone'da push için uygulamanın 'Ana ekrana ekli' (PWA) olması gerekir.",
+        "notSupported": "Bu cihaz veya tarayıcı push bildirimlerini desteklemiyor."
       },
       "sms": {
         "label": "SMS Bildirimleri",

@@ -3,7 +3,6 @@
     "home": "Accueil",
     "about": "À propos",
     "contact": "Contact",
-    "contactSupport": "Support",
     "jobs": "Offres",
     "login": "Connexion",
     "register": "Inscription",
@@ -52,44 +51,6 @@
     "widget": {
       "candidates": "Candidats en revue",
       "updated": "Flux en direct",
-      "tabs": {
-        "dashboard": "Tableau de bord",
-        "jobs": "Emplois",
-        "candidates": "Candidats"
-      },
-      "stats": {
-        "totalApplications": "Total des candidatures",
-        "activeJobs": "Emplois actifs",
-        "partnerCompanies": "Entreprises partenaires",
-        "successRate": "Taux de réussite"
-      },
-      "changes": {
-        "fromLastMonth": "+12% par rapport au mois dernier",
-        "newThisWeek": "8 nouveaux cette semaine",
-        "newPartners": "3 nouveaux partenaires",
-        "improvement": "+2% d'amélioration"
-      },
-      "monthlyApplications": "Candidatures mensuelles des 6 derniers mois",
-      "chartLegend": {
-        "applications": "Candidatures",
-        "interviews": "Entretiens",
-        "hired": "Embauchés"
-      },
-      "recentApplications": "Candidatures récentes",
-      "appliedTo": "Candidature pour:",
-      "status": {
-        "new": "Nouveau",
-        "review": "En examen",
-        "match": "Correspondance"
-      },
-      "months": {
-        "jan": "Jan",
-        "feb": "Fév",
-        "mar": "Mar",
-        "apr": "Avr",
-        "may": "Mai",
-        "jun": "Jun"
-      },
       "items": {
         "0": { "name": "Leyla / CNC", "role": "5 ans exp - Munich", "language": "FR" },
         "1": { "name": "Omar / Infirmier", "role": "B1 Allemand - Hambourg", "language": "TR" },
@@ -207,14 +168,6 @@
       "title": "Matching d'emploi par IA",
       "body": "Notre technologie IA avancée identifie automatiquement les opportunités d'emploi les plus adaptées à votre profil, expérience et objectifs."
     },
-    "matching": {
-      "title": "Matching d'emploi par IA",
-      "body": "Notre technologie IA avancée identifie automatiquement les opportunités d'emploi les plus adaptées à votre profil, expérience et objectifs."
-    },
-    "cvVault": {
-      "title": "Archives CV",
-      "body": "Stockez en toute sécurité tous vos CV et gérez les versions dans différentes langues. Accédez-y et mettez-les à jour quand vous en avez besoin."
-    },
     "autoApplication": {
       "title": "Gestion automatique des candidatures",
       "body": "Nous soumettons automatiquement vos candidatures aux entreprises adaptées avec votre CV localisé et suivons tout le processus."
@@ -330,44 +283,22 @@
   },
   "testimonials": {
     "tag": "Histoires de succès",
-    "title": "Ce que disent nos utilisateurs",
-    "subtitle": "Expériences réelles de nos utilisateurs qui ont trouvé un emploi grâce à PrestaLink",
-    "foundJob": "Emploi trouvé",
-    "story1": {
-      "name": "Amine Bensalem",
-      "role": "Spécialiste en contrôle qualité",
-      "location": "Algérie → Berlin, Allemagne",
-      "text": "Grâce à PrestaLink, j'ai trouvé un emploi de qualité en Allemagne. La plateforme est très conviviale et vous pouvez communiquer directement avec les employeurs. Le processus de téléchargement du CV et de candidature est très facile. Je travaille maintenant à Berlin et je suis très heureux !",
-      "job": "Ingénieur senior en contrôle qualité"
-    },
-    "story2": {
-      "name": "Fatima Zohra",
-      "role": "Infirmière diplômée",
-      "location": "Algérie → Paris, France",
-      "text": "Je voulais trouver un emploi en France en tant qu'infirmière. PrestaLink a de nombreuses offres d'emploi dans le secteur de la santé et le processus de candidature est très rapide. Les employeurs répondent rapidement. Je travaille maintenant dans un hôpital à Paris !",
-      "job": "Infirmière en soins intensifs"
-    },
-    "story3": {
-      "name": "Karim Benali",
-      "role": "Ingénieur logiciel",
-      "location": "Algérie → Amsterdam, Pays-Bas",
-      "text": "Je voulais faire carrière en Europe en tant qu'ingénieur logiciel. PrestaLink a de nombreuses offres d'emploi d'entreprises technologiques. Ma candidature a été acceptée et je travaille maintenant à Amsterdam. La plateforme est vraiment professionnelle !",
-      "job": "Développeur Full-Stack"
-    },
+    "title": "Ce que disent nos candidats",
+    "subtitle": "De vraies histoires de personnes qui ont trouvé leur emploi parfait grâce à Prestalink.",
     "item1": {
-      "name": "Amine Bensalem",
-      "role": "Spécialiste en contrôle qualité",
-      "text": "Grâce à PrestaLink, j'ai trouvé un emploi de qualité en Allemagne. La plateforme est très conviviale et vous pouvez communiquer directement avec les employeurs. Le processus de téléchargement de CV et de candidature est très facile. Je travaille maintenant à Berlin et je suis très heureux !"
+      "name": "Leyla K.",
+      "role": "Spécialiste CNC, Munich",
+      "text": "Prestalink a rendu ma relocalisation en Allemagne si fluide. L'équipe de soutien a aidé avec tout, des documents à la recherche d'un appartement."
     },
     "item2": {
-      "name": "Fatima Zohra",
-      "role": "Infirmière diplômée",
-      "text": "Je voulais trouver un emploi en France en tant qu'infirmière. PrestaLink a de nombreuses offres d'emploi dans le secteur de la santé et le processus de candidature est très rapide. Les employeurs répondent rapidement. Je travaille maintenant dans un hôpital à Paris !"
+      "name": "Omar S.",
+      "role": "Infirmier, Hambourg",
+      "text": "En tant que professionnel de la santé, j'avais besoin d'opportunités vérifiées. Prestalink m'a connecté avec des employeurs de confiance et je travaille maintenant dans mon emploi de rêve."
     },
     "item3": {
-      "name": "Karim Benali",
-      "role": "Ingénieur logiciel",
-      "text": "Je voulais faire carrière en Europe en tant qu'ingénieur logiciel. PrestaLink a de nombreuses offres d'emploi d'entreprises technologiques. Ma candidature a été acceptée et je travaille maintenant à Amsterdam. La plateforme est vraiment professionnelle !"
+      "name": "Sara M.",
+      "role": "Chef, Paris",
+      "text": "La plateforme multilingue a facilité la communication. En 2 mois, j'ai eu plusieurs offres et j'ai choisi la meilleure pour ma carrière."
     }
   },
   "cta": {
@@ -463,14 +394,13 @@
     "testimonialsSubtitle": "Vraies histoires de citoyens algériens"
   },
   "contact": {
-    "title": "Contactez l'équipe",
+    "title": "Contactez l’équipe",
     "subtitle": "Basés à Bruxelles avec des hubs à Istanbul et Casablanca.",
     "name": "Nom complet",
     "email": "E-mail",
     "message": "Votre message",
     "submit": "Envoyer",
-    "success": "Merci ! Nous revenons vers vous sous 24h.",
-    "whatsappMessage": "Bonjour, je souhaite obtenir des informations sur PrestaLink."
+    "success": "Merci ! Nous revenons vers vous sous 24h."
   },
   "auth": {
     "loginTitle": "Bienvenue",
@@ -499,12 +429,6 @@
     "invalidCredentials": "E-mail ou mot de passe invalide. Veuillez r\u00e9essayer.",
     "forbidden": "Vous n'avez pas la permission d'acc\u00e9der \u00e0 ce r\u00f4le.",    "registerPrompt": "Pas encore de compte ?",
     "loginPrompt": "Vous avez déjà un compte ?",
-    "rememberMe": "Se souvenir de moi",
-    "or": "ou",
-    "googleSignIn": "Continuer avec Google",
-    "googleError": "Une erreur s'est produite lors de la connexion avec Google.",
-    "googleRegisterError": "Une erreur s'est produite lors de l'inscription avec Google.",
-    "locale": "fr",
     "roles": {
       "user": {
         "title": "Chercheur d'emploi (Candidat)",
@@ -516,11 +440,7 @@
       },
       "admin": {
         "title": "Administrateur (Admin)",
-        "description": "Contrôlez les utilisateurs et les employeurs, gérez les candidatures et surveillez les activités de la plateforme."
-      },
-      "superadmin": {
-        "title": "Administrateur Système",
-        "description": "Contrôlez toute l'application, gérez les paramètres système et disposez d'une autorité complète sur la plateforme."
+        "description": "Gérez le système, surveillez les utilisateurs et contrôlez les paramètres de la plateforme."
       }
     }
   },
@@ -528,23 +448,9 @@
     "welcome": "Bienvenue",
     "welcomeUser": "Bienvenue {name}",
     "subtitle": "Suivez vos documents, candidatures et messages recruteur.",
-    "profileCompletion": "Complétion du Profil",
     "cvStatus": "Statut CV",
     "cvUploaded": "CV Téléchargé",
     "cvNotUploaded": "CV Non Téléchargé",
-    "viewCv": "Voir le CV",
-    "activeApplications": "Candidatures actives",
-    "noApplicationsYet": "Aucune candidature pour le moment",
-    "suitableJobs": "Emplois adaptés pour vous",
-    "unreadNotification": "Notification non lue",
-    "allNotificationsRead": "Toutes les notifications sont lues",
-    "updateProfileDesc": "Mettez à jour votre profil",
-    "viewJobsDesc": "Voir les offres d'emploi",
-    "badges": {
-      "cvUploaded": "CV Téléchargé",
-      "applications": "{{count}} Candidatures",
-      "profileCompleted": "Profil Complété"
-    },
     "totalApplications": "Total des Candidatures",
     "newJobMatches": "Nouvelles Correspondances",
     "quickActions": "Actions Rapides",
@@ -593,6 +499,12 @@
     "applicants": "Candidats",
     "selectJob": "Choisir une offre",
     "noApplicants": "Aucun candidat pour le moment."
+  },
+  "relativeTime": {
+    "justNow": "À l'instant",
+    "minutesAgo": "Il y a {{minutes}} min",
+    "hoursAgo": "Il y a {{hours}} h",
+    "daysAgo": "Il y a {{days}} j"
   },
   "employerNav": {
     "dashboard": "Tableau de bord",
@@ -756,33 +668,19 @@
   "userNav": {
     "dashboard": "Tableau de bord",
     "profile": "Mon Profil",
-    "cv": "Gestion CV",
     "jobListings": "Offres d'emploi",
-    "favorites": "Emplois Favoris",
     "applications": "Mes Candidatures",
-    "messages": "Messages",
-    "statistics": "Statistiques",
-    "notifications": "Notifications",
-    "settings": "Paramètres",
-    "more": "Plus"
+    "notifications": "Notifications"
   },
   "userProfile": {
     "title": "Modifier le Profil",
     "subtitle": "Mettez à jour vos informations personnelles",
     "incompleteWarning": "Votre profil semble incomplet. Veuillez remplir toutes les informations.",
-    "profileCompletion": "Complétion du Profil",
-    "profileIncomplete": "Profil Incomplet",
-    "personalInformation": "Informations Personnelles",
-    "careerInformation": "Informations de Carrière",
-    "filesAndDocuments": "Fichiers et Documents",
-    "city": "Ville",
-    "characters": "caractères",
     "fields": {
       "fullName": "Nom Complet",
       "email": "E-mail",
       "phone": "Téléphone",
       "country": "Pays",
-      "city": "Ville",
       "languages": "Langues",
       "experienceLevel": "Niveau d'expérience",
       "bio": "Biographie",
@@ -792,34 +690,7 @@
     },
     "placeholders": {
       "country": "Ex: Turquie, Allemagne...",
-      "city": "Votre ville",
-      "bio": "Écrivez une courte biographie sur vous...",
-      "name": "Votre nom et prénom",
-      "email": "email@example.com",
-      "phone": "+213 555 55 56 67"
-    },
-    "experienceLevels": {
-      "entry": "Niveau Débutant (0-2 ans)",
-      "mid": "Niveau Intermédiaire (3-5 ans)",
-      "senior": "Niveau Senior (5+ ans)"
-    },
-    "upload": {
-      "photo": "Télécharger une Photo",
-      "photoHint": "PNG, JPG (Max 5MB)",
-      "cv": "Télécharger un Fichier CV",
-      "cvHint": "Format PDF (Max 10MB)",
-      "certificates": "Télécharger des Fichiers de Certificats",
-      "certificatesHint": "PDF, JPG, PNG (Max 5MB par fichier)",
-      "certificatesSelected": "certificats sélectionnés"
-    },
-    "languageNames": {
-      "TR": "Turc",
-      "EN": "Anglais",
-      "FR": "Français",
-      "DE": "Allemand",
-      "AR": "Arabe",
-      "ES": "Espagnol",
-      "IT": "Italien"
+      "bio": "Écrivez une courte biographie sur vous..."
     },
     "save": "Enregistrer",
     "cancel": "Annuler",
@@ -846,7 +717,15 @@
     "viewDetails": "Voir les détails",
     "noJobs": "Aucune offre d'emploi pour le moment",
     "noMatches": "Aucun emploi trouvé correspondant à vos critères",
-    "all": "Tous"
+    "all": "Tous",
+    "clear": "Effacer"
+  },
+  "userCv": {
+    "title": "Mon CV / Curriculum Vitae",
+    "subtitle": "Format Europass",
+    "download": "Télécharger le CV",
+    "notFound": "Contenu du CV introuvable.",
+    "uploadHint": "Veuillez télécharger votre CV depuis votre page profil."
   },
   "jobDetail": {
     "title": "Détails de l'emploi",
@@ -858,9 +737,9 @@
     "company": "Informations sur l'entreprise",
     "applyNow": "Postuler maintenant",
     "backToJobs": "Retour aux offres",
+    "notFound": "Offre introuvable",
     "cvRequired": "Vous devez télécharger votre CV avant de postuler.",
     "uploadCv": "Télécharger CV",
-    "cvFetchError": "Le fichier CV n'a pas pu être chargé. Veuillez vérifier votre CV depuis votre page de profil.",
     "applicationSuccess": "Votre candidature a été soumise avec succès!",
     "companyInfoComingSoon": "Informations sur l'entreprise à venir"
   },
@@ -872,12 +751,6 @@
     "delete": "Supprimer",
     "edit": "Modifier",
     "back": "Retour"
-  },
-  "pwa": {
-    "updateAvailable": "Nouvelle mise à jour disponible !",
-    "updateDescription": "Actualisez pour mettre à jour l'application.",
-    "update": "Mettre à jour",
-    "updating": "Mise à jour..."
   },
   "userApplications": {
     "title": "Mes Candidatures",
@@ -900,247 +773,6 @@
     "markAllRead": "Tout marquer comme lu",
     "noNotifications": "Aucune nouvelle notification",
     "unread": "non lues"
-  },
-  "userMessages": {
-    "title": "Messages",
-    "subtitle": "Communiquez avec les employeurs et les spécialistes du recrutement",
-    "emptyTitle": "Aucun message pour le moment",
-    "emptyDescription": "Les messages des employeurs apparaîtront ici",
-    "new": "Nouveau",
-    "sampleMessage1": "Bonjour, nous avons examiné votre candidature. Êtes-vous disponible pour un entretien?",
-    "sampleMessage2": "Nous avons aimé votre CV. Pourriez-vous partager des informations supplémentaires?"
-  },
-  "userFavorites": {
-    "title": "Emplois Favoris",
-    "subtitle": "Consultez vos offres d'emploi enregistrées ici",
-    "emptyTitle": "Aucun emploi favori pour le moment",
-    "emptyDescription": "Ajoutez des offres d'emploi aux favoris pour les consulter ici",
-    "goToJobs": "Aller aux Offres d'Emploi",
-    "remove": "Retirer des favoris"
-  },
-  "userStatistics": {
-    "title": "Mes Statistiques",
-    "subtitle": "Résumé de votre parcours professionnel et métriques de performance",
-    "profileCompletion": "Complétion du Profil",
-    "completionRate": "Taux de Complétion",
-    "totalApplications": "Total des Candidatures",
-    "applicationsSent": "Candidatures envoyées",
-    "totalJobs": "Emplois Disponibles",
-    "activeJobs": "Offres d'emploi actives",
-    "applicationStatuses": "Statuts des Candidatures",
-    "pending": "En attente",
-    "reviewing": "En examen",
-    "interview": "Entretien",
-    "accepted": "Accepté",
-    "rejected": "Rejeté",
-    "successRate": "Taux de Réussite",
-    "acceptedApplications": "Candidatures acceptées"
-  },
-  "userSettings": {
-    "title": "Paramètres",
-    "subtitle": "Gérez vos paramètres de compte et d'application",
-    "notifications": {
-      "title": "Paramètres de Notification",
-      "email": {
-        "label": "Notifications par E-mail",
-        "description": "Recevoir des e-mails pour les nouvelles offres d'emploi et mises à jour de candidatures"
-      },
-      "push": {
-        "label": "Notifications Push",
-        "description": "Recevoir des notifications du navigateur"
-      },
-      "sms": {
-        "label": "Notifications SMS",
-        "description": "Recevoir des SMS pour les mises à jour importantes"
-      }
-    },
-    "privacy": {
-      "title": "Paramètres de Confidentialité",
-      "profileVisibility": {
-        "label": "Visibilité du Profil",
-        "description": "Permettre aux employeurs de voir votre profil"
-      },
-      "cvVisibility": {
-        "label": "Visibilité du CV",
-        "description": "Permettre aux employeurs de télécharger votre CV"
-      }
-    },
-    "account": {
-      "title": "Actions du Compte",
-      "changePassword": "Changer le Mot de Passe",
-      "deleteAccount": "Supprimer le Compte",
-      "currentPassword": "Mot de passe actuel",
-      "newPassword": "Nouveau mot de passe",
-      "confirmPassword": "Confirmer le nouveau mot de passe",
-      "passwordChanged": "Mot de passe changé avec succès",
-      "passwordError": "Échec du changement de mot de passe",
-      "passwordMismatch": "Les nouveaux mots de passe ne correspondent pas",
-      "passwordTooShort": "Le mot de passe doit contenir au moins 6 caractères",
-      "invalidCurrentPassword": "Le mot de passe actuel est incorrect",
-      "googleAccountNote": "Le changement de mot de passe n'est pas disponible pour les comptes authentifiés via Google"
-    }
-  },
-  "relativeTime": {
-    "justNow": "À l’instant",
-    "minutesAgo": "il y a {{minutes}} min",
-    "hoursAgo": "il y a {{hours}} h",
-    "daysAgo": "il y a {{days}} j"
-  },
-  "employerNav": {
-    "dashboard": "Tableau de bord",
-    "profile": "Profil entreprise",
-    "createJob": "Créer une offre",
-    "jobListings": "Offres",
-    "notifications": "Notifications"
-  },
-  "employerDashboard": {
-    "welcome": "Bienvenue, {{name}}",
-    "subtitle": "Gérez vos offres, suivez les candidats et accélérez le recrutement.",
-    "profileCompletion": "Complétion du profil",
-    "totalActiveJobs": "Offres actives",
-    "totalApplicants": "Total candidats",
-    "unreadNotifications": "Notifications non lues",
-    "countriesHiring": "Pays de recrutement",
-    "quickActions": "Actions rapides",
-    "createNewJob": "Créer une nouvelle offre",
-    "createJobDesc": "Publier un nouveau poste",
-    "viewJobListings": "Voir les offres",
-    "completeProfile": "Compléter le profil",
-    "completeProfileDesc": "Mettre à jour les informations de l’entreprise",
-    "recentApplicants": "Candidatures récentes",
-    "viewAll": "Voir tout",
-    "unknownApplicant": "Candidat",
-    "recentJobs": "Offres récentes",
-    "applicantsCount": "{{count}} candidatures"
-  },
-  "employerJobs": {
-    "title": "Mes offres",
-    "subtitle": "Gérez vos offres publiées",
-    "loading": "Chargement...",
-    "noJobs": "Vous n'avez pas encore créé d'offre",
-    "confirmDelete": "Êtes-vous sûr de vouloir supprimer cette offre ?",
-    "error": "Une erreur est survenue lors du traitement de l'offre",
-    "totalApplicants": "candidats",
-    "viewApplicants": "Voir les candidats",
-    "edit": "Modifier",
-    "delete": "Supprimer",
-    "status": {
-      "active": "Active",
-      "closed": "Fermée"
-    }
-  },
-  "employerJobDetail": {
-    "backToJobs": "Retour aux offres",
-    "notFound": "Offre introuvable",
-    "applicants": "Candidats",
-    "noApplicants": "Aucune candidature pour le moment",
-    "unknownApplicant": "Candidat",
-    "applicantInfo": {
-      "country": "Pays",
-      "experience": "Expérience",
-      "languages": "Langues",
-      "downloadCv": "Télécharger le CV",
-      "viewProfile": "Voir le profil"
-    },
-    "status": {
-      "pending": "En attente",
-      "reviewing": "En examen",
-      "viewed": "Vu",
-      "interview": "Entretien",
-      "accepted": "Accepté",
-      "rejected": "Rejeté"
-    }
-  },
-  "applicantReview": {
-    "title": "Revue du candidat",
-    "profile": "Profil",
-    "files": "Fichiers",
-    "backToJob": "Retour à l'offre",
-    "loading": "Chargement...",
-    "notFound": "Candidature introuvable",
-    "downloadCv": "Télécharger le CV",
-    "downloadCertificates": "Télécharger les certificats",
-    "changeStatus": "Mettre à jour le statut",
-    "internalNotes": "Notes internes",
-    "notesPlaceholder": "Ajouter des notes...",
-    "saving": "Enregistrement...",
-    "saveNotes": "Enregistrer les notes",
-    "statusUpdated": "Mis à jour",
-    "fields": {
-      "fullName": "Nom complet",
-      "email": "E-mail",
-      "phone": "Téléphone",
-      "country": "Pays",
-      "languages": "Langues",
-      "experience": "Expérience"
-    },
-    "errors": {
-      "updateStatus": "Échec de la mise à jour du statut",
-      "saveNotes": "Échec de l'enregistrement des notes"
-    },
-    "status": {
-      "pending": "En attente",
-      "viewed": "Vu",
-      "interview": "Entretien",
-      "accepted": "Accepté",
-      "rejected": "Rejeté"
-    }
-  },
-  "employerNotifications": {
-    "title": "Notifications",
-    "subtitle": "Consultez vos notifications",
-    "markAllRead": "Tout marquer comme lu",
-    "unreadBanner": "{{count}} notifications non lues",
-    "noNotifications": "Aucune nouvelle notification"
-  },
-  "employerProfile": {
-    "title": "Profil entreprise",
-    "subtitle": "Modifier les informations de l’entreprise",
-    "incompleteWarning": "Complétez votre profil pour gagner la confiance des candidats.",
-    "saved": "Profil enregistré",
-    "error": "Échec de l'enregistrement du profil",
-    "save": "Enregistrer",
-    "fields": {
-      "companyName": "Nom de l’entreprise",
-      "companyDescription": "Description de l’entreprise",
-      "industry": "Secteur",
-      "country": "Pays",
-      "city": "Ville",
-      "contactEmail": "E-mail de contact",
-      "contactPhone": "Téléphone de contact",
-      "companyLogo": "Logo de l’entreprise"
-    }
-  },
-  "createJob": {
-    "title": "Nouvelle offre",
-    "subtitle": "Saisissez les détails et publiez",
-    "success": "Offre publiée",
-    "error": "Échec de la publication",
-    "publishing": "Publication...",
-    "published": "Publiée",
-    "publish": "Publier",
-    "cancel": "Annuler",
-    "fields": {
-      "jobTitle": "Intitulé du poste",
-      "jobDescription": "Description du poste",
-      "location": "Localisation",
-      "salaryRange": "Fourchette salariale",
-      "requiredExperience": "Expérience requise",
-      "requiredLanguages": "Langues requises",
-      "workType": "Type de contrat"
-    },
-    "placeholders": {
-      "jobDescription": "Décrivez le poste...",
-      "location": "Ville, pays...",
-      "salaryRange": "ex. 2000€-3000€",
-      "requiredExperience": "ex. 2+ ans",
-      "requiredLanguages": "ex. Anglais, Français"
-    },
-    "workTypes": {
-      "fullTime": "Temps plein",
-      "partTime": "Temps partiel",
-      "seasonal": "Saisonnier"
-    }
   }
 }
 

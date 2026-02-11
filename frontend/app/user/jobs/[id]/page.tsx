@@ -163,7 +163,7 @@ const JobDetail = () => {
             </div>
           ) : !job ? (
             <div className="text-center py-12 bg-white dark:bg-slate-800 rounded-xl shadow-md border border-slate-200 dark:border-slate-700">
-              <p className="text-slate-600 dark:text-slate-400">İş bulunamadı</p>
+              <p className="text-slate-600 dark:text-slate-400">{t('jobDetail.notFound')}</p>
             </div>
           ) : (
             <>

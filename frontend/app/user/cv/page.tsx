@@ -4,64 +4,31 @@ import { useEffect, useState } from 'react';
 import { useAuthStore } from '@/store/useAuthStore';
 import UserLayout from '@/components/layout/UserLayout';
 import ProtectedPage from '@/components/layout/ProtectedPage';
-import { fetchProfile } from '@/services/api';
+import { useLanguage } from '@/components/providers/LanguageProvider';
 import { Download, FileText } from 'lucide-react';
+import Link from 'next/link';
 
 const CVPage = () => {
-  const { user, setUser } = useAuthStore();
-  const [cvContent, setCvContent] = useState('');
-  const [loading, setLoading] = useState(true);
+  const { user } = useAuthStore();
+  const { t } = useLanguage();
+  const [cvContent, setCvContent] = useState<string | null>(null);
 
   useEffect(() => {
-    const loadCV = async () => {
-      if (!user) {
-        setLoading(false);
-        return;
-      }
+    const content = (user as { cvContent?: string } | null)?.cvContent?.trim();
+    setCvContent(content || null);
+  }, [user]);
 
-      try {
-        // Backend'den güncel profil bilgilerini çek (cvContent dahil)
-        const response = await fetchProfile();
-        const updatedUser = response.data.user;
-        
-        // Auth store'u güncelle
-        if (updatedUser) {
-          setUser(updatedUser);
-        }
-
-        // CV içeriğini ayarla
-        if ((updatedUser as any)?.cvContent) {
-          setCvContent((updatedUser as any).cvContent);
-        } else if ((user as any)?.cvContent) {
-          setCvContent((user as any).cvContent);
-        } else {
-          setCvContent('CV içeriği bulunamadı. Lütfen profil sayfanızdan CV\'nizi yükleyin.');
-        }
-      } catch (error) {
-        console.error('CV yüklenirken hata:', error);
-        // Fallback: user store'dan cvContent'i al
-        if ((user as any)?.cvContent) {
-          setCvContent((user as any).cvContent);
-        } else {
-          setCvContent('CV içeriği yüklenemedi. Lütfen tekrar deneyin.');
-        }
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadCV();
-  }, [user, setUser]);
+  const displayContent = cvContent ?? '';
+  const hasContent = !!cvContent;
 
   const handleDownload = () => {
-    if (!cvContent || !user) return;
-    
-    const blob = new Blob([cvContent], { type: 'text/plain' });
+    if (!displayContent) return;
+    const blob = new Blob([displayContent], { type: 'text/plain' });
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    const fileName = user.name ? `${user.name.replace(/\s+/g, '_')}_CV.txt` : 'CV.txt';
-    a.download = fileName;
+    const safeName = (user?.name || 'CV').replace(/\s+/g, '_').replace(/[^a-zA-Z0-9_-]/g, '');
+    a.download = `${safeName}_CV.txt`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -73,38 +40,47 @@ const CVPage = () => {
       <UserLayout>
         <div className="page-container py-8 px-6">
           <div className="max-w-4xl mx-auto">
-            {/* Header */}
-            <div className="flex items-center justify-between mb-6">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
               <div>
                 <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-                  My CV / Curriculum Vitae
+                  {t('userCv.title')}
                 </h1>
                 <p className="text-gray-600 dark:text-gray-400">
-                  {user?.name} - Europass Format
+                  {user?.name} – {t('userCv.subtitle')}
                 </p>
               </div>
-              <button
-                onClick={handleDownload}
-                className="flex items-center gap-2 px-6 py-3 bg-brandBlue text-white rounded-lg hover:bg-brandBlue/90 transition-colors"
-              >
-                <Download className="w-5 h-5" />
-                Download CV
-              </button>
+              {hasContent && (
+                <button
+                  onClick={handleDownload}
+                  className="flex items-center gap-2 px-6 py-3 bg-brandBlue text-white rounded-lg hover:bg-brandBlue/90 transition-colors w-fit"
+                >
+                  <Download className="w-5 h-5" />
+                  {t('userCv.download')}
+                </button>
+              )}
             </div>
 
-            {/* CV Content */}
-            {loading ? (
-              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 p-8">
-                <div className="text-center py-12">
-                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brandBlue mx-auto mb-4"></div>
-                  <p className="text-gray-600 dark:text-gray-400">CV yükleniyor...</p>
-                </div>
+            {!hasContent ? (
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden p-8 text-center">
+                <FileText className="w-16 h-16 mx-auto text-gray-400 dark:text-gray-500 mb-4" />
+                <p className="text-gray-700 dark:text-gray-300 mb-2">
+                  {t('userCv.notFound')}
+                </p>
+                <p className="text-gray-600 dark:text-gray-400 text-sm mb-6">
+                  {t('userCv.uploadHint')}
+                </p>
+                <Link
+                  href="/user/profile"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-brandBlue text-white rounded-lg hover:bg-brandBlue/90 transition-colors"
+                >
+                  {t('userProfile.title')}
+                </Link>
               </div>
             ) : (
               <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
                 <div className="p-8">
                   <pre className="whitespace-pre-wrap font-mono text-sm text-gray-800 dark:text-gray-200 leading-relaxed">
-                    {cvContent}
+                    {displayContent}
                   </pre>
                 </div>
               </div>

@@ -52,19 +52,14 @@ const StatisticsPage = () => {
           }
         });
 
-        // Calculate profile completion
-        const profileFields = [
-          user.name,
-          user.email,
-          user.phone,
-          (user as any).country,
-          (user as any).bio,
-          (user as any).experienceLevel,
-          user.languages?.length > 0,
-          user.profilePhoto,
-        ];
-        const completedFields = profileFields.filter(Boolean).length;
-        const profileCompletion = Math.round((completedFields / profileFields.length) * 100);
+        // Profile completion: same 8 fields as dashboard for consistency
+        const fields = ['name', 'bio', 'country', 'city', 'languages', 'experienceLevel', 'profilePhoto', 'cvUrl'];
+        let completed = 0;
+        fields.forEach((field) => {
+          const val = (user as any)[field];
+          if (val && (Array.isArray(val) ? val.length > 0 : true)) completed++;
+        });
+        const profileCompletion = Math.round((completed / fields.length) * 100);
 
         setStats({
           totalApplications: applications.length,
@@ -240,6 +235,10 @@ const StatisticsPage = () => {
 };
 
 export default StatisticsPage;
+
+
+
+
 
 
 

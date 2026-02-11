@@ -9,7 +9,7 @@ import type { Notification } from '@/services/types';
 import { Bell, CheckCircle2 } from 'lucide-react';
 
 const UserNotifications = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [loading, setLoading] = useState(true);
   const [markingRead, setMarkingRead] = useState(false);

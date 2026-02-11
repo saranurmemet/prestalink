@@ -314,19 +314,19 @@ const SettingsPage = () => {
             <div className="flex items-center gap-3 mb-4">
               <Smartphone className="w-5 h-5 text-brandBlue" />
               <h2 className="text-xl font-semibold text-slate-800 dark:text-slate-200">
-                Push Bildirimleri (Canlı)
+                {t('userSettings.notifications.pushLive.title')}
               </h2>
             </div>
 
             {!pushSupported ? (
               <p className="text-sm text-slate-500 dark:text-slate-400">
-                Bu cihaz/tarayıcı push bildirimlerini desteklemiyor.
+                {t('userSettings.notifications.pushLive.notSupported')}
               </p>
             ) : (
               <div className="space-y-3">
                 <div className="text-sm text-slate-600 dark:text-slate-400">
-                  <p>İzin: <span className="font-semibold">{pushStatus.permission}</span></p>
-                  <p>Abonelik: <span className="font-semibold">{pushStatus.subscribed ? 'var' : 'yok'}</span></p>
+                  <p>{t('userSettings.notifications.pushLive.permission')}: <span className="font-semibold">{pushStatus.permission}</span></p>
+                  <p>{t('userSettings.notifications.pushLive.subscription')}: <span className="font-semibold">{pushStatus.subscribed ? t('userSettings.notifications.pushLive.subscribedYes') : t('userSettings.notifications.pushLive.subscribedNo')}</span></p>
                   {pushStatus.error && (
                     <p className="text-red-600 dark:text-red-400 mt-1">{pushStatus.error}</p>
                   )}
@@ -339,7 +339,7 @@ const SettingsPage = () => {
                       disabled={pushStatus.loading}
                       className="px-4 py-2 rounded-lg bg-brandBlue text-white text-sm font-semibold hover:bg-brandBlue/90 disabled:opacity-50"
                     >
-                      Bildirimleri Aç
+                      {t('userSettings.notifications.pushLive.enableBtn')}
                     </button>
                   ) : (
                     <button
@@ -347,7 +347,7 @@ const SettingsPage = () => {
                       disabled={pushStatus.loading}
                       className="px-4 py-2 rounded-lg bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 text-sm font-semibold hover:bg-slate-300 dark:hover:bg-slate-600 disabled:opacity-50"
                     >
-                      Bildirimleri Kapat
+                      {t('userSettings.notifications.pushLive.disableBtn')}
                     </button>
                   )}
                   <button
@@ -355,18 +355,18 @@ const SettingsPage = () => {
                     disabled={pushStatus.loading || !pushStatus.subscribed}
                     className="px-4 py-2 rounded-lg bg-brandOrange text-white text-sm font-semibold hover:bg-brandOrange/90 disabled:opacity-50"
                   >
-                    Test Bildirimi Gönder
+                    {t('userSettings.notifications.pushLive.testBtn')}
                   </button>
                   <button
                     onClick={refreshPushStatus}
                     className="px-4 py-2 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-sm font-medium hover:bg-slate-200 dark:hover:bg-slate-600 disabled:opacity-50"
                   >
-                    Yenile
+                    {t('userSettings.notifications.pushLive.refreshBtn')}
                   </button>
                 </div>
 
                 <p className="text-xs text-slate-500 dark:text-slate-400">
-                  Not: iPhone’da push için uygulamanın “Ana ekrana ekli” (PWA installed) olması gerekir.
+                  {t('userSettings.notifications.pushLive.iphoneNote')}
                 </p>
               </div>
             )}

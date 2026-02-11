@@ -181,7 +181,7 @@ const JobListings = () => {
                 }}
                 className="w-full px-4 py-2 bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 rounded-lg hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors"
               >
-                Temizle
+                {t('userJobs.clear')}
               </button>
             </div>
           </div>
