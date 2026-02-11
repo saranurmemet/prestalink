@@ -16,7 +16,7 @@ import type { UserRole } from '@/services/types';
 const RegisterPage = () => {
   const router = useRouter();
   const setAuth = useAuthStore((state) => state.setAuth);
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [selectedRole, setSelectedRole] = useState<UserRole | null>(null);
@@ -288,7 +288,7 @@ const RegisterPage = () => {
                         onSuccess={handleGoogleSuccess}
                         onError={handleGoogleError}
                         useOneTap={false}
-                        locale={t('auth.locale') || 'tr'}
+                        locale={language === 'tr' ? 'tr' : language === 'fr' ? 'fr' : language === 'ar' ? 'ar' : 'en'}
                         theme="outline"
                         size="large"
                         text="signin_with"

@@ -108,7 +108,7 @@ const EmployerNav = () => {
 
           <div className="pt-4 mt-auto border-t border-slate-200 dark:border-slate-800">
             <p className="text-xs text-center text-slate-500 dark:text-slate-400">
-              © 2026 ME&RA®
+              {t('footer.copyright')}
             </p>
           </div>
         </nav>

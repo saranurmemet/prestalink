@@ -9,7 +9,7 @@ const Footer = () => {
   return (
     <footer className="px-4 pb-6 pt-10 animate-fade-in">
       <div className="page-container glass-panel flex flex-col gap-4 rounded-glass px-6 py-6 text-sm text-brandGray dark:text-slate-300 md:flex-row md:items-center md:justify-between">
-        <p className="transition-colors hover:text-brandNavy dark:hover:text-slate-100">© 2026 by ME-RA</p>
+        <p className="transition-colors hover:text-brandNavy dark:hover:text-slate-100">{t('footer.copyright')}</p>
         <div className="flex items-center gap-4">
           <Link href="/about" className="transition-colors hover:text-brandBlue dark:hover:text-blue-400 hover:underline dark:text-slate-300">
             {t('nav.about')}

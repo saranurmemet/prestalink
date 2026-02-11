@@ -2,8 +2,10 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { useLanguage } from '@/components/providers/LanguageProvider';
 
 const SplashScreen = () => {
+  const { t } = useLanguage();
   const [isVisible, setIsVisible] = useState(true);
   const [isMounted, setIsMounted] = useState(false); // Start as false to prevent hydration mismatch
 
@@ -81,9 +83,9 @@ const SplashScreen = () => {
         </div>
       </div>
 
-      {/* "by ME-RA 2026" text in bottom corner */}
+      {/* Footer copyright in bottom corner */}
       <div className="absolute bottom-6 right-6 text-white/70 text-sm font-medium animate-fade-in" style={{ animationDelay: '0.3s' }}>
-        by ME-RA 2026
+        {t('footer.copyright')}
       </div>
     </div>
   );

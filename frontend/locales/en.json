@@ -10,7 +10,8 @@
     "logout": "Logout"
   },
   "footer": {
-    "rights": "All rights reserved."
+    "rights": "All rights reserved.",
+    "copyright": "© 2026 ME&RA®"
   },
   "heroPreview": {
     "title": "Live Hiring Dashboard",

@@ -144,7 +144,7 @@ const UserNav = () => {
           
           <div className="pt-4 mt-auto border-t border-slate-200 dark:border-slate-800">
             <p className="text-xs text-center text-slate-500 dark:text-slate-400">
-              © 2026 ME&RA®
+              {t('footer.copyright')}
             </p>
           </div>
         </nav>
@@ -206,7 +206,7 @@ const UserNav = () => {
         {/* ME&RA Footer on Mobile */}
         <div className="pt-2 pb-1 border-t border-slate-200 dark:border-slate-800">
           <p className="text-[10px] text-center text-slate-500 dark:text-slate-400">
-            © 2026 ME&RA®
+            {t('footer.copyright')}
           </p>
         </div>
       </nav>
