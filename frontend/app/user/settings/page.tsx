@@ -186,7 +186,7 @@ const SettingsPage = () => {
     try {
       await api.post('/notifications/push/test-me', {
         title: 'PrestaLink',
-        body: 'Test: Uygulama kapalıyken de bu bildirim gelmeli.',
+        body: t('userSettings.notifications.pushLive.testBody'),
         url: '/user/notifications',
       });
       setPushStatus((s) => ({ ...s, loading: false }));
@@ -521,7 +521,7 @@ const SettingsPage = () => {
                           disabled={passwordLoading}
                           className="flex-1 px-4 py-2 bg-brandBlue text-white rounded-lg hover:bg-brandBlue/90 disabled:opacity-50 font-semibold"
                         >
-                          {passwordLoading ? 'Değiştiriliyor...' : t('userSettings.account.changePassword')}
+                          {passwordLoading ? t('userSettings.account.changing') : t('userSettings.account.changePassword')}
                         </button>
                         <button
                           type="button"
@@ -532,7 +532,7 @@ const SettingsPage = () => {
                           }}
                           className="px-4 py-2 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-300 dark:hover:bg-slate-600"
                         >
-                          İptal
+                          {t('userSettings.cancel')}
                         </button>
                       </div>
                     </form>

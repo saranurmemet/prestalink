@@ -127,7 +127,7 @@ const FavoritesPage = () => {
                       href={`/user/jobs/${job._id}`}
                       className="px-4 py-2 bg-brandBlue text-white rounded-lg hover:bg-brandBlue/90 transition-colors text-center"
                     >
-                      Detaylar
+                      {t('userFavorites.details')}
                     </a>
                   </div>
                 </div>
@@ -143,6 +143,10 @@ const FavoritesPage = () => {
 };
 
 export default FavoritesPage;
+
+
+
+
 
 
 

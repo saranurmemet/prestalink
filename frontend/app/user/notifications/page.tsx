@@ -43,18 +43,21 @@ const UserNotifications = () => {
 
   const unreadCount = notifications.filter((n) => !n.read).length;
 
+  const localeMap: Record<string, string> = { en: 'en-GB', tr: 'tr-TR', fr: 'fr-FR', ar: 'ar-AR' };
+  const locale = localeMap[language] || 'en-GB';
+
   const formatDate = (dateString?: string) => {
     if (!dateString) return 'N/A';
     const date = new Date(dateString);
     const now = new Date();
     const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000);
 
-    if (diffInSeconds < 60) return 'Az önce';
-    if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)} dakika önce`;
-    if (diffInSeconds < 86400) return `${Math.floor(diffInSeconds / 3600)} saat önce`;
-    if (diffInSeconds < 604800) return `${Math.floor(diffInSeconds / 86400)} gün önce`;
+    if (diffInSeconds < 60) return t('relativeTime.justNow');
+    if (diffInSeconds < 3600) return t('relativeTime.minutesAgo').replace('{{minutes}}', String(Math.floor(diffInSeconds / 60)));
+    if (diffInSeconds < 86400) return t('relativeTime.hoursAgo').replace('{{hours}}', String(Math.floor(diffInSeconds / 3600)));
+    if (diffInSeconds < 604800) return t('relativeTime.daysAgo').replace('{{days}}', String(Math.floor(diffInSeconds / 86400)));
 
-    return date.toLocaleDateString('tr-TR', {
+    return date.toLocaleDateString(locale, {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
@@ -86,7 +89,7 @@ const UserNotifications = () => {
         {unreadCount > 0 && (
           <div className="mb-4 px-4 py-2 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
             <p className="text-sm text-blue-800 dark:text-blue-200">
-              {unreadCount} {t('userNotifications.unread')} bildirim
+              {t('userNotifications.unreadBanner').replace('{{count}}', String(unreadCount))}
             </p>
           </div>
         )}

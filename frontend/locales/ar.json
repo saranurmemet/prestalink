@@ -529,6 +529,7 @@
   "userDashboard": {
     "welcome": "مرحبًا",
     "welcomeUser": "مرحبًا {name}",
+    "guest": "مستخدم",
     "subtitle": "ارفع مستنداتك وتابع طلباتك وتواصل مع المجندين.",
     "profileCompletion": "اكتمال الملف الشخصي",
     "cvStatus": "حالة السيرة الذاتية",
@@ -873,7 +874,10 @@
     "uploadCv": "رفع السيرة الذاتية",
     "cvFetchError": "تعذر تحميل ملف السيرة الذاتية. يرجى التحقق من سيرتك الذاتية من صفحة ملفك الشخصي.",
     "applicationSuccess": "تم إرسال طلبك بنجاح!",
-    "companyInfoComingSoon": "معلومات الشركة قريباً"
+    "companyInfoComingSoon": "معلومات الشركة قريباً",
+    "sending": "جاري الإرسال...",
+    "applied": "تم التقديم!",
+    "applyError": "فشل إرسال الطلب"
   },
   "common": {
     "loading": "جاري التحميل...",
@@ -903,14 +907,17 @@
     "appliedOn": "تم التقديم في",
     "noApplications": "لم تقم بتقديم أي طلبات بعد",
     "jobTitle": "منصب الوظيفة",
-    "company": "الشركة"
+    "company": "الشركة",
+    "jobTitleFallback": "منصب الوظيفة",
+    "noLocation": "لا يوجد موقع"
   },
   "userNotifications": {
     "title": "الإشعارات",
     "subtitle": "عرض جميع إشعاراتك هنا",
     "markAllRead": "تعيين الكل كمقروء",
     "noNotifications": "لا توجد إشعارات جديدة",
-    "unread": "غير مقروء"
+    "unread": "غير مقروء",
+    "unreadBanner": "{{count}} إشعار غير مقروء"
   },
   "userMessages": {
     "title": "الرسائل",
@@ -927,7 +934,8 @@
     "emptyTitle": "لا توجد وظائف مفضلة بعد",
     "emptyDescription": "أضف قوائم الوظائف إلى المفضلة لعرضها هنا",
     "goToJobs": "الذهاب إلى قوائم الوظائف",
-    "remove": "إزالة من المفضلة"
+    "remove": "إزالة من المفضلة",
+    "details": "التفاصيل"
   },
   "userStatistics": {
     "title": "إحصائياتي",
@@ -971,7 +979,8 @@
         "testBtn": "إرسال إشعار تجريبي",
         "refreshBtn": "تحديث",
         "iphoneNote": "ملاحظة: على iPhone، يجب إضافة التطبيق إلى الشاشة الرئيسية (PWA) للإشعارات الفورية.",
-        "notSupported": "هذا الجهاز/المتصفح لا يدعم الإشعارات الفورية."
+        "notSupported": "هذا الجهاز/المتصفح لا يدعم الإشعارات الفورية.",
+        "testBody": "اختبار: يجب أن تصلك هذه الإشعار حتى عندما يكون التطبيق مغلقاً."
       },
       "sms": {
         "label": "إشعارات الرسائل النصية",
@@ -1001,8 +1010,10 @@
       "passwordMismatch": "كلمات المرور الجديدة غير متطابقة",
       "passwordTooShort": "يجب أن تكون كلمة المرور 6 أحرف على الأقل",
       "invalidCurrentPassword": "كلمة المرور الحالية غير صحيحة",
-      "googleAccountNote": "تغيير كلمة المرور غير متاح للحسابات المصادق عليها عبر Google"
-    }
+      "googleAccountNote": "تغيير كلمة المرور غير متاح للحسابات المصادق عليها عبر Google",
+      "changing": "جاري التغيير..."
+    },
+    "cancel": "إلغاء"
   },
   "relativeTime": {
     "justNow": "الآن",

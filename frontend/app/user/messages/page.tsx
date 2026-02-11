@@ -6,8 +6,11 @@ import ProtectedPage from '@/components/layout/ProtectedPage';
 import { useLanguage } from '@/components/providers/LanguageProvider';
 import { MessageSquare, Send, User } from 'lucide-react';
 
+const localeMap: Record<string, string> = { en: 'en-GB', tr: 'tr-TR', fr: 'fr-FR', ar: 'ar-AR' };
+
 const MessagesPage = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const locale = localeMap[language] || 'en-GB';
   const [messages, setMessages] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -84,7 +87,7 @@ const MessagesPage = () => {
                           {msg.senderName}
                         </h3>
                         <span className="text-sm text-slate-500 dark:text-slate-400">
-                          {msg.timestamp.toLocaleTimeString('tr-TR', {
+                          {msg.timestamp.toLocaleTimeString(locale, {
                             hour: '2-digit',
                             minute: '2-digit',
                           })}

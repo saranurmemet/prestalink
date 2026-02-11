@@ -136,7 +136,7 @@ const JobDetail = () => {
       }, 2000);
     } catch (error: any) {
       console.error('Error applying:', error);
-      const errorMessage = error.response?.data?.message || error.message || 'Başvuru gönderilemedi';
+      const errorMessage = error.response?.data?.message || error.message || t('jobDetail.applyError');
       alert(errorMessage);
     } finally {
       setApplying(false);
@@ -249,7 +249,7 @@ const JobDetail = () => {
                   disabled={applying || successMessage}
                   className="w-full md:w-auto px-8 py-4 bg-brandOrange text-white rounded-lg font-semibold text-lg hover:bg-brandOrange/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
                 >
-                  {applying ? 'Gönderiliyor...' : successMessage ? 'Başvuruldu!' : t('jobDetail.applyNow')}
+                  {applying ? t('jobDetail.sending') : successMessage ? t('jobDetail.applied') : t('jobDetail.applyNow')}
                 </button>
               </div>
 

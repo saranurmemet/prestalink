@@ -447,6 +447,7 @@
   "userDashboard": {
     "welcome": "Bienvenue",
     "welcomeUser": "Bienvenue {name}",
+    "guest": "Utilisateur",
     "subtitle": "Suivez vos documents, candidatures et messages recruteur.",
     "cvStatus": "Statut CV",
     "cvUploaded": "CV Téléchargé",
@@ -741,7 +742,10 @@
     "cvRequired": "Vous devez télécharger votre CV avant de postuler.",
     "uploadCv": "Télécharger CV",
     "applicationSuccess": "Votre candidature a été soumise avec succès!",
-    "companyInfoComingSoon": "Informations sur l'entreprise à venir"
+    "companyInfoComingSoon": "Informations sur l'entreprise à venir",
+    "sending": "Envoi...",
+    "applied": "Candidature envoyée !",
+    "applyError": "Échec de l'envoi de la candidature"
   },
   "common": {
     "loading": "Chargement...",
@@ -765,14 +769,17 @@
     "appliedOn": "Candidature déposée le",
     "noApplications": "Vous n'avez pas encore soumis de candidature",
     "jobTitle": "Poste",
-    "company": "Entreprise"
+    "company": "Entreprise",
+    "jobTitleFallback": "Poste",
+    "noLocation": "Localisation non renseignée"
   },
   "userNotifications": {
     "title": "Notifications",
     "subtitle": "Consultez toutes vos notifications ici",
     "markAllRead": "Tout marquer comme lu",
     "noNotifications": "Aucune nouvelle notification",
-    "unread": "non lues"
+    "unread": "non lues",
+    "unreadBanner": "{{count}} notification(s) non lue(s)"
   },
   "userSettings": {
     "title": "Paramètres",
@@ -790,9 +797,14 @@
         "testBtn": "Envoyer une notification test",
         "refreshBtn": "Actualiser",
         "iphoneNote": "Sur iPhone, l'application doit être ajoutée à l'écran d'accueil (PWA) pour les notifications push.",
-        "notSupported": "Cet appareil ou navigateur ne prend pas en charge les notifications push."
+        "notSupported": "Cet appareil ou navigateur ne prend pas en charge les notifications push.",
+        "testBody": "Test : vous devriez recevoir cette notification même lorsque l'application est fermée."
       }
-    }
+    },
+    "account": {
+      "changing": "Modification..."
+    },
+    "cancel": "Annuler"
   }
 }
 

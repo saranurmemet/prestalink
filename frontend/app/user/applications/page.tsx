@@ -9,9 +9,11 @@ import { fetchApplicationsByUser } from '@/services/api';
 import type { Application } from '@/services/types';
 import { Calendar, FileText, Building2 } from 'lucide-react';
 
+const localeMap: Record<string, string> = { en: 'en-GB', tr: 'tr-TR', fr: 'fr-FR', ar: 'ar-AR' };
+
 const UserApplications = () => {
   const { user } = useAuthStore();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [applications, setApplications] = useState<Application[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -50,9 +52,10 @@ const UserApplications = () => {
     return statusMap[status] || status;
   };
 
+  const locale = localeMap[language] || 'en-GB';
   const formatDate = (dateString?: string) => {
     if (!dateString) return 'N/A';
-    return new Date(dateString).toLocaleDateString('tr-TR', {
+    return new Date(dateString).toLocaleDateString(locale, {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
@@ -98,10 +101,10 @@ const UserApplications = () => {
                         </div>
                         <div className="flex-1">
                           <h3 className="text-xl font-semibold text-slate-800 dark:text-slate-200 mb-1">
-                            {jobInfo?.title || 'İş Pozisyonu'}
+                            {jobInfo?.title || t('userApplications.jobTitleFallback')}
                           </h3>
                           <p className="text-sm text-slate-600 dark:text-slate-400 mb-2">
-                            {jobInfo?.location || 'Lokasyon bilgisi yok'}
+                            {jobInfo?.location || t('userApplications.noLocation')}
                           </p>
                           <div className="flex flex-wrap items-center gap-4 text-sm text-slate-500 dark:text-slate-400">
                             <div className="flex items-center gap-2">

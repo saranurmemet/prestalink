@@ -529,6 +529,7 @@
   "userDashboard": {
     "welcome": "Welcome",
     "welcomeUser": "Welcome {name}",
+    "guest": "User",
     "subtitle": "Track your documents, monitor applications and respond to recruiter messages.",
     "profileCompletion": "Profile Completion",
     "cvStatus": "CV Status",
@@ -873,7 +874,10 @@
     "uploadCv": "Upload CV",
     "cvFetchError": "CV file could not be loaded. Please check your CV from your profile page.",
     "applicationSuccess": "Your application has been submitted successfully!",
-    "companyInfoComingSoon": "Company information coming soon"
+    "companyInfoComingSoon": "Company information coming soon",
+    "sending": "Sending...",
+    "applied": "Applied!",
+    "applyError": "Failed to submit application"
   },
   "common": {
     "loading": "Loading...",
@@ -903,14 +907,17 @@
     "appliedOn": "Applied on",
     "noApplications": "You haven't submitted any applications yet",
     "jobTitle": "Job Position",
-    "company": "Company"
+    "company": "Company",
+    "jobTitleFallback": "Job Position",
+    "noLocation": "No location"
   },
   "userNotifications": {
     "title": "Notifications",
     "subtitle": "View all your notifications here",
     "markAllRead": "Mark All as Read",
     "noNotifications": "No new notifications",
-    "unread": "unread"
+    "unread": "unread",
+    "unreadBanner": "{{count}} unread notifications"
   },
   "userMessages": {
     "title": "Messages",
@@ -927,7 +934,8 @@
     "emptyTitle": "No favorite jobs yet",
     "emptyDescription": "Add job listings to favorites to view them here",
     "goToJobs": "Go to Job Listings",
-    "remove": "Remove from favorites"
+    "remove": "Remove from favorites",
+    "details": "Details"
   },
   "userStatistics": {
     "title": "My Statistics",
@@ -971,7 +979,8 @@
         "testBtn": "Send Test Notification",
         "refreshBtn": "Refresh",
         "iphoneNote": "Note: On iPhone, the app must be added to home screen (PWA) for push notifications.",
-        "notSupported": "This device/browser does not support push notifications."
+        "notSupported": "This device/browser does not support push notifications.",
+        "testBody": "Test: You should receive this notification even when the app is closed."
       },
       "sms": {
         "label": "SMS Notifications",
@@ -1001,8 +1010,10 @@
       "passwordTooShort": "Password must be at least 6 characters",
       "invalidCurrentPassword": "Current password is incorrect",
       "googleAccountNote": "Password change is not available for Google-authenticated accounts",
-      "deleteAccount": "Delete Account"
-    }
+      "deleteAccount": "Delete Account",
+      "changing": "Changing..."
+    },
+    "cancel": "Cancel"
   },
   "relativeTime": {
     "justNow": "Just now",

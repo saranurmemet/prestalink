@@ -110,7 +110,7 @@ const UserDashboard = () => {
               {/* Welcome Text */}
               <div className="flex-1">
                 <h1 className="text-3xl font-bold mb-2">
-                  {t('userDashboard.welcomeUser').replace('{name}', user?.name || 'Kullanıcı')}
+                  {t('userDashboard.welcomeUser').replace('{name}', user?.name || t('userDashboard.guest'))}
                 </h1>
                 <p className="text-white/90 mb-3">{t('userDashboard.subtitle')}</p>
                 {/* Profile Completion Bar */}
