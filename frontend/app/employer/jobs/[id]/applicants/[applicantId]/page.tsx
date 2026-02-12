@@ -43,10 +43,11 @@ const ApplicantReviewPage = () => {
           if (applicantData) {
             setApplicant(applicantData as User);
           } else {
-            const applicantId = typeof foundApp.userId === 'string' ? foundApp.userId : params.applicantId;
-            if (applicantId) {
+            const rawId = typeof foundApp.userId === 'string' ? foundApp.userId : params.applicantId;
+            const applicantIdStr = Array.isArray(rawId) ? rawId[0] : rawId;
+            if (applicantIdStr && typeof applicantIdStr === 'string') {
               try {
-                const userRes = await fetchUserById(applicantId);
+                const userRes = await fetchUserById(applicantIdStr);
                 if (userRes.data?.user) setApplicant(userRes.data.user);
               } catch {}
             }
