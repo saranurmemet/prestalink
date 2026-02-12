@@ -6,7 +6,7 @@ import Link from 'next/link';
 import ProtectedPage from '@/components/layout/ProtectedPage';
 import EmployerLayout from '@/components/layout/EmployerLayout';
 import { useLanguage } from '@/components/providers/LanguageProvider';
-import { fetchApplicationsByJob, updateApplicationStatus, fetchProfile } from '@/services/api';
+import { fetchApplicationsByJob, updateApplicationStatus, fetchUserById } from '@/services/api';
 import type { Application, User } from '@/services/types';
 import { getStaticFileUrl } from '@/utils/apiUrl';
 import { ArrowLeft, Download, FileText, Save, CheckCircle2 } from 'lucide-react';
@@ -38,18 +38,18 @@ const ApplicantReviewPage = () => {
           setApplication(foundApp);
           setStatus(foundApp.status);
           
-          // Get applicant data
+          // Get applicant data (populated or fetch by ID)
           const applicantData = typeof foundApp.userId === 'object' ? foundApp.userId : null;
           if (applicantData) {
             setApplicant(applicantData as User);
           } else {
-            // Fetch user profile
-            try {
-              const userRes = await fetchProfile();
-              if (userRes.data.user._id === foundApp.userId) {
-                setApplicant(userRes.data.user);
-              }
-            } catch {}
+            const applicantId = typeof foundApp.userId === 'string' ? foundApp.userId : params.applicantId;
+            if (applicantId) {
+              try {
+                const userRes = await fetchUserById(applicantId);
+                if (userRes.data?.user) setApplicant(userRes.data.user);
+              } catch {}
+            }
           }
         }
       } catch (error) {

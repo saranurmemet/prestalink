@@ -706,7 +706,15 @@
     "noApplicants": "No applications for this job yet",
     "backToJobs": "Back to Jobs",
     "loading": "Loading...",
-    "notFound": "Job not found"
+    "notFound": "Job not found",
+    "editJob": "Edit job",
+    "saveChanges": "Save changes",
+    "cancelEdit": "Cancel",
+    "closeJob": "Close job",
+    "reopenJob": "Reopen",
+    "confirmClose": "Are you sure you want to close this job? No new applications will be accepted.",
+    "confirmReopen": "Are you sure you want to reopen this job?",
+    "errorSaving": "Error saving"
   },
   "applicantReview": {
     "title": "Applicant Review",
@@ -1071,6 +1079,14 @@
     "applicants": "Applicants",
     "noApplicants": "No applications yet",
     "unknownApplicant": "Applicant",
+    "editJob": "Edit job",
+    "saveChanges": "Save changes",
+    "cancelEdit": "Cancel",
+    "closeJob": "Close job",
+    "reopenJob": "Reopen",
+    "confirmClose": "Are you sure you want to close this job?",
+    "confirmReopen": "Are you sure you want to reopen this job?",
+    "errorSaving": "Error saving",
     "applicantInfo": {
       "country": "Country",
       "experience": "Experience",

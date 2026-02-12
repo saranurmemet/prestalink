@@ -260,6 +260,10 @@ export const getAdminUsers = (params?: { page?: number; limit?: number; role?: s
     totalPages: number;
   }>('/admin/users', { params });
 
+/** Get user by ID (recruiter/admin) – e.g. applicant profile when not populated */
+export const fetchUserById = (userId: string) =>
+  api.get<{ user: User }>(`/admin/users/${userId}`);
+
 export const updateUserRole = (userId: string, role: string) =>
   api.put<User>(`/admin/users/${userId}/role`, { role });
 

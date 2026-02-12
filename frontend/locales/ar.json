@@ -706,7 +706,15 @@
     "noApplicants": "لا توجد طلبات لهذه الوظيفة بعد",
     "backToJobs": "العودة إلى الوظائف",
     "loading": "جاري التحميل...",
-    "notFound": "الوظيفة غير موجودة"
+    "notFound": "الوظيفة غير موجودة",
+    "editJob": "تعديل الوظيفة",
+    "saveChanges": "حفظ",
+    "cancelEdit": "إلغاء",
+    "closeJob": "إغلاق الوظيفة",
+    "reopenJob": "إعادة فتح",
+    "confirmClose": "هل أنت متأكد من إغلاق هذه الوظيفة؟",
+    "confirmReopen": "هل أنت متأكد من إعادة فتح هذه الوظيفة؟",
+    "errorSaving": "خطأ في الحفظ"
   },
   "applicantReview": {
     "title": "مراجعة المرشح",

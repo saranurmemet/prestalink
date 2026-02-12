@@ -616,7 +616,15 @@
     "noApplicants": "Aucune candidature pour cette offre pour le moment",
     "backToJobs": "Retour aux offres",
     "loading": "Chargement...",
-    "notFound": "Offre introuvable"
+    "notFound": "Offre introuvable",
+    "editJob": "Modifier l'offre",
+    "saveChanges": "Enregistrer",
+    "cancelEdit": "Annuler",
+    "closeJob": "Fermer l'offre",
+    "reopenJob": "Rouvrir",
+    "confirmClose": "Voulez-vous vraiment fermer cette offre ?",
+    "confirmReopen": "Voulez-vous vraiment rouvrir cette offre ?",
+    "errorSaving": "Erreur lors de l'enregistrement"
   },
   "applicantReview": {
     "title": "Évaluation du Candidat",

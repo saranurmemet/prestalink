@@ -1,23 +1,35 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import ProtectedPage from '@/components/layout/ProtectedPage';
 import EmployerLayout from '@/components/layout/EmployerLayout';
 import { useLanguage } from '@/components/providers/LanguageProvider';
-import { fetchJob, fetchApplicationsByJob, deleteJob } from '@/services/api';
+import { fetchJob, fetchApplicationsByJob, deleteJob, updateJob } from '@/services/api';
 import { getStaticFileUrl } from '@/utils/apiUrl';
 import type { Job, Application, User } from '@/services/types';
-import { ArrowLeft, MapPin, DollarSign, Briefcase, Globe, Users, Download, Eye, Trash2 } from 'lucide-react';
+import { ArrowLeft, MapPin, DollarSign, Briefcase, Globe, Users, Download, Eye, Trash2, Edit2, XCircle, CheckCircle } from 'lucide-react';
 
 const JobDetailPage = () => {
   const params = useParams();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const isEditMode = searchParams.get('edit') === 'true';
   const { t } = useLanguage();
   const [job, setJob] = useState<Job | null>(null);
   const [applications, setApplications] = useState<Application[]>([]);
   const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [editForm, setEditForm] = useState({
+    title: '',
+    description: '',
+    location: '',
+    salary: '',
+    requiredExperience: '',
+    requiredLanguage: '',
+    workType: 'full-time' as 'full-time' | 'part-time' | 'seasonal',
+  });
 
   useEffect(() => {
     const loadData = async () => {
@@ -28,8 +40,18 @@ const JobDetailPage = () => {
           fetchJob(params.id as string),
           fetchApplicationsByJob(params.id as string).catch(() => ({ data: [] })),
         ]);
-        setJob(jobRes.data);
+        const j = jobRes.data;
+        setJob(j);
         setApplications(appsRes.data);
+        setEditForm({
+          title: j.title || '',
+          description: j.description || '',
+          location: j.location || '',
+          salary: j.salary || '',
+          requiredExperience: j.requiredExperience || '',
+          requiredLanguage: j.requiredLanguage || '',
+          workType: (j.workType as 'full-time' | 'part-time' | 'seasonal') || 'full-time',
+        });
       } catch (error) {
         console.error('Error loading job:', error);
       } finally {
@@ -46,6 +68,46 @@ const JobDetailPage = () => {
       router.push('/employer/jobs');
     } catch (error) {
       alert(t('employerJobs.error'));
+    }
+  };
+
+  const handleSaveEdit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!params.id || saving) return;
+    setSaving(true);
+    try {
+      const updated = await updateJob(params.id as string, editForm);
+      setJob(updated.data);
+      router.replace(`/employer/jobs/${params.id}`, { scroll: false });
+    } catch (error: any) {
+      alert(error.response?.data?.message || t('employerJobDetail.errorSaving'));
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleToggleClosed = async () => {
+    if (!job || saving) return;
+    const newClosed = !(job as any).closed;
+    if (!confirm(newClosed ? t('employerJobDetail.confirmClose') : t('employerJobDetail.confirmReopen'))) return;
+    setSaving(true);
+    try {
+      const payload = {
+        title: job.title,
+        description: job.description,
+        location: job.location,
+        salary: job.salary || '',
+        requiredExperience: job.requiredExperience || '',
+        requiredLanguage: job.requiredLanguage || '',
+        workType: job.workType || 'full-time',
+        closed: newClosed,
+      };
+      const updated = await updateJob(job._id, payload);
+      setJob(updated.data);
+    } catch (error: any) {
+      alert(error.response?.data?.message || t('employerJobs.error'));
+    } finally {
+      setSaving(false);
     }
   };
 
@@ -93,13 +155,161 @@ const JobDetailPage = () => {
             </div>
           ) : (
             <>
-              {/* Job Info */}
+              {/* Job Info – Edit mode or View */}
               <div className="bg-white dark:bg-slate-800 rounded-xl p-8 shadow-md border border-slate-200 dark:border-slate-700 mb-6">
                 <div className="flex items-start justify-between mb-4">
-                  <div className="flex-1">
-                    <h1 className="text-3xl font-bold text-slate-800 dark:text-slate-200 mb-4">
-                      {job.title}
-                    </h1>
+                  <h1 className="text-2xl font-bold text-slate-800 dark:text-slate-200">
+                    {isEditMode ? t('employerJobDetail.editJob') : job.title}
+                  </h1>
+                  <div className="flex items-center gap-2">
+                    {!isEditMode && (
+                      <>
+                        <Link
+                          href={`/employer/jobs/${params.id}?edit=true`}
+                          className="p-2 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors"
+                          title={t('employerJobs.edit')}
+                        >
+                          <Edit2 className="w-5 h-5" />
+                        </Link>
+                        <button
+                          type="button"
+                          onClick={handleToggleClosed}
+                          disabled={saving}
+                          className={`flex items-center gap-2 px-3 py-2 rounded-lg font-medium text-sm transition-colors disabled:opacity-50 ${
+                            (job as any).closed
+                              ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 hover:bg-green-200 dark:hover:bg-green-900/50'
+                              : 'bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 hover:bg-amber-200 dark:hover:bg-amber-900/50'
+                          }`}
+                        >
+                          {(job as any).closed ? (
+                            <>
+                              <CheckCircle className="w-4 h-4" />
+                              {t('employerJobDetail.reopenJob')}
+                            </>
+                          ) : (
+                            <>
+                              <XCircle className="w-4 h-4" />
+                              {t('employerJobDetail.closeJob')}
+                            </>
+                          )}
+                        </button>
+                        <button
+                          onClick={handleDelete}
+                          className="p-2 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-lg hover:bg-red-200 dark:hover:bg-red-900/50 transition-colors"
+                          title={t('employerJobs.delete')}
+                        >
+                          <Trash2 className="w-5 h-5" />
+                        </button>
+                      </>
+                    )}
+                  </div>
+                </div>
+
+                {isEditMode ? (
+                  <form onSubmit={handleSaveEdit} className="space-y-4">
+                    <div>
+                      <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                        {t('createJob.fields.jobTitle')} *
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        value={editForm.title}
+                        onChange={(e) => setEditForm({ ...editForm, title: e.target.value })}
+                        className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                        {t('createJob.fields.jobDescription')} *
+                      </label>
+                      <textarea
+                        required
+                        value={editForm.description}
+                        onChange={(e) => setEditForm({ ...editForm, description: e.target.value })}
+                        rows={6}
+                        className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100"
+                      />
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                          {t('createJob.fields.location')} *
+                        </label>
+                        <input
+                          type="text"
+                          required
+                          value={editForm.location}
+                          onChange={(e) => setEditForm({ ...editForm, location: e.target.value })}
+                          className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                          {t('createJob.fields.salaryRange')}
+                        </label>
+                        <input
+                          type="text"
+                          value={editForm.salary}
+                          onChange={(e) => setEditForm({ ...editForm, salary: e.target.value })}
+                          className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                          {t('createJob.fields.requiredExperience')}
+                        </label>
+                        <input
+                          type="text"
+                          value={editForm.requiredExperience}
+                          onChange={(e) => setEditForm({ ...editForm, requiredExperience: e.target.value })}
+                          className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                          {t('createJob.fields.requiredLanguages')}
+                        </label>
+                        <input
+                          type="text"
+                          value={editForm.requiredLanguage}
+                          onChange={(e) => setEditForm({ ...editForm, requiredLanguage: e.target.value })}
+                          className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                          {t('createJob.fields.workType')}
+                        </label>
+                        <select
+                          value={editForm.workType}
+                          onChange={(e) => setEditForm({ ...editForm, workType: e.target.value as 'full-time' | 'part-time' | 'seasonal' })}
+                          className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100"
+                        >
+                          <option value="full-time">{t('createJob.workTypes.fullTime')}</option>
+                          <option value="part-time">{t('createJob.workTypes.partTime')}</option>
+                          <option value="seasonal">{t('createJob.workTypes.seasonal')}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div className="flex gap-3 pt-2">
+                      <button
+                        type="submit"
+                        disabled={saving}
+                        className="px-6 py-2 bg-brandOrange text-white rounded-lg font-medium hover:bg-brandOrange/90 disabled:opacity-50"
+                      >
+                        {saving ? t('auth.loading') : t('employerJobDetail.saveChanges')}
+                      </button>
+                      <Link
+                        href={`/employer/jobs/${params.id}`}
+                        className="px-6 py-2 bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 rounded-lg font-medium hover:bg-slate-300 dark:hover:bg-slate-600"
+                      >
+                        {t('employerJobDetail.cancelEdit')}
+                      </Link>
+                    </div>
+                  </form>
+                ) : (
+                  <>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                       {job.location && (
                         <div className="flex items-center gap-3 text-slate-700 dark:text-slate-300">
@@ -110,7 +320,6 @@ const JobDetailPage = () => {
                           </div>
                         </div>
                       )}
-
                       {job.salary && (
                         <div className="flex items-center gap-3 text-slate-700 dark:text-slate-300">
                           <DollarSign className="w-5 h-5 text-brandOrange" />
@@ -120,7 +329,6 @@ const JobDetailPage = () => {
                           </div>
                         </div>
                       )}
-
                       {job.requiredExperience && (
                         <div className="flex items-center gap-3 text-slate-700 dark:text-slate-300">
                           <Briefcase className="w-5 h-5 text-green-600" />
@@ -130,7 +338,6 @@ const JobDetailPage = () => {
                           </div>
                         </div>
                       )}
-
                       {job.requiredLanguage && (
                         <div className="flex items-center gap-3 text-slate-700 dark:text-slate-300">
                           <Globe className="w-5 h-5 text-purple-600" />
@@ -141,7 +348,6 @@ const JobDetailPage = () => {
                         </div>
                       )}
                     </div>
-
                     <div className="mb-4">
                       <h2 className="text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2">
                         {t('jobDetail.description')}
@@ -150,16 +356,8 @@ const JobDetailPage = () => {
                         {job.description}
                       </p>
                     </div>
-                  </div>
-
-                  <button
-                    onClick={handleDelete}
-                    className="p-2 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-lg hover:bg-red-200 dark:hover:bg-red-900/50 transition-colors ml-4"
-                    title={t('employerJobs.delete')}
-                  >
-                    <Trash2 className="w-5 h-5" />
-                  </button>
-                </div>
+                  </>
+                )}
               </div>
 
               {/* Applicants List */}

@@ -707,7 +707,15 @@
     "noApplicants": "Bu ilan için henüz başvuru yok",
     "backToJobs": "İş İlanlarına Dön",
     "loading": "Yükleniyor...",
-    "notFound": "İş bulunamadı"
+    "notFound": "İş bulunamadı",
+    "editJob": "İlanı Düzenle",
+    "saveChanges": "Kaydet",
+    "cancelEdit": "İptal",
+    "closeJob": "İlanı Kapat",
+    "reopenJob": "Yeniden Aç",
+    "confirmClose": "Bu ilanı kapatmak istediğinize emin misiniz? Yeni başvuru alınmayacaktır.",
+    "confirmReopen": "Bu ilanı yeniden açmak istediğinize emin misiniz?",
+    "errorSaving": "Kaydedilirken hata oluştu"
   },
   "applicantReview": {
     "title": "Aday İnceleme",
@@ -1057,6 +1065,14 @@
     "applicants": "Başvurular",
     "noApplicants": "Henüz başvuru yok",
     "unknownApplicant": "Aday",
+    "editJob": "İlanı Düzenle",
+    "saveChanges": "Kaydet",
+    "cancelEdit": "İptal",
+    "closeJob": "İlanı Kapat",
+    "reopenJob": "Yeniden Aç",
+    "confirmClose": "Bu ilanı kapatmak istediğinize emin misiniz?",
+    "confirmReopen": "Bu ilanı yeniden açmak istediğinize emin misiniz?",
+    "errorSaving": "Kaydedilirken hata oluştu",
     "applicantInfo": {
       "country": "Ülke",
       "experience": "Deneyim",
